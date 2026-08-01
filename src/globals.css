@@ -1,0 +1,295 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* Shamel Sans is scoped to the Arabic Unicode blocks so Latin glyphs (digits,
+ * identifiers like "B2B-C-79", English chrome) fall through to Montserrat
+ * via the font-family cascade instead of using Shamel's weaker Latin set. */
+@font-face {
+  font-family: 'Shamel Sans';
+  src: url('/fonts/FFShamelFamily-SansOneBook.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  unicode-range:
+    U+0600-06FF,  /* Arabic */
+    U+0750-077F,  /* Arabic Supplement */
+    U+08A0-08FF,  /* Arabic Extended-A */
+    U+FB50-FDFF,  /* Arabic Presentation Forms-A */
+    U+FE70-FEFF;  /* Arabic Presentation Forms-B */
+}
+
+@font-face {
+  font-family: 'Shamel Sans';
+  src: url('/fonts/FFShamelFamily-SansOneBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  unicode-range:
+    U+0600-06FF,
+    U+0750-077F,
+    U+08A0-08FF,
+    U+FB50-FDFF,
+    U+FE70-FEFF;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  /* No `scrollbar-gutter: stable` here.
+   *
+   * The quality prototype needs it because its pages scroll at document level,
+   * so reserving the gutter stops a layout shift when a dialog locks the body.
+   * This app is a fixed `h-dvh` shell whose scrolling happens in inner
+   * containers, so the document never scrolls — the reserved gutter was just a
+   * permanent ~15px dead strip along the edge, which pushed the nav rail off
+   * the side of the screen. */
+  overflow: hidden;
+}
+
+:root {
+  font-family: 'Shamel Sans', 'Montserrat', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  color-scheme: light;
+  --radius: 0.625rem;
+  /* The app background is a faint cool tint, not pure white. Sheets of #fff
+   * edge-to-edge glare and give surfaces nothing to sit on — cards, the sheet
+   * and the rail all read as one undifferentiated plane. Keeping --card and
+   * --popover at true white means every raised surface now lifts off the page
+   * on its own, before any shadow is applied. */
+  /* Deliberately a few points off white. At 0.975 the page still read as #fff
+   * and the white cards had nothing to sit on; 0.949 is grey enough that a
+   * raised surface is obvious before any shadow, without going dim. */
+  --background: oklch(0.949 0.005 205);
+  --foreground: oklch(0.145 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.145 0 0);
+
+  /* Elevation ramp. Tinted with the brand teal rather than neutral black, so
+   * shadows read as part of the palette instead of grey smudges. */
+  --shadow-color: 200 40% 30%;
+  --elev-1: 0 1px 2px -1px hsl(var(--shadow-color) / 0.10),
+            0 1px 3px 0 hsl(var(--shadow-color) / 0.06);
+  --elev-2: 0 2px 4px -2px hsl(var(--shadow-color) / 0.12),
+            0 4px 10px -2px hsl(var(--shadow-color) / 0.08);
+  --elev-3: 0 8px 16px -6px hsl(var(--shadow-color) / 0.16),
+            0 20px 32px -12px hsl(var(--shadow-color) / 0.12);
+  /* Tuned for WCAG AAA (7:1) against --background (white) when used for text,
+   * and against --primary-foreground (near-white) when used as a button surface.
+   * Original brand values kept as --primary-brand for non-text accents. */
+  --primary-brand: oklch(51.75% 0.107 196.84);     /* original teal */
+  --primary: oklch(0.40 0.10 196.84);              /* darkened teal — AAA on text & button bg */
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary-brand: oklch(66.88% 0.087 78.79);    /* original gold — non-text accents only */
+  /* `--secondary` is the surface for `bg-secondary` (Badge/Button secondary
+   * variant). Previous value (oklch 0.55) put dark text on a mid-gold ground
+   * — ~4.3:1, failing AAA and barely passing AA. We now point both tokens at
+   * the verified-AAA brand-gold-soft + brand-gold-deep pair (7.9:1 on this
+   * surface — see the table at lines 92–103 below) so role pills hit AAA
+   * without per-callsite overrides. */
+  --secondary: var(--brand-gold-soft);
+  --secondary-foreground: var(--brand-gold-deep);
+  --muted: oklch(0.96 0 0);                        /* subtle gray surface (was a saturated cyan; misused) */
+  --muted-foreground: oklch(0.40 0 0);             /* darkened — AAA against white */
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.145 0 0);
+  --destructive: oklch(0.50 0.245 27.325);         /* darkened red — AAA on white */
+  --border: oklch(0.922 0 0);
+  --input: oklch(0.922 0 0);
+  --ring: oklch(0.708 0 0);
+
+  /* ──────────────────────────────────────────────────────────────────────
+   * Ithraa Alkhair brand palette — exact values from the identity manual.
+   * These are *surface* colours (saturated, vivid). Use them on tinted KPI
+   * tiles, chart fills, and pattern overlays. For *text* on a white card
+   * keep using --primary / --secondary which are darkened to AAA contrast.
+   * ────────────────────────────────────────────────────────────────────── */
+  --brand-teal:   #008085; /* PMS 6139C — primary deep teal */
+  --brand-green:  #00B5A3; /* PMS 3534C — bright accent green */
+  --brand-gold:   #C19E78; /* PMS 2316C — warm hospitality gold */
+  --brand-rose:   #E5446D; /* failure/at-risk accent — complementary */
+  --brand-slate:  #64748b; /* neutral — not-started / muted KPI */
+
+  /* Soft tinted surfaces for KPI cards (≈10% opacity) — composed in HSL so
+   * shadcn variants stay legible. */
+  --brand-teal-soft:  color-mix(in srgb, var(--brand-teal)  12%, white);
+  --brand-green-soft: color-mix(in srgb, var(--brand-green) 12%, white);
+  --brand-gold-soft:  color-mix(in srgb, var(--brand-gold)  16%, white);
+  --brand-rose-soft:  color-mix(in srgb, var(--brand-rose)  12%, white);
+  --brand-slate-soft: color-mix(in srgb, var(--brand-slate) 10%, white);
+
+  /* Deep brand variants — pulled *past* the 7:1 line so they hit WCAG AAA
+   * not only against white panel backgrounds but also against the soft
+   * brand tints used for badge / chip / tile surfaces (which are ~88%
+   * white, so contrast is always a hair lower than on pure white).
+   *
+   * Measured contrast (white bg / matching *-soft bg):
+   *   teal-deep  #004A4D → 10.1 : 1  /  8.1 : 1  ✓
+   *   green-deep #005247 →  9.0 : 1  /  7.2 : 1  ✓
+   *   gold-deep  #5A4729 →  9.0 : 1  /  7.9 : 1  ✓  (was #6D5436 → 6.5 on soft)
+   *   rose-deep  #6B1F35 → 11.2 : 1  /  9.6 : 1  ✓  (was #8E2A45 → 6.7 on soft)
+   *   slate-deep #334155 → 10.5 : 1  /  7.7 : 1  ✓
+   *
+   * Use these for any text/icon on a *-soft surface. Bumping gold-deep
+   * and rose-deep deeper than the original manual values means panels
+   * tinted with them read slightly more saturated, which only improves
+   * white-on-panel contrast.
+   */
+  --brand-teal-deep:  #004A4D;
+  --brand-green-deep: #005247;
+  --brand-gold-deep:  #5A4729;
+  --brand-rose-deep:  #6B1F35;
+  --brand-slate-deep: #334155;
+
+  /* ──────────────────────────────────────────────────────────────────────
+   * Surface roles.
+   *
+   * Four planes, used consistently everywhere. Naming them by *role* rather
+   * than by colour is what keeps the pages coherent: a table header and an
+   * input well are both "sunken", so they always agree without anyone having
+   * to remember a hex value.
+   *
+   *   brand   — deep teal. The rail, and anything that should read as chrome.
+   *   page    — the app background. Teal-tinted, never pure white.
+   *   raised  — cards and panels sitting on `page`.
+   *   sunken  — wells inside `raised`: inputs, table headers, read-only stats.
+   * ────────────────────────────────────────────────────────────────────── */
+  --surface-brand: #023F42;
+  --surface-brand-hover: color-mix(in srgb, var(--brand-teal) 22%, var(--surface-brand));
+  --surface-brand-foreground: oklch(0.97 0.01 190);
+  --surface-page: oklch(0.949 0.005 205);
+  --surface-raised: oklch(1 0 0);
+  --surface-sunken: color-mix(in srgb, var(--brand-teal) 5%, white);
+  /* Borders now sit between a grey page and white cards, so they need a little
+   * more weight than they did against an almost-white background. */
+  --surface-line: color-mix(in srgb, var(--brand-teal) 18%, white);
+
+  /* The identity's geometric motif, used as a faint texture on brand chrome.
+   * Kept very low contrast — it should register as woven paper, not wallpaper. */
+  --brand-pattern: url("/pattern.svg");
+
+  --chart-1: oklch(0.646 0.222 41.116);
+  --chart-2: oklch(0.6 0.118 184.704);
+  --chart-3: oklch(0.398 0.07 227.392);
+  --chart-4: oklch(0.828 0.189 84.429);
+  --chart-5: oklch(0.769 0.188 70.08);
+  /* The rail is a hair lighter than the page so it reads as a distinct plane
+   * without needing a heavy border. */
+  --sidebar: oklch(0.995 0.002 210);
+  --sidebar-foreground: oklch(0.145 0 0);
+  --sidebar-primary: oklch(0.205 0 0);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.97 0 0);
+  --sidebar-accent-foreground: oklch(0.205 0 0);
+  --sidebar-border: oklch(0.922 0 0);
+  --sidebar-ring: oklch(0.708 0 0);
+}
+
+@theme inline {
+  --font-sans: 'Shamel Sans', 'Montserrat', system-ui, sans-serif;
+  --shadow-elev-1: var(--elev-1);
+  --shadow-elev-2: var(--elev-2);
+  --shadow-elev-3: var(--elev-3);
+  --color-surface-brand: var(--surface-brand);
+  --color-surface-brand-hover: var(--surface-brand-hover);
+  --color-surface-brand-foreground: var(--surface-brand-foreground);
+  --color-surface-page: var(--surface-page);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-line: var(--surface-line);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-brand: var(--primary-brand);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary-brand: var(--secondary-brand);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-brand-teal: var(--brand-teal);
+  --color-brand-green: var(--brand-green);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-rose: var(--brand-rose);
+  --color-brand-slate: var(--brand-slate);
+  --color-brand-teal-soft: var(--brand-teal-soft);
+  --color-brand-green-soft: var(--brand-green-soft);
+  --color-brand-gold-soft: var(--brand-gold-soft);
+  --color-brand-rose-soft: var(--brand-rose-soft);
+  --color-brand-slate-soft: var(--brand-slate-soft);
+  --color-brand-teal-deep: var(--brand-teal-deep);
+  --color-brand-green-deep: var(--brand-green-deep);
+  --color-brand-gold-deep: var(--brand-gold-deep);
+  --color-brand-rose-deep: var(--brand-rose-deep);
+  --color-brand-slate-deep: var(--brand-slate-deep);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    text-box-trim: trim-end;
+    text-box-edge: cap alphabetic;
+  }
+  /* Opt-out for components where icons sit inline with text and the global
+   * trim crops glyphs/icons unevenly (e.g. sidebar nav, tab triggers,
+   * dialog headers, KPI cards). */
+  .no-trim,
+  .no-trim * {
+    text-box-trim: none;
+  }
+
+  /* React Flow nodes — animate transform changes so the dagre re-layout
+   * on every expand/collapse glides instead of teleporting. The wrapper
+   * div is what React Flow translates, so the transition lives there. */
+  .react-flow__node {
+    transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  /* Cards here ARE draggable, so this matters: React Flow adds `.dragging`
+   * for the duration of a drag and the node must track the pointer exactly
+   * rather than easing behind it. The transition above still smooths the
+   * dagre re-layout that follows an add/remove. */
+  .react-flow__node.dragging {
+    transition: none;
+  }
+
+  /* A node the user has hand-placed keeps its spot through re-layouts; the
+   * dashed tether back to the auto position tells them it's pinned. */
+  .react-flow__node.is-pinned {
+    transition: none;
+  }
+
+  /* The floating (+) affordance sits outside the card bounds, so the node
+   * wrapper must not clip it. */
+  .react-flow__node {
+    overflow: visible;
+  }
+}

@@ -1,0 +1,19 @@
+# build outputs
+node_modules
+dist
+dist-stage
+.tmp-test
+
+# local state
+*.local
+.DS_Store
+
+# generated captures (recreate with scripts/shots*.mjs)
+/screenshots/
+
+# ── private — internal company material, never push ────────────────
+# Source ministry/company PDFs and their OCR extraction contain real
+# names, e-mail addresses and season pricing. The app builds without them.
+/reports-docs/
+/ocr/
+/docs/

@@ -1,0 +1,216 @@
+import { cn } from "@/lib/utils"
+import { TALL_ENOUGH_QUERY, useMediaQuery } from "@/hooks/use-media-query"
+
+/**
+ * Page chrome for the routed pages.
+ *
+ * One structure everywhere: a branded header band, then a centred column of
+ * `Card` sections on the tinted page surface. The canvas route opts out — it
+ * needs the full viewport with no scroll container of its own.
+ */
+export function PageShell({
+  title,
+  description,
+  actions,
+  children,
+  className,
+}: {
+  title: string
+  description?: string
+  actions?: React.ReactNode
+  children: React.ReactNode
+  className?: string
+}) {
+  return (
+    <div className="flex min-w-0 flex-1 flex-col bg-surface-page">
+      <PageHeader title={title} description={description} actions={actions} />
+      <div className={cn("min-h-0 flex-1 overflow-y-auto", className)}>
+        {/* Start-aligned, not centred: the rail lives on the start edge, so a
+            centred column left a gap against it and pushed the content adrift
+            in the middle of the viewport. `me-auto` takes up the slack on the
+            far side instead. */}
+        <div className="space-y-4 px-4 py-5">{children}</div>
+      </div>
+    </div>
+  )
+}
+
+/**
+ * The header band. The identity's geometric motif sits behind it at very low
+ * opacity, fading out toward the content — enough to make the chrome feel like
+ * Ithraa's rather than a generic admin template, not enough to read as texture
+ * competing with the text.
+ */
+export function PageHeader({
+  title,
+  description,
+  actions,
+}: {
+  title: string
+  description?: string
+  actions?: React.ReactNode
+}) {
+  const tall = useMediaQuery(TALL_ENOUGH_QUERY)
+  return (
+    <header className="relative shrink-0 overflow-hidden border-b border-surface-line bg-surface-raised">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 opacity-[0.045]"
+        style={{
+          backgroundImage: "var(--brand-pattern)",
+          backgroundSize: "420px",
+          maskImage: "linear-gradient(to bottom, black, transparent)",
+        }}
+      />
+      {/* A hairline of brand colour along the top edge ties every page to the rail. */}
+      <div
+        aria-hidden
+        className="absolute inset-x-0 top-0 h-0.5"
+        style={{
+          background:
+            "linear-gradient(to left, var(--brand-teal), var(--brand-green) 45%, var(--brand-gold))",
+        }}
+      />
+      {/* Actions sit immediately after the title, never pushed to the far end.
+       *
+       * `justify-between` looked right on paper but the header row is a
+       * right-aligned `max-w-4xl` column, so "the far end" is wherever that
+       * column happens to stop — mid-screen on a wide display. The button ended
+       * up hundreds of pixels from the title it belongs to, floating in space
+       * with no edge to anchor against. Keeping it adjacent reads as "this
+       * action belongs to this page" at every width. */}
+      <div
+        className={cn(
+          "relative flex items-center gap-4 px-4",
+          tall ? "py-3.5" : "py-2",
+        )}
+      >
+        <div className="min-w-0">
+          <h1
+            className={cn("font-bold text-foreground", tall ? "text-lg tracking-tight" : "text-sm")}
+          >
+            {title}
+          </h1>
+          {description && tall && (
+            <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{description}</p>
+          )}
+        </div>
+        {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
+      </div>
+    </header>
+  )
+}
+
+/** A raised section on the page surface. */
+export function Card({
+  title,
+  description,
+  actions,
+  children,
+  className,
+  bodyClassName,
+}: {
+  title?: string
+  description?: string
+  actions?: React.ReactNode
+  children: React.ReactNode
+  className?: string
+  bodyClassName?: string
+}) {
+  return (
+    <section
+      className={cn(
+        "overflow-hidden rounded-xl border border-surface-line bg-surface-raised shadow-[var(--elev-1)]",
+        className,
+      )}
+    >
+      {(title || actions) && (
+        <div className="flex items-start justify-between gap-3 border-b border-surface-line px-4 py-3">
+          <div className="min-w-0">
+            {title && <h2 className="text-[13px] font-bold text-foreground">{title}</h2>}
+            {description && (
+              <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
+                {description}
+              </p>
+            )}
+          </div>
+          {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
+        </div>
+      )}
+      <div className={cn("p-4", bodyClassName)}>{children}</div>
+    </section>
+  )
+}
+
+/** A short explanatory strip. Used for the "why this page exists" line. */
+export function Note({
+  children,
+  tone = "neutral",
+  icon,
+}: {
+  children: React.ReactNode
+  tone?: "neutral" | "brand" | "warn"
+  icon?: React.ReactNode
+}) {
+  return (
+    <p
+      className={cn(
+        "flex gap-2 rounded-lg px-3 py-2 text-[11px] leading-relaxed",
+        tone === "neutral" && "bg-surface-sunken text-muted-foreground",
+        tone === "brand" &&
+          "bg-[color:var(--brand-teal-soft)] text-[color:var(--brand-teal-deep)]",
+        tone === "warn" &&
+          "bg-[color:var(--brand-gold-soft)] text-[color:var(--brand-gold-deep)]",
+      )}
+    >
+      {icon && <span className="mt-0.5 shrink-0">{icon}</span>}
+      <span className="min-w-0">{children}</span>
+    </p>
+  )
+}
+
+/** A number + label tile, for the stat rows at the top of a page. */
+export function Stat({
+  value,
+  label,
+  tone = "neutral",
+}: {
+  value: string
+  label: string
+  tone?: "neutral" | "good" | "warn" | "bad"
+}) {
+  return (
+    <div
+      className={cn(
+        "rounded-lg px-3 py-2.5",
+        tone === "neutral" && "bg-surface-sunken",
+        tone === "good" && "bg-[color:var(--brand-green-soft)]",
+        tone === "warn" && "bg-[color:var(--brand-gold-soft)]",
+        tone === "bad" && "bg-[color:var(--brand-rose-soft)]",
+      )}
+    >
+      <div
+        className={cn(
+          "text-xl font-bold tabular-nums",
+          tone === "neutral" && "text-foreground",
+          tone === "good" && "text-[color:var(--brand-green-deep)]",
+          tone === "warn" && "text-[color:var(--brand-gold-deep)]",
+          tone === "bad" && "text-[color:var(--brand-rose-deep)]",
+        )}
+      >
+        {value}
+      </div>
+      <div
+        className={cn(
+          "mt-0.5 text-[10px]",
+          tone === "neutral" && "text-muted-foreground",
+          tone === "good" && "text-[color:var(--brand-green-deep)]",
+          tone === "warn" && "text-[color:var(--brand-gold-deep)]",
+          tone === "bad" && "text-[color:var(--brand-rose-deep)]",
+        )}
+      >
+        {label}
+      </div>
+    </div>
+  )
+}

@@ -1,0 +1,15 @@
+{
+  // Compiles the pure layout module so `test/*.test.mjs` can exercise it in
+  // plain node. Only files with no project-relative imports belong here.
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "strict": true,
+    "skipLibCheck": true,
+    "outDir": "./.tmp-test",
+    "rootDir": "./src"
+  },
+  "include": ["src/features/graph/layout.ts"]
+}

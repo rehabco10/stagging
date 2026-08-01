@@ -1,0 +1,77 @@
+# Build and deploy the wizard to GitHub Pages.
+#
+# Action majors verified current as of Aug 2026:
+#   checkout@v5 (node24), configure-pages@v5, upload-pages-artifact@v3,
+#   deploy-pages@v4 (the required pair since the artifact-v4 migration),
+#   pnpm/action-setup@v4 + setup-node@v4 — deliberately NOT setup-node@v5,
+#   which has a known immediate failure when paired with pnpm/corepack.
+#
+# GitHub Pages serves a project site at /<repo>/, so the build's `base` is
+# injected via BASE_PATH (vite.config.ts). Pages has no SPA rewrites, so the
+# router fallback is the 404.html trick: an unknown deep link serves 404.html,
+# which is a copy of index.html, and BrowserRouter takes over from there.
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time; let an in-flight production deploy finish.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      # pnpm must be on PATH before setup-node resolves its cache.
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck + unit tests
+        run: pnpm test
+
+      - name: Build (base = /<repo>/)
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}/
+        run: pnpm build
+
+      - name: SPA fallback + skip Jekyll
+        run: |
+          cp dist/index.html dist/404.html
+          touch dist/.nojekyll
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
