@@ -22,7 +22,7 @@ export function PageShell({
   className?: string
 }) {
   return (
-    <div className="flex min-w-0 flex-1 flex-col bg-surface-page">
+    <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-surface-page">
       <PageHeader title={title} description={description} actions={actions} />
       <div className={cn("min-h-0 flex-1 overflow-y-auto", className)}>
         {/* Start-aligned, not centred: the rail lives on the start edge, so a

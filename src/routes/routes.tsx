@@ -23,7 +23,7 @@ export function CanvasPage() {
   const subtitle = useInspectorSubtitle()
 
   return (
-    <div className="relative flex min-w-0 flex-1 flex-col bg-surface-page">
+    <div className="relative flex min-h-0 min-w-0 flex-1 flex-col bg-surface-page">
       <PageHeader
         title="تكوين الباقات"
         description="ابدأ من عقدة «الباقات» وأضف الباقات وإقاماتها."
