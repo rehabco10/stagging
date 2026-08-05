@@ -12,10 +12,10 @@ import type { DraftContract, DraftFlightBlock, DraftPackage, DraftSeason } from 
  *   and capacity partition (row 1's 450 = packages 01+33, etc.), with ties
  *   between same-set rows resolved by the supply file's per-package windows.
  *
- * Adjustments for the 1448 demo (generator: `scripts/seed-1447/`, which needs
- * the sibling `../../hajj-1447/light-housing-system` repo):
- * - Every date rebased 373 days, so the earliest contract lands on
- *   2027-05-12 and stays keep their real alignment with contract windows.
+ * Mapping notes (generator: `scripts/seed-1447/`, which needs the sibling
+ * `../../hajj-1447/light-housing-system` repo):
+ * - Dates are the REAL 1447 dates, unshifted: the wizard opens on the 1447
+ *   reference season, and planning 1448 starts by editing the season setup.
  * - Room mixes are the booked proportions scaled to each package's capacity;
  *   never-booked standard packages default to all-quad, premium/luxury ones
  *   stay unplanned.
@@ -27,18 +27,18 @@ import type { DraftContract, DraftFlightBlock, DraftPackage, DraftSeason } from 
  */
 
 /**
- * Season setup, carried from 1447: the 7,000 quota WAS 1447's allotment (the
- * 1448 figure arrives with the ministry letter and is edited in الإعدادات),
- * and the window is the envelope of every mapped 1447 contract and stay,
- * rebased 373 days onto the 1448 calendar. Config, not fact — the
- * wizard's date defaults flow from it either way.
+ * Season setup = the 1447 season as it really was: 7,000 quota, and the
+ * window is the envelope of the FINAL PocketBase package windows plus the
+ * contract windows, in real 2026 dates. Moving to 1448 is a deliberate act
+ * in الإعدادات (years, quota when the ministry letter lands, window) — every
+ * date default in the wizard flows from this config.
  */
 export const SEED_SEASON: DraftSeason = {
-  "year_hijri": 1448,
-  "year_gregorian": 2027,
+  "year_hijri": 1447,
+  "year_gregorian": 2026,
   "quota_total": 7000,
-  "starts_on": "2027-05-12",
-  "ends_on": "2027-06-16"
+  "starts_on": "2026-05-04",
+  "ends_on": "2026-06-08"
 }
 
 export const SEED_CONTRACTS: DraftContract[] = [
@@ -47,8 +47,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_maysan",
     "contract_no": "202510000004070",
     "city": "madinah",
-    "starts_on": "2027-06-12",
-    "ends_on": "2027-06-16",
+    "starts_on": "2026-06-04",
+    "ends_on": "2026-06-08",
     "status": "signed",
     "lines": [
       {
@@ -64,8 +64,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_maysan",
     "contract_no": "202510000004071",
     "city": "madinah",
-    "starts_on": "2027-05-23",
-    "ends_on": "2027-05-26",
+    "starts_on": "2026-05-15",
+    "ends_on": "2026-05-18",
     "status": "signed",
     "lines": [
       {
@@ -81,8 +81,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_maysan",
     "contract_no": "202510000004073",
     "city": "madinah",
-    "starts_on": "2027-05-23",
-    "ends_on": "2027-05-27",
+    "starts_on": "2026-05-15",
+    "ends_on": "2026-05-19",
     "status": "signed",
     "lines": [
       {
@@ -98,8 +98,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_maysan",
     "contract_no": "202510000004074",
     "city": "madinah",
-    "starts_on": "2027-05-26",
-    "ends_on": "2027-05-30",
+    "starts_on": "2026-05-18",
+    "ends_on": "2026-05-22",
     "status": "signed",
     "lines": [
       {
@@ -115,8 +115,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_maysan",
     "contract_no": "202510000004075",
     "city": "madinah",
-    "starts_on": "2027-05-27",
-    "ends_on": "2027-05-30",
+    "starts_on": "2026-05-19",
+    "ends_on": "2026-05-22",
     "status": "signed",
     "lines": [
       {
@@ -132,8 +132,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_deyar",
     "contract_no": "202510000004155",
     "city": "madinah",
-    "starts_on": "2027-06-08",
-    "ends_on": "2027-06-16",
+    "starts_on": "2026-05-31",
+    "ends_on": "2026-06-08",
     "status": "signed",
     "lines": [
       {
@@ -149,8 +149,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_durrat",
     "contract_no": "202510000004158",
     "city": "madinah",
-    "starts_on": "2027-05-20",
-    "ends_on": "2027-05-30",
+    "starts_on": "2026-05-12",
+    "ends_on": "2026-05-22",
     "status": "signed",
     "lines": [
       {
@@ -166,8 +166,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_aziziyah",
     "contract_no": "202510000004169",
     "city": "shifting",
-    "starts_on": "2027-05-20",
-    "ends_on": "2027-06-14",
+    "starts_on": "2026-05-12",
+    "ends_on": "2026-06-06",
     "status": "signed",
     "lines": [
       {
@@ -183,8 +183,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_aziziyah",
     "contract_no": "202510000004183",
     "city": "shifting",
-    "starts_on": "2027-05-20",
-    "ends_on": "2027-06-14",
+    "starts_on": "2026-05-12",
+    "ends_on": "2026-06-06",
     "status": "signed",
     "lines": [
       {
@@ -200,8 +200,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_pullman",
     "contract_no": "202510000004200",
     "city": "makkah",
-    "starts_on": "2027-06-08",
-    "ends_on": "2027-06-12",
+    "starts_on": "2026-05-31",
+    "ends_on": "2026-06-04",
     "status": "signed",
     "lines": [
       {
@@ -229,8 +229,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_pullman",
     "contract_no": "202510000004202",
     "city": "makkah",
-    "starts_on": "2027-05-24",
-    "ends_on": "2027-05-29",
+    "starts_on": "2026-05-16",
+    "ends_on": "2026-05-21",
     "status": "signed",
     "lines": [
       {
@@ -258,8 +258,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_maysan",
     "contract_no": "202510000004212",
     "city": "madinah",
-    "starts_on": "2027-06-08",
-    "ends_on": "2027-06-12",
+    "starts_on": "2026-05-31",
+    "ends_on": "2026-06-04",
     "status": "signed",
     "lines": [
       {
@@ -275,8 +275,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_aziziyah",
     "contract_no": "202610000004389",
     "city": "shifting",
-    "starts_on": "2027-05-20",
-    "ends_on": "2027-06-14",
+    "starts_on": "2026-05-12",
+    "ends_on": "2026-06-06",
     "status": "signed",
     "lines": [
       {
@@ -292,8 +292,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_pullman",
     "contract_no": "202610000004390",
     "city": "makkah",
-    "starts_on": "2027-05-29",
-    "ends_on": "2027-06-08",
+    "starts_on": "2026-05-21",
+    "ends_on": "2026-05-31",
     "status": "signed",
     "lines": [
       {
@@ -321,8 +321,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_haram",
     "contract_no": "202610000004437",
     "city": "madinah",
-    "starts_on": "2027-05-20",
-    "ends_on": "2027-05-24",
+    "starts_on": "2026-05-12",
+    "ends_on": "2026-05-16",
     "status": "signed",
     "lines": [
       {
@@ -350,8 +350,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_haram",
     "contract_no": "202610000004438",
     "city": "madinah",
-    "starts_on": "2027-05-24",
-    "ends_on": "2027-05-29",
+    "starts_on": "2026-05-16",
+    "ends_on": "2026-05-21",
     "status": "signed",
     "lines": [
       {
@@ -379,8 +379,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_haram",
     "contract_no": "202610000004439",
     "city": "madinah",
-    "starts_on": "2027-05-26",
-    "ends_on": "2027-05-29",
+    "starts_on": "2026-05-18",
+    "ends_on": "2026-05-21",
     "status": "signed",
     "lines": [
       {
@@ -408,8 +408,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_haram",
     "contract_no": "202610000004440",
     "city": "madinah",
-    "starts_on": "2027-05-29",
-    "ends_on": "2027-06-01",
+    "starts_on": "2026-05-21",
+    "ends_on": "2026-05-24",
     "status": "signed",
     "lines": [
       {
@@ -437,8 +437,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_haram",
     "contract_no": "202610000004441",
     "city": "madinah",
-    "starts_on": "2027-06-08",
-    "ends_on": "2027-06-12",
+    "starts_on": "2026-05-31",
+    "ends_on": "2026-06-04",
     "status": "signed",
     "lines": [
       {
@@ -466,8 +466,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_haram",
     "contract_no": "202610000004442",
     "city": "madinah",
-    "starts_on": "2027-06-08",
-    "ends_on": "2027-06-11",
+    "starts_on": "2026-05-31",
+    "ends_on": "2026-06-03",
     "status": "signed",
     "lines": [
       {
@@ -495,8 +495,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_haram",
     "contract_no": "202610000004443",
     "city": "madinah",
-    "starts_on": "2027-06-12",
-    "ends_on": "2027-06-15",
+    "starts_on": "2026-06-04",
+    "ends_on": "2026-06-07",
     "status": "signed",
     "lines": [
       {
@@ -524,8 +524,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_hilton",
     "contract_no": "202610000004508",
     "city": "madinah",
-    "starts_on": "2027-05-15",
-    "ends_on": "2027-05-20",
+    "starts_on": "2026-05-07",
+    "ends_on": "2026-05-12",
     "status": "signed",
     "lines": [
       {
@@ -553,8 +553,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_hyatt",
     "contract_no": "202610000004527",
     "city": "makkah",
-    "starts_on": "2027-05-20",
-    "ends_on": "2027-05-29",
+    "starts_on": "2026-05-12",
+    "ends_on": "2026-05-21",
     "status": "signed",
     "lines": [
       {
@@ -582,8 +582,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_hyatt",
     "contract_no": "202610000004530",
     "city": "makkah",
-    "starts_on": "2027-05-25",
-    "ends_on": "2027-05-29",
+    "starts_on": "2026-05-17",
+    "ends_on": "2026-05-21",
     "status": "signed",
     "lines": [
       {
@@ -611,8 +611,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_swiss",
     "contract_no": "202610000004583",
     "city": "makkah",
-    "starts_on": "2027-05-29",
-    "ends_on": "2027-06-08",
+    "starts_on": "2026-05-21",
+    "ends_on": "2026-05-31",
     "status": "signed",
     "lines": [
       {
@@ -640,8 +640,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_voco",
     "contract_no": "202610000004611",
     "city": "makkah",
-    "starts_on": "2027-05-20",
-    "ends_on": "2027-06-14",
+    "starts_on": "2026-05-12",
+    "ends_on": "2026-06-06",
     "status": "signed",
     "lines": [
       {
@@ -669,8 +669,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_taqwa",
     "contract_no": "202610000004613",
     "city": "madinah",
-    "starts_on": "2027-06-08",
-    "ends_on": "2027-06-15",
+    "starts_on": "2026-05-31",
+    "ends_on": "2026-06-07",
     "status": "signed",
     "lines": [
       {
@@ -698,8 +698,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_taqwa",
     "contract_no": "202610000004614",
     "city": "madinah",
-    "starts_on": "2027-05-26",
-    "ends_on": "2027-05-29",
+    "starts_on": "2026-05-18",
+    "ends_on": "2026-05-21",
     "status": "signed",
     "lines": [
       {
@@ -727,8 +727,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_taqwa",
     "contract_no": "202610000004615",
     "city": "madinah",
-    "starts_on": "2027-05-20",
-    "ends_on": "2027-05-26",
+    "starts_on": "2026-05-12",
+    "ends_on": "2026-05-18",
     "status": "signed",
     "lines": [
       {
@@ -756,8 +756,8 @@ export const SEED_CONTRACTS: DraftContract[] = [
     "hotelId": "h_taqwa",
     "contract_no": "202610000004616",
     "city": "madinah",
-    "starts_on": "2027-05-12",
-    "ends_on": "2027-05-20",
+    "starts_on": "2026-05-04",
+    "ends_on": "2026-05-12",
     "status": "signed",
     "lines": [
       {
@@ -789,7 +789,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV215",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "Amsterdam",
     "contract_type": "group",
@@ -803,7 +803,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV214",
-    "flies_on": "2027-05-20",
+    "flies_on": "2026-05-12",
     "from_city": "Amsterdam",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -817,7 +817,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV215",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "Amsterdam",
     "contract_type": "group",
@@ -831,7 +831,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV130",
-    "flies_on": "2027-05-29",
+    "flies_on": "2026-05-21",
     "from_city": "Paris",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -845,7 +845,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1421",
-    "flies_on": "2027-06-15",
+    "flies_on": "2026-06-07",
     "from_city": "Madina",
     "to_city": "Riyadh",
     "contract_type": "group",
@@ -859,7 +859,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV127",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "Paris",
     "contract_type": "group",
@@ -873,7 +873,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV119",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "LONDON",
     "contract_type": "group",
@@ -887,7 +887,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "إير كايرو",
     "airline_en": "Air Cairo",
     "flight_no": "SM493",
-    "flies_on": "2027-05-20",
+    "flies_on": "2026-05-12",
     "from_city": "Cairo",
     "to_city": "Madina",
     "contract_type": "group",
@@ -901,7 +901,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "إير كايرو",
     "airline_en": "Air Cairo",
     "flight_no": "SM480",
-    "flies_on": "2027-06-09",
+    "flies_on": "2026-06-01",
     "from_city": "Jeddah",
     "to_city": "Cairo",
     "contract_type": "group",
@@ -915,7 +915,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV123",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "MANCHESTER",
     "contract_type": "group",
@@ -929,7 +929,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV124",
-    "flies_on": "2027-05-29",
+    "flies_on": "2026-05-21",
     "from_city": "MANCHESTER",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -943,7 +943,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1420",
-    "flies_on": "2027-05-24",
+    "flies_on": "2026-05-16",
     "from_city": "Jeddah",
     "to_city": "Madina",
     "contract_type": "group",
@@ -957,7 +957,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1420",
-    "flies_on": "2027-05-21",
+    "flies_on": "2026-05-13",
     "from_city": "Jeddah",
     "to_city": "Madina",
     "contract_type": "group",
@@ -971,7 +971,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV214",
-    "flies_on": "2027-05-29",
+    "flies_on": "2026-05-21",
     "from_city": "Amsterdam",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -985,7 +985,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV127",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "Paris",
     "contract_type": "group",
@@ -999,7 +999,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "إير كايرو",
     "airline_en": "Air Cairo",
     "flight_no": "SM477",
-    "flies_on": "2027-05-23",
+    "flies_on": "2026-05-15",
     "from_city": "Cairo",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1013,7 +1013,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "إير كايرو",
     "airline_en": "Air Cairo",
     "flight_no": "SM494",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Madina",
     "to_city": "Cairo",
     "contract_type": "group",
@@ -1027,7 +1027,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1422",
-    "flies_on": "2027-05-25",
+    "flies_on": "2026-05-17",
     "from_city": "Jeddah",
     "to_city": "Madina",
     "contract_type": "group",
@@ -1041,7 +1041,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الاماراتيه",
     "airline_en": "ALAMARATYH",
     "flight_no": "EK809",
-    "flies_on": "2027-05-12",
+    "flies_on": "2026-05-04",
     "from_city": "Dubai",
     "to_city": "Madina",
     "contract_type": "group",
@@ -1055,7 +1055,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1429",
-    "flies_on": "2027-06-16",
+    "flies_on": "2026-06-08",
     "from_city": "Madina",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1069,7 +1069,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV210",
-    "flies_on": "2027-05-24",
+    "flies_on": "2026-05-16",
     "from_city": "MILANO",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1083,7 +1083,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV211",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "MILANO",
     "contract_type": "group",
@@ -1097,7 +1097,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV215",
-    "flies_on": "2027-06-15",
+    "flies_on": "2026-06-07",
     "from_city": "Jeddah",
     "to_city": "Amsterdam",
     "contract_type": "group",
@@ -1111,7 +1111,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV214",
-    "flies_on": "2027-05-27",
+    "flies_on": "2026-05-19",
     "from_city": "Amsterdam",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1125,7 +1125,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV126",
-    "flies_on": "2027-05-28",
+    "flies_on": "2026-05-20",
     "from_city": "Paris",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1139,7 +1139,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1467",
-    "flies_on": "2027-05-24",
+    "flies_on": "2026-05-16",
     "from_city": "Riyadh",
     "to_city": "Madina",
     "contract_type": "group",
@@ -1153,7 +1153,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV211",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "MILANO",
     "contract_type": "group",
@@ -1167,7 +1167,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1421",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Madina",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1181,7 +1181,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1465",
-    "flies_on": "2027-05-23",
+    "flies_on": "2026-05-15",
     "from_city": "Riyadh",
     "to_city": "Madina",
     "contract_type": "group",
@@ -1195,7 +1195,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudi Airlines",
     "flight_no": "SV21",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "NEWYORK",
     "contract_type": "group",
@@ -1209,7 +1209,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1014",
-    "flies_on": "2027-06-09",
+    "flies_on": "2026-06-01",
     "from_city": "Jeddah",
     "to_city": "Riyadh",
     "contract_type": "group",
@@ -1223,7 +1223,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1016",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "Riyadh",
     "contract_type": "group",
@@ -1237,7 +1237,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1457",
-    "flies_on": "2027-05-20",
+    "flies_on": "2026-05-12",
     "from_city": "Riyadh",
     "to_city": "Madina",
     "contract_type": "group",
@@ -1251,7 +1251,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV131",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "Paris",
     "contract_type": "group",
@@ -1265,7 +1265,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1051",
-    "flies_on": "2027-05-30",
+    "flies_on": "2026-05-22",
     "from_city": "Riyadh",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1279,7 +1279,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV127",
-    "flies_on": "2027-06-15",
+    "flies_on": "2026-06-07",
     "from_city": "Jeddah",
     "to_city": "Paris",
     "contract_type": "group",
@@ -1293,7 +1293,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
     "flight_no": "BA133",
-    "flies_on": "2027-05-28",
+    "flies_on": "2026-05-20",
     "from_city": "LONDON",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1307,7 +1307,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
     "flight_no": "BA132",
-    "flies_on": "2027-06-11",
+    "flies_on": "2026-06-03",
     "from_city": "Jeddah",
     "to_city": "LONDON",
     "contract_type": "group",
@@ -1321,7 +1321,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1429",
-    "flies_on": "2027-06-15",
+    "flies_on": "2026-06-07",
     "from_city": "Madina",
     "to_city": "Riyadh",
     "contract_type": "group",
@@ -1335,7 +1335,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV250",
-    "flies_on": "2027-05-29",
+    "flies_on": "2026-05-21",
     "from_city": "BIRMINGHAM",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1349,7 +1349,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV253",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "BIRMINGHAM",
     "contract_type": "group",
@@ -1363,7 +1363,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV214",
-    "flies_on": "2027-05-28",
+    "flies_on": "2026-05-20",
     "from_city": "Amsterdam",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1377,7 +1377,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1420",
-    "flies_on": "2027-05-25",
+    "flies_on": "2026-05-17",
     "from_city": "Jeddah",
     "to_city": "Madina",
     "contract_type": "group",
@@ -1391,7 +1391,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1051",
-    "flies_on": "2027-05-29",
+    "flies_on": "2026-05-21",
     "from_city": "Riyadh",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1405,7 +1405,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الاماراتيه",
     "airline_en": "ALAMARATYH",
     "flight_no": "EK802",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "Dubai",
     "contract_type": "group",
@@ -1419,7 +1419,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الاماراتيه",
     "airline_en": "ALAMARATYH",
     "flight_no": "EK806",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "Dubai",
     "contract_type": "group",
@@ -1433,7 +1433,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV126",
-    "flies_on": "2027-05-29",
+    "flies_on": "2026-05-21",
     "from_city": "Paris",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1447,7 +1447,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1421",
-    "flies_on": "2027-06-16",
+    "flies_on": "2026-06-08",
     "from_city": "Madina",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1461,7 +1461,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
     "flight_no": "BA133",
-    "flies_on": "2027-05-30",
+    "flies_on": "2026-05-22",
     "from_city": "LONDON",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1475,7 +1475,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
     "flight_no": "BA132",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "LONDON",
     "contract_type": "group",
@@ -1489,7 +1489,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1046",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "Paris",
     "contract_type": "group",
@@ -1503,7 +1503,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV215",
-    "flies_on": "2027-06-10",
+    "flies_on": "2026-06-02",
     "from_city": "Jeddah",
     "to_city": "Amsterdam",
     "contract_type": "group",
@@ -1517,7 +1517,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
     "flight_no": "BA132",
-    "flies_on": "2027-06-09",
+    "flies_on": "2026-06-01",
     "from_city": "Jeddah",
     "to_city": "LONDON",
     "contract_type": "group",
@@ -1531,7 +1531,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
     "flight_no": "BA133",
-    "flies_on": "2027-05-26",
+    "flies_on": "2026-05-18",
     "from_city": "LONDON",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1545,7 +1545,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV120",
-    "flies_on": "2027-05-29",
+    "flies_on": "2026-05-21",
     "from_city": "LONDON",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1559,7 +1559,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1457",
-    "flies_on": "2027-05-29",
+    "flies_on": "2026-05-21",
     "from_city": "Riyadh",
     "to_city": "Madina",
     "contract_type": "group",
@@ -1573,7 +1573,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1041",
-    "flies_on": "2027-05-30",
+    "flies_on": "2026-05-22",
     "from_city": "Riyadh",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1587,7 +1587,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV21",
-    "flies_on": "2027-06-11",
+    "flies_on": "2026-06-03",
     "from_city": "Jeddah",
     "to_city": "NEWYORK",
     "contract_type": "group",
@@ -1601,7 +1601,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الاماراتيه",
     "airline_en": "ALAMARATYH",
     "flight_no": "EK809",
-    "flies_on": "2027-05-15",
+    "flies_on": "2026-05-07",
     "from_city": "Dubai",
     "to_city": "Madina",
     "contract_type": "group",
@@ -1615,7 +1615,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1428",
-    "flies_on": "2027-05-23",
+    "flies_on": "2026-05-15",
     "from_city": "Jeddah",
     "to_city": "Madina",
     "contract_type": "group",
@@ -1629,7 +1629,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV35",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "WASHINGTON",
     "contract_type": "group",
@@ -1643,7 +1643,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV124",
-    "flies_on": "2027-05-30",
+    "flies_on": "2026-05-22",
     "from_city": "MANCHESTER",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1657,7 +1657,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية التركية",
     "airline_en": "Turkish Airlines",
     "flight_no": "TK 120",
-    "flies_on": "2027-05-24",
+    "flies_on": "2026-05-16",
     "from_city": "Istanbul",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1671,7 +1671,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية التركية",
     "airline_en": "Turkish Airlines",
     "flight_no": "TK115",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "Istanbul",
     "contract_type": "group",
@@ -1685,7 +1685,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1048",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "Riyadh",
     "contract_type": "group",
@@ -1699,7 +1699,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV20",
-    "flies_on": "2027-05-26",
+    "flies_on": "2026-05-18",
     "from_city": "NEWYORK",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1713,7 +1713,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1420",
-    "flies_on": "2027-05-26",
+    "flies_on": "2026-05-18",
     "from_city": "Jeddah",
     "to_city": "Madina",
     "contract_type": "group",
@@ -1727,7 +1727,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV237",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "Geneva",
     "contract_type": "group",
@@ -1741,7 +1741,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV210",
-    "flies_on": "2027-05-28",
+    "flies_on": "2026-05-20",
     "from_city": "MILANO",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1755,7 +1755,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1424",
-    "flies_on": "2027-05-21",
+    "flies_on": "2026-05-13",
     "from_city": "Jeddah",
     "to_city": "Madina",
     "contract_type": "group",
@@ -1769,7 +1769,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV228",
-    "flies_on": "2027-05-27",
+    "flies_on": "2026-05-19",
     "from_city": "BARCELONA",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1783,7 +1783,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV229",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "BARCELONA",
     "contract_type": "group",
@@ -1797,7 +1797,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV124",
-    "flies_on": "2027-05-26",
+    "flies_on": "2026-05-18",
     "from_city": "MANCHESTER",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1811,7 +1811,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV236",
-    "flies_on": "2027-05-27",
+    "flies_on": "2026-05-19",
     "from_city": "Geneva",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1825,7 +1825,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV237",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "Geneva",
     "contract_type": "group",
@@ -1839,7 +1839,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV211",
-    "flies_on": "2027-06-10",
+    "flies_on": "2026-06-02",
     "from_city": "Jeddah",
     "to_city": "MILANO",
     "contract_type": "group",
@@ -1853,7 +1853,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV120",
-    "flies_on": "2027-05-30",
+    "flies_on": "2026-05-22",
     "from_city": "LONDON",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1867,7 +1867,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية التركية",
     "airline_en": "Turkish Airlines",
     "flight_no": "TK126",
-    "flies_on": "2027-05-29",
+    "flies_on": "2026-05-21",
     "from_city": "Istanbul",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1881,7 +1881,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية التركية",
     "airline_en": "Turkish Airlines",
     "flight_no": "TK127",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "Istanbul",
     "contract_type": "group",
@@ -1895,7 +1895,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية القطرية",
     "airline_en": "Qatar Airways",
     "flight_no": "QR1182",
-    "flies_on": "2027-05-30",
+    "flies_on": "2026-05-22",
     "from_city": "Doha",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1909,7 +1909,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية القطرية",
     "airline_en": "Qatar Airways",
     "flight_no": "QR1185",
-    "flies_on": "2027-06-16",
+    "flies_on": "2026-06-08",
     "from_city": "Jeddah",
     "to_city": "Doha",
     "contract_type": "group",
@@ -1923,7 +1923,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV168",
-    "flies_on": "2027-05-29",
+    "flies_on": "2026-05-21",
     "from_city": "Frankfort",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1937,7 +1937,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1057",
-    "flies_on": "2027-05-29",
+    "flies_on": "2026-05-21",
     "from_city": "Riyadh",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1951,7 +1951,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV123",
-    "flies_on": "2027-06-11",
+    "flies_on": "2026-06-03",
     "from_city": "Jeddah",
     "to_city": "MANCHESTER",
     "contract_type": "group",
@@ -1965,7 +1965,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV210",
-    "flies_on": "2027-05-27",
+    "flies_on": "2026-05-19",
     "from_city": "MILANO",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1979,7 +1979,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV36",
-    "flies_on": "2027-05-26",
+    "flies_on": "2026-05-18",
     "from_city": "WASHINGTON",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -1993,7 +1993,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1420",
-    "flies_on": "2027-05-30",
+    "flies_on": "2026-05-22",
     "from_city": "Jeddah",
     "to_city": "Madina",
     "contract_type": "group",
@@ -2007,7 +2007,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV62",
-    "flies_on": "2027-05-26",
+    "flies_on": "2026-05-18",
     "from_city": "TORONTO-PEARSON",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2021,7 +2021,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV61",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "TORONTO-PEARSON",
     "contract_type": "group",
@@ -2035,7 +2035,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV120",
-    "flies_on": "2027-05-26",
+    "flies_on": "2026-05-18",
     "from_city": "London",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2049,7 +2049,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV119",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "LONDON",
     "contract_type": "group",
@@ -2063,7 +2063,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV226",
-    "flies_on": "2027-05-27",
+    "flies_on": "2026-05-19",
     "from_city": "Madrid",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2077,7 +2077,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV227",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "Madrid",
     "contract_type": "group",
@@ -2091,7 +2091,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV119",
-    "flies_on": "2027-06-11",
+    "flies_on": "2026-06-03",
     "from_city": "Jeddah",
     "to_city": "LONDON",
     "contract_type": "group",
@@ -2105,7 +2105,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV167",
-    "flies_on": "2027-06-10",
+    "flies_on": "2026-06-02",
     "from_city": "Jeddah",
     "to_city": "Frankfort",
     "contract_type": "group",
@@ -2119,7 +2119,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV130",
-    "flies_on": "2027-05-27",
+    "flies_on": "2026-05-19",
     "from_city": "Paris",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2133,7 +2133,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
     "flight_no": "BA133",
-    "flies_on": "2027-05-27",
+    "flies_on": "2026-05-19",
     "from_city": "LONDON",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2147,7 +2147,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV226",
-    "flies_on": "2027-05-24",
+    "flies_on": "2026-05-16",
     "from_city": "Madrid",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2161,7 +2161,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV227",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "Madrid",
     "contract_type": "group",
@@ -2175,7 +2175,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
     "flight_no": "BA132",
-    "flies_on": "2027-06-10",
+    "flies_on": "2026-06-02",
     "from_city": "Jeddah",
     "to_city": "LONDON",
     "contract_type": "group",
@@ -2189,7 +2189,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1464",
-    "flies_on": "2027-06-16",
+    "flies_on": "2026-06-08",
     "from_city": "Madina",
     "to_city": "Riyadh",
     "contract_type": "group",
@@ -2203,7 +2203,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV36",
-    "flies_on": "2027-05-30",
+    "flies_on": "2026-05-22",
     "from_city": "WASHINGTON",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2217,7 +2217,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1016",
-    "flies_on": "2027-06-11",
+    "flies_on": "2026-06-03",
     "from_city": "Jeddah",
     "to_city": "Riyadh",
     "contract_type": "group",
@@ -2231,7 +2231,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV168",
-    "flies_on": "2027-05-27",
+    "flies_on": "2026-05-19",
     "from_city": "Frankfort",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2245,7 +2245,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV167",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "Frankfort",
     "contract_type": "group",
@@ -2259,7 +2259,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية التركية",
     "airline_en": "Turkish Airlines",
     "flight_no": "TK98",
-    "flies_on": "2027-05-25",
+    "flies_on": "2026-05-17",
     "from_city": "Istanbul",
     "to_city": "Madina",
     "contract_type": "group",
@@ -2273,7 +2273,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية التركية",
     "airline_en": "Turkish Airlines",
     "flight_no": "TK97",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "Istanbul",
     "contract_type": "group",
@@ -2287,7 +2287,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV62",
-    "flies_on": "2027-05-30",
+    "flies_on": "2026-05-22",
     "from_city": "TORONTO-PEARSON",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2301,7 +2301,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV61",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "TORONTO-PEARSON",
     "contract_type": "group",
@@ -2315,7 +2315,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1044",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "Riyadh",
     "contract_type": "group",
@@ -2329,7 +2329,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1467",
-    "flies_on": "2027-05-25",
+    "flies_on": "2026-05-17",
     "from_city": "Riyadh",
     "to_city": "Madina",
     "contract_type": "group",
@@ -2343,7 +2343,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1050",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "Riyadh",
     "contract_type": "group",
@@ -2357,7 +2357,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1420",
-    "flies_on": "2027-05-28",
+    "flies_on": "2026-05-20",
     "from_city": "Jeddah",
     "to_city": "Madina",
     "contract_type": "group",
@@ -2371,7 +2371,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV131",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Jeddah",
     "to_city": "Paris",
     "contract_type": "group",
@@ -2385,7 +2385,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1051",
-    "flies_on": "2027-05-23",
+    "flies_on": "2026-05-15",
     "from_city": "Riyadh",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2399,7 +2399,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1464",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "Madina",
     "to_city": "Riyadh",
     "contract_type": "group",
@@ -2413,7 +2413,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1053",
-    "flies_on": "2027-05-30",
+    "flies_on": "2026-05-22",
     "from_city": "Riyadh",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2427,7 +2427,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV250",
-    "flies_on": "2027-05-27",
+    "flies_on": "2026-05-19",
     "from_city": "BIRMINGHAM",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2441,7 +2441,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV253",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "Jeddah",
     "to_city": "BIRMINGHAM",
     "contract_type": "group",
@@ -2455,7 +2455,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1057",
-    "flies_on": "2027-05-27",
+    "flies_on": "2026-05-19",
     "from_city": "Riyadh",
     "to_city": "Jeddah",
     "contract_type": "group",
@@ -2469,7 +2469,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV1014",
-    "flies_on": "2027-06-11",
+    "flies_on": "2026-06-03",
     "from_city": "Jeddah",
     "to_city": "Riyadh",
     "contract_type": "group",
@@ -2483,7 +2483,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "إير كايرو",
     "airline_en": "Air Cairo (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-21",
+    "flies_on": "2026-05-13",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2497,7 +2497,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "فلاي دبي",
     "airline_en": "Flydubai (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-20",
+    "flies_on": "2026-05-12",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2511,7 +2511,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-12",
+    "flies_on": "2026-05-04",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2525,7 +2525,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران أديل",
     "airline_en": "Flyadeal (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-23",
+    "flies_on": "2026-05-15",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2539,7 +2539,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران الاتحاد",
     "airline_en": "Etihad Airways (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-12",
+    "flies_on": "2026-05-04",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2553,7 +2553,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية القطرية",
     "airline_en": "Qatar Airways (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-12",
+    "flies_on": "2026-05-04",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2567,7 +2567,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية التركية",
     "airline_en": "Turkish Airlines (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-12",
+    "flies_on": "2026-05-04",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2581,7 +2581,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران الملكية الأردنية",
     "airline_en": "Royal Jordanian (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-20",
+    "flies_on": "2026-05-12",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2595,7 +2595,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران ناس",
     "airline_en": "flynas (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-20",
+    "flies_on": "2026-05-12",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2609,7 +2609,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران ايجين",
     "airline_en": "Aegean Airlines (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-25",
+    "flies_on": "2026-05-17",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2623,7 +2623,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "VF",
     "airline_en": "VF (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-21",
+    "flies_on": "2026-05-13",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2637,7 +2637,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران الإمارات",
     "airline_en": "Emirates (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-23",
+    "flies_on": "2026-05-15",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2651,7 +2651,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية الأثيوبية",
     "airline_en": "Ethiopian Airlines (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-24",
+    "flies_on": "2026-05-16",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2665,7 +2665,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "نسما للطيران",
     "airline_en": "Nesma Airlines (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-24",
+    "flies_on": "2026-05-16",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2679,7 +2679,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران بيجاسوس",
     "airline_en": "Pegasus Airlines (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-24",
+    "flies_on": "2026-05-16",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2693,7 +2693,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "MSC",
     "airline_en": "MSC (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-27",
+    "flies_on": "2026-05-19",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2707,7 +2707,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران الخليج",
     "airline_en": "Gulf Air (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-21",
+    "flies_on": "2026-05-13",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2721,7 +2721,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية الفرنسية",
     "airline_en": "Air France (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-30",
+    "flies_on": "2026-05-22",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2735,7 +2735,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران الشرق الأوسط",
     "airline_en": "Middle East Airlines (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-20",
+    "flies_on": "2026-05-12",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2749,7 +2749,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الطيران العماني",
     "airline_en": "Oman Air (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-25",
+    "flies_on": "2026-05-17",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2763,7 +2763,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران الهند",
     "airline_en": "Air India (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-23",
+    "flies_on": "2026-05-15",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2777,7 +2777,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "صاف اير",
     "airline_en": "Safair (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-27",
+    "flies_on": "2026-05-19",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2791,7 +2791,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران ايبريا",
     "airline_en": "Iberia (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-25",
+    "flies_on": "2026-05-17",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2805,7 +2805,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية الكينية",
     "airline_en": "Kenya Airways (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-23",
+    "flies_on": "2026-05-15",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2819,7 +2819,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران تاي إنترناشونال",
     "airline_en": "Thai Airways International (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-28",
+    "flies_on": "2026-05-20",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2833,7 +2833,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "العربية للطيران",
     "airline_en": "Air Arabia (GDS)",
     "flight_no": "",
-    "flies_on": "2027-05-26",
+    "flies_on": "2026-05-18",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2847,7 +2847,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "إير كايرو",
     "airline_en": "Air Cairo (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2861,7 +2861,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "السعودية",
     "airline_en": "Saudia (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-07",
+    "flies_on": "2026-05-30",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2875,7 +2875,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران ايجين",
     "airline_en": "Aegean Airlines (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2889,7 +2889,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران الملكية الأردنية",
     "airline_en": "Royal Jordanian (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2903,7 +2903,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران أديل",
     "airline_en": "Flyadeal (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2917,7 +2917,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران ناس",
     "airline_en": "flynas (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2931,7 +2931,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية التركية",
     "airline_en": "Turkish Airlines (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2945,7 +2945,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية القطرية",
     "airline_en": "Qatar Airways (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2959,7 +2959,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران الاتحاد",
     "airline_en": "Etihad Airways (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2973,7 +2973,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "فلاي دبي",
     "airline_en": "Flydubai (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -2987,7 +2987,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "VF",
     "airline_en": "VF (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3001,7 +3001,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية الأثيوبية",
     "airline_en": "Ethiopian Airlines (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3015,7 +3015,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "نسما للطيران",
     "airline_en": "Nesma Airlines (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3029,7 +3029,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران الإمارات",
     "airline_en": "Emirates (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3043,7 +3043,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران بيجاسوس",
     "airline_en": "Pegasus Airlines (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3057,7 +3057,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران الخليج",
     "airline_en": "Gulf Air (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3071,7 +3071,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "AJY",
     "airline_en": "AJY (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-10",
+    "flies_on": "2026-06-02",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3085,7 +3085,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران ايبريا",
     "airline_en": "Iberia (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-10",
+    "flies_on": "2026-06-02",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3099,7 +3099,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الطيران العماني",
     "airline_en": "Oman Air (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3113,7 +3113,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "طيران الهند",
     "airline_en": "Air India (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-12",
+    "flies_on": "2026-06-04",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3127,7 +3127,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية الفرنسية",
     "airline_en": "Air France (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-09",
+    "flies_on": "2026-06-01",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3141,7 +3141,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "الخطوط الجوية الكينية",
     "airline_en": "Kenya Airways (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-08",
+    "flies_on": "2026-05-31",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3155,7 +3155,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "airline_ar": "العربية للطيران",
     "airline_en": "Air Arabia (GDS)",
     "flight_no": "",
-    "flies_on": "2027-06-09",
+    "flies_on": "2026-06-01",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
@@ -3179,15 +3179,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_01_0",
         "role": "first",
         "hotelId": "h_swiss",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-05-31"
       },
       {
         "id": "leg_1447_01_1",
         "role": "second",
         "hotelId": "h_haram",
-        "starts_on": "2027-06-08",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-31",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -3336,15 +3336,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_02_0",
         "role": "first",
         "hotelId": "h_haram",
-        "starts_on": "2027-05-24",
-        "ends_on": "2027-05-29"
+        "starts_on": "2026-05-16",
+        "ends_on": "2026-05-21"
       },
       {
         "id": "leg_1447_02_1",
         "role": "second",
         "hotelId": "h_pullman",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-05-31"
       }
     ],
     "contractIds": [
@@ -3469,15 +3469,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_03_0",
         "role": "first",
         "hotelId": "h_haram",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-01"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-05-24"
       },
       {
         "id": "leg_1447_03_1",
         "role": "second",
         "hotelId": "h_pullman",
-        "starts_on": "2027-06-01",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-24",
+        "ends_on": "2026-05-31"
       }
     ],
     "contractIds": [
@@ -3590,22 +3590,22 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_04_0",
         "role": "first",
         "hotelId": "h_haram",
-        "starts_on": "2027-05-20",
-        "ends_on": "2027-05-24"
+        "starts_on": "2026-05-12",
+        "ends_on": "2026-05-16"
       },
       {
         "id": "leg_1447_04_1",
         "role": "second",
         "hotelId": "h_pullman",
-        "starts_on": "2027-05-24",
-        "ends_on": "2027-05-29"
+        "starts_on": "2026-05-16",
+        "ends_on": "2026-05-21"
       },
       {
         "id": "leg_1447_04_2",
         "role": "transitional",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-05-31"
       }
     ],
     "contractIds": [
@@ -3663,22 +3663,22 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_05_0",
         "role": "first",
         "hotelId": "h_pullman",
-        "starts_on": "2027-06-08",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-31",
+        "ends_on": "2026-06-04"
       },
       {
         "id": "leg_1447_05_1",
         "role": "second",
         "hotelId": "h_haram",
-        "starts_on": "2027-06-12",
-        "ends_on": "2027-06-16"
+        "starts_on": "2026-06-04",
+        "ends_on": "2026-06-08"
       },
       {
         "id": "leg_1447_05_2",
         "role": "transitional",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-05-31"
       }
     ],
     "contractIds": [
@@ -3732,22 +3732,22 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_06_0",
         "role": "first",
         "hotelId": "h_haram",
-        "starts_on": "2027-05-26",
-        "ends_on": "2027-05-29"
+        "starts_on": "2026-05-18",
+        "ends_on": "2026-05-21"
       },
       {
         "id": "leg_1447_06_1",
         "role": "second",
         "hotelId": "h_pullman",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-01"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-05-24"
       },
       {
         "id": "leg_1447_06_2",
         "role": "transitional",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-06-01",
-        "ends_on": "2027-06-09"
+        "starts_on": "2026-05-24",
+        "ends_on": "2026-06-01"
       }
     ],
     "contractIds": [
@@ -3877,15 +3877,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_07_0",
         "role": "first",
         "hotelId": "h_taqwa",
-        "starts_on": "2027-05-20",
-        "ends_on": "2027-05-23"
+        "starts_on": "2026-05-12",
+        "ends_on": "2026-05-15"
       },
       {
         "id": "leg_1447_07_1",
         "role": "second",
         "hotelId": "h_voco",
-        "starts_on": "2027-05-23",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-15",
+        "ends_on": "2026-05-31"
       }
     ],
     "contractIds": [
@@ -3974,15 +3974,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_08_0",
         "role": "first",
         "hotelId": "h_taqwa",
-        "starts_on": "2027-05-20",
-        "ends_on": "2027-05-23"
+        "starts_on": "2026-05-12",
+        "ends_on": "2026-05-15"
       },
       {
         "id": "leg_1447_08_1",
         "role": "second",
         "hotelId": "h_voco",
-        "starts_on": "2027-05-23",
-        "ends_on": "2027-06-10"
+        "starts_on": "2026-05-15",
+        "ends_on": "2026-06-02"
       }
     ],
     "contractIds": [
@@ -4039,15 +4039,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_09_0",
         "role": "first",
         "hotelId": "h_taqwa",
-        "starts_on": "2027-05-23",
-        "ends_on": "2027-05-26"
+        "starts_on": "2026-05-15",
+        "ends_on": "2026-05-18"
       },
       {
         "id": "leg_1447_09_1",
         "role": "second",
         "hotelId": "h_voco",
-        "starts_on": "2027-05-26",
-        "ends_on": "2027-06-10"
+        "starts_on": "2026-05-18",
+        "ends_on": "2026-06-02"
       }
     ],
     "contractIds": [
@@ -4160,15 +4160,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_10_0",
         "role": "first",
         "hotelId": "h_taqwa",
-        "starts_on": "2027-05-23",
-        "ends_on": "2027-05-26"
+        "starts_on": "2026-05-15",
+        "ends_on": "2026-05-18"
       },
       {
         "id": "leg_1447_10_1",
         "role": "second",
         "hotelId": "h_voco",
-        "starts_on": "2027-05-26",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-18",
+        "ends_on": "2026-05-31"
       }
     ],
     "contractIds": [
@@ -4257,15 +4257,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_11_0",
         "role": "first",
         "hotelId": "h_taqwa",
-        "starts_on": "2027-05-26",
-        "ends_on": "2027-05-29"
+        "starts_on": "2026-05-18",
+        "ends_on": "2026-05-21"
       },
       {
         "id": "leg_1447_11_1",
         "role": "second",
         "hotelId": "h_voco",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-09"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-06-01"
       }
     ],
     "contractIds": [
@@ -4402,15 +4402,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_12_0",
         "role": "first",
         "hotelId": "h_voco",
-        "starts_on": "2027-05-28",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-20",
+        "ends_on": "2026-05-31"
       },
       {
         "id": "leg_1447_12_1",
         "role": "second",
         "hotelId": "h_taqwa",
-        "starts_on": "2027-06-08",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-31",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -4567,15 +4567,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_13_0",
         "role": "first",
         "hotelId": "h_voco",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-06-04"
       },
       {
         "id": "leg_1447_13_1",
         "role": "second",
         "hotelId": "h_taqwa",
-        "starts_on": "2027-06-12",
-        "ends_on": "2027-06-15"
+        "starts_on": "2026-06-04",
+        "ends_on": "2026-06-07"
       }
     ],
     "contractIds": [
@@ -4680,15 +4680,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_14_0",
         "role": "first",
         "hotelId": "h_maysan",
-        "starts_on": "2027-05-23",
-        "ends_on": "2027-05-27"
+        "starts_on": "2026-05-15",
+        "ends_on": "2026-05-19"
       },
       {
         "id": "leg_1447_14_1",
         "role": "second",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-27",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-19",
+        "ends_on": "2026-05-31"
       }
     ],
     "contractIds": [
@@ -4877,15 +4877,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_15_0",
         "role": "first",
         "hotelId": "h_maysan",
-        "starts_on": "2027-05-23",
-        "ends_on": "2027-05-26"
+        "starts_on": "2026-05-15",
+        "ends_on": "2026-05-18"
       },
       {
         "id": "leg_1447_15_1",
         "role": "second",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-26",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-18",
+        "ends_on": "2026-05-31"
       }
     ],
     "contractIds": [
@@ -4942,15 +4942,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_16_0",
         "role": "first",
         "hotelId": "h_maysan",
-        "starts_on": "2027-05-27",
-        "ends_on": "2027-05-30"
+        "starts_on": "2026-05-19",
+        "ends_on": "2026-05-22"
       },
       {
         "id": "leg_1447_16_1",
         "role": "second",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-30",
-        "ends_on": "2027-06-10"
+        "starts_on": "2026-05-22",
+        "ends_on": "2026-06-02"
       }
     ],
     "contractIds": [
@@ -5079,15 +5079,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_17_0",
         "role": "first",
         "hotelId": "h_maysan",
-        "starts_on": "2027-05-27",
-        "ends_on": "2027-05-30"
+        "starts_on": "2026-05-19",
+        "ends_on": "2026-05-22"
       },
       {
         "id": "leg_1447_17_1",
         "role": "second",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-30",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-22",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -5260,15 +5260,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_18_0",
         "role": "first",
         "hotelId": "h_maysan",
-        "starts_on": "2027-05-26",
-        "ends_on": "2027-05-30"
+        "starts_on": "2026-05-18",
+        "ends_on": "2026-05-22"
       },
       {
         "id": "leg_1447_18_1",
         "role": "second",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-30",
-        "ends_on": "2027-06-09"
+        "starts_on": "2026-05-22",
+        "ends_on": "2026-06-01"
       }
     ],
     "contractIds": [
@@ -5345,15 +5345,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_19_0",
         "role": "first",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-05-31"
       },
       {
         "id": "leg_1447_19_1",
         "role": "second",
         "hotelId": "h_maysan",
-        "starts_on": "2027-06-08",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-31",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -5482,15 +5482,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_20_0",
         "role": "first",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-28",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-20",
+        "ends_on": "2026-05-31"
       },
       {
         "id": "leg_1447_20_1",
         "role": "second",
         "hotelId": "h_maysan",
-        "starts_on": "2027-06-08",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-31",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -5623,15 +5623,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_21_0",
         "role": "first",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-06-04"
       },
       {
         "id": "leg_1447_21_1",
         "role": "second",
         "hotelId": "h_maysan",
-        "starts_on": "2027-06-12",
-        "ends_on": "2027-06-16"
+        "starts_on": "2026-06-04",
+        "ends_on": "2026-06-08"
       }
     ],
     "contractIds": [
@@ -5792,15 +5792,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_22_0",
         "role": "first",
         "hotelId": "h_durrat",
-        "starts_on": "2027-05-20",
-        "ends_on": "2027-05-24"
+        "starts_on": "2026-05-12",
+        "ends_on": "2026-05-16"
       },
       {
         "id": "leg_1447_22_1",
         "role": "second",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-24",
-        "ends_on": "2027-06-10"
+        "starts_on": "2026-05-16",
+        "ends_on": "2026-06-02"
       }
     ],
     "contractIds": [
@@ -5929,15 +5929,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_23_0",
         "role": "first",
         "hotelId": "h_durrat",
-        "starts_on": "2027-05-24",
-        "ends_on": "2027-05-27"
+        "starts_on": "2026-05-16",
+        "ends_on": "2026-05-19"
       },
       {
         "id": "leg_1447_23_1",
         "role": "second",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-27",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-19",
+        "ends_on": "2026-05-31"
       }
     ],
     "contractIds": [
@@ -6094,15 +6094,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_24_0",
         "role": "first",
         "hotelId": "h_durrat",
-        "starts_on": "2027-05-27",
-        "ends_on": "2027-05-30"
+        "starts_on": "2026-05-19",
+        "ends_on": "2026-05-22"
       },
       {
         "id": "leg_1447_24_1",
         "role": "second",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-30",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-22",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -6239,15 +6239,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_25_0",
         "role": "first",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-05-31"
       },
       {
         "id": "leg_1447_25_1",
         "role": "second",
         "hotelId": "h_deyar",
-        "starts_on": "2027-06-08",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-31",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -6328,15 +6328,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_26_0",
         "role": "first",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-23",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-15",
+        "ends_on": "2026-05-31"
       },
       {
         "id": "leg_1447_26_1",
         "role": "second",
         "hotelId": "h_deyar",
-        "starts_on": "2027-06-08",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-31",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -6453,15 +6453,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_27_0",
         "role": "first",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-28",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-20",
+        "ends_on": "2026-05-31"
       },
       {
         "id": "leg_1447_27_1",
         "role": "second",
         "hotelId": "h_deyar",
-        "starts_on": "2027-06-08",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-31",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -6582,15 +6582,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_28_0",
         "role": "first",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-06-04"
       },
       {
         "id": "leg_1447_28_1",
         "role": "second",
         "hotelId": "h_deyar",
-        "starts_on": "2027-06-12",
-        "ends_on": "2027-06-16"
+        "starts_on": "2026-06-04",
+        "ends_on": "2026-06-08"
       }
     ],
     "contractIds": [
@@ -6723,22 +6723,22 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_29_0",
         "role": "first",
         "hotelId": "h_hilton",
-        "starts_on": "2027-05-12",
-        "ends_on": "2027-05-20"
+        "starts_on": "2026-05-04",
+        "ends_on": "2026-05-12"
       },
       {
         "id": "leg_1447_29_1",
         "role": "second",
         "hotelId": "h_hyatt",
-        "starts_on": "2027-05-20",
-        "ends_on": "2027-05-29"
+        "starts_on": "2026-05-12",
+        "ends_on": "2026-05-21"
       },
       {
         "id": "leg_1447_29_2",
         "role": "transitional",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -6860,22 +6860,22 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_30_0",
         "role": "first",
         "hotelId": "h_taqwa",
-        "starts_on": "2027-05-12",
-        "ends_on": "2027-05-20"
+        "starts_on": "2026-05-04",
+        "ends_on": "2026-05-12"
       },
       {
         "id": "leg_1447_30_1",
         "role": "second",
         "hotelId": "h_hyatt",
-        "starts_on": "2027-05-20",
-        "ends_on": "2027-05-29"
+        "starts_on": "2026-05-12",
+        "ends_on": "2026-05-21"
       },
       {
         "id": "leg_1447_30_2",
         "role": "transitional",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -6921,22 +6921,22 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_31_0",
         "role": "first",
         "hotelId": "h_hilton",
-        "starts_on": "2027-05-15",
-        "ends_on": "2027-05-20"
+        "starts_on": "2026-05-07",
+        "ends_on": "2026-05-12"
       },
       {
         "id": "leg_1447_31_1",
         "role": "second",
         "hotelId": "h_hyatt",
-        "starts_on": "2027-05-20",
-        "ends_on": "2027-05-29"
+        "starts_on": "2026-05-12",
+        "ends_on": "2026-05-21"
       },
       {
         "id": "leg_1447_31_2",
         "role": "transitional",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -6978,15 +6978,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_32_0",
         "role": "first",
         "hotelId": "h_durrat",
-        "starts_on": "2027-05-20",
-        "ends_on": "2027-05-24"
+        "starts_on": "2026-05-12",
+        "ends_on": "2026-05-16"
       },
       {
         "id": "leg_1447_32_1",
         "role": "second",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-24",
-        "ends_on": "2027-06-10"
+        "starts_on": "2026-05-16",
+        "ends_on": "2026-06-02"
       }
     ],
     "contractIds": [
@@ -7043,15 +7043,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_33_0",
         "role": "first",
         "hotelId": "h_swiss",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-05-31"
       },
       {
         "id": "leg_1447_33_1",
         "role": "second",
         "hotelId": "h_haram",
-        "starts_on": "2027-06-08",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-31",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -7196,15 +7196,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_34_0",
         "role": "first",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-05-31"
       },
       {
         "id": "leg_1447_34_1",
         "role": "second",
         "hotelId": "h_maysan",
-        "starts_on": "2027-06-08",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-31",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -7313,15 +7313,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_35_0",
         "role": "first",
         "hotelId": "h_durrat",
-        "starts_on": "2027-05-27",
-        "ends_on": "2027-05-30"
+        "starts_on": "2026-05-19",
+        "ends_on": "2026-05-22"
       },
       {
         "id": "leg_1447_35_1",
         "role": "second",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-30",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-22",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -7418,15 +7418,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_36_0",
         "role": "first",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-06-04"
       },
       {
         "id": "leg_1447_36_1",
         "role": "second",
         "hotelId": "h_maysan",
-        "starts_on": "2027-06-12",
-        "ends_on": "2027-06-16"
+        "starts_on": "2026-06-04",
+        "ends_on": "2026-06-08"
       }
     ],
     "contractIds": [
@@ -7539,15 +7539,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_37_0",
         "role": "first",
         "hotelId": "h_durrat",
-        "starts_on": "2027-05-24",
-        "ends_on": "2027-05-27"
+        "starts_on": "2026-05-16",
+        "ends_on": "2026-05-19"
       },
       {
         "id": "leg_1447_37_1",
         "role": "second",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-27",
-        "ends_on": "2027-06-08"
+        "starts_on": "2026-05-19",
+        "ends_on": "2026-05-31"
       }
     ],
     "contractIds": [
@@ -7624,22 +7624,22 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_38_0",
         "role": "first",
         "hotelId": "h_taqwa",
-        "starts_on": "2027-05-12",
-        "ends_on": "2027-05-20"
+        "starts_on": "2026-05-04",
+        "ends_on": "2026-05-12"
       },
       {
         "id": "leg_1447_38_1",
         "role": "second",
         "hotelId": "h_hyatt",
-        "starts_on": "2027-05-20",
-        "ends_on": "2027-05-29"
+        "starts_on": "2026-05-12",
+        "ends_on": "2026-05-21"
       },
       {
         "id": "leg_1447_38_2",
         "role": "transitional",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [
@@ -7705,22 +7705,22 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "id": "leg_1447_39_0",
         "role": "first",
         "hotelId": "h_hilton",
-        "starts_on": "2027-05-15",
-        "ends_on": "2027-05-20"
+        "starts_on": "2026-05-07",
+        "ends_on": "2026-05-12"
       },
       {
         "id": "leg_1447_39_1",
         "role": "second",
         "hotelId": "h_hyatt",
-        "starts_on": "2027-05-20",
-        "ends_on": "2027-05-29"
+        "starts_on": "2026-05-12",
+        "ends_on": "2026-05-21"
       },
       {
         "id": "leg_1447_39_2",
         "role": "transitional",
         "hotelId": "h_aziziyah",
-        "starts_on": "2027-05-29",
-        "ends_on": "2027-06-12"
+        "starts_on": "2026-05-21",
+        "ends_on": "2026-06-04"
       }
     ],
     "contractIds": [

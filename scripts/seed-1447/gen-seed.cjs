@@ -59,13 +59,16 @@ const must = (map, name, where) => {
   return map[name]
 }
 
-/* ── date rebasing: same anchor rule for contracts, flights AND legs ── */
+/* ── dates: NOT rebased — the seed IS the 1447 season, real dates kept ──
+ * An earlier version shifted everything +373 days to align with hardcoded
+ * 1448 defaults. The season window is config now (SEED_SEASON), so the
+ * fiction is gone: the wizard opens on the 1447 reference season, and
+ * planning 1448 starts by editing the season setup in الإعدادات.
+ */
 const DAY = 86_400_000
 const ms = (d) => Date.parse(`${d}T00:00:00Z`)
-const isoOf = (t) => new Date(t).toISOString().slice(0, 10)
-const anchor = Math.min(...data.contracts.map((c) => ms(c.starts_on)))
-const shiftDays = Math.round((ms("2027-05-12") - anchor) / DAY)
-const rebase = (d) => isoOf(ms(d) + shiftDays * DAY)
+const shiftDays = 0
+const rebase = (d) => d
 
 /* ── contracts ── */
 const contracts = data.contracts.map((c, i) => {
@@ -404,11 +407,11 @@ const rawDates = [
   ...(pb ? [pb.envelope.starts_on, pb.envelope.ends_on] : []),
 ]
 const seasonConfig = {
-  year_hijri: 1448,
-  year_gregorian: 2027,
+  year_hijri: 1447,
+  year_gregorian: 2026,
   quota_total: 7000,
-  starts_on: rebase(rawDates.reduce((a, b) => (a < b ? a : b))),
-  ends_on: rebase(rawDates.reduce((a, b) => (a > b ? a : b))),
+  starts_on: rawDates.reduce((a, b) => (a < b ? a : b)),
+  ends_on: rawDates.reduce((a, b) => (a > b ? a : b)),
 }
 
 /* ── consistency report ── */
@@ -439,10 +442,10 @@ const body = `import type { DraftContract, DraftFlightBlock, DraftPackage, Draft
  *   and capacity partition (row 1's 450 = packages 01+33, etc.), with ties
  *   between same-set rows resolved by the supply file's per-package windows.
  *
- * Adjustments for the 1448 demo (generator: \`scripts/seed-1447/\`, which needs
- * the sibling \`../../hajj-1447/light-housing-system\` repo):
- * - Every date rebased ${shiftDays} days, so the earliest contract lands on
- *   2027-05-12 and stays keep their real alignment with contract windows.
+ * Mapping notes (generator: \`scripts/seed-1447/\`, which needs the sibling
+ * \`../../hajj-1447/light-housing-system\` repo):
+ * - Dates are the REAL 1447 dates, unshifted: the wizard opens on the 1447
+ *   reference season, and planning 1448 starts by editing the season setup.
  * - Room mixes are the booked proportions scaled to each package's capacity;
  *   never-booked standard packages default to all-quad, premium/luxury ones
  *   stay unplanned.
@@ -454,11 +457,11 @@ const body = `import type { DraftContract, DraftFlightBlock, DraftPackage, Draft
  */
 
 /**
- * Season setup, carried from 1447: the 7,000 quota WAS 1447's allotment (the
- * 1448 figure arrives with the ministry letter and is edited in الإعدادات),
- * and the window is the envelope of every mapped 1447 contract and stay,
- * rebased ${shiftDays} days onto the 1448 calendar. Config, not fact — the
- * wizard's date defaults flow from it either way.
+ * Season setup = the 1447 season as it really was: 7,000 quota, and the
+ * window is the envelope of the FINAL PocketBase package windows plus the
+ * contract windows, in real 2026 dates. Moving to 1448 is a deliberate act
+ * in الإعدادات (years, quota when the ministry letter lands, window) — every
+ * date default in the wizard flows from this config.
  */
 export const SEED_SEASON: DraftSeason = ${JSON.stringify(seasonConfig, null, 2)}
 

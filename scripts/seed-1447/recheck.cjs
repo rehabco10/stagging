@@ -22,8 +22,8 @@ const excelDate = (v) => {
   return /^\d{4}-\d{2}-\d{2}/.test(s) ? s : null
 }
 const DAY = 86_400_000
-const SHIFT = 373
-const rebase = (d) => new Date(Date.parse(`${d}T00:00:00Z`) + SHIFT * DAY).toISOString().slice(0, 10)
+// The seed keeps the real 1447 dates — raw and seeded compare 1:1.
+const rebase = (d) => d
 
 let problems = 0
 const bad = (msg) => {
