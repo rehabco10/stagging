@@ -88,6 +88,9 @@ export const SeasonSchema = BaseSchema.extend({
   year_hijri: z.coerce.number().int(),
   year_gregorian: z.coerce.number().int(),
   quota_total: z.coerce.number().int().positive(),
+  /** The season's date envelope — every date default in the wizard flows from it. */
+  starts_on: pbDate.optional().nullable(),
+  ends_on: pbDate.optional().nullable(),
   status: SeasonStatus.default("draft"),
   default_disclaimer_ar: z.string().optional().nullable(),
 })

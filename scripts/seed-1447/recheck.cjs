@@ -177,6 +177,28 @@ for (const [no, rc] of raw) {
 }
 console.log(`stay-vs-package-window checked=${windowChecked} outside=${windowOff}`)
 
+/* 4b. chain spans vs the FINAL PocketBase package windows (pb-dump.py) */
+const PB_JSON = path.join(__dirname, "pb-1447.json")
+if (fs.existsSync(PB_JSON)) {
+  const pb = JSON.parse(fs.readFileSync(PB_JSON, "utf8"))
+  console.log(`\n== 4b. chain spans vs PB package windows ==`)
+  let off = 0
+  for (const sp of seed.packages) {
+    const nusukId = pkgCsv.find((f) => f[0] === sp.package_no)?.[1]
+    const w = pb.packages.find((x) => x.nusuk_id === nusukId)
+    if (!w || !w.start || !w.end || !sp.legs.length) continue
+    const s = sp.legs.map((l) => l.starts_on).sort()[0]
+    const e = sp.legs.map((l) => l.ends_on).sort().slice(-1)[0]
+    const ws = rebase(w.start)
+    const we = rebase(w.end)
+    if (s < ws || e > we) {
+      off++
+      if (off <= 8) console.log(`  off: pkg ${sp.package_no} chain ${s}..${e} vs PB ${ws}..${we}`)
+    }
+  }
+  console.log(`chains outside the PB window: ${off}`)
+}
+
 /* 5. Voco / معاد العالمية verification via links */
 console.log(`\n== 5. معاد العالمية → Voco check ==`)
 for (const [no, rc] of raw) {

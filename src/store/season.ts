@@ -11,7 +11,7 @@ import type {
   TierValue,
 } from "@/lib/schemas"
 import { validateSeason, nightsBetween, type Issue } from "@/lib/validation"
-import { SEED_CONTRACTS, SEED_FLIGHT_BLOCKS, SEED_PACKAGES } from "./seed-1447"
+import { SEED_CONTRACTS, SEED_FLIGHT_BLOCKS, SEED_PACKAGES, SEED_SEASON } from "./seed-1447"
 
 /**
  * The draft the wizard edits, held in memory. PocketBase persistence comes
@@ -144,8 +144,22 @@ export interface DraftRequirement {
   params: Record<string, unknown> | null
 }
 
+/**
+ * Season setup config. The window is the season's date envelope — every date
+ * default in the app (new legs, contracts, seat blocks) flows from
+ * `starts_on` instead of a hardcoded constant. Seeded from the mapped 1447
+ * data (rebased), edited in الإعدادات when the 1448 letters land.
+ */
+export interface DraftSeason {
+  year_hijri: number
+  year_gregorian: number
+  quota_total: number
+  starts_on: string
+  ends_on: string
+}
+
 export interface DraftState {
-  season: { year_hijri: number; year_gregorian: number; quota_total: number }
+  season: DraftSeason
   hotels: DraftHotel[]
   contracts: DraftContract[]
   flightBlocks: DraftFlightBlock[]
@@ -213,7 +227,7 @@ const SEED_REQUIREMENTS: DraftRequirement[] = [
 ]
 
 export const state = proxy<DraftState>({
-  season: { year_hijri: 1448, year_gregorian: 2027, quota_total: 7000 },
+  season: { ...SEED_SEASON },
   hotels: SEED_HOTELS,
   // The real 1447 season, rebased onto the 1448 dates — see seed-1447.ts for
   // exactly what was adjusted. Starting from last season's packages and signed
@@ -434,7 +448,7 @@ export function addLeg(packageId: string): string | null {
   // construction — the validator should never have to report a gap the user
   // didn't deliberately create.
   const chain = orderedLegs(pkg)
-  const start = chain.length ? chain[chain.length - 1].ends_on : `${state.season.year_gregorian}-05-12`
+  const start = chain.length ? chain[chain.length - 1].ends_on : state.season.starts_on
   const end = addDays(start, 3)
 
   // Alternate cities so the default chain reads Madinah → Makkah like most
@@ -710,7 +724,7 @@ export function removeHotel(id: string): { ok: boolean; usedBy: number; contract
 export function addContract(hotelId?: string): string {
   const hotel = (hotelId && hotelById(hotelId)) || state.hotels[0]
   const id = nextId("hc")
-  const start = `${state.season.year_gregorian}-05-12`
+  const start = state.season.starts_on
   state.contracts.push({
     id,
     hotelId: hotel?.id ?? "",

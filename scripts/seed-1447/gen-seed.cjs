@@ -11,6 +11,19 @@ const OCR = path.resolve(__dirname, "../../ocr")
 const OUT = path.resolve(__dirname, "../../src/store/seed-1447.ts")
 const data = JSON.parse(fs.readFileSync(IN, "utf8"))
 
+// The 1447 system's FINAL PocketBase data (pb-dump.py) — post-ingestion and
+// post-linkFixer, so its dates outrank the raw xlsx: contract_packages is the
+// dated contract↔package junction, and the package trip windows define the
+// season envelope.
+const PB_JSON = path.join(__dirname, "pb-1447.json")
+const pb = fs.existsSync(PB_JSON) ? JSON.parse(fs.readFileSync(PB_JSON, "utf8")) : null
+if (pb) {
+  for (const cp of pb.contract_packages) {
+    if (!cp.start || !cp.end) continue
+    ;(data.pkgWindows[cp.nusuk_id] ??= {})[cp.contract_no] = { start: cp.start, end: cp.end }
+  }
+}
+
 /* ── hotel name maps (both sides verified 1:1 against SEED_HOTELS) ── */
 const EN_HOTEL = {
   "Al Aziziyah": "h_aziziyah", "Al Haram": "h_haram", "Al Taqawa": "h_taqwa",
@@ -380,6 +393,24 @@ const packages = [...pkgRows]
     }
   })
 
+/* ── season setup config, derived from the mapped dates ──
+ * The season window is not an opinion: it is the envelope of the authoritative
+ * dates — the FINAL PocketBase package windows plus the contract windows —
+ * rebased. Date defaults across the app (new legs, new contracts, new seat
+ * blocks) flow from this instead of hardcoded constants.
+ */
+const rawDates = [
+  ...data.contracts.flatMap((c) => [c.starts_on, c.ends_on]),
+  ...(pb ? [pb.envelope.starts_on, pb.envelope.ends_on] : []),
+]
+const seasonConfig = {
+  year_hijri: 1448,
+  year_gregorian: 2027,
+  quota_total: 7000,
+  starts_on: rebase(rawDates.reduce((a, b) => (a < b ? a : b))),
+  ends_on: rebase(rawDates.reduce((a, b) => (a > b ? a : b))),
+}
+
 /* ── consistency report ── */
 const capTotal = packages.reduce((t, p) => t + p.capacity, 0)
 const mixOk = packages.every((p) => {
@@ -394,7 +425,7 @@ console.log(
 if (capTotal !== 7000 || !mixOk) throw new Error("consistency check failed")
 
 /* ── emit ── */
-const body = `import type { DraftContract, DraftFlightBlock, DraftPackage } from "./season"
+const body = `import type { DraftContract, DraftFlightBlock, DraftPackage, DraftSeason } from "./season"
 
 /**
  * Demo season ingested from the real 1447 data — two sources joined on the
@@ -421,6 +452,15 @@ const body = `import type { DraftContract, DraftFlightBlock, DraftPackage } from
  *   202610000004611 carries exactly the Voco packages 07–13 and 32);
  *   Aziziyah = shifting.
  */
+
+/**
+ * Season setup, carried from 1447: the 7,000 quota WAS 1447's allotment (the
+ * 1448 figure arrives with the ministry letter and is edited in الإعدادات),
+ * and the window is the envelope of every mapped 1447 contract and stay,
+ * rebased ${shiftDays} days onto the 1448 calendar. Config, not fact — the
+ * wizard's date defaults flow from it either way.
+ */
+export const SEED_SEASON: DraftSeason = ${JSON.stringify(seasonConfig, null, 2)}
 
 export const SEED_CONTRACTS: DraftContract[] = ${JSON.stringify(contracts, null, 2)}
 

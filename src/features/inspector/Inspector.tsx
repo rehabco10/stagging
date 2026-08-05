@@ -63,6 +63,24 @@ function SeasonForm() {
             onChange={(e) => (state.season.quota_total = Number(e.target.value) || 0)}
           />
         </Field>
+        <div className="grid grid-cols-2 gap-2">
+          <Field label="بداية الموسم">
+            <Input
+              type="date"
+              dir="ltr"
+              value={snap.season.starts_on}
+              onChange={(e) => e.target.value && (state.season.starts_on = e.target.value)}
+            />
+          </Field>
+          <Field label="نهاية الموسم">
+            <Input
+              type="date"
+              dir="ltr"
+              value={snap.season.ends_on}
+              onChange={(e) => e.target.value && (state.season.ends_on = e.target.value)}
+            />
+          </Field>
+        </div>
         <div className="flex items-center justify-between rounded-md bg-muted px-2.5 py-2 text-[11px] tabular-nums">
           <span className="text-muted-foreground">موزَّع {arNum(used)}</span>
           <span

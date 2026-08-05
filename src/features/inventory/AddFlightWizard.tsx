@@ -22,7 +22,7 @@ const fresh = (airline?: { ar: string; en: string }): FlightDraft => ({
   airline_ar: airline?.ar ?? "",
   airline_en: airline?.en ?? "",
   flight_no: "",
-  flies_on: `${state.season.year_gregorian}-05-12`,
+  flies_on: state.season.starts_on,
   from_city: "",
   to_city: "جدة",
   contract_type: "group",

@@ -370,10 +370,28 @@ export function SettingsPanel() {
           </Field>
         </div>
         <div className="mt-3">
-          <Field label="الحصة الإجمالية (حاج)" hint="مجموع سعات الباقات يجب أن يساويها تمامًا.">
+          <Field label="الحصة الإجمالية (حاج)" hint="مجموع سعات الباقات يجب أن يساويها تمامًا — الرقم الحالي محمول من 1447 حتى يصدر خطاب 1448.">
             <NumInput
               value={snap.season.quota_total}
               onChange={(e) => (state.season.quota_total = Number(e.target.value) || 0)}
+            />
+          </Field>
+        </div>
+        <div className="mt-3 grid grid-cols-2 gap-3">
+          <Field label="بداية الموسم" hint="منها تبدأ افتراضات الإقامات والعقود والرحلات.">
+            <Input
+              type="date"
+              dir="ltr"
+              value={snap.season.starts_on}
+              onChange={(e) => e.target.value && (state.season.starts_on = e.target.value)}
+            />
+          </Field>
+          <Field label="نهاية الموسم">
+            <Input
+              type="date"
+              dir="ltr"
+              value={snap.season.ends_on}
+              onChange={(e) => e.target.value && (state.season.ends_on = e.target.value)}
             />
           </Field>
         </div>

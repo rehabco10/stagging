@@ -1,4 +1,4 @@
-import type { DraftContract, DraftFlightBlock, DraftPackage } from "./season"
+import type { DraftContract, DraftFlightBlock, DraftPackage, DraftSeason } from "./season"
 
 /**
  * Demo season ingested from the real 1447 data — two sources joined on the
@@ -25,6 +25,21 @@ import type { DraftContract, DraftFlightBlock, DraftPackage } from "./season"
  *   202610000004611 carries exactly the Voco packages 07–13 and 32);
  *   Aziziyah = shifting.
  */
+
+/**
+ * Season setup, carried from 1447: the 7,000 quota WAS 1447's allotment (the
+ * 1448 figure arrives with the ministry letter and is edited in الإعدادات),
+ * and the window is the envelope of every mapped 1447 contract and stay,
+ * rebased 373 days onto the 1448 calendar. Config, not fact — the
+ * wizard's date defaults flow from it either way.
+ */
+export const SEED_SEASON: DraftSeason = {
+  "year_hijri": 1448,
+  "year_gregorian": 2027,
+  "quota_total": 7000,
+  "starts_on": "2027-05-12",
+  "ends_on": "2027-06-16"
+}
 
 export const SEED_CONTRACTS: DraftContract[] = [
   {
