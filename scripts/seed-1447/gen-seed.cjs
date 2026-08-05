@@ -125,36 +125,29 @@ data.flights
       status: "confirmed",
     })
   })
-// GDS seats aggregate per (direction, carrier) — not one anonymous lump:
-// every seat keeps its real carrier attribution, and the carrier pages fold
-// each aggregate into its airline's own card.
+// GDS seats aggregate into ONE anonymous block per direction, deliberately:
+// a GDS seat has no carrier identity at planning time — the airline is only
+// known retroactively, once the individual booking is made. Attributing the
+// aggregates per carrier (an earlier revision) painted hindsight as plan.
 for (const direction of ["arrival", "return"]) {
   const list = data.flights.filter((f) => f.contract_type !== "b2b" && f.direction === direction)
-  const byCarrier = new Map()
-  for (const f of list) {
-    const key = f.airline_ar || f.airline_en || "غير محدد"
-    if (!byCarrier.has(key)) byCarrier.set(key, [])
-    byCarrier.get(key).push(f)
-  }
-  let i = 0
-  for (const [carrier, group] of byCarrier) {
-    const id = `fb_1447_gds_${direction}_${i++}`
-    for (const f of group) blockIdByKey.set(f.key, id)
-    flightBlocks.push({
-      id,
-      direction,
-      airline_ar: group.find((f) => f.airline_ar)?.airline_ar ?? carrier,
-      airline_en: `${group.find((f) => f.airline_en)?.airline_en ?? carrier} (GDS)`,
-      flight_no: "",
-      flies_on: rebase(group.map((f) => f.flies_on).sort()[0]),
-      from_city: "متعدد",
-      to_city: "متعدد",
-      contract_type: "gds",
-      pnr: "",
-      seats: group.reduce((t, f) => t + f.seats, 0),
-      status: "confirmed",
-    })
-  }
+  if (!list.length) continue
+  const id = `fb_1447_gds_${direction}`
+  for (const f of list) blockIdByKey.set(f.key, id)
+  flightBlocks.push({
+    id,
+    direction,
+    airline_ar: "حجوزات أفراد (GDS)",
+    airline_en: "GDS individual bookings",
+    flight_no: "",
+    flies_on: rebase(list.map((f) => f.flies_on).sort()[0]),
+    from_city: "متعدد",
+    to_city: "متعدد",
+    contract_type: "gds",
+    pnr: "",
+    seats: list.reduce((t, f) => t + f.seats, 0),
+    status: "confirmed",
+  })
 }
 
 /* ── ocr CSVs ── */

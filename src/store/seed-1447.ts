@@ -2478,689 +2478,31 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_gds_arrival_0",
+    "id": "fb_1447_gds_arrival",
     "direction": "arrival",
-    "airline_ar": "إير كايرو",
-    "airline_en": "Air Cairo (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-13",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 347,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_1",
-    "direction": "arrival",
-    "airline_ar": "فلاي دبي",
-    "airline_en": "Flydubai (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-12",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 105,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_2",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia (GDS)",
+    "airline_ar": "حجوزات أفراد (GDS)",
+    "airline_en": "GDS individual bookings",
     "flight_no": "",
     "flies_on": "2026-05-04",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
     "pnr": "",
-    "seats": 931,
+    "seats": 2854,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_gds_arrival_3",
-    "direction": "arrival",
-    "airline_ar": "طيران أديل",
-    "airline_en": "Flyadeal (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-15",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 250,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_4",
-    "direction": "arrival",
-    "airline_ar": "طيران الاتحاد",
-    "airline_en": "Etihad Airways (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-04",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 121,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_5",
-    "direction": "arrival",
-    "airline_ar": "الخطوط الجوية القطرية",
-    "airline_en": "Qatar Airways (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-04",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 224,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_6",
-    "direction": "arrival",
-    "airline_ar": "الخطوط الجوية التركية",
-    "airline_en": "Turkish Airlines (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-04",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 167,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_7",
-    "direction": "arrival",
-    "airline_ar": "طيران الملكية الأردنية",
-    "airline_en": "Royal Jordanian (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-12",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 205,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_8",
-    "direction": "arrival",
-    "airline_ar": "طيران ناس",
-    "airline_en": "flynas (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-12",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 263,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_9",
-    "direction": "arrival",
-    "airline_ar": "طيران ايجين",
-    "airline_en": "Aegean Airlines (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-17",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 43,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_10",
-    "direction": "arrival",
-    "airline_ar": "VF",
-    "airline_en": "VF (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-13",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 52,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_11",
-    "direction": "arrival",
-    "airline_ar": "طيران الإمارات",
-    "airline_en": "Emirates (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-15",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 34,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_12",
-    "direction": "arrival",
-    "airline_ar": "الخطوط الجوية الأثيوبية",
-    "airline_en": "Ethiopian Airlines (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-16",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 23,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_13",
-    "direction": "arrival",
-    "airline_ar": "نسما للطيران",
-    "airline_en": "Nesma Airlines (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-16",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 24,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_14",
-    "direction": "arrival",
-    "airline_ar": "طيران بيجاسوس",
-    "airline_en": "Pegasus Airlines (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-16",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 28,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_15",
-    "direction": "arrival",
-    "airline_ar": "MSC",
-    "airline_en": "MSC (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-19",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 4,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_16",
-    "direction": "arrival",
-    "airline_ar": "طيران الخليج",
-    "airline_en": "Gulf Air (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-13",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 15,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_17",
-    "direction": "arrival",
-    "airline_ar": "الخطوط الجوية الفرنسية",
-    "airline_en": "Air France (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-22",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 2,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_18",
-    "direction": "arrival",
-    "airline_ar": "طيران الشرق الأوسط",
-    "airline_en": "Middle East Airlines (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-12",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 2,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_19",
-    "direction": "arrival",
-    "airline_ar": "الطيران العماني",
-    "airline_en": "Oman Air (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-17",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 2,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_20",
-    "direction": "arrival",
-    "airline_ar": "طيران الهند",
-    "airline_en": "Air India (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-15",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 4,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_21",
-    "direction": "arrival",
-    "airline_ar": "صاف اير",
-    "airline_en": "Safair (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-19",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 2,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_22",
-    "direction": "arrival",
-    "airline_ar": "طيران ايبريا",
-    "airline_en": "Iberia (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-17",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 2,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_23",
-    "direction": "arrival",
-    "airline_ar": "الخطوط الجوية الكينية",
-    "airline_en": "Kenya Airways (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-15",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 1,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_24",
-    "direction": "arrival",
-    "airline_ar": "طيران تاي إنترناشونال",
-    "airline_en": "Thai Airways International (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-20",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 1,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_arrival_25",
-    "direction": "arrival",
-    "airline_ar": "العربية للطيران",
-    "airline_en": "Air Arabia (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-18",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 2,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_0",
+    "id": "fb_1447_gds_return",
     "direction": "return",
-    "airline_ar": "إير كايرو",
-    "airline_en": "Air Cairo (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 350,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_1",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia (GDS)",
+    "airline_ar": "حجوزات أفراد (GDS)",
+    "airline_en": "GDS individual bookings",
     "flight_no": "",
     "flies_on": "2026-05-30",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
     "pnr": "",
-    "seats": 1032,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_2",
-    "direction": "return",
-    "airline_ar": "طيران ايجين",
-    "airline_en": "Aegean Airlines (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 44,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_3",
-    "direction": "return",
-    "airline_ar": "طيران الملكية الأردنية",
-    "airline_en": "Royal Jordanian (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 207,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_4",
-    "direction": "return",
-    "airline_ar": "طيران أديل",
-    "airline_en": "Flyadeal (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 222,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_5",
-    "direction": "return",
-    "airline_ar": "طيران ناس",
-    "airline_en": "flynas (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 268,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_6",
-    "direction": "return",
-    "airline_ar": "الخطوط الجوية التركية",
-    "airline_en": "Turkish Airlines (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 172,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_7",
-    "direction": "return",
-    "airline_ar": "الخطوط الجوية القطرية",
-    "airline_en": "Qatar Airways (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 217,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_8",
-    "direction": "return",
-    "airline_ar": "طيران الاتحاد",
-    "airline_en": "Etihad Airways (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 110,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_9",
-    "direction": "return",
-    "airline_ar": "فلاي دبي",
-    "airline_en": "Flydubai (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 46,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_10",
-    "direction": "return",
-    "airline_ar": "VF",
-    "airline_en": "VF (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 40,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_11",
-    "direction": "return",
-    "airline_ar": "الخطوط الجوية الأثيوبية",
-    "airline_en": "Ethiopian Airlines (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 21,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_12",
-    "direction": "return",
-    "airline_ar": "نسما للطيران",
-    "airline_en": "Nesma Airlines (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 24,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_13",
-    "direction": "return",
-    "airline_ar": "طيران الإمارات",
-    "airline_en": "Emirates (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 35,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_14",
-    "direction": "return",
-    "airline_ar": "طيران بيجاسوس",
-    "airline_en": "Pegasus Airlines (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 26,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_15",
-    "direction": "return",
-    "airline_ar": "طيران الخليج",
-    "airline_en": "Gulf Air (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 17,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_16",
-    "direction": "return",
-    "airline_ar": "AJY",
-    "airline_en": "AJY (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-06-02",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 5,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_17",
-    "direction": "return",
-    "airline_ar": "طيران ايبريا",
-    "airline_en": "Iberia (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-06-02",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 5,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_18",
-    "direction": "return",
-    "airline_ar": "الطيران العماني",
-    "airline_en": "Oman Air (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 4,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_19",
-    "direction": "return",
-    "airline_ar": "طيران الهند",
-    "airline_en": "Air India (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-06-04",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 4,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_20",
-    "direction": "return",
-    "airline_ar": "الخطوط الجوية الفرنسية",
-    "airline_en": "Air France (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-06-01",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 1,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_21",
-    "direction": "return",
-    "airline_ar": "الخطوط الجوية الكينية",
-    "airline_en": "Kenya Airways (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-05-31",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 1,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_gds_return_22",
-    "direction": "return",
-    "airline_ar": "العربية للطيران",
-    "airline_en": "Air Arabia (GDS)",
-    "flight_no": "",
-    "flies_on": "2026-06-01",
-    "from_city": "متعدد",
-    "to_city": "متعدد",
-    "contract_type": "gds",
-    "pnr": "",
-    "seats": 2,
+    "seats": 2853,
     "status": "confirmed"
   }
 ]
@@ -3204,28 +2546,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 50
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 25
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 63
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 25
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 7
+        "blockId": "fb_1447_gds_return",
+        "seats": 62
       },
       {
         "blockId": "fb_1447_54",
@@ -3236,80 +2562,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 28
       },
       {
-        "blockId": "fb_1447_gds_arrival_11",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_13",
-        "seats": 5
-      },
-      {
         "blockId": "fb_1447_10",
         "seats": 43
       },
       {
         "blockId": "fb_1447_83",
         "seats": 43
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_12",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_11",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_24",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_13",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_12",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 1
       }
     ],
     "room_mix": {
@@ -3353,20 +2611,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 8
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 54
       },
       {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 8
+        "blockId": "fb_1447_gds_return",
+        "seats": 54
       },
       {
         "blockId": "fb_1447_105",
@@ -3375,74 +2625,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_106",
         "seats": 14
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_11",
-        "seats": 9
-      },
-      {
-        "blockId": "fb_1447_gds_return_13",
-        "seats": 9
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 10
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_19",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_18",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_16",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_15",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_12",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_11",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_22",
-        "seats": 2
       }
     ],
     "room_mix": {
@@ -3494,28 +2676,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 39
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 24
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 43
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 25
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_17",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_20",
-        "seats": 1
+        "blockId": "fb_1447_gds_return",
+        "seats": 43
       },
       {
         "blockId": "fb_1447_55",
@@ -3524,46 +2690,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_6",
         "seats": 58
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_16",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_15",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_13",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_12",
-        "seats": 1
       }
     ],
     "room_mix": {
@@ -3631,11 +2757,11 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 47
       },
       {
-        "blockId": "fb_1447_gds_arrival_5",
+        "blockId": "fb_1447_gds_arrival",
         "seats": 3
       },
       {
-        "blockId": "fb_1447_gds_return_7",
+        "blockId": "fb_1447_gds_return",
         "seats": 3
       }
     ],
@@ -3700,11 +2826,11 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 49
       },
       {
-        "blockId": "fb_1447_gds_arrival_6",
+        "blockId": "fb_1447_gds_arrival",
         "seats": 2
       },
       {
-        "blockId": "fb_1447_gds_return_6",
+        "blockId": "fb_1447_gds_return",
         "seats": 2
       }
     ],
@@ -3757,20 +2883,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 2
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 51
       },
       {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 7
+        "blockId": "fb_1447_gds_return",
+        "seats": 51
       },
       {
         "blockId": "fb_1447_87",
@@ -3787,70 +2905,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_67",
         "seats": 48
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 28
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 28
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_11",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_13",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_16",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_15",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_13",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_12",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 4
       }
     ],
     "room_mix": {
@@ -3910,44 +2964,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 131
       },
       {
-        "blockId": "fb_1447_gds_arrival_18",
-        "seats": 2
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 18
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_10",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 2
+        "blockId": "fb_1447_gds_return",
+        "seats": 18
       }
     ],
     "room_mix": {
@@ -3999,20 +3021,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 42
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 3
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 4
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 1
+        "blockId": "fb_1447_gds_return",
+        "seats": 4
       }
     ],
     "room_mix": {
@@ -4056,84 +3070,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 9
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 90
       },
       {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 12
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 10
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 10
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 9
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_11",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_14",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_14",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 30
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 30
-      },
-      {
-        "blockId": "fb_1447_gds_return_17",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 21
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 23
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_13",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_12",
-        "seats": 3
+        "blockId": "fb_1447_gds_return",
+        "seats": 90
       }
     ],
     "room_mix": {
@@ -4193,44 +3135,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 92
       },
       {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 26
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 49
       },
       {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 26
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 17
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 17
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 1
+        "blockId": "fb_1447_gds_return",
+        "seats": 49
       }
     ],
     "room_mix": {
@@ -4294,87 +3204,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 66
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 21
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 123
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 21
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 76
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 76
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 11
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 11
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_11",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_13",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 5
+        "blockId": "fb_1447_gds_return",
+        "seats": 123
       },
       {
         "blockId": "fb_1447_96",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_13",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_12",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_25",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_22",
         "seats": 1
       }
     ],
@@ -4427,12 +3265,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 82
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 19
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 55
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 19
+        "blockId": "fb_1447_gds_return",
+        "seats": 55
       },
       {
         "blockId": "fb_1447_39",
@@ -4441,14 +3279,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_40",
         "seats": 41
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 2
       },
       {
         "blockId": "fb_1447_41",
@@ -4465,82 +3295,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_26",
         "seats": 48
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_13",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_12",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_9",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_2",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_11",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_13",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_16",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_15",
-        "seats": 1
       }
     ],
     "room_mix": {
@@ -4600,12 +3354,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 60
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 23
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 42
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 23
+        "blockId": "fb_1447_gds_return",
+        "seats": 42
       },
       {
         "blockId": "fb_1447_34",
@@ -4614,46 +3368,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_35",
         "seats": 83
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_10",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_return_10",
-        "seats": 6
       }
     ],
     "room_mix": {
@@ -4721,20 +3435,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 11
       },
       {
-        "blockId": "fb_1447_gds_arrival_10",
-        "seats": 6
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 224
       },
       {
-        "blockId": "fb_1447_gds_return_10",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 12
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 84
+        "blockId": "fb_1447_gds_return",
+        "seats": 224
       },
       {
         "blockId": "fb_1447_59",
@@ -4745,112 +3451,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 49
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 81
-      },
-      {
-        "blockId": "fb_1447_gds_return_2",
-        "seats": 1
-      },
-      {
         "blockId": "fb_1447_20",
         "seats": 95
       },
       {
         "blockId": "fb_1447_21",
         "seats": 95
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_13",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 13
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 18
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 26
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 26
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_11",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_23",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_21",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 33
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 33
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_16",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_15",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 21
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 21
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 15
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 15
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_13",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_12",
-        "seats": 3
       }
     ],
     "room_mix": {
@@ -4902,20 +3508,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 89
       },
       {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 2
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 4
       },
       {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 2
+        "blockId": "fb_1447_gds_return",
+        "seats": 4
       }
     ],
     "room_mix": {
@@ -4959,20 +3557,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 56
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 170
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 61
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 9
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 5
+        "blockId": "fb_1447_gds_return",
+        "seats": 170
       },
       {
         "blockId": "fb_1447_117",
@@ -4983,76 +3573,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 4
       },
       {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 22
-      },
-      {
         "blockId": "fb_1447_96",
         "seats": 21
       },
       {
         "blockId": "fb_1447_99",
         "seats": 21
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 36
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 36
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 18
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_15",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 19
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 14
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 14
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_17",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_10",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_10",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 18
       }
     ],
     "room_mix": {
@@ -5128,24 +3654,16 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 11
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 26
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 139
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 26
+        "blockId": "fb_1447_gds_return",
+        "seats": 139
       },
       {
         "blockId": "fb_1447_41",
         "seats": 18
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_9",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_return_2",
-        "seats": 8
       },
       {
         "blockId": "fb_1447_103",
@@ -5154,86 +3672,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_104",
         "seats": 15
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 19
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 19
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 13
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 14
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 18
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 18
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_10",
-        "seats": 14
-      },
-      {
-        "blockId": "fb_1447_gds_return_10",
-        "seats": 13
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_14",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_return_14",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 11
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 11
       }
     ],
     "room_mix": {
@@ -5293,32 +3731,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 38
       },
       {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 1
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 9
       },
       {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_14",
-        "seats": 2
+        "blockId": "fb_1447_gds_return",
+        "seats": 9
       }
     ],
     "room_mix": {
@@ -5370,12 +3788,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 50
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 25
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 73
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 36
+        "blockId": "fb_1447_gds_return",
+        "seats": 73
       },
       {
         "blockId": "fb_1447_10",
@@ -5394,68 +3812,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 39
       },
       {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 4
-      },
-      {
         "blockId": "fb_1447_54",
         "seats": 32
       },
       {
         "blockId": "fb_1447_90",
         "seats": 32
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 14
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 10
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 9
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 12
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 12
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 1
       }
     ],
     "room_mix": {
@@ -5523,80 +3885,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 19
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 17
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 69
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 17
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 20
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 20
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_12",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_11",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_10",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 14
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 14
+        "blockId": "fb_1447_gds_return",
+        "seats": 69
       }
     ],
     "room_mix": {
@@ -5648,12 +3942,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 94
       },
       {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 6
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 164
       },
       {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 6
+        "blockId": "fb_1447_gds_return",
+        "seats": 164
       },
       {
         "blockId": "fb_1447_3",
@@ -5662,14 +3956,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_19",
         "seats": 95
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 59
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 66
       },
       {
         "blockId": "fb_1447_116",
@@ -5698,74 +3984,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_43",
         "seats": 16
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_10",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_10",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 23
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 23
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 19
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 19
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 15
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 15
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_11",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_13",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 11
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 11
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_9",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_return_2",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 9
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 13
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 11
       }
     ],
     "room_mix": {
@@ -5817,12 +4035,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 67
       },
       {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 4
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 98
       },
       {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 9
+        "blockId": "fb_1447_gds_return",
+        "seats": 98
       },
       {
         "blockId": "fb_1447_12",
@@ -5843,66 +4061,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_94",
         "seats": 28
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 12
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 12
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 21
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 21
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 45
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 45
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_16",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_15",
-        "seats": 1
       }
     ],
     "room_mix": {
@@ -5962,12 +4120,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 53
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 20
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 108
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 19
+        "blockId": "fb_1447_gds_return",
+        "seats": 108
       },
       {
         "blockId": "fb_1447_110",
@@ -5976,98 +4134,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_111",
         "seats": 10
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 13
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 12
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 13
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 13
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 17
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 17
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 11
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 11
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_14",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_14",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_13",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_10",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_10",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_12",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_11",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 15
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 15
       }
     ],
     "room_mix": {
@@ -6143,44 +4209,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 46
       },
       {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 1
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 111
       },
       {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 17
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 17
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_15",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 52
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 52
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 16
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 16
+        "blockId": "fb_1447_gds_return",
+        "seats": 111
       },
       {
         "blockId": "fb_1447_112",
@@ -6189,30 +4223,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_113",
         "seats": 9
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_9",
-        "seats": 19
-      },
-      {
-        "blockId": "fb_1447_gds_return_2",
-        "seats": 19
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_14",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_14",
-        "seats": 2
       }
     ],
     "room_mix": {
@@ -6264,28 +4274,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 43
       },
       {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 2
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 18
       },
       {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 13
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 13
+        "blockId": "fb_1447_gds_return",
+        "seats": 18
       },
       {
         "blockId": "fb_1447_13",
@@ -6294,14 +4288,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_2",
         "seats": 25
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 2
       }
     ],
     "room_mix": {
@@ -6353,12 +4339,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 107
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 11
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 59
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 46
+        "blockId": "fb_1447_gds_return",
+        "seats": 59
       },
       {
         "blockId": "fb_1447_114",
@@ -6367,66 +4353,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_115",
         "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_20",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_19",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 35
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_14",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_14",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 1
       }
     ],
     "room_mix": {
@@ -6470,12 +4396,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 7
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 50
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 7
+        "blockId": "fb_1447_gds_return",
+        "seats": 50
       },
       {
         "blockId": "fb_1447_24",
@@ -6484,78 +4410,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
       {
         "blockId": "fb_1447_14",
         "seats": 36
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_9",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_2",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 10
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 10
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 13
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 13
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_13",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_12",
-        "seats": 1
       }
     ],
     "room_mix": {
@@ -6599,104 +4453,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 2
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 344
       },
       {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 126
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 147
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_10",
-        "seats": 9
-      },
-      {
-        "blockId": "fb_1447_gds_return_10",
-        "seats": 9
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_11",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_13",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 41
-      },
-      {
-        "blockId": "fb_1447_gds_return_15",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 39
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 95
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 95
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 21
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 33
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 33
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_13",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_12",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_16",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_25",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_22",
-        "seats": 1
+        "blockId": "fb_1447_gds_return",
+        "seats": 344
       }
     ],
     "room_mix": {
@@ -6748,92 +4510,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 41
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 105
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 37
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 13
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 17
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 20
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 20
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_12",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_11",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_9",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_14",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_14",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_11",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_13",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_9",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_2",
-        "seats": 1
+        "blockId": "fb_1447_gds_return",
+        "seats": 105
       }
     ],
     "room_mix": {
@@ -7003,20 +4685,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 67
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 4
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 6
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 2
+        "blockId": "fb_1447_gds_return",
+        "seats": 6
       }
     ],
     "room_mix": {
@@ -7068,12 +4742,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 45
       },
       {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 6
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 88
       },
       {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 6
+        "blockId": "fb_1447_gds_return",
+        "seats": 88
       },
       {
         "blockId": "fb_1447_101",
@@ -7084,14 +4758,6 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 15
       },
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 45
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 47
-      },
-      {
         "blockId": "fb_1447_48",
         "seats": 21
       },
@@ -7100,76 +4766,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 21
       },
       {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 12
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 12
-      },
-      {
         "blockId": "fb_1447_107",
         "seats": 14
       },
       {
         "blockId": "fb_1447_108",
         "seats": 14
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_16",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_15",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_12",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_11",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_13",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_12",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_11",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_13",
-        "seats": 1
       }
     ],
     "room_mix": {
@@ -7213,80 +4815,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 35
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 136
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 44
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 7
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_10",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_16",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 11
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 11
-      },
-      {
-        "blockId": "fb_1447_gds_return_18",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 47
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 47
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 8
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 15
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 15
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_13",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_12",
-        "seats": 4
+        "blockId": "fb_1447_gds_return",
+        "seats": 136
       }
     ],
     "room_mix": {
@@ -7330,68 +4864,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 17
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 85
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 12
-      },
-      {
-        "blockId": "fb_1447_gds_return_4",
-        "seats": 19
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 12
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 12
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_21",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_11",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 31
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 31
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_3",
-        "seats": 16
+        "blockId": "fb_1447_gds_return",
+        "seats": 85
       }
     ],
     "room_mix": {
@@ -7435,84 +4913,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 33
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 121
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 40
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_20",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_19",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 20
-      },
-      {
-        "blockId": "fb_1447_gds_return_10",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_9",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_return_2",
-        "seats": 1
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 33
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 33
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 20
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 16
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 14
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_1",
-        "seats": 9
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 3
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 5
+        "blockId": "fb_1447_gds_return",
+        "seats": 121
       }
     ],
     "room_mix": {
@@ -7556,48 +4962,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 2
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 42
       },
       {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_7",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_3",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_12",
-        "seats": 4
-      },
-      {
-        "blockId": "fb_1447_gds_return_5",
-        "seats": 25
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 11
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 11
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_8",
-        "seats": 21
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_0",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_0",
-        "seats": 2
+        "blockId": "fb_1447_gds_return",
+        "seats": 42
       }
     ],
     "room_mix": {
@@ -7649,36 +5019,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 5
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 18
       },
       {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_4",
-        "seats": 2
-      },
-      {
-        "blockId": "fb_1447_gds_return_8",
-        "seats": 2
+        "blockId": "fb_1447_gds_return",
+        "seats": 18
       }
     ],
     "room_mix": {
@@ -7730,28 +5076,12 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival_6",
-        "seats": 5
+        "blockId": "fb_1447_gds_arrival",
+        "seats": 16
       },
       {
-        "blockId": "fb_1447_gds_return_6",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_2",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_return_1",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_gds_arrival_5",
-        "seats": 6
-      },
-      {
-        "blockId": "fb_1447_gds_return_7",
-        "seats": 6
+        "blockId": "fb_1447_gds_return",
+        "seats": 16
       }
     ],
     "room_mix": {
