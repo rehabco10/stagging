@@ -36,9 +36,9 @@ test("layout places every node in the tree", () => {
   for (const id of [ROOT_ID, "pkg_a", "pkg_b", "leg_a1", "leg_a2", "leg_b1"]) {
     assert.ok(layout.has(id), `missing ${id}`)
   }
-  // Root above packages, packages above legs.
-  assert.ok(layout.get(ROOT_ID).y < layout.get("pkg_a").y)
-  assert.ok(layout.get("pkg_a").y < layout.get("leg_a1").y)
+  // The flow runs sideways: root before packages, packages before their legs.
+  assert.ok(layout.get(ROOT_ID).x < layout.get("pkg_a").x)
+  assert.ok(layout.get("pkg_a").x < layout.get("leg_a1").x)
 })
 
 test("a pinned node takes exactly the pinned coordinates", () => {
@@ -176,15 +176,21 @@ test("removing a package drops it from the reconciled list", () => {
 /* ── new nodes must never stack ─────────────────────────────────── */
 
 test("empty packages are spread apart, never stacked", () => {
+  // The layout wraps into rows past WRAP_AT, so the invariant is 2-D: no two
+  // package cards may overlap — same row clears the width, other rows clear
+  // the height. (The original single-rank version asserted unique x for every
+  // package, which a wrapping grid rightly violates.)
   for (const n of [2, 3, 5, 9]) {
     const packages = Array.from({ length: n }, (_, i) => ({ id: `pkg_${i}`, legIds: [] }))
     const layout = computeLayout({ packages, pinned: {} }, SIZES)
-    const xs = packages.map((p) => layout.get(p.id).x)
-    assert.equal(new Set(xs).size, n, `${n} packages share an x position`)
-    // Every pair must clear the card width, or the cards overlap on screen.
-    const sorted = [...xs].sort((a, b) => a - b)
-    for (let i = 1; i < sorted.length; i++) {
-      assert.ok(sorted[i] - sorted[i - 1] >= SIZES.pkg.w, `packages overlap at index ${i}`)
+    const pos = packages.map((p) => layout.get(p.id))
+    for (let i = 0; i < pos.length; i++) {
+      for (let j = i + 1; j < pos.length; j++) {
+        const clear =
+          Math.abs(pos[i].x - pos[j].x) >= SIZES.pkg.w ||
+          Math.abs(pos[i].y - pos[j].y) >= SIZES.pkg.h
+        assert.ok(clear, `packages ${i} and ${j} overlap (n=${n})`)
+      }
     }
   }
 })

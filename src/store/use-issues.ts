@@ -13,13 +13,16 @@ import type { Issue } from "@/lib/validation"
  * count and then never update — the nav rail sat on a stale error badge while
  * the panel beside it showed the correct number.
  *
- * Reading the three slices the validator actually depends on marks them as
+ * Reading every slice the validator actually depends on marks them as
  * tracked, so any change to them re-renders the caller.
  */
 export function useIssues(): Issue[] {
   const snap = useSnapshot(state)
-  const { packages, requirements, season } = snap
-  return useMemo(() => issuesFor(state), [packages, requirements, season])
+  const { packages, requirements, season, hotels, contracts, flightBlocks } = snap
+  return useMemo(
+    () => issuesFor(state),
+    [packages, requirements, season, hotels, contracts, flightBlocks],
+  )
 }
 
 export function useErrorCount(): number {

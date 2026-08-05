@@ -1,25 +1,31 @@
-import { useState } from "react"
 import { useSnapshot } from "valtio"
 import {
+  BedDouble,
   CircleCheck,
+  FileText,
   Info,
+  Package,
+  Plane,
   Plus,
+  Route,
+  ShieldCheck,
   Trash2,
   TriangleAlert,
   Database,
   LayoutGrid,
+  type LucideIcon,
 } from "lucide-react"
 
 import {
-  addHotel,
   addRequirement,
   allocated,
-  removeHotel,
   removeRequirement,
   state,
+  togglePrices,
   unpinAll,
-  type DraftHotel,
 } from "@/store/season"
+import { ISSUE_CATEGORY_LABEL, ISSUE_CATEGORY_ORDER } from "@/lib/options"
+import { categoryOf, type IssueCategory } from "@/lib/validation"
 import { Button } from "@/components/ui/button"
 import { Card, Note, Stat } from "@/components/PageShell"
 import {
@@ -34,17 +40,6 @@ import {
 } from "@/components/ui/field"
 import { useIssues } from "@/store/use-issues"
 import { cn, arNum } from "@/lib/utils"
-
-const STAR_OPTIONS: SelectOption[] = [
-  { value: "5", label: "خمسة نجوم" },
-  { value: "4", label: "أربعة نجوم" },
-  { value: "3", label: "ثلاثة نجوم" },
-  { value: "2", label: "نجمتان" },
-  { value: "1", label: "نجمة واحدة" },
-  { value: "nuzul", label: "نزل" },
-]
-
-const GRADE_OPTIONS: SelectOption[] = ["أ", "ب", "ج", "م"].map((g) => ({ value: g, label: g }))
 
 const KIND_OPTIONS: SelectOption[] = [
   { value: "mix", label: "نسب الفئات" },
@@ -64,157 +59,6 @@ const MIX_GROUP_OPTIONS: SelectOption[] = [
   { value: "standard", label: "الأساسية" },
   { value: "premium_and_above", label: "المميزة فأعلى" },
 ]
-
-/** Shared header styling for the data tables. */
-const TH = "px-2.5 py-2 text-start text-[10px] font-semibold uppercase tracking-wider"
-
-/* ── hotels & camps ─────────────────────────────────────────────── */
-
-function HotelTable({
-  city,
-  onError,
-}: {
-  city: DraftHotel["city"]
-  onError: (m: string | null) => void
-}) {
-  const snap = useSnapshot(state)
-  const rows = snap.hotels.filter((h) => h.city === city)
-  const usage = (id: string) =>
-    snap.packages.reduce((t, p) => t + p.legs.filter((l) => l.hotelId === id).length, 0)
-
-  return (
-    <Card
-      title={city === "makkah" ? "مكة المكرمة" : "المدينة المنورة"}
-      description={`${arNum(rows.length)} فندق في المخزون`}
-      actions={
-        <Button variant="outline" size="sm" onClick={() => addHotel(city)}>
-          <Plus className="size-3.5" />
-          إضافة
-        </Button>
-      }
-      bodyClassName="p-0"
-    >
-      <div className="overflow-x-auto">
-        <table className="w-full min-w-[38rem] border-collapse text-sm">
-          <thead>
-            <tr className="bg-surface-sunken text-[color:var(--brand-teal-deep)]">
-              <th className={TH}>الاسم (عربي)</th>
-              <th className={TH}>الاسم (إنجليزي)</th>
-              <th className={cn(TH, "w-32")}>التصنيف</th>
-              <th className={cn(TH, "w-16")}>الفئة</th>
-              <th className={cn(TH, "w-24")}>الاستخدام</th>
-              <th className={cn(TH, "w-10")} />
-            </tr>
-          </thead>
-          <tbody>
-            {rows.length === 0 && (
-              <tr>
-                <td colSpan={6} className="px-3 py-8 text-center text-[11px] text-muted-foreground">
-                  لا توجد فنادق في هذه المدينة بعد.
-                </td>
-              </tr>
-            )}
-            {rows.map((h) => {
-              const live = state.hotels.find((x) => x.id === h.id)!
-              const used = usage(h.id)
-              return (
-                <tr
-                  key={h.id}
-                  className="border-t border-surface-line align-middle transition-colors hover:bg-surface-sunken/60"
-                >
-                  <td className="px-1.5 py-1">
-                    <Input
-                      className={cn(cellCls, "font-medium")}
-                      placeholder="اسم الفندق"
-                      value={h.name_ar}
-                      onChange={(e) => (live.name_ar = e.target.value)}
-                    />
-                  </td>
-                  <td className="px-1.5 py-1">
-                    <Input
-                      dir="ltr"
-                      className={cn(cellCls, "text-start")}
-                      placeholder="Hotel name"
-                      value={h.name_en}
-                      onChange={(e) => (live.name_en = e.target.value)}
-                    />
-                  </td>
-                  <td className="px-1.5 py-1">
-                    <SelectField
-                      className={cellCls}
-                      allowEmpty={false}
-                      value={h.star_class}
-                      options={STAR_OPTIONS}
-                      onChange={(v) => (live.star_class = v as DraftHotel["star_class"])}
-                    />
-                  </td>
-                  <td className="px-1.5 py-1">
-                    <SelectField
-                      className={cellCls}
-                      allowEmpty={false}
-                      value={h.grade}
-                      options={GRADE_OPTIONS}
-                      onChange={(v) => (live.grade = v as DraftHotel["grade"])}
-                    />
-                  </td>
-                  <td className="px-2.5 py-1">
-                    {used === 0 ? (
-                      <span className="text-[10px] text-muted-foreground">—</span>
-                    ) : (
-                      <span className="inline-flex rounded-full bg-[color:var(--brand-teal-soft)] px-2 py-0.5 text-[10px] font-semibold tabular-nums text-[color:var(--brand-teal-deep)]">
-                        {arNum(used)} إقامة
-                      </span>
-                    )}
-                  </td>
-                  <td className="px-1 py-1">
-                    {/* Destructive action stays quiet until hovered. */}
-                    <button
-                      type="button"
-                      aria-label={`حذف ${h.name_ar || "الفندق"}`}
-                      title={used > 0 ? "مستخدم في باقة — لا يمكن حذفه" : "حذف"}
-                      onClick={() => {
-                        const r = removeHotel(h.id)
-                        onError(
-                          r.ok ? null : `لا يمكن حذف «${h.name_ar}»: مستخدم في ${arNum(r.usedBy)} إقامة.`,
-                        )
-                      }}
-                      className="grid size-7 place-items-center rounded-md text-muted-foreground/45 transition-colors hover:bg-[color:var(--brand-rose-soft)] hover:text-[color:var(--brand-rose-deep)]"
-                    >
-                      <Trash2 className="size-3.5" />
-                    </button>
-                  </td>
-                </tr>
-              )
-            })}
-          </tbody>
-        </table>
-      </div>
-    </Card>
-  )
-}
-
-export function HotelsPanel() {
-  const [error, setError] = useState<string | null>(null)
-  return (
-    <>
-      {error && (
-        <Note tone="warn" icon={<TriangleAlert className="size-3.5" />}>
-          {error}
-        </Note>
-      )}
-      {/* Both cities fit beside each other on a wide screen; stacked they
-          left half the viewport empty and pushed Madinah below the fold. */}
-      <div className="grid items-start gap-4 xl:grid-cols-2">
-        <HotelTable city="makkah" onError={setError} />
-        <HotelTable city="madinah" onError={setError} />
-      </div>
-      <Note icon={<Info className="size-3.5" />}>
-        المخيمات («المخيم المستهدف» في نموذج الوزارة) لم تُضَف بعد — انظر{" "}
-        <span className="font-mono text-[10px]">docs/pages-and-sync.md</span>.
-      </Note>
-    </>
-  )
-}
 
 /* ── meetings & requirements ────────────────────────────────────── */
 
@@ -371,12 +215,31 @@ export function RequirementsPanel() {
 
 /* ── validation ─────────────────────────────────────────────────── */
 
+const CATEGORY_ICON: Record<IssueCategory, LucideIcon> = {
+  governance: ShieldCheck,
+  itinerary: Route,
+  package: Package,
+  contracts: FileText,
+  housing: BedDouble,
+  flights: Plane,
+  other: Info,
+}
+
 export function ValidationPanel() {
   const snap = useSnapshot(state)
   const issues = useIssues()
   const errors = issues.filter((i) => i.level === "error")
   const warnings = issues.filter((i) => i.level === "warning")
   const ready = errors.length === 0 && snap.packages.length > 0
+
+  // Grouped by category, errors before warnings within each group — the
+  // reader works one area at a time, not one interleaved list of 37 rows.
+  const groups = ISSUE_CATEGORY_ORDER.map((cat) => {
+    const items = issues
+      .filter((i) => categoryOf(i.code) === cat)
+      .sort((a, b) => (a.level === b.level ? 0 : a.level === "error" ? -1 : 1))
+    return { cat, items, errorCount: items.filter((i) => i.level === "error").length }
+  }).filter((g) => g.items.length > 0)
 
   return (
     <>
@@ -392,7 +255,7 @@ export function ValidationPanel() {
         </div>
       </Card>
 
-      <Card title="النتائج" description="اضغط على أي بند لفتح الباقة المعنية.">
+      <Card title="النتائج" description="مجمَّعة حسب المجال — اضغط على أي بند لفتح الباقة المعنية.">
         {issues.length === 0 ? (
           <div className="flex items-center gap-2 rounded-lg bg-[color:var(--brand-green-soft)] px-3 py-2.5 text-[11px] text-[color:var(--brand-green-deep)]">
             <CircleCheck className="size-4 shrink-0" />
@@ -401,29 +264,75 @@ export function ValidationPanel() {
             </span>
           </div>
         ) : (
-          // Two columns once there is width — the rows are one line each, and
-          // a single full-width column of short pills wasted half the card.
-          <ul className="grid items-start gap-1.5 lg:grid-cols-2">
-            {issues.map((i, idx) => (
-              <li
-                key={`${i.code}-${i.entityId}-${idx}`}
-                onClick={() => {
-                  if (i.scope === "package" || i.scope === "leg") state.selectedId = i.entityId
-                }}
-                className={cn(
-                  "flex gap-2 rounded-lg px-2.5 py-2 text-[11px] leading-snug",
-                  i.level === "error"
-                    ? "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]"
-                    : "bg-[color:var(--brand-gold-soft)] text-[color:var(--brand-gold-deep)]",
-                  (i.scope === "package" || i.scope === "leg") &&
-                    "cursor-pointer transition-[filter] hover:brightness-97",
-                )}
-              >
-                <TriangleAlert className="mt-0.5 size-3.5 shrink-0" />
-                <span>{i.message}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="space-y-4">
+            {groups.map(({ cat, items, errorCount }) => {
+              const Icon = CATEGORY_ICON[cat]
+              const warnCount = items.length - errorCount
+              return (
+                <section key={cat}>
+                  <header className="flex items-center gap-2">
+                    <span
+                      className={cn(
+                        "grid size-6 shrink-0 place-items-center rounded-md",
+                        errorCount > 0
+                          ? "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]"
+                          : "bg-[color:var(--brand-gold-soft)] text-[color:var(--brand-gold-deep)]",
+                      )}
+                    >
+                      <Icon className="size-3.5" />
+                    </span>
+                    <h3 className="text-[12px] font-bold text-foreground">
+                      {ISSUE_CATEGORY_LABEL[cat]}
+                    </h3>
+                    <span className="text-[10px] tabular-nums text-muted-foreground">
+                      {errorCount > 0 && `${arNum(errorCount)} خطأ`}
+                      {errorCount > 0 && warnCount > 0 && " · "}
+                      {warnCount > 0 && `${arNum(warnCount)} تنبيه`}
+                    </span>
+                  </header>
+                  {/* Two columns once there is width — the rows are one line
+                      each, and a full-width column of short pills wasted half
+                      the card. */}
+                  <ul className="mt-1.5 grid items-start gap-1.5 lg:grid-cols-2">
+                    {items.map((i, idx) => {
+                      // Only issues that can open something are interactive —
+                      // and those render as real buttons, so keyboard users
+                      // get them too.
+                      const clickable = i.scope === "package" || i.scope === "leg"
+                      const cls = cn(
+                        "flex w-full gap-2 rounded-lg px-2.5 py-2 text-start text-[11px] leading-snug",
+                        i.level === "error"
+                          ? "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]"
+                          : "bg-[color:var(--brand-gold-soft)] text-[color:var(--brand-gold-deep)]",
+                        clickable && "cursor-pointer transition-[filter] hover:brightness-97",
+                      )
+                      const content = (
+                        <>
+                          <TriangleAlert className="mt-0.5 size-3.5 shrink-0" />
+                          <span>{i.message}</span>
+                        </>
+                      )
+                      return (
+                        <li key={`${i.code}-${i.entityId}-${idx}`}>
+                          {clickable ? (
+                            <button
+                              type="button"
+                              onClick={() => (state.selectedId = i.entityId)}
+                              className={cls}
+                            >
+                              {content}
+                            </button>
+                          ) : (
+                            <div className={cls}>{content}</div>
+                          )}
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </section>
+              )
+            })}
+          </div>
         )}
       </Card>
     </>
@@ -504,6 +413,13 @@ export function SettingsPanel() {
             </div>
           </div>
         </div>
+      </Card>
+
+      <Card title="العرض" description="ما يظهر على الشاشة أثناء الاجتماعات.">
+        <label className="flex items-center gap-2 text-[12px] text-foreground/80">
+          <Checkbox checked={snap.showPrices} onCheckedChange={() => togglePrices()} />
+          إظهار الأسعار — تُحجب افتراضيًا («••••») ويكشفها ضغط أي سعر محجوب
+        </label>
       </Card>
 
       <Card title="التخزين والاتصال">

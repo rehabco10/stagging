@@ -1,0 +1,13 @@
+# Plain ar-SA locale renders Arabic-Indic digits (٧٬٠٠٠) while the whole UI —
+# and Nusuk — uses Latin digits. Numbers must go through arNum()/sar() from
+# src/lib/utils.ts (locale ar-SA-u-nu-latn).
+id: no-plain-ar-sa-locale
+language: tsx
+severity: error
+message: Use arNum()/sar() — plain "ar-SA" renders Arabic-Indic digits the UI forbids.
+files:
+  - src/**
+rule:
+  any:
+    - pattern: $X.toLocaleString("ar-SA")
+    - pattern: new Intl.NumberFormat("ar-SA")

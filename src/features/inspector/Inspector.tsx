@@ -14,8 +14,10 @@ import {
   type DraftPackage,
 } from "@/store/season"
 import { ROLE_LABEL } from "@/features/graph/nodes"
+import { PackageResources } from "@/features/inventory/PackageResources"
 import { displayCategory } from "@/lib/schemas"
 import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
+import { MaskedPriceInput } from "@/components/ui/price"
 import { ROLE_OPTIONS, TIER_OPTIONS } from "@/lib/options"
 import { cn, arNum } from "@/lib/utils"
 import { useIssues } from "@/store/use-issues"
@@ -135,12 +137,35 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
             />
           </Field>
           <Field label="السعر الابتدائي (ر.س)">
-            <NumInput
+            <MaskedPriceInput
               value={live.initial_price_sar}
               onChange={(e) => (pkg.initial_price_sar = Number(e.target.value) || 0)}
             />
           </Field>
         </div>
+
+        <Field
+          label="توزيع الغرف (حاج)"
+          hint={(() => {
+            const sum = live.room_mix["2"] + live.room_mix["3"] + live.room_mix["4"]
+            if (sum === 0) return "رباعية / ثلاثية / ثنائية — اتركه صفرًا إن لم يُخطَّط بعد."
+            const diff = live.capacity - sum
+            if (diff === 0) return `الموزَّع ${arNum(sum)} — مطابق للسعة.`
+            return diff > 0 ? `الموزَّع ${arNum(sum)} — ينقص ${arNum(diff)}.` : `الموزَّع ${arNum(sum)} — يزيد ${arNum(-diff)}.`
+          })()}
+        >
+          <div className="grid grid-cols-3 gap-1.5">
+            {(["4", "3", "2"] as const).map((rt) => (
+              <NumInput
+                key={rt}
+                aria-label={rt === "4" ? "رباعية" : rt === "3" ? "ثلاثية" : "ثنائية"}
+                placeholder={rt === "4" ? "رباعية" : rt === "3" ? "ثلاثية" : "ثنائية"}
+                value={live.room_mix[rt] ? String(live.room_mix[rt]) : ""}
+                onChange={(e) => (pkg.room_mix[rt] = Math.max(0, Number(e.target.value) || 0))}
+              />
+            ))}
+          </div>
+        </Field>
 
         <Field
           label="لاحقة التصنيف"
@@ -174,6 +199,8 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
         </div>
       </Section>
 
+      <BindingsSection pkg={pkg} />
+
       <Section title="إجراءات">
         <button
           type="button"
@@ -185,6 +212,17 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
         </button>
       </Section>
     </>
+  )
+}
+
+/* ── supply bindings ────────────────────────────────────────────── */
+
+/** The per-decision resources panel, shared with the /packages workspace. */
+function BindingsSection({ pkg }: { pkg: DraftPackage }) {
+  return (
+    <Section title="الموارد — العقود والمقاعد">
+      <PackageResources pkg={pkg} />
+    </Section>
   )
 }
 
@@ -294,24 +332,38 @@ function Issues() {
         </div>
       ) : (
         <ul className="space-y-1.5">
-          {issues.slice(0, 40).map((i, idx) => (
-            <li
-              key={`${i.code}-${i.entityId}-${idx}`}
-              onClick={() => {
-                if (i.scope === "package" || i.scope === "leg") state.selectedId = i.entityId
-              }}
-              className={cn(
-                "flex gap-1.5 rounded-md px-2 py-1.5 text-[11px] leading-snug",
-                i.level === "error"
-                  ? "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]"
-                  : "bg-[color:var(--brand-gold-soft)] text-[color:var(--brand-gold-deep)]",
-                (i.scope === "package" || i.scope === "leg") && "cursor-pointer hover:brightness-97",
-              )}
-            >
-              <TriangleAlert className="size-3.5 shrink-0 mt-0.5" />
-              <span>{i.message}</span>
-            </li>
-          ))}
+          {issues.slice(0, 40).map((i, idx) => {
+            // Real buttons for the openable issues — keyboard users included.
+            const clickable = i.scope === "package" || i.scope === "leg"
+            const cls = cn(
+              "flex w-full gap-1.5 rounded-md px-2 py-1.5 text-start text-[11px] leading-snug",
+              i.level === "error"
+                ? "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]"
+                : "bg-[color:var(--brand-gold-soft)] text-[color:var(--brand-gold-deep)]",
+              clickable && "cursor-pointer hover:brightness-97",
+            )
+            const content = (
+              <>
+                <TriangleAlert className="size-3.5 shrink-0 mt-0.5" />
+                <span>{i.message}</span>
+              </>
+            )
+            return (
+              <li key={`${i.code}-${i.entityId}-${idx}`}>
+                {clickable ? (
+                  <button
+                    type="button"
+                    onClick={() => (state.selectedId = i.entityId)}
+                    className={cls}
+                  >
+                    {content}
+                  </button>
+                ) : (
+                  <div className={cls}>{content}</div>
+                )}
+              </li>
+            )
+          })}
         </ul>
       )}
     </Section>

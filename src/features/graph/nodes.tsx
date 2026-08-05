@@ -1,5 +1,6 @@
 import { Handle, Position, type Node, type NodeProps } from "@xyflow/react"
-import { Plus, Pin, MoveRight, TriangleAlert } from "lucide-react"
+import { ChevronDown, ChevronLeft, Plus, Pin, MoveRight, TriangleAlert } from "lucide-react"
+import { Price } from "@/components/ui/price"
 import { cn, arNum } from "@/lib/utils"
 import type { DraftLeg, DraftPackage, DraftHotel } from "@/store/season"
 
@@ -84,7 +85,8 @@ function AddButton({
         if (!disabled) onClick()
       }}
       className={cn(
-        "nodrag nopan absolute left-1/2 -bottom-3.5 -translate-x-1/2 z-10",
+        // The tree grows rightward, so the grow-affordance sits on the right edge.
+        "nodrag nopan absolute top-1/2 -right-3.5 -translate-y-1/2 z-10",
         "grid place-items-center size-7 rounded-full border shadow-sm",
         "transition-[opacity,transform,background-color,color] duration-150",
         visible
@@ -210,10 +212,54 @@ export function QuotaNode({ data }: NodeProps<Node<QuotaData>>) {
           )}
         </div>
 
-        <Handle type="source" position={Position.Bottom} className="!opacity-0" />
+        <Handle type="source" position={Position.Right} className="!opacity-0" />
         <AddButton visible={data.selected} title="إضافة باقة" onClick={data.onAdd} />
       </Card>
     </>
+  )
+}
+
+/* ── tier (pseudo) ──────────────────────────────────────────────── */
+
+export interface TierData extends Record<string, unknown> {
+  tier: DraftPackage["tier"]
+  label: string
+  count: number
+  capacity: number
+  /** Share of the allocated total, for eyeballing the 40/60 mix rule. */
+  pct: number
+  onAdd: () => void
+}
+
+export const TIER_NODE_W = 200
+export const TIER_NODE_H = 88
+
+/**
+ * Auto-derived grouping node — no stored entity behind it. It exists so the
+ * canvas reads as quota → tier → packages, and so «إضافة» under a tier
+ * creates a package already carrying that tier.
+ */
+export function TierNode({ data }: NodeProps<Node<TierData>>) {
+  const tint = TIER_TINT[data.tier]
+  return (
+    <Card tint={tint} selected={false} width={TIER_NODE_W} height={TIER_NODE_H}>
+      <Handle type="target" position={Position.Left} className="!opacity-0" />
+      <Handle type="source" position={Position.Right} className="!opacity-0" />
+      <div className="flex items-start justify-between gap-2">
+        <div className="text-[10px] uppercase tracking-wider font-semibold text-foreground/70">
+          فئة
+        </div>
+        <div className={cn("text-base font-bold tabular-nums", TINT_FG[tint])}>
+          {arNum(data.capacity)}
+        </div>
+      </div>
+      <div className="text-sm font-bold text-foreground leading-tight">{data.label}</div>
+      <div className="flex items-center justify-between text-[10px] text-foreground/65 tabular-nums border-t border-white/60 pt-1">
+        <span>{arNum(data.count)} باقة</span>
+        <span>{data.pct.toFixed(1)}%</span>
+      </div>
+      <AddButton visible={false} title={`إضافة باقة ${data.label}`} onClick={data.onAdd} />
+    </Card>
   )
 }
 
@@ -230,6 +276,9 @@ export interface PackageData extends Record<string, unknown> {
   /** Has at least one blocking error. */
   invalid: boolean
   errorCount: number
+  /** This package's branch is the one open on the canvas (accordion). */
+  expanded: boolean
+  onToggle: () => void
   onAdd: () => void
 }
 
@@ -243,8 +292,8 @@ export function PackageNode({ data }: NodeProps<Node<PackageData>>) {
   return (
     <Card tint={tint} selected={data.selected} invalid={data.invalid} width={PACKAGE_W} height={PACKAGE_H}>
       <PinnedMark pinned={data.pinned} />
-      <Handle type="target" position={Position.Top} className="!opacity-0" />
-      <Handle type="source" position={Position.Bottom} className="!opacity-0" />
+      <Handle type="target" position={Position.Left} className="!opacity-0" />
+      <Handle type="source" position={Position.Right} className="!opacity-0" />
 
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
@@ -267,9 +316,34 @@ export function PackageNode({ data }: NodeProps<Node<PackageData>>) {
       </div>
 
       <div className="flex items-center justify-between text-[10px] text-foreground/70 tabular-nums border-t border-white/60 pt-1.5">
-        <span>
-          {legCount === 0 ? "بدون إقامات" : `${arNum(legCount)} إقامة · ${arNum(nights)} ليلة`}
-        </span>
+        {legCount === 0 ? (
+          <span>بدون إقامات</span>
+        ) : (
+          // The accordion handle: opens this package's legs, closing whichever
+          // branch was open — one readable package at a time on a 39-package
+          // canvas. stopPropagation keeps it from also selecting the node.
+          <button
+            type="button"
+            title={data.expanded ? "طيّ الإقامات" : "عرض الإقامات"}
+            aria-expanded={data.expanded}
+            onClick={(e) => {
+              e.stopPropagation()
+              data.onToggle()
+            }}
+            className={cn(
+              "nodrag nopan inline-flex items-center gap-1 rounded-md px-1.5 py-0.5 -ms-1.5 cursor-pointer",
+              "transition-colors hover:bg-white/70",
+              data.expanded && "bg-white/60 font-semibold",
+            )}
+          >
+            {data.expanded ? (
+              <ChevronDown className="size-3" />
+            ) : (
+              <ChevronLeft className="size-3" />
+            )}
+            {arNum(legCount)} إقامة · {arNum(nights)} ليلة
+          </button>
+        )}
         {data.invalid ? (
           // A compact chip, not a red card. Every package is "incomplete" for
           // most of its life; painting each one rose made the whole canvas read
@@ -278,12 +352,10 @@ export function PackageNode({ data }: NodeProps<Node<PackageData>>) {
             <TriangleAlert className="size-2.5" />
             {arNum(data.errorCount)}
           </span>
+        ) : pkg.initial_price_sar > 0 ? (
+          <Price value={`${arNum(Math.round(pkg.initial_price_sar))} ر.س`} />
         ) : (
-          <span>
-            {pkg.initial_price_sar > 0
-              ? `${arNum(Math.round(pkg.initial_price_sar))} ر.س`
-              : "بدون سعر"}
-          </span>
+          <span>بدون سعر</span>
         )}
       </div>
 
@@ -319,7 +391,7 @@ export function LegNode({ data }: NodeProps<Node<LegData>>) {
   return (
     <Card tint={tint} selected={data.selected} invalid={data.invalid} width={LEG_W} height={LEG_H}>
       <PinnedMark pinned={data.pinned} />
-      <Handle type="target" position={Position.Top} className="!opacity-0" />
+      <Handle type="target" position={Position.Left} className="!opacity-0" />
 
       <div className="flex items-center justify-between gap-2 text-[10px] font-semibold text-foreground/70">
         <span className="uppercase tracking-wider">{ROLE_LABEL[leg.role]}</span>
@@ -343,4 +415,4 @@ export function LegNode({ data }: NodeProps<Node<LegData>>) {
   )
 }
 
-export const nodeTypes = { quota: QuotaNode, package: PackageNode, leg: LegNode } as const
+export const nodeTypes = { quota: QuotaNode, tier: TierNode, package: PackageNode, leg: LegNode } as const

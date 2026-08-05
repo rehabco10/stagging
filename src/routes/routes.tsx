@@ -8,7 +8,6 @@ import { ResponsivePanel } from "@/components/ui/responsive-panel"
 import { PackageGraph } from "@/features/graph/PackageGraph"
 import { InspectorContent, useInspectorSubtitle } from "@/features/inspector/Inspector"
 import {
-  HotelsPanel,
   RequirementsPanel,
   SettingsPanel,
   ValidationPanel,
@@ -72,17 +71,6 @@ export function RequirementsPage() {
       description="ما اتُّفق عليه مع الفريق ووزارة الحج والعمرة. المعتمد منه يُطبَّق على التحقق قبل الرفع."
     >
       <RequirementsPanel />
-    </PageShell>
-  )
-}
-
-export function HotelsPage() {
-  return (
-    <PageShell
-      title="الفنادق والمخيمات"
-      description="المخزون المتاح لهذا الموسم، وما تستخدمه الباقات منه."
-    >
-      <HotelsPanel />
     </PageShell>
   )
 }

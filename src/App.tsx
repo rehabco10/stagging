@@ -3,9 +3,10 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import { Navigation } from "@/components/NavRail"
 import { DashboardPage } from "@/routes/dashboard"
 import { PackagesPage } from "@/routes/packages"
+import { CarriersPage } from "@/features/inventory/CarriersPage"
+import { HousingPage } from "@/features/inventory/HousingPage"
 import {
   CanvasPage,
-  HotelsPage,
   RequirementsPage,
   SettingsPage,
   ValidationPage,
@@ -22,8 +23,12 @@ export default function App() {
           <Route path="/" element={<DashboardPage />} />
           <Route path="/canvas" element={<CanvasPage />} />
           <Route path="/packages" element={<PackagesPage />} />
+          <Route path="/packages/:pkgId" element={<PackagesPage />} />
           <Route path="/requirements" element={<RequirementsPage />} />
-          <Route path="/hotels" element={<HotelsPage />} />
+          <Route path="/hotels" element={<HousingPage />} />
+          <Route path="/hotels/:hotelId" element={<HousingPage />} />
+          <Route path="/flights" element={<CarriersPage />} />
+          <Route path="/flights/:carrier" element={<CarriersPage />} />
           <Route path="/validation" element={<ValidationPage />} />
           <Route path="/settings" element={<SettingsPage />} />
           <Route path="*" element={<Navigate to="/" replace />} />

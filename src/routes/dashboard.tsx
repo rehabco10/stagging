@@ -6,6 +6,7 @@ import {
   CircleCheck,
   ClipboardList,
   Network,
+  Plane,
   ShieldCheck,
   Table2,
   TriangleAlert,
@@ -13,7 +14,7 @@ import {
 } from "lucide-react"
 
 import { Card, Note, PageShell, Stat } from "@/components/PageShell"
-import { allocated, state } from "@/store/season"
+import { allocated, confirmedSeats, peakSignedBeds, state, type DraftState } from "@/store/season"
 import { useIssues } from "@/store/use-issues"
 import { cn, arNum } from "@/lib/utils"
 
@@ -39,6 +40,11 @@ export function DashboardPage() {
   const pkgs = snap.packages.length
   const withLegs = snap.packages.filter((p) => p.legs.length > 0).length
   const agreed = snap.requirements.filter((r) => r.status === "agreed").length
+
+  // Supply side, read through the snapshot so contract edits re-render here.
+  const s = snap as unknown as DraftState
+  const signedBeds = peakSignedBeds(s)
+  const arrivalSeats = confirmedSeats("arrival", s)
 
   const std = snap.packages
     .filter((p) => p.tier === "standard")
@@ -108,6 +114,16 @@ export function DashboardPage() {
             tone={left === 0 ? "good" : over ? "bad" : "neutral"}
           />
           <Stat value={arNum(pkgs)} label={`باقة · ${arNum(withLegs)} لها إقامات`} />
+          <Stat
+            value={arNum(signedBeds)}
+            label="سرير متعاقد عليه (ذروة الليلة)"
+            tone={signedBeds >= quota ? "good" : "neutral"}
+          />
+          <Stat
+            value={arNum(arrivalSeats)}
+            label="مقعد وصول مؤكَّد"
+            tone={arrivalSeats >= quota ? "good" : "neutral"}
+          />
 
           {/* Readiness is a door, not just a number — it opens the validation page. */}
           <Link
@@ -175,7 +191,17 @@ export function DashboardPage() {
               to="/hotels"
               icon={Building2}
               title="الفنادق والمخيمات"
-              sub={`${arNum(snap.hotels.length)} فندق في المخزون`}
+              sub={`${arNum(snap.hotels.length)} فندق · ${arNum(snap.contracts.length)} عقد سكن`}
+            />
+            <SectionTile
+              to="/flights"
+              icon={Plane}
+              title="مقاعد الطيران"
+              sub={
+                snap.flightBlocks.length === 0
+                  ? "لا كتل مقاعد بعد"
+                  : `${arNum(snap.flightBlocks.length)} كتلة · ${arNum(arrivalSeats)} مقعد وصول مؤكَّد`
+              }
             />
           </div>
         </Card>

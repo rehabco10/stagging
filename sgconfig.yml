@@ -1,0 +1,7 @@
+# ast-grep project config — structural lint rules this repo's history earned.
+# Run: pnpm lint:ast
+ruleDirs:
+  - ast-grep-rules
+# Treat .ts as tsx so one rule language covers the whole src tree.
+languageGlobs:
+  tsx: ['*.ts']

@@ -1,0 +1,10 @@
+# Stray debug logging in app code; the seed/verify scripts (scripts/) are
+# exempt — printing is their job.
+id: no-console-log
+language: tsx
+severity: warning
+message: Remove debug console.log from app code.
+files:
+  - src/**
+rule:
+  pattern: console.log($$$ARGS)

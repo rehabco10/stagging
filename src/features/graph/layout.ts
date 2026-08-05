@@ -1,5 +1,3 @@
-import dagre from "@dagrejs/dagre"
-
 /**
  * Graph layout + the pin reconciliation rules, kept pure and free of React so
  * they can be exercised directly. The pinning behaviour is subtle enough that
@@ -19,7 +17,7 @@ export interface Box {
 
 export interface LayoutTree {
   /** Packages in order, each with its legs already in chronological order. */
-  packages: Array<{ id: string; legIds: string[] }>
+  packages: Array<{ id: string; legIds: string[]; tier?: string }>
   /** Nodes the user has dragged; these override the solver's position. */
   pinned: Record<string, Pos>
 }
@@ -28,55 +26,114 @@ export interface LayoutSizes {
   root: Box
   pkg: Box
   leg: Box
+  /** Box for the pseudo tier nodes; falls back to `pkg` when absent. */
+  tier?: Box
 }
 
 export const ROOT_ID = "root"
+/** Fixed display order of the tier sections; unknown tiers append after. */
+export const TIER_ORDER = ["luxury", "premium", "standard"]
+export const tierNodeId = (tier: string) => `tier_${tier}`
+
+const MARGIN = 40
+const GAP_Y = 28
+const RANK_GAP = 88
+const LEG_DROP = 56
+const LEG_GAP_Y = 16
+/** Packages per column. One dagre-style rank of 39 packages was a 12,000px smear. */
+const WRAP_AT = 7
 
 /**
- * Top-down dagre tree: quota root → packages → stay legs.
+ * Deterministic sideways grid: quota root on the left, packages flowing
+ * rightward in columns of `WRAP_AT`, and the expanded package's legs in a
+ * band beside its column. Horizontal because stay chains read as sequences
+ * and screens are wide: the top-down version stacked 39 packages into rows
+ * and every expansion fought its neighbours for vertical room.
+ *
+ * This replaced a dagre single-rank layout the day the real 39-package season
+ * seeded in — one rank made every card an unreadable speck at fit-view, and
+ * with the canvas accordion only one package shows legs at a time anyway.
  *
  * Pinned nodes are laid out normally and then overridden, deliberately: the
- * solver still reserves their rank so the rest of the tree keeps a sane shape
+ * solver still reserves their slot so the rest of the tree keeps a sane shape
  * whether or not the user has parked a card somewhere.
  */
+const SECTION_GAP = 72
+
 export function computeLayout(tree: LayoutTree, sizes: LayoutSizes): Map<string, Pos> {
-  const boxes = new Map<string, Box>()
-  const g = new dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}))
-  g.setGraph({ rankdir: "TB", nodesep: 32, ranksep: 88, edgesep: 16, marginx: 40, marginy: 40 })
-
-  boxes.set(ROOT_ID, sizes.root)
-  g.setNode(ROOT_ID, { width: sizes.root.w, height: sizes.root.h })
-
-  for (const pkg of tree.packages) {
-    boxes.set(pkg.id, sizes.pkg)
-    g.setNode(pkg.id, { width: sizes.pkg.w, height: sizes.pkg.h })
-    g.setEdge(ROOT_ID, pkg.id)
-    for (const legId of pkg.legIds) {
-      boxes.set(legId, sizes.leg)
-      g.setNode(legId, { width: sizes.leg.w, height: sizes.leg.h })
-      g.setEdge(pkg.id, legId)
-    }
-  }
-
-  dagre.layout(g)
-
   const out = new Map<string, Pos>()
-  for (const [id, box] of boxes) {
+  const tierBox = sizes.tier ?? sizes.pkg
+  const place = (id: string, x: number, y: number) => {
     const pin = tree.pinned[id]
-    if (pin) {
-      out.set(id, { x: pin.x, y: pin.y })
-      continue
-    }
-    const n = g.node(id)
-    // dagre reports centres; React Flow positions from the top-left corner.
-    out.set(id, { x: (n?.x ?? 0) - box.w / 2, y: (n?.y ?? 0) - box.h / 2 })
+    out.set(id, pin ? { x: pin.x, y: pin.y } : { x, y })
   }
+
+  // Group into tier sections, fixed order, unknown tiers appended.
+  const byTier = new Map<string, LayoutTree["packages"]>()
+  for (const pkg of tree.packages) {
+    const tier = pkg.tier ?? "standard"
+    const list = byTier.get(tier) ?? []
+    list.push(pkg)
+    byTier.set(tier, list)
+  }
+  const tiers = [
+    ...TIER_ORDER.filter((t) => byTier.has(t)),
+    ...[...byTier.keys()].filter((t) => !TIER_ORDER.includes(t)),
+  ]
+
+  const sectionH = (count: number) => {
+    const rows = Math.max(1, Math.min(WRAP_AT, count))
+    return rows * sizes.pkg.h + (rows - 1) * GAP_Y
+  }
+  const totalH = tiers.reduce((t, tier) => t + sectionH(byTier.get(tier)!.length), 0) +
+    Math.max(0, tiers.length - 1) * SECTION_GAP
+
+  place(ROOT_ID, MARGIN, MARGIN + Math.max(totalH, sizes.root.h) / 2 - sizes.root.h / 2)
+  const tierX = MARGIN + sizes.root.w + RANK_GAP
+  const pkgX0 = tierX + tierBox.w + RANK_GAP
+
+  let sectionTop = MARGIN
+  for (const tier of tiers) {
+    const pkgs = byTier.get(tier)!
+    const secH = sectionH(pkgs.length)
+    place(tierNodeId(tier), tierX, sectionTop + secH / 2 - tierBox.h / 2)
+
+    let x = pkgX0
+    for (let start = 0; start < pkgs.length; start += WRAP_AT) {
+      const col = pkgs.slice(start, start + WRAP_AT)
+      const colH = col.length * sizes.pkg.h + (col.length - 1) * GAP_Y
+      const yStart = sectionTop + (secH - colH) / 2
+
+      col.forEach((pkg, i) => place(pkg.id, x, yStart + i * (sizes.pkg.h + GAP_Y)))
+
+      // Legs band beside this column: each package's legs centred on it, but
+      // never overlapping the neighbour's band — the cursor walks the column.
+      const legX = x + sizes.pkg.w + LEG_DROP
+      let cursor = -Infinity
+      let colHasLegs = false
+      col.forEach((pkg, i) => {
+        if (!pkg.legIds.length) return
+        colHasLegs = true
+        const bandH = pkg.legIds.length * sizes.leg.h + (pkg.legIds.length - 1) * LEG_GAP_Y
+        const centre = yStart + i * (sizes.pkg.h + GAP_Y) + sizes.pkg.h / 2
+        const bandY = Math.max(sectionTop, centre - bandH / 2, cursor + LEG_GAP_Y)
+        pkg.legIds.forEach((legId, j) => place(legId, legX, bandY + j * (sizes.leg.h + LEG_GAP_Y)))
+        cursor = bandY + bandH
+      })
+
+      x += sizes.pkg.w + (colHasLegs ? LEG_DROP + sizes.leg.w : 0) + RANK_GAP
+    }
+
+    sectionTop += secH + SECTION_GAP
+  }
+
   return out
 }
 
 /** A stable key for "has the tree's shape or pinning changed?". */
 export function structureKeyOf(tree: LayoutTree): string {
-  const shape = tree.packages.map((p) => `${p.id}:${p.legIds.join("|")}`).join(";")
+  // Tier is part of the shape: retiering a package moves it between sections.
+  const shape = tree.packages.map((p) => `${p.id}~${p.tier ?? ""}:${p.legIds.join("|")}`).join(";")
   const pins = Object.entries(tree.pinned)
     .map(([k, v]) => `${k}@${v.x},${v.y}`)
     .sort()

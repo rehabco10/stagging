@@ -1,0 +1,14 @@
+# The flight contract type was renamed b2b/b2c → group/gds (the raw 1447
+# sheets still say B2B/B2C, so re-ingestion work keeps wanting to leak the old
+# values back into src).
+id: no-legacy-flight-type-b2b
+language: tsx
+severity: error
+message: Legacy flight type value — use "group" (block purchase) instead of "b2b".
+files:
+  - src/**
+rule:
+  any:
+    - pattern: '"b2b"'
+    - pattern: '"b2c"'
+note: The gds/group vocabulary is defined in src/lib/schemas.ts (FlightContractType).

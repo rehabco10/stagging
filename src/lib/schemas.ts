@@ -8,17 +8,18 @@ import { z } from "zod"
  * so numeric fields coerce and dates stay strings until the UI parses them.
  */
 
-/** PocketBase system fields. `passthrough` keeps `expand` and anything new. */
-export const BaseSchema = z
-  .object({
-    id: z.string().optional(),
-    created: z.string().optional(),
-    updated: z.string().optional(),
-    collectionId: z.string().optional(),
-    collectionName: z.string().optional(),
-    expand: z.any().optional(),
-  })
-  .passthrough()
+/**
+ * PocketBase system fields. A loose object keeps `expand` and anything new —
+ * Zod 4's `looseObject` is the non-deprecated spelling of v3's `.passthrough()`.
+ */
+export const BaseSchema = z.looseObject({
+  id: z.string().optional(),
+  created: z.string().optional(),
+  updated: z.string().optional(),
+  collectionId: z.string().optional(),
+  collectionName: z.string().optional(),
+  expand: z.any().optional(),
+})
 
 /* ── enums ──────────────────────────────────────────────────────── */
 
@@ -54,6 +55,28 @@ export const RequirementKind = z.enum([
 ])
 export const RequirementStatus = z.enum(["proposed", "agreed", "superseded"])
 export const SubmissionStatus = z.enum(["preparing", "sent", "accepted", "rejected", "partial"])
+
+/* ── inventory enums — see docs/inventory-concept.md ────────────── */
+
+/**
+ * Contract-level city. Hotels collapse shifting → makkah, but a contract keeps
+ * it: 1447 had dedicated shifting blocks *and* mixed contracts, which forced a
+ * per-package `city` migration downstream. Separate value, not a flag.
+ */
+export const ContractCity = z.enum(["makkah", "madinah", "shifting"])
+/** Beds per room — the supply grain of the 1447 contract sheets (ثنائي/ثلاثي/رباعي). */
+export const RoomType = z.enum(["2", "3", "4"])
+/** Only `signed` counts as supply in the availability checks. */
+export const ContractStatus = z.enum(["proposed", "signed", "cancelled"])
+/** Explicit on the block — 1447 encoded direction by which relation pointed at the flight. */
+export const FlightDirection = z.enum(["arrival", "return"])
+/**
+ * How the seats were bought. «نوع عقد الطيران» in the 1447 sheets said
+ * B2B/B2C; the operational vocabulary is `group` (block purchase from the
+ * carrier) vs `gds` (individual reservations through the GDS).
+ */
+export const FlightContractType = z.enum(["group", "gds"])
+export const FlightBlockStatus = z.enum(["proposed", "confirmed", "cancelled"])
 
 /** PocketBase date field: "YYYY-MM-DD" or a full timestamp. */
 const pbDate = z.string().min(1)
@@ -128,6 +151,37 @@ export const PackageSchema = BaseSchema.extend({
   initial_price_sar: z.coerce.number().positive(),
   publish_status: PublishStatus.default("draft"),
   sale_status: SaleStatus.default("unavailable"),
+  /**
+   * Supply bindings — which housing contracts and flight seat blocks serve
+   * this package. The successor of 1447's `contract_packages` junction and its
+   * per-pilgrim flight relations, lifted to package level, so allocation is
+   * decided while authoring instead of being reverse-engineered downstream.
+   * Flight links carry `seats`: a 500-pilgrim package really spreads over many
+   * ~150-seat flights, which a bare reference cannot express — the real 1447
+   * distribution was unrepresentable without it. Validated in `validateSeason`.
+   */
+  housing_contracts: z.array(relation).default([]),
+  flight_allocations: z
+    .array(
+      z.object({
+        block: relation,
+        seats: z.coerce.number().int().nonnegative().default(0),
+      }),
+    )
+    .default([]),
+  /**
+   * Pilgrims by room type — the demand-side mirror of the contract room lines.
+   * One mix for the whole trip: 92.6% of 1447's 2,407 bookings kept the same
+   * room type in both cities. Σ must equal `capacity` once any value is set;
+   * all zeros means "not planned yet" and the room-type checks stay quiet.
+   */
+  room_mix: z
+    .object({
+      "2": z.coerce.number().int().nonnegative().default(0),
+      "3": z.coerce.number().int().nonnegative().default(0),
+      "4": z.coerce.number().int().nonnegative().default(0),
+    })
+    .default({ "2": 0, "3": 0, "4": 0 }),
 })
 
 export const PackageContentSchema = BaseSchema.extend({
@@ -144,6 +198,59 @@ export const PackageMediaSchema = BaseSchema.extend({
   sort: z.coerce.number().int().nonnegative().default(0),
   approved: z.boolean().default(false),
   approved_by: relation.optional().nullable(),
+})
+
+/* ── inventory: contracts on hotels, flight seat blocks ──────────
+ * The supply side. A contract is NOT "the deal with the hotel" — the 1447 data
+ * shows one hotel holding up to seven contracts, each a block of beds for its
+ * own date window. Capacity is never a single entered number: the source
+ * Excel's ContractCapacity held rooms (or double-sold beds) and had to be
+ * recomputed from the room-type rows. See docs/inventory-concept.md §1.
+ */
+
+export const HousingContractSchema = BaseSchema.extend({
+  season: relation,
+  /** Single required relation — 1447's multi-select + name-string join is the bug this fixes. */
+  hotel: relation,
+  /** Business key from the platform, e.g. `202610000004389`. */
+  contract_no: z.string(),
+  city: ContractCity,
+  starts_on: pbDate,
+  ends_on: pbDate,
+  /** Derived = Σ line.beds; stored denormalised, validated, never trusted. */
+  beds_total: z.coerce.number().int().nonnegative().default(0),
+  status: ContractStatus.default("proposed"),
+  notes: z.string().optional().nullable(),
+})
+
+export const ContractRoomLineSchema = BaseSchema.extend({
+  contract: relation,
+  room_type: RoomType,
+  rooms: z.coerce.number().int().nonnegative(),
+  /** Derived = rooms × room_type; validated like `itinerary.total_nights`. */
+  beds: z.coerce.number().int().nonnegative().default(0),
+  /** Per-bed-per-night. Optional — no 1447 contract carried any price at all. */
+  rate_sar: z.coerce.number().positive().optional().nullable(),
+})
+
+/**
+ * A purchased block of seats. Shaped after the only seat data 1447 had — the
+ * free-text «اسم العقد» column: airline → route → PNR → seats. Packages do not
+ * reference blocks; coverage is checked season-wide against the quota.
+ */
+export const FlightBlockSchema = BaseSchema.extend({
+  season: relation,
+  direction: FlightDirection,
+  airline_ar: z.string().optional().nullable(),
+  airline_en: z.string().optional().nullable(),
+  flight_no: z.string().optional().nullable(),
+  flies_on: pbDate.optional().nullable(),
+  from_city: z.string().optional().nullable(),
+  to_city: z.string().optional().nullable(),
+  contract_type: FlightContractType.default("group"),
+  pnr: z.string().optional().nullable(),
+  seats: z.coerce.number().int().nonnegative().default(0),
+  status: FlightBlockStatus.default("proposed"),
 })
 
 /* ── intake: meetings → requirements → packages ──────────────────
@@ -246,6 +353,11 @@ export const PackageDetailSchema = PackageSchema.extend({
   media: z.array(PackageMediaSchema).default([]),
 })
 
+/** A contract with its room-type lines loaded — what the validator works on. */
+export const ContractWithLinesSchema = HousingContractSchema.extend({
+  lines: z.array(ContractRoomLineSchema),
+})
+
 /* ── types ──────────────────────────────────────────────────────── */
 
 export type Season = z.infer<typeof SeasonSchema>
@@ -263,9 +375,20 @@ export type Requirement = z.infer<typeof RequirementSchema>
 export type RequirementParamsValue = z.infer<typeof RequirementParams>
 export type Submission = z.infer<typeof SubmissionSchema>
 
+export type HousingContract = z.infer<typeof HousingContractSchema>
+export type ContractRoomLine = z.infer<typeof ContractRoomLineSchema>
+export type ContractWithLines = z.infer<typeof ContractWithLinesSchema>
+export type FlightBlock = z.infer<typeof FlightBlockSchema>
+
 export type CityValue = z.infer<typeof City>
 export type TierValue = z.infer<typeof Tier>
 export type LegRoleValue = z.infer<typeof LegRole>
+export type ContractCityValue = z.infer<typeof ContractCity>
+export type RoomTypeValue = z.infer<typeof RoomType>
+export type ContractStatusValue = z.infer<typeof ContractStatus>
+export type FlightDirectionValue = z.infer<typeof FlightDirection>
+export type FlightContractTypeValue = z.infer<typeof FlightContractType>
+export type FlightBlockStatusValue = z.infer<typeof FlightBlockStatus>
 
 /**
  * The five categories the platform displays, rebuilt from the three flags we

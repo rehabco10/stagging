@@ -1,12 +1,17 @@
-import { parseRequirementParams } from "./schemas"
+// Extension included so the emitted ESM runs in plain node for the tests
+// (tsconfig.test.json) — bundler resolution maps it back to schemas.ts.
+import { parseRequirementParams } from "./schemas.js"
 import type {
+  ContractWithLines,
+  FlightBlock,
+  Hotel,
   ItineraryWithLegs,
   ItineraryLeg,
   Package,
   Requirement,
   RequirementParamsValue,
   Season,
-} from "./schemas"
+} from "./schemas.js"
 
 /**
  * Season validation. Every rule here corresponds to a defect that actually
@@ -22,9 +27,46 @@ export interface Issue {
   level: IssueLevel
   /** Which rule fired — stable key, safe to use for i18n lookup. */
   code: string
-  scope: "leg" | "itinerary" | "package" | "season"
+  /** `contract` = one contract's own fields; `inventory` = supply vs demand, keyed by hotel. */
+  scope: "leg" | "itinerary" | "package" | "season" | "contract" | "inventory"
   entityId: string
   message: string
+}
+
+/* ── categories: how the UI groups findings ─────────────────────── */
+
+export type IssueCategory =
+  | "governance" // season rules: quota, mix, pricing, requirements
+  | "itinerary" // stay chains: dates, contiguity, roles
+  | "package" // one package's own fields
+  | "contracts" // a housing contract's own fields
+  | "housing" // housing supply vs demand: beds, windows, bindings
+  | "flights" // seat blocks: coverage and bindings
+  | "other"
+
+/** The `inventory.*` namespace mixes housing and air — these are the air side. */
+const FLIGHT_CODES = new Set([
+  "inventory.flight_overallocated",
+  "inventory.flight_shortfall",
+  "inventory.flight_overlinked",
+  "inventory.no_flight_link",
+  "inventory.flight_link_dangling",
+  "inventory.link_cancelled",
+  "inventory.arrival_seats",
+  "inventory.return_seats",
+])
+
+/**
+ * Category is derived from the code, not stored on the issue — one mapping
+ * here instead of a second field to keep correct at forty push sites.
+ */
+export function categoryOf(code: string): IssueCategory {
+  if (code.startsWith("leg.") || code.startsWith("itinerary.")) return "itinerary"
+  if (code.startsWith("package.")) return "package"
+  if (code.startsWith("season.")) return "governance"
+  if (code.startsWith("contract.")) return "contracts"
+  if (code.startsWith("inventory.")) return FLIGHT_CODES.has(code) ? "flights" : "housing"
+  return "other"
 }
 
 /** PocketBase dates arrive as "YYYY-MM-DD" or a full timestamp. */
@@ -169,11 +211,77 @@ export function validatePackage(
   if (!(pkg.capacity > 0)) at(unset, "package.capacity", "لم تُحدَّد سعة الباقة بعد.")
   if (!(pkg.initial_price_sar > 0)) at(unset, "package.price", "لم يُحدَّد السعر الابتدائي بعد.")
 
+  // A partially-entered mix is wrong, not merely unfinished — a mix that
+  // doesn't sum to the capacity houses ghosts or leaves pilgrims roomless.
+  const mixSum = roomMixTotal(pkg)
+  if (mixSum > 0 && pkg.capacity > 0 && mixSum !== pkg.capacity) {
+    at("error", "package.room_mix_total", `توزيع الغرف (${n(mixSum)} حاج) لا يساوي سعة الباقة (${n(pkg.capacity)}).`)
+  }
+
   // The gate that would have caught packages 33–39 in 1447: priced, but never described.
   if (pkg.publish_status !== "draft") {
     if (!readiness.hasArabicBody) at("error", "package.no_body_ar", "لا يمكن رفع باقة بدون وصف عربي.")
     if (!readiness.hasEnglishBody) at("warning", "package.no_body_en", "لا يوجد وصف إنجليزي للباقة.")
     if (readiness.approvedHeroCount < 1) at("error", "package.no_hero", "لا توجد صورة رئيسية معتمدة للباقة.")
+  }
+
+  return issues
+}
+
+/** Σ of a package's room mix; 0 when absent (older callers, unplanned drafts). */
+function roomMixTotal(pkg: Package): number {
+  const m = pkg.room_mix
+  if (!m) return 0
+  return (Number(m["2"]) || 0) + (Number(m["3"]) || 0) + (Number(m["4"]) || 0)
+}
+
+const ROOM_TYPE_LABEL: Record<string, string> = {
+  "2": "الثنائية",
+  "3": "الثلاثية",
+  "4": "الرباعية",
+}
+
+/* ── contract ───────────────────────────────────────────────────── */
+
+/** The slice of a hotel the inventory rules need. */
+export type HotelRef = Pick<Hotel, "id" | "name_ar" | "city">
+
+export function validateContract(c: ContractWithLines, hotel: HotelRef | undefined): Issue[] {
+  const issues: Issue[] = []
+  const id = c.id ?? c.contract_no
+  const label = `عقد ${c.contract_no || "بدون رقم"}${hotel ? ` — ${hotel.name_ar}` : ""}`
+  const at = (level: IssueLevel, code: string, message: string) =>
+    issues.push({ level, code, scope: "contract", entityId: id, message: `${label}: ${message}` })
+
+  const span = nightsBetween(c.starts_on, c.ends_on)
+  if (span === null) at("error", "contract.bad_date", "تاريخ غير صالح في نافذة العقد.")
+  else if (span <= 0) at("error", "contract.window", "نهاية العقد يجب أن تكون بعد بدايته.")
+
+  if (!c.contract_no) at("warning", "contract.no_number", "لم يُدخَل رقم العقد بعد.")
+  if (!hotel) at("error", "contract.no_hotel", "العقد غير مرتبط بفندق.")
+
+  // The 1447 lesson: the entered total lied (rooms, or double-sold beds).
+  // Beds are only ever the sum of the room-type lines.
+  let total = 0
+  for (const line of c.lines) {
+    const expect = line.rooms * Number(line.room_type)
+    if (line.beds !== expect) {
+      at(
+        "error",
+        "contract.line_beds",
+        `أسرّة الغرف ${line.room_type === "2" ? "الثنائية" : line.room_type === "3" ? "الثلاثية" : "الرباعية"} (${n(line.beds)}) لا تطابق عدد الغرف × السعة (${n(expect)}).`,
+      )
+    }
+    total += line.beds
+  }
+  if (c.lines.length === 0) at("warning", "contract.no_lines", "لا توجد أنواع غرف — العقد لا يوفّر أي سرير.")
+  if (c.beds_total !== total) {
+    at("error", "contract.beds_total", `إجمالي الأسرّة المخزَّن (${n(c.beds_total)}) لا يطابق مجموع الغرف (${n(total)}).`)
+  }
+
+  // Shifting supply is Makkah supply by definition; a madinah hotel can't carry it.
+  if (c.city === "shifting" && hotel && hotel.city !== "makkah") {
+    at("error", "contract.shifting_city", "عقد انتقالي على فندق خارج مكة المكرمة.")
   }
 
   return issues
@@ -188,6 +296,10 @@ export interface SeasonInput {
   /** Agreed requirements from meetings — the source of quota, mix and pricing bounds. */
   requirements: Requirement[]
   readiness: Map<string, PackageReadiness>
+  /** Supply side — optional so callers without inventory keep working unchanged. */
+  hotels?: HotelRef[]
+  contracts?: ContractWithLines[]
+  flightBlocks?: FlightBlock[]
 }
 
 const EMPTY_READINESS: PackageReadiness = {
@@ -198,6 +310,7 @@ const EMPTY_READINESS: PackageReadiness = {
 
 export function validateSeason(input: SeasonInput): Issue[] {
   const { season, packages, itineraries, requirements, readiness } = input
+  const { hotels = [], contracts = [], flightBlocks = [] } = input
   const issues: Issue[] = []
   const seasonId = season.id ?? String(season.year_hijri)
   const at = (level: IssueLevel, code: string, message: string) =>
@@ -313,6 +426,557 @@ export function validateSeason(input: SeasonInput): Issue[] {
   for (const req of agreed) {
     if (req.kind === "note" && !req.acknowledged) {
       at("warning", "season.note_unacknowledged", `متطلب غير مؤكَّد: «${req.title}».`)
+    }
+  }
+
+  const quotaForFlights =
+    agreed
+      .map(parseRequirementParams)
+      .find((p): p is Extract<RequirementParamsValue, { kind: "quota" }> => p?.kind === "quota")
+      ?.total ?? season.quota_total
+
+  issues.push(
+    ...validateInventory({ packages, itineraries, hotels, contracts, flightBlocks, quota: quotaForFlights }),
+  )
+
+  // Flight coverage: enough confirmed seats to move the quota, each direction.
+  // Warnings only, and only once blocks exist — seat blocks firm up later than
+  // housing, and an empty list is "not started", not "short".
+  if (flightBlocks.length > 0) {
+    for (const [direction, code, label] of [
+      ["arrival", "inventory.arrival_seats", "الوصول"],
+      ["return", "inventory.return_seats", "المغادرة"],
+    ] as const) {
+      const seats = flightBlocks
+        .filter((f) => f.direction === direction && f.status === "confirmed")
+        .reduce((t, f) => t + (f.seats || 0), 0)
+      if (seats < quotaForFlights) {
+        issues.push({
+          level: "warning",
+          code,
+          scope: "inventory",
+          entityId: seasonId,
+          message: `مقاعد ${label} المؤكَّدة (${n(seats)}) أقل من الحصة (${n(quotaForFlights)}).`,
+        })
+      }
+    }
+  }
+
+  return issues
+}
+
+/* ── inventory: supply vs demand, per hotel per night ───────────── */
+
+/** A dated amount: `amount` beds (or pilgrims) for `nights` nights from `start`. */
+interface Span {
+  start: number // UTC ms of the first night
+  nights: number
+  amount: number
+}
+
+const coversNight = (s: Span, night: number) =>
+  night >= s.start && night < s.start + s.nights * DAY_MS
+
+const iso = (ms: number) => new Date(ms).toISOString().slice(0, 10)
+
+interface SweepRun {
+  kind: "gap" | "over"
+  from: number
+  to: number
+  /** Peak shortfall across the run (beds); 0 for gaps. */
+  short: number
+}
+
+/**
+ * Night-by-night comparison of demand against supply over the demanded range.
+ * Consecutive nights with the same finding merge into one run — a 4-night
+ * shortfall is one result at its peak, not four. Shared by the hotel-level
+ * aggregate check and the per-contract binding check.
+ */
+function sweepShortfalls(demand: Span[], supply: Span[]): SweepRun[] {
+  if (demand.length === 0) return []
+  const first = Math.min(...demand.map((s) => s.start))
+  const last = Math.max(...demand.map((s) => s.start + (s.nights - 1) * DAY_MS))
+  const runs: SweepRun[] = []
+  let run: { kind: "ok" | "gap" | "over"; from: number; to: number; short: number } | null = null
+
+  // The season spans weeks; the cap only guards against a typo'd year turning
+  // the sweep into a decade.
+  for (let night = first, i = 0; night <= last && i < 400; night += DAY_MS, i++) {
+    const need = demand.filter((s) => coversNight(s, night)).reduce((t, s) => t + s.amount, 0)
+    let kind: "ok" | "gap" | "over" = "ok"
+    let short = 0
+    if (need > 0) {
+      const covering = supply.filter((s) => coversNight(s, night))
+      if (covering.length === 0) kind = "gap"
+      else {
+        const have = covering.reduce((t, s) => t + s.amount, 0)
+        if (need > have) {
+          kind = "over"
+          short = need - have
+        }
+      }
+    }
+    if (run && run.kind === kind) {
+      run.to = night
+      run.short = Math.max(run.short, short)
+    } else {
+      if (run && run.kind !== "ok") runs.push(run as SweepRun)
+      run = { kind, from: night, to: night, short }
+    }
+  }
+  if (run && run.kind !== "ok") runs.push(run as SweepRun)
+  return runs
+}
+
+const rangeLabel = (r: SweepRun) =>
+  r.from === r.to ? `ليلة ${iso(r.from)}` : `الليالي من ${iso(r.from)} حتى ${iso(r.to)}`
+
+/**
+ * The check 1447 structurally could not run: its rooms carried no dates, so a
+ * room stayed "full" after its occupants left and stays were never compared to
+ * contract windows. Here legs have exact dates and contracts have windows, so
+ * supply and demand meet night by night.
+ *
+ * Only `signed` contracts are supply. A used hotel with no signed contract is a
+ * warning, not an error — hotels start as prospects and a bare list must not
+ * block itinerary drafting.
+ */
+function validateInventory(input: {
+  packages: Package[]
+  itineraries: Map<string, ItineraryWithLegs>
+  hotels: HotelRef[]
+  contracts: ContractWithLines[]
+  flightBlocks: FlightBlock[]
+  quota: number
+}): Issue[] {
+  const { packages, itineraries, hotels, contracts } = input
+  const issues: Issue[] = []
+  const hotelName = (id: string) => hotels.find((h) => h.id === id)?.name_ar || id
+
+  // Duplicate business keys — a warning, since the platform occasionally reissues.
+  const seen = new Map<string, number>()
+  for (const c of contracts) if (c.contract_no) seen.set(c.contract_no, (seen.get(c.contract_no) ?? 0) + 1)
+  for (const [no, count] of seen) {
+    if (count > 1) {
+      issues.push({
+        level: "warning",
+        code: "inventory.duplicate_contract_no",
+        scope: "inventory",
+        entityId: no,
+        message: `رقم العقد ${no} مكرر ${n(count)} مرات.`,
+      })
+    }
+  }
+
+  // demand: each leg loads its hotel with the owning package's capacity
+  const demandBy = new Map<string, Span[]>()
+  for (const pkg of packages) {
+    if (!(pkg.capacity > 0) || !pkg.itinerary) continue
+    const itin = itineraries.get(pkg.itinerary)
+    if (!itin) continue
+    for (const leg of itin.legs) {
+      const start = toUTCDate(leg.starts_on)
+      const nights = nightsBetween(leg.starts_on, leg.ends_on)
+      if (!start || !nights || nights <= 0) continue // bad dates already reported per leg
+      const spans = demandBy.get(leg.hotel) ?? []
+      spans.push({ start: start.getTime(), nights, amount: pkg.capacity })
+      demandBy.set(leg.hotel, spans)
+    }
+  }
+
+  // supply: signed contract windows
+  const supplyBy = new Map<string, Span[]>()
+  for (const c of contracts) {
+    if (c.status !== "signed" || !c.hotel) continue
+    const start = toUTCDate(c.starts_on)
+    const nights = nightsBetween(c.starts_on, c.ends_on)
+    if (!start || !nights || nights <= 0) continue // contract's own issues already reported
+    const spans = supplyBy.get(c.hotel) ?? []
+    spans.push({ start: start.getTime(), nights, amount: c.beds_total })
+    supplyBy.set(c.hotel, spans)
+  }
+
+  for (const [hotelId, demand] of demandBy) {
+    const supply = supplyBy.get(hotelId)
+    if (!supply) {
+      issues.push({
+        level: "warning",
+        code: "inventory.no_contract",
+        scope: "inventory",
+        entityId: hotelId,
+        message: `فندق «${hotelName(hotelId)}»: لا يوجد عقد سكن موقَّع لهذا الفندق.`,
+      })
+      continue
+    }
+
+    for (const r of sweepShortfalls(demand, supply)) {
+      if (r.kind === "gap") {
+        issues.push({
+          level: "warning",
+          code: "inventory.window_gap",
+          scope: "inventory",
+          entityId: hotelId,
+          message: `فندق «${hotelName(hotelId)}»: ${rangeLabel(r)} خارج نافذة أي عقد موقَّع.`,
+        })
+      } else {
+        issues.push({
+          level: "error",
+          code: "inventory.overbooked",
+          scope: "inventory",
+          entityId: hotelId,
+          // «سعات الباقات», not «الطلب»: the figure is planned capacity at
+          // full sell-out, not today's bookings.
+          message: `فندق «${hotelName(hotelId)}»: سعات الباقات تتجاوز الأسرّة المتعاقد عليها بمقدار ${n(r.short)} سرير (${rangeLabel(r)}).`,
+        })
+      }
+    }
+  }
+
+  issues.push(...validateBindings(input))
+
+  return issues
+}
+
+/* ── explicit bindings: package ↔ contract, package ↔ seat block ── */
+
+/**
+ * The 1447 system pinned beds to packages downstream, in the contract sheet.
+ * Here the author binds each package to the contracts and seat blocks that
+ * serve it, so the checks can be per-contract and per-block instead of only
+ * per-hotel aggregate. The aggregate sweep above stays as the safety net for
+ * whatever is not bound yet.
+ */
+function validateBindings(input: {
+  packages: Package[]
+  itineraries: Map<string, ItineraryWithLegs>
+  hotels: HotelRef[]
+  contracts: ContractWithLines[]
+  flightBlocks: FlightBlock[]
+  quota: number
+}): Issue[] {
+  const { packages, itineraries, hotels, contracts, flightBlocks, quota } = input
+  const issues: Issue[] = []
+  const hotelName = (id: string) => hotels.find((h) => h.id === id)?.name_ar || id
+  const contractById = new Map(contracts.map((c) => [c.id ?? c.contract_no, c]))
+  const at = (
+    level: IssueLevel,
+    code: string,
+    scope: Issue["scope"],
+    entityId: string,
+    message: string,
+  ) => issues.push({ level, code, scope, entityId, message })
+
+  /* housing contracts */
+
+  // Beds each bound package asks of each contract, per night. When several
+  // bound contracts on one hotel cover the same night, the demand SPLITS
+  // between them in proportion to their beds — charging the full demand to
+  // each would flag overlapping windows (Haram's raw 16–21 and 18–21 really
+  // overlap) as short when their combined beds suffice.
+  const nightLoad = new Map<string, Map<number, number>>() // contractId → night → beds
+  const nightTypeLoad = new Map<string, Map<number, number>>() // `${contractId}|${rt}`
+  // Hotels each package is bound to through its contracts.
+  const boundHotels = new Map<string, Set<string>>()
+
+  const contractBedsOf = (c: ContractWithLines) =>
+    c.lines.reduce((t, l) => t + (l.beds || 0), 0)
+  const typeBedsOf = (c: ContractWithLines, rt: string) =>
+    c.lines.filter((l) => l.room_type === rt).reduce((t, l) => t + (l.beds || 0), 0)
+  const bump = (m: Map<string, Map<number, number>>, key: string, night: number, amount: number) => {
+    const inner = m.get(key) ?? new Map<number, number>()
+    inner.set(night, (inner.get(night) ?? 0) + amount)
+    m.set(key, inner)
+  }
+
+  for (const pkg of packages) {
+    const pkgId = pkg.id ?? pkg.package_no
+    const itin = pkg.itinerary ? itineraries.get(pkg.itinerary) : undefined
+    const legHotels = new Set(itin?.legs.map((l) => l.hotel) ?? [])
+    const bound = new Set<string>()
+    const usableByHotel = new Map<string, ContractWithLines[]>()
+    boundHotels.set(pkgId, bound)
+
+    for (const cid of pkg.housing_contracts ?? []) {
+      const c = contractById.get(cid)
+      if (!c) {
+        // The store refuses removals while bound, so this only happens to imported data.
+        at("warning", "inventory.link_dangling", "package", pkgId, `باقة ${pkg.package_no}: مرتبطة بعقد سكن لم يعد موجودًا.`)
+        continue
+      }
+      if (!c.hotel || !legHotels.has(c.hotel)) {
+        at(
+          "warning",
+          "inventory.link_idle",
+          "package",
+          pkgId,
+          `باقة ${pkg.package_no}: مرتبطة بعقد ${c.contract_no || "بدون رقم"} على فندق «${hotelName(c.hotel ?? "")}» ولا إقامة لها فيه.`,
+        )
+        continue
+      }
+      if (c.status !== "signed") {
+        at(
+          "warning",
+          "inventory.link_unsigned",
+          "package",
+          pkgId,
+          `باقة ${pkg.package_no}: مرتبطة بعقد ${c.contract_no || "بدون رقم"} غير موقَّع.`,
+        )
+      }
+      bound.add(c.hotel)
+      const list = usableByHotel.get(c.hotel) ?? []
+      list.push(c)
+      usableByHotel.set(c.hotel, list)
+    }
+
+    if (!(pkg.capacity > 0) || !itin) continue
+    const mix = roomMixTotal(pkg) > 0 ? pkg.room_mix : null
+    for (const leg of itin.legs) {
+      const candidates = usableByHotel.get(leg.hotel)
+      if (!candidates?.length) continue
+      const start = toUTCDate(leg.starts_on)
+      const nights = nightsBetween(leg.starts_on, leg.ends_on)
+      if (!start || !nights || nights <= 0) continue
+      for (let i = 0, night = start.getTime(); i < nights && i < 400; i++, night += DAY_MS) {
+        const covering = candidates.filter((c) => {
+          const s = toUTCDate(c.starts_on)
+          const n = nightsBetween(c.starts_on, c.ends_on)
+          return s && n && n > 0 && coversNight({ start: s.getTime(), nights: n, amount: 0 }, night)
+        })
+        if (!covering.length) continue // the union gap check below owns this night
+        const totalBeds = covering.reduce((t, c) => t + contractBedsOf(c), 0)
+        for (const c of covering) {
+          const share = totalBeds > 0 ? contractBedsOf(c) / totalBeds : 1 / covering.length
+          bump(nightLoad, c.id ?? c.contract_no, night, pkg.capacity * share)
+        }
+        if (mix && covering.some((c) => c.city !== "shifting")) {
+          for (const rt of ["2", "3", "4"] as const) {
+            const people = Number(mix[rt]) || 0
+            if (people <= 0) continue
+            const eligible = covering.filter((c) => c.city !== "shifting")
+            const totalType = eligible.reduce((t, c) => t + typeBedsOf(c, rt), 0)
+            for (const c of eligible) {
+              const share = totalType > 0 ? typeBedsOf(c, rt) / totalType : 1 / eligible.length
+              bump(nightTypeLoad, `${c.id ?? c.contract_no}|${rt}`, night, people * share)
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // Merge consecutive short nights into one finding at its peak.
+  const overRuns = (nights: Map<number, number>, limit: number): SweepRun[] => {
+    const sorted = [...nights.entries()].sort(([a], [b]) => a - b)
+    const runs: SweepRun[] = []
+    let run: SweepRun | null = null
+    for (const [night, load] of sorted) {
+      const short = Math.round(load) - limit
+      if (short > 0 && run && night === run.to + DAY_MS) {
+        run.to = night
+        run.short = Math.max(run.short, short)
+      } else if (short > 0) {
+        if (run) runs.push(run)
+        run = { kind: "over", from: night, to: night, short }
+      } else if (run) {
+        runs.push(run)
+        run = null
+      }
+    }
+    if (run) runs.push(run)
+    return runs
+  }
+
+  // Each contract against the share of demand that actually falls on it.
+  // «سعات الباقات» in the messages, deliberately: the number is the planned
+  // capacity at full sell-out, not today's bookings — 1447 validated fine at
+  // its real 62% occupancy while these same gaps existed on paper.
+  for (const [cid, nights] of nightLoad) {
+    const c = contractById.get(cid)!
+    const label = `عقد ${c.contract_no || "بدون رقم"} — ${hotelName(c.hotel)}`
+    for (const r of overRuns(nights, contractBedsOf(c))) {
+      at(
+        "error",
+        "inventory.contract_overallocated",
+        "contract",
+        cid,
+        `${label}: سعات الباقات المرتبطة به تتجاوز أسرّته بمقدار ${n(r.short)} سرير (${rangeLabel(r)}).`,
+      )
+    }
+  }
+
+  // Same, one room type at a time: a contract can have beds to spare overall
+  // and still be short of quads — the 1447 supply is 80% quads, and the
+  // premium mixes want the scarce doubles and triples. Shifting contracts
+  // were exempted during accumulation: the 1447 shifting building was
+  // quad-only nuzul housing while its packages sold doubles and triples.
+  for (const [key, nights] of nightTypeLoad) {
+    const [cid, rt] = key.split("|")
+    const c = contractById.get(cid)!
+    for (const r of overRuns(nights, typeBedsOf(c, rt))) {
+      at(
+        "error",
+        "inventory.room_type_overallocated",
+        "contract",
+        cid,
+        `عقد ${c.contract_no || "بدون رقم"} — ${hotelName(c.hotel)}: الغرف ${ROOM_TYPE_LABEL[rt]} تنقص ${n(r.short)} سريرًا عن خطة توزيع الغرف عند اكتمال سعات الباقات المرتبطة (${rangeLabel(r)}).`,
+      )
+    }
+  }
+
+  // Per package × hotel: the union of its bound contracts' windows must cover
+  // the stay. Beds are irrelevant here (the checks above own that), so the
+  // union spans carry effectively infinite capacity to silence "over" runs.
+  for (const pkg of packages) {
+    const pkgId = pkg.id ?? pkg.package_no
+    const itin = pkg.itinerary ? itineraries.get(pkg.itinerary) : undefined
+    if (!itin) continue
+    const byHotel = new Map<string, Span[]>()
+    for (const cid of pkg.housing_contracts ?? []) {
+      const c = contractById.get(cid)
+      if (!c?.hotel) continue
+      const start = toUTCDate(c.starts_on)
+      const nights = nightsBetween(c.starts_on, c.ends_on)
+      if (!start || !nights || nights <= 0) continue
+      const spans = byHotel.get(c.hotel) ?? []
+      spans.push({ start: start.getTime(), nights, amount: Number.MAX_SAFE_INTEGER })
+      byHotel.set(c.hotel, spans)
+    }
+    for (const [hotelId, windows] of byHotel) {
+      const stay: Span[] = []
+      for (const leg of itin.legs) {
+        if (leg.hotel !== hotelId) continue
+        const start = toUTCDate(leg.starts_on)
+        const nights = nightsBetween(leg.starts_on, leg.ends_on)
+        if (!start || !nights || nights <= 0) continue
+        stay.push({ start: start.getTime(), nights, amount: 1 })
+      }
+      for (const r of sweepShortfalls(stay, windows)) {
+        if (r.kind !== "gap") continue
+        at(
+          "warning",
+          "inventory.link_window",
+          "package",
+          pkgId,
+          `باقة ${pkg.package_no}: ${rangeLabel(r)} في فندق «${hotelName(hotelId)}» خارج نوافذ العقود المرتبطة.`,
+        )
+      }
+    }
+  }
+
+  // Nudge: a stay at a hotel that has signed contracts, none of them bound.
+  const signedHotels = new Set(
+    contracts.filter((c) => c.status === "signed" && c.hotel).map((c) => c.hotel),
+  )
+  for (const pkg of packages) {
+    const pkgId = pkg.id ?? pkg.package_no
+    const itin = pkg.itinerary ? itineraries.get(pkg.itinerary) : undefined
+    if (!itin) continue
+    const bound = boundHotels.get(pkgId) ?? new Set()
+    const flagged = new Set<string>()
+    for (const leg of itin.legs) {
+      if (!signedHotels.has(leg.hotel) || bound.has(leg.hotel) || flagged.has(leg.hotel)) continue
+      flagged.add(leg.hotel)
+      at(
+        "warning",
+        "inventory.no_contract_link",
+        "package",
+        pkgId,
+        `باقة ${pkg.package_no}: لا ترتبط بأي عقد سكن لفندق «${hotelName(leg.hotel)}» رغم وجود عقود موقَّعة عليه.`,
+      )
+    }
+    // Once beds are bound, the mix decides *which* beds — nudge for it.
+    if (pkg.capacity > 0 && (boundHotels.get(pkgId)?.size ?? 0) > 0 && roomMixTotal(pkg) === 0) {
+      at(
+        "warning",
+        "inventory.no_room_mix",
+        "package",
+        pkgId,
+        `باقة ${pkg.package_no}: مرتبطة بعقود سكن دون توزيع الحجاج على أنواع الغرف.`,
+      )
+    }
+  }
+
+  /* flight seat blocks */
+
+  const blockById = new Map(flightBlocks.map((f) => [f.id ?? "", f]))
+  const blockLabel = (f: FlightBlock) =>
+    `كتلة ${f.direction === "arrival" ? "الوصول" : "المغادرة"} ${[f.airline_ar, f.flight_no].filter(Boolean).join(" ") || f.pnr || ""}`.trim()
+
+  // Allocations carry seat counts, so the block check is exact arithmetic:
+  // Σ allocated seats per block against its seats. No splitting heuristics —
+  // a 500-pilgrim package allocates, say, 150+180+170 across three flights.
+  const blockLoad = new Map<string, number>()
+  const allocatedByDirection = new Map<string, { arrival: number; return: number; linked: Set<"arrival" | "return"> }>()
+  for (const pkg of packages) {
+    const pkgId = pkg.id ?? pkg.package_no
+    const tally = { arrival: 0, return: 0, linked: new Set<"arrival" | "return">() }
+    allocatedByDirection.set(pkgId, tally)
+    for (const alloc of pkg.flight_allocations ?? []) {
+      const f = blockById.get(alloc.block)
+      if (!f) {
+        at("warning", "inventory.flight_link_dangling", "package", pkgId, `باقة ${pkg.package_no}: مرتبطة بكتلة مقاعد لم تعد موجودة.`)
+        continue
+      }
+      if (f.status === "cancelled") {
+        at("warning", "inventory.link_cancelled", "package", pkgId, `باقة ${pkg.package_no}: مرتبطة بكتلة مقاعد ملغاة (${blockLabel(f)}).`)
+        continue
+      }
+      tally.linked.add(f.direction)
+      tally[f.direction] += alloc.seats || 0
+      blockLoad.set(alloc.block, (blockLoad.get(alloc.block) ?? 0) + (alloc.seats || 0))
+    }
+  }
+  for (const [fid, load] of blockLoad) {
+    const f = blockById.get(fid)!
+    if (load > (f.seats || 0)) {
+      at(
+        "error",
+        "inventory.flight_overallocated",
+        "inventory",
+        fid,
+        `${blockLabel(f)}: المقاعد المخصصة للباقات (${n(load)}) تتجاوز مقاعدها (${n(f.seats || 0)}).`,
+      )
+    }
+  }
+
+  // Per package per direction. Coverage nudges are gated on the fleet being
+  // able to carry the quota at all — while it can't, the missing links are one
+  // season-level problem (the seats warnings above), not a nag on every
+  // package. Over-linking (more seats reserved than pilgrims) is waste and is
+  // flagged regardless of the fleet.
+  for (const direction of ["arrival", "return"] as const) {
+    const fleet = flightBlocks
+      .filter((f) => f.direction === direction && f.status !== "cancelled")
+      .reduce((t, f) => t + (f.seats || 0), 0)
+    const fleetCovers = fleet > 0 && fleet >= quota
+    const label = direction === "arrival" ? "الوصول" : "المغادرة"
+    for (const pkg of packages) {
+      if (!(pkg.capacity > 0)) continue
+      const pkgId = pkg.id ?? pkg.package_no
+      const tally = allocatedByDirection.get(pkgId)!
+      const allocated = tally[direction]
+      if (allocated > pkg.capacity) {
+        at(
+          "warning",
+          "inventory.flight_overlinked",
+          "package",
+          pkgId,
+          `باقة ${pkg.package_no}: مقاعد ${label} المخصصة (${n(allocated)}) أكثر من سعتها (${n(pkg.capacity)}).`,
+        )
+      }
+      if (!fleetCovers) continue
+      if (!tally.linked.has(direction)) {
+        at("warning", "inventory.no_flight_link", "package", pkgId, `باقة ${pkg.package_no}: لا ترتبط بأي كتلة مقاعد ${label}.`)
+      } else if (allocated < pkg.capacity) {
+        at(
+          "warning",
+          "inventory.flight_shortfall",
+          "package",
+          pkgId,
+          `باقة ${pkg.package_no}: مقاعد ${label} المخصصة (${n(allocated)}) أقل من سعتها (${n(pkg.capacity)}).`,
+        )
+      }
     }
   }
 

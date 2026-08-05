@@ -1,6 +1,17 @@
 import { proxy } from "valtio"
-import type { CityValue, LegRoleValue, TierValue } from "@/lib/schemas"
+import type {
+  CityValue,
+  ContractCityValue,
+  ContractStatusValue,
+  FlightContractTypeValue,
+  FlightDirectionValue,
+  FlightBlockStatusValue,
+  LegRoleValue,
+  RoomTypeValue,
+  TierValue,
+} from "@/lib/schemas"
 import { validateSeason, nightsBetween, type Issue } from "@/lib/validation"
+import { SEED_CONTRACTS, SEED_FLIGHT_BLOCKS, SEED_PACKAGES } from "./seed-1447"
 
 /**
  * The draft the wizard edits, held in memory. PocketBase persistence comes
@@ -38,6 +49,84 @@ export interface DraftPackage {
   capacity: number
   initial_price_sar: number
   legs: DraftLeg[]
+  /** Housing contracts serving this package — 1447's `contract_packages`, chosen at authoring time. */
+  contractIds: string[]
+  /**
+   * Seat blocks carrying this package, with the seats reserved on each — a
+   * bare reference could not express a 500-pilgrim package spread over
+   * ~150-seat flights, which is how 1447 actually flew.
+   */
+  flightAllocations: DraftFlightAllocation[]
+  /**
+   * Pilgrims by room type. One mix for the whole trip, not per leg: 92.6% of
+   * the 2,407 real 1447 bookings kept the same room type in both cities (only
+   * 13 mixed types within one city). All zeros = not planned yet, and the
+   * room-type supply checks stay quiet.
+   */
+  room_mix: Record<RoomTypeValue, number>
+  /**
+   * Nusuk lifecycle. Absent from the draft for the wizard's first year, which
+   * meant `validatePackage`'s content gate — built specifically for 1447's
+   * seven priced-but-undescribed packages — could never fire. See
+   * docs/packages-ux-bpr.md §4.
+   */
+  publish_status: "draft" | "submitted" | "approved" | "rejected"
+  sale_status: "unavailable" | "available"
+  /** Content readiness — the forward contract of a future /content editor. */
+  content_ready_ar: boolean
+  content_ready_en: boolean
+  hero_approved: boolean
+}
+
+/**
+ * A block of beds at one hotel for one date window — NOT "the deal with the
+ * hotel": 1447 hotels held up to seven of these, split by dates. Beds are
+ * derived from the room-type lines, never entered as one number (the 1447
+ * Excel total held rooms, not beds). See docs/inventory-concept.md.
+ */
+export interface DraftRoomLine {
+  id: string
+  room_type: RoomTypeValue
+  rooms: number
+  /** Per-bed-per-night, null while unknown — no 1447 contract carried a price. */
+  rate_sar: number | null
+}
+
+export interface DraftContract {
+  id: string
+  hotelId: string
+  contract_no: string
+  city: ContractCityValue
+  starts_on: string
+  ends_on: string
+  /** Only `signed` counts as supply in the availability checks. */
+  status: ContractStatusValue
+  lines: DraftRoomLine[]
+}
+
+/**
+ * A purchased block of flight seats — airline, route, PNR, seats. The shape of
+ * the free-text «اسم العقد» column, which was the only place 1447 kept seat
+ * counts. Not referenced by packages; coverage is checked against the quota.
+ */
+export interface DraftFlightAllocation {
+  blockId: string
+  seats: number
+}
+
+export interface DraftFlightBlock {
+  id: string
+  direction: FlightDirectionValue
+  airline_ar: string
+  airline_en: string
+  flight_no: string
+  flies_on: string
+  from_city: string
+  to_city: string
+  contract_type: FlightContractTypeValue
+  pnr: string
+  seats: number
+  status: FlightBlockStatusValue
 }
 
 /**
@@ -58,10 +147,25 @@ export interface DraftRequirement {
 export interface DraftState {
   season: { year_hijri: number; year_gregorian: number; quota_total: number }
   hotels: DraftHotel[]
+  contracts: DraftContract[]
+  flightBlocks: DraftFlightBlock[]
   requirements: DraftRequirement[]
   packages: DraftPackage[]
   /** Node id currently inspected — `"root"`, a package id, or a leg id. */
   selectedId: string
+  /**
+   * Prices render masked («••••») until toggled — the wizard is routinely on
+   * screen in meetings with hotels and providers, and the price sheet is the
+   * one thing that must not be in the room. One global flag: revealing any
+   * price reveals them all, deliberately, so a presenter knows the state.
+   */
+  showPrices: boolean
+  /**
+   * The one package whose legs render on the canvas — accordion, not a set:
+   * 39 seeded packages with ~90 legs at fit-view zoom are unreadable specks,
+   * so the tree shows package cards only and opens one branch at a time.
+   */
+  expandedPackageId: string | null
   /** Nodes the user has dragged; re-layout leaves these alone. */
   pinned: Record<string, { x: number; y: number }>
   /**
@@ -111,9 +215,17 @@ const SEED_REQUIREMENTS: DraftRequirement[] = [
 export const state = proxy<DraftState>({
   season: { year_hijri: 1448, year_gregorian: 2027, quota_total: 7000 },
   hotels: SEED_HOTELS,
+  // The real 1447 season, rebased onto the 1448 dates — see seed-1447.ts for
+  // exactly what was adjusted. Starting from last season's packages and signed
+  // supply is how this season actually gets planned: clone, adjust, delete
+  // what won't repeat.
+  contracts: SEED_CONTRACTS,
+  flightBlocks: SEED_FLIGHT_BLOCKS,
   requirements: SEED_REQUIREMENTS,
-  packages: [],
+  packages: SEED_PACKAGES,
   selectedId: "root",
+  showPrices: false,
+  expandedPackageId: null,
   pinned: {},
   lastAdded: null,
 })
@@ -150,6 +262,39 @@ export function orderedLegs(pkg: DraftPackage): DraftLeg[] {
   return [...pkg.legs].sort((a, b) => a.starts_on.localeCompare(b.starts_on))
 }
 
+export const lineBeds = (l: DraftRoomLine) => l.rooms * Number(l.room_type)
+
+export const contractBeds = (c: DraftContract) => c.lines.reduce((t, l) => t + lineBeds(l), 0)
+
+/**
+ * The most beds any single night has under signed contract — the honest
+ * supply headline. Summing whole contracts would double-count a hotel's
+ * time-sliced blocks, which never all exist on the same night.
+ */
+export function peakSignedBeds(s: DraftState = state): number {
+  const deltas = new Map<string, number>()
+  for (const c of s.contracts) {
+    if (c.status !== "signed") continue
+    const beds = contractBeds(c)
+    if (beds <= 0 || (nightsBetween(c.starts_on, c.ends_on) ?? 0) <= 0) continue
+    deltas.set(c.starts_on, (deltas.get(c.starts_on) ?? 0) + beds)
+    deltas.set(c.ends_on, (deltas.get(c.ends_on) ?? 0) - beds)
+  }
+  let peak = 0
+  let level = 0
+  for (const [, d] of [...deltas.entries()].sort(([a], [b]) => a.localeCompare(b))) {
+    level += d
+    peak = Math.max(peak, level)
+  }
+  return peak
+}
+
+export function confirmedSeats(direction: DraftFlightBlock["direction"], s: DraftState = state): number {
+  return s.flightBlocks
+    .filter((f) => f.direction === direction && f.status === "confirmed")
+    .reduce((t, f) => t + (f.seats || 0), 0)
+}
+
 /* ── actions ────────────────────────────────────────────────────── */
 
 /** Next unused two-digit package number. */
@@ -160,7 +305,7 @@ function nextPackageNo(): string {
   return String(n).padStart(2, "0")
 }
 
-export function addPackage(): string {
+export function addPackage(tier: TierValue = "standard"): string {
   const no = nextPackageNo()
   const id = nextId("pkg")
   // Give the new package whatever quota is still unallocated, so the root
@@ -170,13 +315,22 @@ export function addPackage(): string {
     id,
     package_no: no,
     name_en: `ITHRAA ALKHAIR ${no}`,
-    tier: "standard",
+    tier,
     variant_suffix: "",
     capacity: left,
     initial_price_sar: 0,
     legs: [],
+    contractIds: [],
+    flightAllocations: [],
+    room_mix: { "2": 0, "3": 0, "4": 0 },
+    publish_status: "draft",
+    sale_status: "unavailable",
+    content_ready_ar: false,
+    content_ready_en: false,
+    hero_approved: false,
   })
   state.selectedId = id
+  state.expandedPackageId = id
   state.lastAdded = { id, parentId: "root" }
   return id
 }
@@ -203,8 +357,22 @@ export function duplicatePackage(id: string): string | null {
     capacity: 0,
     initial_price_sar: src.initial_price_sar,
     legs: src.legs.map((l) => ({ ...l, id: nextId("leg") })),
+    // Same chain → same contracts. Capacity starts at 0, so the copy cannot
+    // overallocate a contract by merely existing — and the room mix and seat
+    // allocations reset with it, since both are sized to the capacity.
+    contractIds: [...src.contractIds],
+    flightAllocations: [],
+    room_mix: { "2": 0, "3": 0, "4": 0 },
+    // A variant starts its own lifecycle: it needs its own content and its
+    // own Nusuk approval regardless of what the original earned.
+    publish_status: "draft",
+    sale_status: "unavailable",
+    content_ready_ar: false,
+    content_ready_en: false,
+    hero_approved: false,
   })
   state.selectedId = newId
+  state.expandedPackageId = newId
   state.lastAdded = { id: newId, parentId: "root" }
   return newId
 }
@@ -216,6 +384,38 @@ export function removePackage(id: string) {
   delete state.pinned[id]
   state.packages.splice(i, 1)
   if (state.selectedId === id) state.selectedId = "root"
+  if (state.expandedPackageId === id) state.expandedPackageId = null
+}
+
+/* ── season-level balance & pricing actions (BPR) ───────────────── */
+
+/** Assign the season's unallocated remainder to this package. */
+export function takeRemaining(packageId: string) {
+  const pkg = state.packages.find((p) => p.id === packageId)
+  if (!pkg) return
+  pkg.capacity += Math.max(0, remaining())
+}
+
+/**
+ * Price the tier, not each package: 1447's SA variants were priced identical
+ * to the fils, and per-category averages show one decision per tier.
+ */
+export function applyTierPrice(tier: TierValue, sar: number) {
+  for (const p of state.packages) if (p.tier === tier) p.initial_price_sar = sar
+}
+
+/**
+ * Copy another package's stay chain onto this one — the 1447 composition
+ * reality (seven Premium packages shared one identical chain) as a first-class
+ * action instead of only whole-package duplication.
+ */
+export function cloneChainFrom(targetId: string, sourceId: string) {
+  const target = state.packages.find((p) => p.id === targetId)
+  const source = state.packages.find((p) => p.id === sourceId)
+  if (!target || !source || target === source) return
+  for (const leg of target.legs) delete state.pinned[leg.id]
+  target.legs = source.legs.map((l) => ({ ...l, id: nextId("leg") }))
+  state.expandedPackageId = targetId
 }
 
 /** Roles a package can still take — one `first`, one `second`, one optional `transitional`. */
@@ -246,6 +446,8 @@ export function addLeg(packageId: string): string | null {
   const id = nextId("leg")
   pkg.legs.push({ id, role, hotelId: hotel.id, starts_on: start, ends_on: end })
   state.selectedId = id
+  // The new leg must be visible — open this package's branch.
+  state.expandedPackageId = packageId
   state.lastAdded = { id, parentId: packageId }
   return id
 }
@@ -296,6 +498,15 @@ export function retimeLeg(legId: string, starts_on: string, ends_on: string) {
       chain[i].ends_on = addDays(chain[i].ends_on, delta)
     }
   }
+}
+
+export function togglePrices() {
+  state.showPrices = !state.showPrices
+}
+
+/** Accordion toggle: open this package's branch, closing whichever was open. */
+export function toggleExpandedPackage(id: string) {
+  state.expandedPackageId = state.expandedPackageId === id ? null : id
 }
 
 export function pinNode(id: string, x: number, y: number) {
@@ -382,8 +593,11 @@ export function issuesFor(s: DraftState): Issue[] {
       transport: "bus" as const,
       capacity: p.capacity,
       initial_price_sar: p.initial_price_sar,
-      publish_status: "draft" as const,
-      sale_status: "unavailable" as const,
+      publish_status: p.publish_status,
+      sale_status: p.sale_status,
+      housing_contracts: [...p.contractIds],
+      flight_allocations: p.flightAllocations.map((a) => ({ block: a.blockId, seats: a.seats })),
+      room_mix: { ...p.room_mix },
     })),
     itineraries,
     requirements: s.requirements.map((r) => ({
@@ -396,7 +610,55 @@ export function issuesFor(s: DraftState): Issue[] {
       acknowledged: r.acknowledged,
       params: r.params,
     })),
-    readiness: new Map(),
+    // Content readiness now feeds the gate built for 1447's seven
+    // priced-but-undescribed packages — it received an empty map (gate
+    // permanently disarmed) until the /packages BPR added these flags.
+    readiness: new Map(
+      s.packages.map((p) => [
+        p.id,
+        {
+          hasArabicBody: p.content_ready_ar,
+          hasEnglishBody: p.content_ready_en,
+          approvedHeroCount: p.hero_approved ? 1 : 0,
+        },
+      ]),
+    ),
+    hotels: s.hotels.map((h) => ({ id: h.id, name_ar: h.name_ar, city: h.city })),
+    // Derived fields (beds, beds_total) are computed here, not stored — so the
+    // mismatch rules exist for imported data, and the draft can't trip them.
+    contracts: s.contracts.map((c) => ({
+      id: c.id,
+      season: "draft",
+      hotel: c.hotelId,
+      contract_no: c.contract_no,
+      city: c.city,
+      starts_on: c.starts_on,
+      ends_on: c.ends_on,
+      beds_total: contractBeds(c),
+      status: c.status,
+      lines: c.lines.map((l) => ({
+        id: l.id,
+        contract: c.id,
+        room_type: l.room_type,
+        rooms: l.rooms,
+        beds: lineBeds(l),
+        rate_sar: l.rate_sar,
+      })),
+    })),
+    flightBlocks: s.flightBlocks.map((f) => ({
+      id: f.id,
+      season: "draft",
+      direction: f.direction,
+      airline_ar: f.airline_ar || null,
+      flight_no: f.flight_no || null,
+      flies_on: f.flies_on || null,
+      from_city: f.from_city || null,
+      to_city: f.to_city || null,
+      contract_type: f.contract_type,
+      pnr: f.pnr || null,
+      seats: f.seats,
+      status: f.status,
+    })),
   })
 }
 
@@ -423,27 +685,125 @@ export function removeRequirement(id: string) {
 
 /* ── hotels ─────────────────────────────────────────────────────── */
 
-export function addHotel(city: CityValue = "makkah"): string {
+/** The add wizard collects the whole shape, so no empty-row state exists. */
+export function addHotel(data: Omit<DraftHotel, "id">): string {
   const id = nextId("h")
-  state.hotels.push({
-    id,
-    name_ar: "",
-    name_en: "",
-    city,
-    star_class: "5",
-    grade: "أ",
-  })
+  state.hotels.push({ id, ...data })
   return id
 }
 
-/** Refuses to remove a hotel that a stay leg still points at. */
-export function removeHotel(id: string): { ok: boolean; usedBy: number } {
+/** Refuses to remove a hotel that a stay leg or a housing contract still points at. */
+export function removeHotel(id: string): { ok: boolean; usedBy: number; contractCount: number } {
   const usedBy = state.packages.reduce(
     (t, p) => t + p.legs.filter((l) => l.hotelId === id).length,
     0,
   )
-  if (usedBy > 0) return { ok: false, usedBy }
+  const contractCount = state.contracts.filter((c) => c.hotelId === id).length
+  if (usedBy > 0 || contractCount > 0) return { ok: false, usedBy, contractCount }
   const i = state.hotels.findIndex((h) => h.id === id)
   if (i >= 0) state.hotels.splice(i, 1)
+  return { ok: true, usedBy: 0, contractCount: 0 }
+}
+
+/* ── housing contracts & flight blocks ──────────────────────────── */
+
+export function addContract(hotelId?: string): string {
+  const hotel = (hotelId && hotelById(hotelId)) || state.hotels[0]
+  const id = nextId("hc")
+  const start = `${state.season.year_gregorian}-05-12`
+  state.contracts.push({
+    id,
+    hotelId: hotel?.id ?? "",
+    contract_no: "",
+    city: hotel?.city ?? "makkah",
+    starts_on: start,
+    ends_on: addDays(start, 5),
+    // Supply must be opted into: the nightly checks only count `signed`, so a
+    // half-typed contract can never manufacture beds.
+    status: "proposed",
+    lines: [{ id: nextId("crl"), room_type: "4", rooms: 0, rate_sar: null }],
+  })
+  return id
+}
+
+/** Refuses to remove a contract that a package is still bound to. */
+export function removeContract(id: string): { ok: boolean; usedBy: number } {
+  const usedBy = state.packages.filter((p) => p.contractIds.includes(id)).length
+  if (usedBy > 0) return { ok: false, usedBy }
+  const i = state.contracts.findIndex((c) => c.id === id)
+  if (i >= 0) state.contracts.splice(i, 1)
+  return { ok: true, usedBy: 0 }
+}
+
+/** Bind / unbind a package to a housing contract. */
+export function toggleContractLink(packageId: string, contractId: string) {
+  const pkg = state.packages.find((p) => p.id === packageId)
+  if (!pkg) return
+  const i = pkg.contractIds.indexOf(contractId)
+  if (i >= 0) pkg.contractIds.splice(i, 1)
+  else pkg.contractIds.push(contractId)
+}
+
+/**
+ * Bind / unbind a package to a seat block. Binding defaults the reserved
+ * seats to what the package still needs in that direction, capped by the
+ * block — the common case is "fill the rest of my pilgrims onto this flight".
+ */
+export function toggleFlightAllocation(packageId: string, blockId: string) {
+  const pkg = state.packages.find((p) => p.id === packageId)
+  if (!pkg) return
+  const i = pkg.flightAllocations.findIndex((a) => a.blockId === blockId)
+  if (i >= 0) {
+    pkg.flightAllocations.splice(i, 1)
+    return
+  }
+  const block = state.flightBlocks.find((f) => f.id === blockId)
+  const already = pkg.flightAllocations.reduce((t, a) => {
+    const b = state.flightBlocks.find((f) => f.id === a.blockId)
+    return b?.direction === block?.direction ? t + a.seats : t
+  }, 0)
+  const remaining = Math.max(0, (pkg.capacity || 0) - already)
+  const seats = Math.min(block?.seats ?? 0, remaining > 0 ? remaining : block?.seats ?? 0)
+  pkg.flightAllocations.push({ blockId, seats })
+}
+
+export function setFlightAllocationSeats(packageId: string, blockId: string, seats: number) {
+  const pkg = state.packages.find((p) => p.id === packageId)
+  const alloc = pkg?.flightAllocations.find((a) => a.blockId === blockId)
+  if (alloc) alloc.seats = Math.max(0, seats)
+}
+
+export function addRoomLine(contractId: string): string | null {
+  const c = state.contracts.find((x) => x.id === contractId)
+  if (!c) return null
+  // First room type not already listed, largest first — the 1447 sheets were
+  // overwhelmingly quads.
+  const taken = new Set(c.lines.map((l) => l.room_type))
+  const room_type = (["4", "3", "2"] as const).find((t) => !taken.has(t)) ?? "4"
+  const id = nextId("crl")
+  c.lines.push({ id, room_type, rooms: 0, rate_sar: null })
+  return id
+}
+
+export function removeRoomLine(contractId: string, lineId: string) {
+  const c = state.contracts.find((x) => x.id === contractId)
+  if (!c) return
+  const i = c.lines.findIndex((l) => l.id === lineId)
+  if (i >= 0) c.lines.splice(i, 1)
+}
+
+/** The add wizard collects the whole shape, so no empty-row state exists. */
+export function addFlightBlock(data: Omit<DraftFlightBlock, "id">): string {
+  const id = nextId("fb")
+  state.flightBlocks.push({ id, ...data })
+  return id
+}
+
+/** Refuses to remove a seat block that a package is still bound to. */
+export function removeFlightBlock(id: string): { ok: boolean; usedBy: number } {
+  const usedBy = state.packages.filter((p) => p.flightAllocations.some((a) => a.blockId === id)).length
+  if (usedBy > 0) return { ok: false, usedBy }
+  const i = state.flightBlocks.findIndex((f) => f.id === id)
+  if (i >= 0) state.flightBlocks.splice(i, 1)
   return { ok: true, usedBy: 0 }
 }

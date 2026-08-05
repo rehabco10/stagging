@@ -20,7 +20,9 @@ import {
   computeLayout,
   reconcileNodes,
   structureKeyOf,
+  tierNodeId,
   worldExtent,
+  TIER_ORDER,
   type LayoutSizes,
   type LayoutTree,
 } from "./layout"
@@ -31,11 +33,14 @@ import {
   PACKAGE_W,
   QUOTA_H,
   QUOTA_W,
+  TIER_NODE_H,
+  TIER_NODE_W,
   TIER_TINT,
   nodeTypes,
   type LegData,
   type PackageData,
   type QuotaData,
+  type TierData,
   type Tint,
 } from "./nodes"
 import { CanvasToolbar } from "./CanvasToolbar"
@@ -53,6 +58,7 @@ import {
   packageNights,
   pinNode,
   state,
+  toggleExpandedPackage,
   unpinAll,
   unpinNode,
 } from "@/store/season"
@@ -68,12 +74,25 @@ const SIZES: LayoutSizes = {
   root: { w: QUOTA_W, h: QUOTA_H },
   pkg: { w: PACKAGE_W, h: PACKAGE_H },
   leg: { w: LEG_W, h: LEG_H },
+  tier: { w: TIER_NODE_W, h: TIER_NODE_H },
 }
 
 const boxOf = (id: string) =>
-  id === "root" ? SIZES.root : id.startsWith("leg_") ? SIZES.leg : SIZES.pkg
+  id === "root"
+    ? SIZES.root
+    : id.startsWith("tier_")
+      ? SIZES.tier!
+      : id.startsWith("leg_")
+        ? SIZES.leg
+        : SIZES.pkg
 
-type AnyData = QuotaData | PackageData | LegData
+const TIER_AR: Record<string, string> = {
+  luxury: "فاخرة",
+  premium: "مميزة",
+  standard: "أساسية",
+}
+
+type AnyData = QuotaData | TierData | PackageData | LegData
 
 interface Built {
   nodes: Node<AnyData>[]
@@ -90,6 +109,7 @@ interface Props {
 function PackageGraphInner({ onNodeActivated }: Props) {
   const snap = useSnapshot(state)
   const flow = useReactFlow()
+  const wrapperRef = useRef<HTMLDivElement>(null)
   const dragStart = useRef<{ x: number; y: number } | null>(null)
   // Overlays only earn their space on a tall enough canvas.
   const roomy = useMediaQuery(ROOMY_CANVAS_QUERY)
@@ -125,14 +145,19 @@ function PackageGraphInner({ onNodeActivated }: Props) {
    */
   const tree: LayoutTree = useMemo(
     () => ({
+      // Accordion: only the expanded package contributes its legs to the
+      // layout — 39 packages × ~90 legs at once was an unreadable smear, and
+      // dagre spread it wider than the pan extent could make comfortable.
       packages: state.packages.map((p) => ({
         id: p.id,
-        legIds: orderedLegs(p).map((l) => l.id),
+        tier: p.tier,
+        legIds:
+          p.id === state.expandedPackageId ? orderedLegs(p).map((l) => l.id) : [],
       })),
       pinned: { ...state.pinned },
     }),
     // snap is the reactive trigger; we read the live proxy for the values.
-    [snap.packages, snap.pinned],
+    [snap.packages, snap.pinned, snap.expandedPackageId],
   )
 
   const structureKey = useMemo(() => structureKeyOf(tree), [tree])
@@ -170,6 +195,42 @@ function PackageGraphInner({ onNodeActivated }: Props) {
       } satisfies QuotaData,
     })
 
+    // Pseudo tier nodes: quota → tier → its packages. Derived, never stored.
+    for (const tier of TIER_ORDER) {
+      const members = snap.packages.filter((p) => p.tier === tier)
+      if (!members.length) continue
+      const id = tierNodeId(tier)
+      const capacity = members.reduce((t, p) => t + (p.capacity || 0), 0)
+      nodes.push({
+        id,
+        type: "tier",
+        position: at(id),
+        width: TIER_NODE_W,
+        height: TIER_NODE_H,
+        draggable: true,
+        selectable: false,
+        className: snap.pinned[id] ? "is-pinned" : undefined,
+        data: {
+          tier: tier as PackageData["pkg"]["tier"],
+          label: TIER_AR[tier] ?? tier,
+          count: members.length,
+          capacity,
+          pct: totalAllocated > 0 ? (capacity / totalAllocated) * 100 : 0,
+          onAdd: () => addPackage(tier as PackageData["pkg"]["tier"]),
+        } satisfies TierData,
+      })
+      edges.push({
+        id: `root->${id}`,
+        source: "root",
+        target: id,
+        type: "smoothstep",
+        style: {
+          stroke: `color-mix(in srgb, ${tintVar(TIER_TINT[tier as keyof typeof TIER_TINT])} 60%, transparent)`,
+          strokeWidth: 2,
+        },
+      })
+    }
+
     for (const pkg of snap.packages) {
       const live = state.packages.find((p) => p.id === pkg.id)!
       const tint = TIER_TINT[pkg.tier]
@@ -193,17 +254,20 @@ function PackageGraphInner({ onNodeActivated }: Props) {
           pinned: Boolean(snap.pinned[pkg.id]),
           invalid: errorIds.has(pkg.id),
           errorCount: errorCounts.get(pkg.id) ?? 0,
+          expanded: snap.expandedPackageId === pkg.id,
+          onToggle: () => toggleExpandedPackage(pkg.id),
           onAdd: () => addLeg(pkg.id),
         } satisfies PackageData,
       })
       edges.push({
-        id: `root->${pkg.id}`,
-        source: "root",
+        id: `${tierNodeId(pkg.tier)}->${pkg.id}`,
+        source: tierNodeId(pkg.tier),
         target: pkg.id,
         type: "smoothstep",
-        style: { stroke: `color-mix(in srgb, ${tintVar("teal")} 55%, transparent)`, strokeWidth: 1.75 },
+        style: { stroke: `color-mix(in srgb, ${tintVar(tint)} 55%, transparent)`, strokeWidth: 1.75 },
       })
 
+      if (snap.expandedPackageId !== pkg.id) continue
       orderedLegs(live).forEach((leg, i) => {
         nodes.push({
           id: leg.id,
@@ -263,34 +327,81 @@ function PackageGraphInner({ onNodeActivated }: Props) {
 
   /* ── refit only when the shape changes, never on hover ───────── */
 
-  const shape = `${snap.packages.length}:${snap.packages.map((p) => p.legs.length).join(",")}`
+  /**
+   * Focus is decided and executed in two steps. Deciding happens when the
+   * structure mutates; executing must wait until the target node is actually
+   * IN the `nodes` state React Flow renders — fitting inside a lone rAF fired
+   * before the store had ingested a freshly added package, so fitView resolved
+   * empty bounds and parked the viewport over blank canvas.
+   *
+   * One focus rule: frame the open branch (adding a package or a leg both
+   * expand their package). Collapse leaves the viewport where the user is.
+   */
+  const shape = `${snap.packages.length}:${snap.packages.map((p) => p.legs.length).join(",")}:${snap.expandedPackageId ?? ""}`
   const lastShape = useRef<string | null>(null)
+  const pendingFocus = useRef<"all" | string | null>(null)
   useEffect(() => {
     if (lastShape.current === shape) return
     const isFirstPass = lastShape.current === null
     lastShape.current = shape
+    pendingFocus.current = isFirstPass ? "all" : state.expandedPackageId
+    clearLastAdded()
+  }, [shape])
 
-    const added = state.lastAdded
-    const raf = requestAnimationFrame(() => {
-      // Framing just the new branch beats re-fitting everything — but only
-      // when there is room to spare. On a short canvas it left the rest of
-      // the tree below the fold, so fall back to fitting everything there.
-      if (added && !isFirstPass && roomy) {
-        flow.fitView({
-          nodes: [{ id: added.parentId }, { id: added.id }],
-          padding: 0.45,
-          duration: 420,
-          minZoom: 0.35,
-          maxZoom: 1.1,
-        })
-        clearLastAdded()
-        return
-      }
-      flow.fitView({ padding: 0.18, duration: 420, minZoom: 0.2, maxZoom: 1 })
-      if (added) clearLastAdded()
-    })
-    return () => cancelAnimationFrame(raf)
-  }, [shape, flow, roomy])
+  useEffect(() => {
+    const target = pendingFocus.current
+    if (!target) return
+    if (target !== "all") {
+      const legIds = state.packages.find((p) => p.id === target)?.legs.map((l) => l.id) ?? []
+      const present = new Set(nodes.map((n) => n.id))
+      if (![target, ...legIds].every((id) => present.has(id))) return // not committed yet
+      // We own the layout, so the branch rect is computed here rather than
+      // asked of React Flow — fitView({nodes:[{id}]}) silently fell back to
+      // fitting everything, which zoomed the grid out on every add.
+      const boxes = [target, ...legIds]
+        .map((id) => ({ pos: layout.get(id), box: boxOf(id) }))
+        .filter((b): b is { pos: { x: number; y: number }; box: { w: number; h: number } } =>
+          Boolean(b.pos),
+        )
+      if (!boxes.length) return
+      pendingFocus.current = null
+      const minX = Math.min(...boxes.map((b) => b.pos.x))
+      const minY = Math.min(...boxes.map((b) => b.pos.y))
+      const maxX = Math.max(...boxes.map((b) => b.pos.x + b.box.w))
+      const maxY = Math.max(...boxes.map((b) => b.pos.y + b.box.h))
+      // Inflate so the implied zoom never exceeds ~0.95 — a lone new card
+      // otherwise fills the screen edge to edge.
+      const el = wrapperRef.current
+      const cw = el?.clientWidth ?? 1200
+      const ch = el?.clientHeight ?? 800
+      const w = Math.max((maxX - minX) * 1.5, cw / 0.95)
+      const h = Math.max((maxY - minY) * 1.6, ch / 0.95)
+      const cx = (minX + maxX) / 2
+      const cy = (minY + maxY) / 2
+      // Fire-and-forget, deliberately no cleanup: consuming the focus also
+      // triggers store writes (clearLastAdded) whose re-render would run this
+      // effect's cleanup and cancel the frames before they ever fired — the
+      // focus silently never happened. The wrapper check covers unmount.
+      requestAnimationFrame(() =>
+        requestAnimationFrame(() => {
+          if (!wrapperRef.current) return
+          flow.fitBounds(
+            { x: cx - w / 2, y: cy - h / 2, width: w, height: h },
+            { duration: 420 },
+          )
+        }),
+      )
+      return
+    }
+    if (nodes.length === 0) return
+    pendingFocus.current = null
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => {
+        if (!wrapperRef.current) return
+        flow.fitView({ padding: 0.18, duration: 420, minZoom: 0.2, maxZoom: 1 })
+      }),
+    )
+  }, [nodes, layout, flow])
 
   /* ── drag: pin where dropped, but only past the tap threshold ── */
 
@@ -313,7 +424,7 @@ function PackageGraphInner({ onNodeActivated }: Props) {
 
   return (
     // React Flow's transform math needs LTR; the cards inside are dir="rtl".
-    <div dir="ltr" className="relative h-full w-full" {...longPressHandlers}>
+    <div ref={wrapperRef} dir="ltr" className="relative h-full w-full" {...longPressHandlers}>
       <ReactFlow
         nodes={nodes}
         edges={edges}
@@ -340,6 +451,8 @@ function PackageGraphInner({ onNodeActivated }: Props) {
         // TAP_SLOP keeps tap-vs-drag consistent with our own pin logic.
         nodeDragThreshold={TAP_SLOP}
         onNodeClick={(_e, n) => {
+          // Tier nodes are derived grouping chrome — nothing to inspect.
+          if (n.id.startsWith("tier_")) return
           state.selectedId = n.id
           onNodeActivated?.(n.id)
         }}
@@ -398,6 +511,10 @@ function PackageGraphInner({ onNodeActivated }: Props) {
             nodeStrokeWidth={0}
             nodeColor={(n) => {
               if (n.type === "quota") return "var(--brand-teal)"
+              if (n.type === "tier") {
+                const d = n.data as TierData
+                return tintVar(TIER_TINT[d.tier])
+              }
               if (n.type === "package") {
                 const d = n.data as PackageData
                 return tintVar(TIER_TINT[d.pkg.tier])

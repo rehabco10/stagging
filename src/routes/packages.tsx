@@ -1,10 +1,23 @@
+import { useState } from "react"
+import { useNavigate, useParams } from "react-router-dom"
 import { useSnapshot } from "valtio"
-import { Copy, Plus, Trash2, TriangleAlert } from "lucide-react"
+import { Copy, Package as PackageIcon, Plus, Trash2, TriangleAlert } from "lucide-react"
 
-import { Card, Note, PageShell } from "@/components/PageShell"
+import { MasterDetail } from "@/components/MasterDetail"
+import { Card, Note, PageHeader } from "@/components/PageShell"
 import { Button } from "@/components/ui/button"
-import { Field, Input, NumInput, SelectField, cellCls } from "@/components/ui/field"
-import { ROLE_OPTIONS, TIER_LABEL, TIER_OPTIONS } from "@/lib/options"
+import { Checkbox, Field, Input, NumInput, SelectField, cellCls } from "@/components/ui/field"
+import { FilterChips } from "@/components/ui/filter-chips"
+import { MaskedPriceInput, Price } from "@/components/ui/price"
+import { Meter } from "@/components/ui/meter"
+import { PackageResources } from "@/features/inventory/PackageResources"
+import {
+  PUBLISH_STATUS_OPTIONS,
+  ROLE_OPTIONS,
+  SALE_STATUS_OPTIONS,
+  TIER_LABEL,
+  TIER_OPTIONS,
+} from "@/lib/options"
 import { displayCategory } from "@/lib/schemas"
 import {
   addDays,
@@ -12,6 +25,7 @@ import {
   addPackage,
   allocated,
   availableRoles,
+  cloneChainFrom,
   duplicatePackage,
   legNights,
   orderedLegs,
@@ -20,311 +34,461 @@ import {
   removePackage,
   retimeLeg,
   state,
+  takeRemaining,
   type DraftPackage,
 } from "@/store/season"
 import { useIssues } from "@/store/use-issues"
 import { cn, arNum } from "@/lib/utils"
 
-const TH = "px-2.5 py-2 text-start text-[10px] font-semibold uppercase tracking-wider"
+const TH = "px-2.5 py-2 text-start text-[11px] font-semibold text-muted-foreground"
 
 /**
- * The classic editor: the same season as the canvas, as a grid plus forms.
- *
- * This page and the graph are 1:1 by construction, not by duplication — both
- * read and write the single valtio store and share `state.selectedId`, so a
- * package picked here is the selected node on the canvas and vice versa, and
- * every action (add, duplicate, delete, retime) is the same store function the
- * node menu calls.
+ * «مصنع الباقات» — the packages page rebuilt around the season's actual
+ * process (docs/packages-ux-bpr.md): a standing balance header steers the
+ * capacity partition, the master is a read-only registry with readiness
+ * dots, and the workspace sections follow the process order — identity &
+ * pricing, capacity & mix, stays, resources, readiness & publishing.
  */
 export function PackagesPage() {
+  const { pkgId } = useParams()
+  const navigate = useNavigate()
   const snap = useSnapshot(state)
   const issues = useIssues()
+  const [tierFilter, setTierFilter] = useState<DraftPackage["tier"] | null>(null)
+  const [search, setSearch] = useState("")
 
-  // Blocking errors per package, counting its legs as part of the package.
   const errorsByPkg = new Map<string, number>()
   for (const p of snap.packages) {
     const ids = new Set<string>([p.id, ...p.legs.map((l) => l.id)])
-    errorsByPkg.set(
-      p.id,
-      issues.filter((i) => i.level === "error" && ids.has(i.entityId)).length,
-    )
+    errorsByPkg.set(p.id, issues.filter((i) => i.level === "error" && ids.has(i.entityId)).length)
   }
 
   const used = allocated(state)
   const quota = snap.season.quota_total
-  const selected = state.packages.find((p) => p.id === snap.selectedId)
+  const standard = snap.packages
+    .filter((p) => p.tier === "standard")
+    .reduce((t, p) => t + p.capacity, 0)
+  const stdPct = used > 0 ? (standard / used) * 100 : 0
+  const premPct = used > 0 ? 100 - stdPct : 0
+
+  const ordered = [...snap.packages].sort((a, b) => a.package_no.localeCompare(b.package_no))
+  const filtered = ordered.filter(
+    (p) =>
+      (tierFilter === null || p.tier === tierFilter) &&
+      (search.trim() === "" ||
+        p.name_en.toLowerCase().includes(search.trim().toLowerCase()) ||
+        p.package_no.includes(search.trim())),
+  )
+  const selected = pkgId ? snap.packages.find((p) => p.id === pkgId) : undefined
+  // Never an empty pane while packages exist — default to the first.
+  const shown = selected ?? filtered[0] ?? ordered[0]
 
   return (
-    <PageShell
-      title="جدول الباقات"
-      description="تحرير الباقات وإقاماتها في جداول — نفس بيانات المخطط تمامًا، بعرض كلاسيكي."
-      actions={
-        <Button size="sm" onClick={() => addPackage()}>
-          <Plus className="size-3.5" />
-          باقة جديدة
-        </Button>
-      }
-    >
-      {/* Master-detail goes side-by-side once there is width for both — the
-          stacked layout on a laptop left the right half of the screen empty
-          and put the detail below the fold. */}
-      <div className="grid items-start gap-4 2xl:grid-cols-5">
-      {/* Full width while nothing is selected — otherwise the grid reserves
-          two empty columns for a detail card that is not rendered. */}
-      <Card bodyClassName="p-0" className={selected ? "2xl:col-span-3" : "2xl:col-span-5"}>
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[46rem] border-collapse text-sm">
-            <thead>
-              <tr className="bg-surface-sunken text-[color:var(--brand-teal-deep)]">
-                <th className={cn(TH, "w-16")}>رقم</th>
-                <th className={TH}>الاسم (إنجليزي)</th>
-                <th className={cn(TH, "w-24")}>الفئة</th>
-                <th className={cn(TH, "w-24")}>السعة</th>
-                <th className={cn(TH, "w-28")}>السعر (ر.س)</th>
-                <th className={cn(TH, "w-28")}>الإقامات / الليالي</th>
-                <th className={cn(TH, "w-20")}>الحالة</th>
-                <th className={cn(TH, "w-20")} />
-              </tr>
-            </thead>
-            <tbody>
-              {snap.packages.length === 0 && (
-                <tr>
-                  <td colSpan={8} className="px-3 py-8 text-center text-[11px] text-muted-foreground">
-                    لا توجد باقات بعد — أضف الأولى بزر «باقة جديدة».
-                  </td>
-                </tr>
+    <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-surface-page">
+      <PageHeader
+        title="الباقات"
+        description="مصنع الموسم — الميزان أعلاه، وكل باقة ورشة عمل بترتيب العملية."
+        actions={
+          <Button size="sm" onClick={() => addPackage()}>
+            <Plus className="size-3.5" />
+            باقة جديدة
+          </Button>
+        }
+      />
+      <div className="flex min-h-0 flex-1 flex-col gap-3 px-4 py-4">
+        {/* الميزان — the steering instrument for the capacity partition. */}
+        <Card bodyClassName="p-4">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+            <Meter className="min-w-64 flex-[2]" label="الحصة" value={used} max={quota} />
+            <Meter
+              className="min-w-52 flex-1"
+              label="فاخرة+مميزة ≤٤٠٪"
+              value={Math.round(premPct * 10) / 10}
+              max={40}
+            />
+            <Meter
+              className="min-w-52 flex-1"
+              label="أساسية ≥٦٠٪"
+              value={Math.round(stdPct * 10) / 10}
+              max={60}
+              bound="min"
+            />
+            <span
+              className={cn(
+                "shrink-0 rounded-full px-2.5 py-1 text-[11px] font-bold tabular-nums",
+                used === quota
+                  ? "bg-[color:var(--brand-green-soft)] text-[color:var(--brand-green-deep)]"
+                  : used > quota
+                    ? "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]"
+                    : "bg-surface-sunken text-foreground/80",
               )}
-              {snap.packages.map((p) => {
-                const live = state.packages.find((x) => x.id === p.id)!
-                const errs = errorsByPkg.get(p.id) ?? 0
-                const isSel = snap.selectedId === p.id
-                return (
-                  <tr
-                    key={p.id}
-                    onClick={() => (state.selectedId = p.id)}
-                    className={cn(
-                      "cursor-pointer border-t border-surface-line align-middle transition-colors",
-                      isSel
-                        ? "bg-[color:var(--brand-teal-soft)]"
-                        : "hover:bg-surface-sunken/60",
-                    )}
-                  >
-                    <td className="px-2.5 py-1 font-semibold tabular-nums">{p.package_no}</td>
-                    <td className="px-1.5 py-1">
-                      <Input
-                        dir="ltr"
-                        className={cn(cellCls, "text-start font-medium")}
-                        value={p.name_en}
-                        onChange={(e) => (live.name_en = e.target.value)}
-                      />
-                    </td>
-                    <td className="px-2.5 py-1 text-[11px]">{TIER_LABEL[p.tier]}</td>
-                    <td className="px-1.5 py-1">
-                      <NumInput
-                        className={cellCls}
-                        value={p.capacity}
-                        onChange={(e) => (live.capacity = Number(e.target.value) || 0)}
-                      />
-                    </td>
-                    <td className="px-1.5 py-1">
-                      <NumInput
-                        className={cellCls}
-                        value={p.initial_price_sar}
-                        onChange={(e) => (live.initial_price_sar = Number(e.target.value) || 0)}
-                      />
-                    </td>
-                    <td className="px-2.5 py-1 text-[11px] tabular-nums text-muted-foreground">
-                      {arNum(p.legs.length)} / {arNum(packageNights(live))}
-                    </td>
-                    <td className="px-2.5 py-1">
-                      {errs > 0 ? (
-                        <span className="inline-flex items-center gap-1 rounded-full bg-[color:var(--brand-rose)] px-1.5 py-0.5 text-[9px] font-bold text-white tabular-nums">
-                          <TriangleAlert className="size-2.5" />
-                          {arNum(errs)}
-                        </span>
-                      ) : (
-                        <span className="text-[10px] text-[color:var(--brand-green-deep)]">سليمة</span>
-                      )}
-                    </td>
-                    <td className="px-1 py-1">
-                      <div className="flex items-center">
-                        <RowIcon
-                          label={`تكرار باقة ${p.package_no}`}
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            duplicatePackage(p.id)
-                          }}
-                        >
-                          <Copy className="size-3.5" />
-                        </RowIcon>
-                        <RowIcon
-                          danger
-                          label={`حذف باقة ${p.package_no}`}
-                          onClick={(e) => {
-                            e.stopPropagation()
-                            removePackage(p.id)
-                          }}
-                        >
-                          <Trash2 className="size-3.5" />
-                        </RowIcon>
-                      </div>
-                    </td>
-                  </tr>
-                )
-              })}
-            </tbody>
-            {snap.packages.length > 0 && (
-              <tfoot>
-                <tr className="border-t border-surface-line bg-surface-sunken/70 text-[11px] font-semibold">
-                  <td colSpan={3} className="px-2.5 py-2">
-                    الإجمالي — {arNum(snap.packages.length)} باقة
-                  </td>
-                  <td
-                    className={cn(
-                      "px-2.5 py-2 tabular-nums",
-                      used === quota
-                        ? "text-[color:var(--brand-green-deep)]"
-                        : used > quota
-                          ? "text-[color:var(--brand-rose-deep)]"
-                          : "text-foreground",
-                    )}
-                  >
-                    {arNum(used)} / {arNum(quota)}
-                  </td>
-                  <td colSpan={4} className="px-2.5 py-2 text-muted-foreground">
-                    {used === quota
-                      ? "الحصة مستوفاة"
-                      : used > quota
-                        ? `تجاوز بمقدار ${arNum(used - quota)}`
-                        : `متبقٍ ${arNum(quota - used)}`}
-                  </td>
-                </tr>
-              </tfoot>
-            )}
-          </table>
-        </div>
-      </Card>
-
-      {selected ? (
-        <PackageDetail pkg={selected} issues={issues} className="2xl:col-span-2" />
-      ) : (
-        snap.packages.length > 0 && (
-          <div className="2xl:col-span-2">
-            <Note>اختر باقة من الجدول لعرض تفاصيلها وإقاماتها.</Note>
+            >
+              {used === quota
+                ? "الحصة مستوفاة"
+                : used > quota
+                  ? `تجاوز ${arNum(used - quota)}`
+                  : `متبقٍ ${arNum(quota - used)}`}
+            </span>
           </div>
-        )
-      )}
+        </Card>
+
+        <div className="min-h-0 flex-1">
+          <MasterDetail
+            detailOpen={Boolean(selected)}
+            onBack={() => navigate("/packages")}
+            placeholder={
+              <span className="flex items-center gap-2">
+                <PackageIcon className="size-4" />
+                اختر باقة من القائمة
+              </span>
+            }
+            master={
+              <>
+                {/* A solid toolbar card, not floating chips: cards scrolling
+                    beneath a transparent strip looked like an overlap glitch —
+                    a bordered surface makes passing under it read as intended. */}
+                <div className="sticky top-0 z-10 space-y-2 rounded-xl border border-surface-line bg-surface-raised p-2.5 shadow-[var(--elev-1)]">
+                  <Input
+                    placeholder="بحث بالاسم أو الرقم…"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                  />
+                  <FilterChips
+                    value={tierFilter}
+                    onChange={setTierFilter}
+                    options={(["luxury", "premium", "standard"] as const).map((t) => ({
+                      value: t,
+                      label: TIER_LABEL[t],
+                      count: snap.packages.filter((p) => p.tier === t).length,
+                    }))}
+                  />
+                </div>
+                <ul className="space-y-2">
+                  {filtered.length === 0 && (
+                    <li className="rounded-xl border border-dashed border-surface-line px-3 py-5 text-center text-[12px] text-muted-foreground">
+                      لا نتائج.
+                    </li>
+                  )}
+                  {filtered.map((p) => (
+                    <MasterRow
+                      key={p.id}
+                      pkg={p as DraftPackage}
+                      active={p.id === shown?.id}
+                      errors={errorsByPkg.get(p.id) ?? 0}
+                      onSelect={() => navigate(`/packages/${p.id}`)}
+                    />
+                  ))}
+                </ul>
+              </>
+            }
+            detail={
+              shown && <Workspace key={shown.id} id={shown.id} issues={issues} />
+            }
+          />
+        </div>
       </div>
-    </PageShell>
+    </div>
   )
 }
 
-/* ── detail: the full form + legs grid for the selected package ──── */
+/* ── master row: read-only, scannable ───────────────────────────── */
 
-function PackageDetail({
+function readinessDots(p: DraftPackage) {
+  return [
+    { key: "بيانات", ok: Boolean(p.name_en) && p.capacity > 0 && p.initial_price_sar > 0 },
+    { key: "إقامات", ok: p.legs.length >= 2 },
+    { key: "موارد", ok: p.contractIds.length > 0 },
+    { key: "محتوى", ok: p.content_ready_ar && p.hero_approved },
+  ]
+}
+
+const TIER_EDGE: Record<DraftPackage["tier"], string> = {
+  luxury: "var(--brand-gold)",
+  premium: "var(--brand-green)",
+  standard: "var(--brand-slate)",
+}
+
+function MasterRow({
   pkg,
-  issues,
-  className,
+  active,
+  errors,
+  onSelect,
 }: {
   pkg: DraftPackage
-  issues: ReturnType<typeof useIssues>
-  className?: string
+  active: boolean
+  errors: number
+  onSelect: () => void
 }) {
+  const dots = readinessDots(pkg)
+  const done = dots.filter((d) => d.ok).length
+  return (
+    <li>
+      <button
+        type="button"
+        onClick={onSelect}
+        className={cn(
+          "relative w-full rounded-xl border py-3 pe-3.5 ps-4 text-start transition-colors",
+          active
+            ? "border-[color:var(--brand-teal)]/50 bg-[color:var(--brand-teal-soft)]/50 shadow-[var(--elev-1)]"
+            : "border-surface-line bg-surface-raised hover:bg-surface-sunken/60",
+        )}
+      >
+        {/* tier tint on the start edge — scan by color, same hues as the canvas */}
+        <span
+          aria-hidden
+          className="absolute inset-y-2.5 start-1.5 w-1 rounded-full"
+          style={{ background: TIER_EDGE[pkg.tier] }}
+        />
+        <div className="flex items-center gap-2">
+          <span className="shrink-0 text-[11px] font-bold tabular-nums text-muted-foreground">
+            {pkg.package_no}
+          </span>
+          <span dir="ltr" className="min-w-0 flex-1 truncate text-start text-[13px] font-semibold">
+            {pkg.name_en || "—"}
+          </span>
+          {errors > 0 && (
+            <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-[color:var(--brand-rose-soft)] px-2 py-0.5 text-[11px] font-semibold tabular-nums text-[color:var(--brand-rose-deep)]">
+              <TriangleAlert className="size-3" />
+              {arNum(errors)}
+            </span>
+          )}
+        </div>
+        <div className="mt-1 text-[11px] tabular-nums text-muted-foreground">
+          {TIER_LABEL[pkg.tier]} · <b className="font-semibold text-foreground/80">{arNum(pkg.capacity)} حاج</b>
+          {pkg.initial_price_sar > 0 && (
+            <>
+              {" "}
+              ·{" "}
+              <Price
+                interactive={false}
+                value={`${arNum(Math.round(pkg.initial_price_sar))} ر.س`}
+              />
+            </>
+          )}
+        </div>
+        <div className="mt-1.5 flex items-center gap-1.5">
+          {dots.map((d) => (
+            <span
+              key={d.key}
+              title={`${d.key}: ${d.ok ? "جاهز" : "ناقص"}`}
+              className={cn(
+                "size-2 rounded-full",
+                d.ok ? "bg-[color:var(--brand-green)]" : "bg-surface-line",
+              )}
+            />
+          ))}
+          <span className="text-[10px] tabular-nums text-muted-foreground">
+            جاهزية {arNum(done)}/{arNum(dots.length)}
+          </span>
+        </div>
+      </button>
+    </li>
+  )
+}
+
+/* ── workspace: the selected package, sections in process order ─── */
+
+function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIssues> }) {
+  const navigate = useNavigate()
   const snap = useSnapshot(state)
-  const live = state.packages.find((p) => p.id === pkg.id)
-  const view = snap.packages.find((p) => p.id === pkg.id)
+  const live = state.packages.find((p) => p.id === id)
+  const view = snap.packages.find((p) => p.id === id)
+  const [cloneSrc, setCloneSrc] = useState("")
   if (!live || !view) return null
 
   const shifting = view.legs.some((l) => l.role === "transitional")
   const canAdd = availableRoles(live).length > 0
-  const ownIds = new Set<string>([pkg.id, ...view.legs.map((l) => l.id)])
+  const ownIds = new Set<string>([id, ...view.legs.map((l) => l.id)])
   const own = issues.filter((i) => ownIds.has(i.entityId))
+  const gateErrors = own.filter((i) => i.level === "error")
+  const left = snap.season.quota_total - allocated(state)
+
+  // The agreed pricing bounds of this tier, straight from the requirements.
+  const bounds = snap.requirements.find(
+    (r) =>
+      r.status === "agreed" &&
+      r.kind === "pricing" &&
+      (r.params as { tier?: string } | null)?.tier === view.tier,
+  )?.params as { min_sar?: number | null; max_sar?: number | null } | undefined
+  const outOfBounds =
+    view.initial_price_sar > 0 &&
+    Boolean(
+      (bounds?.min_sar != null && view.initial_price_sar < bounds.min_sar) ||
+        (bounds?.max_sar != null && view.initial_price_sar > bounds.max_sar),
+    )
 
   const hotelOptions = snap.hotels.map((h) => ({
     value: h.id,
     label: `${h.name_ar} — ${h.city === "makkah" ? "مكة" : "المدينة"}`,
   }))
+  const mixSum = view.room_mix["2"] + view.room_mix["3"] + view.room_mix["4"]
 
   return (
-    <Card
-      className={className}
-      title={`باقة ${view.package_no} — التفاصيل`}
-      description={`التصنيف في نسك: ${displayCategory({
-        tier: view.tier,
-        is_shifting: shifting,
-        variant_suffix: view.variant_suffix,
-      })}`}
-      actions={
-        <>
-          <Button variant="outline" size="sm" onClick={() => duplicatePackage(pkg.id)}>
-            <Copy className="size-3.5" />
-            تكرار
-          </Button>
-          <Button variant="destructive" size="sm" onClick={() => removePackage(pkg.id)}>
-            <Trash2 className="size-3.5" />
-            حذف
-          </Button>
-        </>
-      }
-    >
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-        <Field label="رقم الباقة">
-          <Input value={view.package_no} onChange={(e) => (live.package_no = e.target.value)} />
-        </Field>
-        <Field label="الاسم (إنجليزي)" className="col-span-2">
-          <Input dir="ltr" value={view.name_en} onChange={(e) => (live.name_en = e.target.value)} />
-        </Field>
-        <Field label="الفئة">
-          <SelectField
-            allowEmpty={false}
-            value={view.tier}
-            options={TIER_OPTIONS}
-            onChange={(v) => (live.tier = v as DraftPackage["tier"])}
-          />
-        </Field>
-        <Field label="السعة (حاج)">
-          <NumInput
-            value={view.capacity}
-            onChange={(e) => (live.capacity = Number(e.target.value) || 0)}
-          />
-        </Field>
-        <Field label="السعر الابتدائي">
-          <NumInput
-            value={view.initial_price_sar}
-            onChange={(e) => (live.initial_price_sar = Number(e.target.value) || 0)}
-          />
-        </Field>
-      </div>
-
-      <div className="mt-4 border-t border-surface-line pt-3">
-        <div className="mb-2 flex items-center justify-between">
-          <h3 className="text-[12px] font-bold text-foreground">
-            الإقامات
-            <span className="ms-2 text-[10px] font-normal text-muted-foreground tabular-nums">
-              {arNum(view.legs.length)} إقامة · {arNum(packageNights(live))} ليلة
-            </span>
-          </h3>
-          <Button
-            variant="outline"
-            size="sm"
-            disabled={!canAdd}
-            title={canAdd ? undefined : "كل الأدوار مستخدمة (أول، ثانٍ، انتقالي)"}
-            onClick={() => addLeg(pkg.id)}
+    <>
+      {/* ── ١ الهوية والتسعير ── */}
+      <Card
+        title={`باقة ${view.package_no}`}
+        description={`التصنيف في نسك: ${displayCategory({
+          tier: view.tier,
+          is_shifting: shifting,
+          variant_suffix: view.variant_suffix,
+        })}`}
+        actions={
+          <>
+            <Button variant="outline" size="sm" onClick={() => navigate(`/packages/${duplicatePackage(id)}`)}>
+              <Copy className="size-3.5" />
+              تكرار
+            </Button>
+            <Button
+              variant="destructive"
+              size="sm"
+              onClick={() => {
+                removePackage(id)
+                navigate("/packages")
+              }}
+            >
+              <Trash2 className="size-3.5" />
+              حذف
+            </Button>
+          </>
+        }
+      >
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          <Field label="رقم الباقة">
+            <Input value={view.package_no} onChange={(e) => (live.package_no = e.target.value)} />
+          </Field>
+          <Field label="الاسم (إنجليزي)" className="col-span-2 lg:col-span-1">
+            <Input dir="ltr" value={view.name_en} onChange={(e) => (live.name_en = e.target.value)} />
+          </Field>
+          <Field label="الفئة">
+            <SelectField
+              allowEmpty={false}
+              value={view.tier}
+              options={TIER_OPTIONS}
+              onChange={(v) => (live.tier = v as DraftPackage["tier"])}
+            />
+          </Field>
+          <Field label="لاحقة التصنيف">
+            <Input
+              dir="ltr"
+              placeholder="—"
+              value={view.variant_suffix}
+              onChange={(e) => (live.variant_suffix = e.target.value)}
+            />
+          </Field>
+          <Field
+            label="السعر الابتدائي (ر.س)"
+            hint={
+              bounds
+                ? `حدود ${TIER_LABEL[view.tier]} المعتمدة: ${arNum(bounds.min_sar ?? 0)} – ${bounds.max_sar != null ? arNum(bounds.max_sar) : "—"}`
+                : "لا حدود سعرية معتمدة لهذه الفئة بعد."
+            }
+            error={outOfBounds ? "خارج الحدود المعتمدة للفئة." : undefined}
           >
-            <Plus className="size-3.5" />
-            إضافة إقامة
-          </Button>
+            <MaskedPriceInput
+              value={view.initial_price_sar}
+              onChange={(e) => (live.initial_price_sar = Number(e.target.value) || 0)}
+            />
+          </Field>
         </div>
+      </Card>
 
+      {/* ── ٢ السعة والتوزيع ── */}
+      <Card title="السعة وتوزيع الغرف">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
+          <Field
+            label="السعة (حاج)"
+            hint={
+              left > 0
+                ? `في الحصة ${arNum(left)} غير موزَّعة — «خذ المتبقي» يسندها لهذه الباقة.`
+                : "الحصة موزَّعة بالكامل."
+            }
+          >
+            {/* Joined input-group: the action is welded to the field it acts
+                on instead of floating beside it at its own baseline. */}
+            <div className="flex">
+              <NumInput
+                className="rounded-e-none"
+                value={view.capacity}
+                onChange={(e) => (live.capacity = Number(e.target.value) || 0)}
+              />
+              <Button
+                variant="outline"
+                className="-ms-px shrink-0 rounded-s-none"
+                disabled={left <= 0}
+                onClick={() => takeRemaining(id)}
+                title="أسند المتبقي من الحصة لهذه الباقة"
+              >
+                خذ المتبقي{left > 0 && ` (${arNum(left)})`}
+              </Button>
+            </div>
+          </Field>
+          <Field
+            label="توزيع الغرف (رباعية / ثلاثية / ثنائية)"
+            hint={
+              mixSum === 0
+                ? "اتركه صفرًا إن لم يُخطَّط بعد."
+                : mixSum === view.capacity
+                  ? `الموزَّع ${arNum(mixSum)} — مطابق للسعة.`
+                  : `الموزَّع ${arNum(mixSum)} — ${mixSum < view.capacity ? `ينقص ${arNum(view.capacity - mixSum)}` : `يزيد ${arNum(mixSum - view.capacity)}`}.`
+            }
+          >
+            <div className="grid grid-cols-3 gap-1.5">
+              {(["4", "3", "2"] as const).map((rt) => (
+                <NumInput
+                  key={rt}
+                  aria-label={rt === "4" ? "رباعية" : rt === "3" ? "ثلاثية" : "ثنائية"}
+                  placeholder={rt === "4" ? "رباعية" : rt === "3" ? "ثلاثية" : "ثنائية"}
+                  value={view.room_mix[rt] ? String(view.room_mix[rt]) : ""}
+                  onChange={(e) => (live.room_mix[rt] = Math.max(0, Number(e.target.value) || 0))}
+                />
+              ))}
+            </div>
+          </Field>
+        </div>
+      </Card>
+
+      {/* ── ٣ الإقامات ── */}
+      <Card
+        title="الإقامات"
+        description={`${arNum(view.legs.length)} إقامة · ${arNum(packageNights(live))} ليلة`}
+        actions={
+          <>
+            <SelectField
+              className="w-44"
+              placeholder="نسخ مسار باقة…"
+              value={cloneSrc}
+              options={snap.packages
+                .filter((p) => p.id !== id && p.legs.length > 0)
+                .map((p) => ({ value: p.id, label: `باقة ${p.package_no} — ${p.name_en}` }))}
+              onChange={(v) => {
+                if (v) cloneChainFrom(id, v)
+                setCloneSrc("")
+              }}
+            />
+            <Button
+              variant="outline"
+              size="sm"
+              disabled={!canAdd}
+              title={canAdd ? undefined : "كل الأدوار مستخدمة (أول، ثانٍ، انتقالي)"}
+              onClick={() => addLeg(id)}
+            >
+              <Plus className="size-3.5" />
+              إضافة
+            </Button>
+          </>
+        }
+        bodyClassName="p-0"
+      >
         {view.legs.length === 0 ? (
-          <p className="rounded-lg bg-surface-sunken px-3 py-4 text-center text-[11px] text-muted-foreground">
-            لا توجد إقامات بعد.
+          <p className="px-3 py-6 text-center text-[12px] text-muted-foreground">
+            لا توجد إقامات بعد — أضف الأولى أو انسخ مسار باقة قائمة.
           </p>
         ) : (
-          <div className="overflow-x-auto rounded-lg border border-surface-line">
+          <div className="overflow-x-auto">
             <table className="w-full min-w-[42rem] border-collapse text-sm">
               <thead>
-                <tr className="bg-surface-sunken text-[color:var(--brand-teal-deep)]">
+                <tr className="bg-surface-sunken">
                   <th className={cn(TH, "w-10")}>#</th>
                   <th className={cn(TH, "w-36")}>الدور</th>
                   <th className={TH}>الفندق</th>
@@ -393,9 +557,14 @@ function PackageDetail({
                         {leg.ends_on}
                       </td>
                       <td className="px-1 py-1">
-                        <RowIcon danger label="حذف الإقامة" onClick={() => removeLeg(leg.id)}>
+                        <button
+                          type="button"
+                          aria-label="حذف الإقامة"
+                          onClick={() => removeLeg(leg.id)}
+                          className="grid size-7 place-items-center rounded-md text-muted-foreground/45 transition-colors hover:bg-[color:var(--brand-rose-soft)] hover:text-[color:var(--brand-rose-deep)]"
+                        >
                           <Trash2 className="size-3.5" />
-                        </RowIcon>
+                        </button>
                       </td>
                     </tr>
                   )
@@ -404,59 +573,73 @@ function PackageDetail({
             </table>
           </div>
         )}
-        <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground">
-          تغيير التاريخ أو الليالي يزيح الإقامات التالية بنفس المقدار، فتبقى السلسلة متصلة بلا
-          فجوات — كما في المخطط تمامًا.
-        </p>
-      </div>
+      </Card>
 
-      {own.length > 0 && (
-        <div className="mt-3 space-y-1.5 border-t border-surface-line pt-3">
-          {own.slice(0, 5).map((i, idx) => (
-            <p
-              key={`${i.code}-${idx}`}
-              className={cn(
-                "flex gap-2 rounded-lg px-2.5 py-1.5 text-[11px] leading-snug",
-                i.level === "error"
-                  ? "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]"
-                  : "bg-[color:var(--brand-gold-soft)] text-[color:var(--brand-gold-deep)]",
-              )}
-            >
-              <TriangleAlert className="mt-0.5 size-3.5 shrink-0" />
-              <span>{i.message}</span>
-            </p>
-          ))}
+      {/* ── ٤ الموارد ── */}
+      <Card
+        title="الموارد — العقود والمقاعد"
+        description="السكن قرار تغطية لكل فندق؛ والطيران قرار تغطية لكل اتجاه."
+      >
+        <PackageResources pkg={live} />
+      </Card>
+
+      {/* ── ٥ الجاهزية والنشر ── */}
+      <Card
+        title="الجاهزية والنشر"
+        description="بوابة الرفع: باقة مسعَّرة بلا وصف لا تمر — درس 1447."
+      >
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+          <Field label="حالة النشر في نسك">
+            <SelectField
+              allowEmpty={false}
+              value={view.publish_status}
+              options={PUBLISH_STATUS_OPTIONS}
+              onChange={(v) => (live.publish_status = v as DraftPackage["publish_status"])}
+            />
+          </Field>
+          <Field label="حالة البيع">
+            <SelectField
+              allowEmpty={false}
+              value={view.sale_status}
+              options={SALE_STATUS_OPTIONS}
+              onChange={(v) => (live.sale_status = v as DraftPackage["sale_status"])}
+            />
+          </Field>
+          <div className="col-span-2 space-y-1.5">
+            {(
+              [
+                ["content_ready_ar", "الوصف العربي جاهز"],
+                ["content_ready_en", "الوصف الإنجليزي جاهز"],
+                ["hero_approved", "الصورة الرئيسية معتمدة"],
+              ] as const
+            ).map(([key, label]) => (
+              <label key={key} className="flex items-center gap-2 text-[12px] text-foreground/80">
+                <Checkbox
+                  checked={view[key]}
+                  onCheckedChange={(c) => (live[key] = Boolean(c))}
+                />
+                {label}
+              </label>
+            ))}
+          </div>
         </div>
-      )}
-    </Card>
-  )
-}
-
-function RowIcon({
-  label,
-  danger,
-  onClick,
-  children,
-}: {
-  label: string
-  danger?: boolean
-  onClick: (e: React.MouseEvent) => void
-  children: React.ReactNode
-}) {
-  return (
-    <button
-      type="button"
-      aria-label={label}
-      title={label}
-      onClick={onClick}
-      className={cn(
-        "grid size-7 place-items-center rounded-md text-muted-foreground/45 transition-colors",
-        danger
-          ? "hover:bg-[color:var(--brand-rose-soft)] hover:text-[color:var(--brand-rose-deep)]"
-          : "hover:bg-[color:var(--brand-teal-soft)] hover:text-[color:var(--brand-teal-deep)]",
-      )}
-    >
-      {children}
-    </button>
+        {gateErrors.length > 0 && (
+          <div className="mt-3 space-y-1.5 border-t border-surface-line pt-3">
+            {gateErrors.slice(0, 6).map((i, idx) => (
+              <p
+                key={`${i.code}-${idx}`}
+                className="flex gap-2 rounded-lg bg-[color:var(--brand-rose-soft)] px-2.5 py-1.5 text-[11px] leading-snug text-[color:var(--brand-rose-deep)]"
+              >
+                <TriangleAlert className="mt-0.5 size-3.5 shrink-0" />
+                <span>{i.message}</span>
+              </p>
+            ))}
+          </div>
+        )}
+        {gateErrors.length === 0 && (
+          <Note tone="brand">لا أخطاء تمنع رفع هذه الباقة.</Note>
+        )}
+      </Card>
+    </>
   )
 }

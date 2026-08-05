@@ -17,3 +17,6 @@ dist-stage
 /reports-docs/
 /ocr/
 /docs/
+
+# generated seed intermediates (regenerate via scripts/seed-1447)
+scripts/seed-1447/*.json

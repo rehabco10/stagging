@@ -7,6 +7,7 @@ import {
   LayoutDashboard,
   Menu,
   Network,
+  Plane,
   Settings,
   ShieldCheck,
   Table2,
@@ -33,6 +34,7 @@ const ITEMS: Item[] = [
   { to: "/packages", label: "جدول الباقات", icon: Table2 },
   { to: "/requirements", label: "الاجتماعات والمتطلبات", icon: ClipboardList },
   { to: "/hotels", label: "الفنادق والمخيمات", icon: Building2 },
+  { to: "/flights", label: "مقاعد الطيران", icon: Plane },
   { to: "/validation", label: "التحقق والرفع", icon: ShieldCheck, badge: true },
   { to: "/settings", label: "الإعدادات", icon: Settings },
 ]
