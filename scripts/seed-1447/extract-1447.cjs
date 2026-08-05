@@ -11,6 +11,22 @@ const path = require("path")
 const PROJECT = path.resolve(__dirname, "../../../../hajj-1447/light-housing-system")
 const XLSX = require(require.resolve("xlsx", { paths: [PROJECT] }))
 const BASE = path.join(PROJECT, "new-data-sample")
+// The 2026-08-05 end-of-season snapshots (6,716 pilgrims / 8,189 booking
+// rows) supersede the mid-season v2 files for journey and demand; supply has
+// no fresher export. Fall back to v2 when the archive is absent.
+const V4 = path.join(BASE, "v4-2026-08-05")
+const pick = (v4Name, v2Name) => {
+  const p = path.join(V4, v4Name)
+  return fs.existsSync(p) ? p : path.join(BASE, v2Name)
+}
+const JOURNEY_XLSX = pick(
+  "رحلة الحاج لشركة اثراء الخير لخدمات الحجاج.xlsx",
+  "pilgrims_journey_1447h_v2.xlsx",
+)
+const DEMAND_XLSX = pick(
+  "شركة اثراء الخير لخدمات الحجاج(تسكين).xlsx",
+  "housing_unitTypeforHousing_1447h_v2.xlsx",
+)
 const OUT = process.argv[2] ?? path.join(__dirname, "seed-1447.json")
 
 const excelDate = (v) => {
@@ -68,7 +84,7 @@ for (const r of rows) {
 }
 
 /* ── flights ── */
-const jwb = XLSX.readFile(path.join(BASE, "pilgrims_journey_1447h_v2.xlsx"))
+const jwb = XLSX.readFile(JOURNEY_XLSX)
 const jrows = XLSX.utils.sheet_to_json(jwb.Sheets[jwb.SheetNames[0]], { defval: null })
 
 const flights = new Map()
@@ -113,7 +129,7 @@ for (const r of jrows) {
 }
 
 /* ── demand: room types per booking / per package ── */
-const dwb = XLSX.readFile(path.join(BASE, "housing_unitTypeforHousing_1447h_v2.xlsx"))
+const dwb = XLSX.readFile(DEMAND_XLSX)
 const drows = XLSX.utils.sheet_to_json(dwb.Sheets[dwb.SheetNames[0]], { defval: null })
 
 // Per booking: room-type set per hotel-type, to see if the mix varies by city.

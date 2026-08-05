@@ -187,7 +187,11 @@ for (const [no, rc] of raw) {
 
 /* 6. demand: booked mix vs seeded room_mix proportions */
 console.log(`\n== 6. room mixes vs booking file ==`)
-const dwb = XLSX.readFile(path.join(BASE, "housing_unitTypeforHousing_1447h_v2.xlsx"))
+// Same source the generator used: the v4 end-of-season snapshot if archived.
+const v4Demand = path.join(BASE, "v4-2026-08-05", "شركة اثراء الخير لخدمات الحجاج(تسكين).xlsx")
+const dwb = XLSX.readFile(
+  fs.existsSync(v4Demand) ? v4Demand : path.join(BASE, "housing_unitTypeforHousing_1447h_v2.xlsx"),
+)
 const drows = XLSX.utils.sheet_to_json(dwb.Sheets[dwb.SheetNames[0]], { defval: null })
 const booked = new Map() // nusuk -> {city: {rt: ppl}}
 for (const r of drows) {

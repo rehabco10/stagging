@@ -779,25 +779,11 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Amsterdam",
     "contract_type": "group",
     "pnr": "",
-    "seats": 201,
+    "seats": 261,
     "status": "confirmed"
   },
   {
     "id": "fb_1447_1",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV215",
-    "flies_on": "2027-06-12",
-    "from_city": "Jeddah",
-    "to_city": "Amsterdam",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 176,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_2",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -807,7 +793,21 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
-    "seats": 157,
+    "seats": 198,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_2",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV215",
+    "flies_on": "2027-06-12",
+    "from_city": "Jeddah",
+    "to_city": "Amsterdam",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 196,
     "status": "confirmed"
   },
   {
@@ -821,11 +821,53 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
-    "seats": 143,
+    "seats": 177,
     "status": "confirmed"
   },
   {
     "id": "fb_1447_4",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1421",
+    "flies_on": "2027-06-15",
+    "from_city": "Madina",
+    "to_city": "Riyadh",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 155,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_5",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV127",
+    "flies_on": "2027-06-08",
+    "from_city": "Jeddah",
+    "to_city": "Paris",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 145,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_6",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV119",
+    "flies_on": "2027-06-08",
+    "from_city": "Jeddah",
+    "to_city": "LONDON",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 143,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_7",
     "direction": "arrival",
     "airline_ar": "إير كايرو",
     "airline_en": "Air Cairo",
@@ -839,7 +881,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_5",
+    "id": "fb_1447_8",
     "direction": "return",
     "airline_ar": "إير كايرو",
     "airline_en": "Air Cairo",
@@ -853,7 +895,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_6",
+    "id": "fb_1447_9",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -863,123 +905,11 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "MANCHESTER",
     "contract_type": "group",
     "pnr": "",
-    "seats": 119,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_7",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1420",
-    "flies_on": "2027-05-21",
-    "from_city": "Jeddah",
-    "to_city": "Madina",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 113,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_8",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1421",
-    "flies_on": "2027-06-15",
-    "from_city": "Madina",
-    "to_city": "Riyadh",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 106,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_9",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV127",
-    "flies_on": "2027-06-08",
-    "from_city": "Jeddah",
-    "to_city": "Paris",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 105,
+    "seats": 133,
     "status": "confirmed"
   },
   {
     "id": "fb_1447_10",
-    "direction": "arrival",
-    "airline_ar": "إير كايرو",
-    "airline_en": "Air Cairo",
-    "flight_no": "SM477",
-    "flies_on": "2027-05-23",
-    "from_city": "Cairo",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 104,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_11",
-    "direction": "return",
-    "airline_ar": "إير كايرو",
-    "airline_en": "Air Cairo",
-    "flight_no": "SM494",
-    "flies_on": "2027-06-12",
-    "from_city": "Madina",
-    "to_city": "Cairo",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 104,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_12",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV210",
-    "flies_on": "2027-05-24",
-    "from_city": "MILANO",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 96,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_13",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV211",
-    "flies_on": "2027-06-08",
-    "from_city": "Jeddah",
-    "to_city": "MILANO",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 96,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_14",
-    "direction": "arrival",
-    "airline_ar": "الاماراتيه",
-    "airline_en": "ALAMARATYH",
-    "flight_no": "EK809",
-    "flies_on": "2027-05-12",
-    "from_city": "Dubai",
-    "to_city": "Madina",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 95,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_15",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -989,95 +919,11 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
-    "seats": 94,
+    "seats": 133,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_16",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV214",
-    "flies_on": "2027-05-29",
-    "from_city": "Amsterdam",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 92,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_17",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV127",
-    "flies_on": "2027-06-12",
-    "from_city": "Jeddah",
-    "to_city": "Paris",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 88,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_18",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV211",
-    "flies_on": "2027-06-12",
-    "from_city": "Jeddah",
-    "to_city": "MILANO",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 88,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_19",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV214",
-    "flies_on": "2027-05-27",
-    "from_city": "Amsterdam",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 87,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_20",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV119",
-    "flies_on": "2027-06-08",
-    "from_city": "Jeddah",
-    "to_city": "LONDON",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 86,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_21",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1429",
-    "flies_on": "2027-06-15",
-    "from_city": "Madina",
-    "to_city": "Riyadh",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 83,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_22",
+    "id": "fb_1447_11",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1087,35 +933,189 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Madina",
     "contract_type": "group",
     "pnr": "",
-    "seats": 82,
+    "seats": 128,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_12",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1420",
+    "flies_on": "2027-05-21",
+    "from_city": "Jeddah",
+    "to_city": "Madina",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 121,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_13",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV214",
+    "flies_on": "2027-05-29",
+    "from_city": "Amsterdam",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 119,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_14",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV127",
+    "flies_on": "2027-06-12",
+    "from_city": "Jeddah",
+    "to_city": "Paris",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 119,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_15",
+    "direction": "arrival",
+    "airline_ar": "إير كايرو",
+    "airline_en": "Air Cairo",
+    "flight_no": "SM477",
+    "flies_on": "2027-05-23",
+    "from_city": "Cairo",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 107,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_16",
+    "direction": "return",
+    "airline_ar": "إير كايرو",
+    "airline_en": "Air Cairo",
+    "flight_no": "SM494",
+    "flies_on": "2027-06-12",
+    "from_city": "Madina",
+    "to_city": "Cairo",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 107,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_17",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1422",
+    "flies_on": "2027-05-25",
+    "from_city": "Jeddah",
+    "to_city": "Madina",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 106,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_18",
+    "direction": "arrival",
+    "airline_ar": "الاماراتيه",
+    "airline_en": "ALAMARATYH",
+    "flight_no": "EK809",
+    "flies_on": "2027-05-12",
+    "from_city": "Dubai",
+    "to_city": "Madina",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 97,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_19",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1429",
+    "flies_on": "2027-06-16",
+    "from_city": "Madina",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 95,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_20",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV210",
+    "flies_on": "2027-05-24",
+    "from_city": "MILANO",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 95,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_21",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV211",
+    "flies_on": "2027-06-08",
+    "from_city": "Jeddah",
+    "to_city": "MILANO",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 95,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_22",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV215",
+    "flies_on": "2027-06-15",
+    "from_city": "Jeddah",
+    "to_city": "Amsterdam",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 94,
     "status": "confirmed"
   },
   {
     "id": "fb_1447_23",
     "direction": "arrival",
-    "airline_ar": "الخطوط الجوية البريطانية",
-    "airline_en": "British Airways",
-    "flight_no": "BA133",
-    "flies_on": "2027-05-28",
-    "from_city": "LONDON",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV214",
+    "flies_on": "2027-05-27",
+    "from_city": "Amsterdam",
     "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
-    "seats": 82,
+    "seats": 93,
     "status": "confirmed"
   },
   {
     "id": "fb_1447_24",
-    "direction": "return",
-    "airline_ar": "الخطوط الجوية البريطانية",
-    "airline_en": "British Airways",
-    "flight_no": "BA132",
-    "flies_on": "2027-06-11",
-    "from_city": "Jeddah",
-    "to_city": "LONDON",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV126",
+    "flies_on": "2027-05-28",
+    "from_city": "Paris",
+    "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
-    "seats": 82,
+    "seats": 92,
     "status": "confirmed"
   },
   {
@@ -1129,11 +1129,67 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Madina",
     "contract_type": "group",
     "pnr": "",
-    "seats": 75,
+    "seats": 92,
     "status": "confirmed"
   },
   {
     "id": "fb_1447_26",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV211",
+    "flies_on": "2027-06-12",
+    "from_city": "Jeddah",
+    "to_city": "MILANO",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 90,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_27",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1421",
+    "flies_on": "2027-06-12",
+    "from_city": "Madina",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 90,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_28",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1465",
+    "flies_on": "2027-05-23",
+    "from_city": "Riyadh",
+    "to_city": "Madina",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 89,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_29",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudi Airlines",
+    "flight_no": "SV21",
+    "flies_on": "2027-06-08",
+    "from_city": "Jeddah",
+    "to_city": "NEWYORK",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 89,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_30",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1143,11 +1199,193 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Riyadh",
     "contract_type": "group",
     "pnr": "",
-    "seats": 74,
+    "seats": 89,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_27",
+    "id": "fb_1447_31",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1016",
+    "flies_on": "2027-06-12",
+    "from_city": "Jeddah",
+    "to_city": "Riyadh",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 86,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_32",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1457",
+    "flies_on": "2027-05-20",
+    "from_city": "Riyadh",
+    "to_city": "Madina",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 85,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_33",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV131",
+    "flies_on": "2027-06-08",
+    "from_city": "Jeddah",
+    "to_city": "Paris",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 85,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_34",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1051",
+    "flies_on": "2027-05-30",
+    "from_city": "Riyadh",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 83,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_35",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV127",
+    "flies_on": "2027-06-15",
+    "from_city": "Jeddah",
+    "to_city": "Paris",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 83,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_36",
+    "direction": "arrival",
+    "airline_ar": "الخطوط الجوية البريطانية",
+    "airline_en": "British Airways",
+    "flight_no": "BA133",
+    "flies_on": "2027-05-28",
+    "from_city": "LONDON",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 82,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_37",
+    "direction": "return",
+    "airline_ar": "الخطوط الجوية البريطانية",
+    "airline_en": "British Airways",
+    "flight_no": "BA132",
+    "flies_on": "2027-06-11",
+    "from_city": "Jeddah",
+    "to_city": "LONDON",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 82,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_38",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1429",
+    "flies_on": "2027-06-15",
+    "from_city": "Madina",
+    "to_city": "Riyadh",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 82,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_39",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV250",
+    "flies_on": "2027-05-29",
+    "from_city": "BIRMINGHAM",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 80,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_40",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV253",
+    "flies_on": "2027-06-12",
+    "from_city": "Jeddah",
+    "to_city": "BIRMINGHAM",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 80,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_41",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV214",
+    "flies_on": "2027-05-28",
+    "from_city": "Amsterdam",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 78,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_42",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1420",
+    "flies_on": "2027-05-25",
+    "from_city": "Jeddah",
+    "to_city": "Madina",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 77,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_43",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1051",
+    "flies_on": "2027-05-29",
+    "from_city": "Riyadh",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 76,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_44",
     "direction": "return",
     "airline_ar": "الاماراتيه",
     "airline_en": "ALAMARATYH",
@@ -1161,7 +1399,49 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_28",
+    "id": "fb_1447_45",
+    "direction": "return",
+    "airline_ar": "الاماراتيه",
+    "airline_en": "ALAMARATYH",
+    "flight_no": "EK806",
+    "flies_on": "2027-06-12",
+    "from_city": "Jeddah",
+    "to_city": "Dubai",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 73,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_46",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV126",
+    "flies_on": "2027-05-29",
+    "from_city": "Paris",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 71,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_47",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1421",
+    "flies_on": "2027-06-16",
+    "from_city": "Madina",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 71,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_48",
     "direction": "arrival",
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
@@ -1175,7 +1455,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_29",
+    "id": "fb_1447_49",
     "direction": "return",
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
@@ -1189,40 +1469,26 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_30",
+    "id": "fb_1447_50",
     "direction": "return",
-    "airline_ar": "الاماراتيه",
-    "airline_en": "ALAMARATYH",
-    "flight_no": "EK806",
-    "flies_on": "2027-06-12",
-    "from_city": "Jeddah",
-    "to_city": "Dubai",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 71,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_31",
-    "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
-    "flight_no": "SV1420",
-    "flies_on": "2027-05-25",
+    "flight_no": "SV1046",
+    "flies_on": "2027-06-08",
     "from_city": "Jeddah",
-    "to_city": "Madina",
+    "to_city": "Paris",
     "contract_type": "group",
     "pnr": "",
     "seats": 69,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_32",
+    "id": "fb_1447_51",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
     "flight_no": "SV215",
-    "flies_on": "2027-06-15",
+    "flies_on": "2027-06-10",
     "from_city": "Jeddah",
     "to_city": "Amsterdam",
     "contract_type": "group",
@@ -1231,21 +1497,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_33",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV126",
-    "flies_on": "2027-05-28",
-    "from_city": "Paris",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 66,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_34",
+    "id": "fb_1447_52",
     "direction": "return",
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
@@ -1259,7 +1511,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_35",
+    "id": "fb_1447_53",
     "direction": "arrival",
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
@@ -1273,83 +1525,13 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_36",
+    "id": "fb_1447_54",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
-    "flight_no": "SV1457",
-    "flies_on": "2027-05-20",
-    "from_city": "Riyadh",
-    "to_city": "Madina",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 64,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_37",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV131",
-    "flies_on": "2027-06-08",
-    "from_city": "Jeddah",
-    "to_city": "Paris",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 64,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_38",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV214",
-    "flies_on": "2027-05-28",
-    "from_city": "Amsterdam",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 64,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_39",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1421",
-    "flies_on": "2027-06-12",
-    "from_city": "Madina",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 62,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_40",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1016",
-    "flies_on": "2027-06-12",
-    "from_city": "Jeddah",
-    "to_city": "Riyadh",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 61,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_41",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1429",
-    "flies_on": "2027-06-16",
-    "from_city": "Madina",
+    "flight_no": "SV120",
+    "flies_on": "2027-05-29",
+    "from_city": "LONDON",
     "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
@@ -1357,7 +1539,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_42",
+    "id": "fb_1447_55",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1371,35 +1553,35 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_43",
+    "id": "fb_1447_56",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
-    "flight_no": "SV1465",
-    "flies_on": "2027-05-23",
+    "flight_no": "SV1041",
+    "flies_on": "2027-05-30",
     "from_city": "Riyadh",
-    "to_city": "Madina",
+    "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
-    "seats": 56,
+    "seats": 50,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_44",
+    "id": "fb_1447_57",
     "direction": "return",
     "airline_ar": "السعودية",
-    "airline_en": "Saudi Airlines",
+    "airline_en": "Saudia",
     "flight_no": "SV21",
-    "flies_on": "2027-06-08",
+    "flies_on": "2027-06-11",
     "from_city": "Jeddah",
     "to_city": "NEWYORK",
     "contract_type": "group",
     "pnr": "",
-    "seats": 56,
+    "seats": 50,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_45",
+    "id": "fb_1447_58",
     "direction": "arrival",
     "airline_ar": "الاماراتيه",
     "airline_en": "ALAMARATYH",
@@ -1413,49 +1595,35 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_46",
+    "id": "fb_1447_59",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
-    "flight_no": "SV20",
-    "flies_on": "2027-05-26",
-    "from_city": "NEWYORK",
-    "to_city": "Jeddah",
+    "flight_no": "SV1428",
+    "flies_on": "2027-05-23",
+    "from_city": "Jeddah",
+    "to_city": "Madina",
     "contract_type": "group",
     "pnr": "",
     "seats": 49,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_47",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV250",
-    "flies_on": "2027-05-29",
-    "from_city": "BIRMINGHAM",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 49,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_48",
+    "id": "fb_1447_60",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
-    "flight_no": "SV253",
-    "flies_on": "2027-06-12",
+    "flight_no": "SV35",
+    "flies_on": "2027-06-08",
     "from_city": "Jeddah",
-    "to_city": "BIRMINGHAM",
+    "to_city": "WASHINGTON",
     "contract_type": "group",
     "pnr": "",
     "seats": 49,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_49",
+    "id": "fb_1447_61",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1469,13 +1637,13 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_50",
+    "id": "fb_1447_62",
     "direction": "arrival",
-    "airline_ar": "الخطوط الجوية القطرية",
-    "airline_en": "Qatar Airways",
-    "flight_no": "QR1182",
-    "flies_on": "2027-05-30",
-    "from_city": "Doha",
+    "airline_ar": "الخطوط الجوية التركية",
+    "airline_en": "Turkish Airlines",
+    "flight_no": "TK 120",
+    "flies_on": "2027-05-24",
+    "from_city": "Istanbul",
     "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
@@ -1483,21 +1651,49 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_51",
+    "id": "fb_1447_63",
     "direction": "return",
-    "airline_ar": "الخطوط الجوية القطرية",
-    "airline_en": "Qatar Airways",
-    "flight_no": "QR1185",
-    "flies_on": "2027-06-16",
+    "airline_ar": "الخطوط الجوية التركية",
+    "airline_en": "Turkish Airlines",
+    "flight_no": "TK115",
+    "flies_on": "2027-06-08",
     "from_city": "Jeddah",
-    "to_city": "Doha",
+    "to_city": "Istanbul",
     "contract_type": "group",
     "pnr": "",
     "seats": 48,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_52",
+    "id": "fb_1447_64",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1048",
+    "flies_on": "2027-06-08",
+    "from_city": "Jeddah",
+    "to_city": "Riyadh",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 48,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_65",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV20",
+    "flies_on": "2027-05-26",
+    "from_city": "NEWYORK",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 48,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_66",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1511,7 +1707,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_53",
+    "id": "fb_1447_67",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1525,7 +1721,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_54",
+    "id": "fb_1447_68",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1539,7 +1735,21 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_55",
+    "id": "fb_1447_69",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1424",
+    "flies_on": "2027-05-21",
+    "from_city": "Jeddah",
+    "to_city": "Madina",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 47,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_70",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1553,7 +1763,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_56",
+    "id": "fb_1447_71",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1567,7 +1777,21 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_57",
+    "id": "fb_1447_72",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV124",
+    "flies_on": "2027-05-26",
+    "from_city": "MANCHESTER",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 47,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_73",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1581,7 +1805,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_58",
+    "id": "fb_1447_74",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1595,7 +1819,21 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_59",
+    "id": "fb_1447_75",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV211",
+    "flies_on": "2027-06-10",
+    "from_city": "Jeddah",
+    "to_city": "MILANO",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 46,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_76",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1609,27 +1847,69 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_60",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1046",
-    "flies_on": "2027-06-08",
-    "from_city": "Jeddah",
-    "to_city": "Paris",
+    "id": "fb_1447_77",
+    "direction": "arrival",
+    "airline_ar": "الخطوط الجوية التركية",
+    "airline_en": "Turkish Airlines",
+    "flight_no": "TK126",
+    "flies_on": "2027-05-29",
+    "from_city": "Istanbul",
+    "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
     "seats": 45,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_61",
-    "direction": "arrival",
+    "id": "fb_1447_78",
+    "direction": "return",
     "airline_ar": "الخطوط الجوية التركية",
     "airline_en": "Turkish Airlines",
-    "flight_no": "TK 120",
-    "flies_on": "2027-05-24",
-    "from_city": "Istanbul",
+    "flight_no": "TK127",
+    "flies_on": "2027-06-12",
+    "from_city": "Jeddah",
+    "to_city": "Istanbul",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 45,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_79",
+    "direction": "arrival",
+    "airline_ar": "الخطوط الجوية القطرية",
+    "airline_en": "Qatar Airways",
+    "flight_no": "QR1182",
+    "flies_on": "2027-05-30",
+    "from_city": "Doha",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 45,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_80",
+    "direction": "return",
+    "airline_ar": "الخطوط الجوية القطرية",
+    "airline_en": "Qatar Airways",
+    "flight_no": "QR1185",
+    "flies_on": "2027-06-16",
+    "from_city": "Jeddah",
+    "to_city": "Doha",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 45,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_81",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV168",
+    "flies_on": "2027-05-29",
+    "from_city": "Frankfort",
     "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
@@ -1637,21 +1917,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_62",
-    "direction": "return",
-    "airline_ar": "الخطوط الجوية التركية",
-    "airline_en": "Turkish Airlines",
-    "flight_no": "TK115",
-    "flies_on": "2027-06-08",
-    "from_city": "Jeddah",
-    "to_city": "Istanbul",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 43,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_63",
+    "id": "fb_1447_82",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1665,63 +1931,21 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_64",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV126",
-    "flies_on": "2027-05-29",
-    "from_city": "Paris",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 43,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_65",
+    "id": "fb_1447_83",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
-    "flight_no": "SV1421",
-    "flies_on": "2027-06-16",
-    "from_city": "Madina",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 43,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_66",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1041",
-    "flies_on": "2027-05-30",
-    "from_city": "Riyadh",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 42,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_67",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV21",
+    "flight_no": "SV123",
     "flies_on": "2027-06-11",
     "from_city": "Jeddah",
-    "to_city": "NEWYORK",
+    "to_city": "MANCHESTER",
     "contract_type": "group",
     "pnr": "",
-    "seats": 42,
+    "seats": 43,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_68",
+    "id": "fb_1447_84",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1731,25 +1955,25 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
-    "seats": 40,
+    "seats": 42,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_69",
+    "id": "fb_1447_85",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
-    "flight_no": "SV120",
-    "flies_on": "2027-05-29",
-    "from_city": "LONDON",
+    "flight_no": "SV36",
+    "flies_on": "2027-05-26",
+    "from_city": "WASHINGTON",
     "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
-    "seats": 40,
+    "seats": 41,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_70",
+    "id": "fb_1447_86",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1763,105 +1987,63 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_71",
+    "id": "fb_1447_87",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV62",
+    "flies_on": "2027-05-26",
+    "from_city": "TORONTO-PEARSON",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 39,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_88",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
-    "flight_no": "SV211",
-    "flies_on": "2027-06-10",
+    "flight_no": "SV61",
+    "flies_on": "2027-06-08",
     "from_city": "Jeddah",
-    "to_city": "MILANO",
+    "to_city": "TORONTO-PEARSON",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 39,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_89",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV120",
+    "flies_on": "2027-05-26",
+    "from_city": "London",
+    "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
     "seats": 38,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_72",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1428",
-    "flies_on": "2027-05-23",
-    "from_city": "Jeddah",
-    "to_city": "Madina",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 35,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_73",
+    "id": "fb_1447_90",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
-    "flight_no": "SV35",
-    "flies_on": "2027-06-08",
+    "flight_no": "SV119",
+    "flies_on": "2027-06-12",
     "from_city": "Jeddah",
-    "to_city": "WASHINGTON",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 35,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_74",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1048",
-    "flies_on": "2027-06-08",
-    "from_city": "Jeddah",
-    "to_city": "Riyadh",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 33,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_75",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV124",
-    "flies_on": "2027-05-26",
-    "from_city": "MANCHESTER",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 33,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_76",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV123",
-    "flies_on": "2027-06-11",
-    "from_city": "Jeddah",
-    "to_city": "MANCHESTER",
+    "to_city": "LONDON",
     "contract_type": "group",
     "pnr": "",
     "seats": 32,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_77",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1422",
-    "flies_on": "2027-05-25",
-    "from_city": "Jeddah",
-    "to_city": "Madina",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 31,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_78",
+    "id": "fb_1447_91",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1875,7 +2057,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_79",
+    "id": "fb_1447_92",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1889,7 +2071,21 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_80",
+    "id": "fb_1447_93",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV119",
+    "flies_on": "2027-06-11",
+    "from_city": "Jeddah",
+    "to_city": "LONDON",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 28,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_94",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1903,77 +2099,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_81",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV215",
-    "flies_on": "2027-06-10",
-    "from_city": "Jeddah",
-    "to_city": "Amsterdam",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 26,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_82",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV62",
-    "flies_on": "2027-05-26",
-    "from_city": "TORONTO-PEARSON",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 26,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_83",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV61",
-    "flies_on": "2027-06-08",
-    "from_city": "Jeddah",
-    "to_city": "TORONTO-PEARSON",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 26,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_84",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV36",
-    "flies_on": "2027-05-26",
-    "from_city": "WASHINGTON",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 25,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_85",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1424",
-    "flies_on": "2027-05-21",
-    "from_city": "Jeddah",
-    "to_city": "Madina",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 24,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_86",
+    "id": "fb_1447_95",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -1983,11 +2109,11 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
-    "seats": 22,
+    "seats": 27,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_87",
+    "id": "fb_1447_96",
     "direction": "arrival",
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
@@ -2001,49 +2127,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_88",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV119",
-    "flies_on": "2027-06-11",
-    "from_city": "Jeddah",
-    "to_city": "LONDON",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 22,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_89",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1051",
-    "flies_on": "2027-05-30",
-    "from_city": "Riyadh",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 22,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_90",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV127",
-    "flies_on": "2027-06-15",
-    "from_city": "Jeddah",
-    "to_city": "Paris",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 22,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_91",
+    "id": "fb_1447_97",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -2057,7 +2141,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_92",
+    "id": "fb_1447_98",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -2071,7 +2155,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_93",
+    "id": "fb_1447_99",
     "direction": "return",
     "airline_ar": "الخطوط الجوية البريطانية",
     "airline_en": "British Airways",
@@ -2085,49 +2169,49 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_94",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1051",
-    "flies_on": "2027-05-29",
-    "from_city": "Riyadh",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 19,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_95",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV168",
-    "flies_on": "2027-05-29",
-    "from_city": "Frankfort",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 18,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_96",
+    "id": "fb_1447_100",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
-    "flight_no": "SV119",
-    "flies_on": "2027-06-12",
-    "from_city": "Jeddah",
-    "to_city": "LONDON",
+    "flight_no": "SV1464",
+    "flies_on": "2027-06-16",
+    "from_city": "Madina",
+    "to_city": "Riyadh",
     "contract_type": "group",
     "pnr": "",
-    "seats": 18,
+    "seats": 20,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_97",
+    "id": "fb_1447_101",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV36",
+    "flies_on": "2027-05-30",
+    "from_city": "WASHINGTON",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 15,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_102",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1016",
+    "flies_on": "2027-06-11",
+    "from_city": "Jeddah",
+    "to_city": "Riyadh",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 15,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_103",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -2141,7 +2225,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_98",
+    "id": "fb_1447_104",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -2155,105 +2239,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_99",
-    "direction": "arrival",
-    "airline_ar": "الخطوط الجوية التركية",
-    "airline_en": "Turkish Airlines",
-    "flight_no": "TK126",
-    "flies_on": "2027-05-29",
-    "from_city": "Istanbul",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 15,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_100",
-    "direction": "return",
-    "airline_ar": "الخطوط الجوية التركية",
-    "airline_en": "Turkish Airlines",
-    "flight_no": "TK127",
-    "flies_on": "2027-06-12",
-    "from_city": "Jeddah",
-    "to_city": "Istanbul",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 15,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_101",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV62",
-    "flies_on": "2027-05-30",
-    "from_city": "TORONTO-PEARSON",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 12,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_102",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV61",
-    "flies_on": "2027-06-12",
-    "from_city": "Jeddah",
-    "to_city": "TORONTO-PEARSON",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 12,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_103",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1464",
-    "flies_on": "2027-06-16",
-    "from_city": "Madina",
-    "to_city": "Riyadh",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 9,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_104",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1467",
-    "flies_on": "2027-05-25",
-    "from_city": "Riyadh",
-    "to_city": "Madina",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 8,
-    "status": "confirmed"
-  },
-  {
     "id": "fb_1447_105",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1050",
-    "flies_on": "2027-06-08",
-    "from_city": "Jeddah",
-    "to_city": "Riyadh",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 8,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_106",
     "direction": "arrival",
     "airline_ar": "الخطوط الجوية التركية",
     "airline_en": "Turkish Airlines",
@@ -2263,11 +2249,11 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Madina",
     "contract_type": "group",
     "pnr": "",
-    "seats": 6,
+    "seats": 14,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_107",
+    "id": "fb_1447_106",
     "direction": "return",
     "airline_ar": "الخطوط الجوية التركية",
     "airline_en": "Turkish Airlines",
@@ -2277,11 +2263,109 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Istanbul",
     "contract_type": "group",
     "pnr": "",
-    "seats": 6,
+    "seats": 14,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_107",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV62",
+    "flies_on": "2027-05-30",
+    "from_city": "TORONTO-PEARSON",
+    "to_city": "Jeddah",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 14,
     "status": "confirmed"
   },
   {
     "id": "fb_1447_108",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV61",
+    "flies_on": "2027-06-12",
+    "from_city": "Jeddah",
+    "to_city": "TORONTO-PEARSON",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 14,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_109",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1044",
+    "flies_on": "2027-06-08",
+    "from_city": "Jeddah",
+    "to_city": "Riyadh",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 11,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_110",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1467",
+    "flies_on": "2027-05-25",
+    "from_city": "Riyadh",
+    "to_city": "Madina",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 10,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_111",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1050",
+    "flies_on": "2027-06-08",
+    "from_city": "Jeddah",
+    "to_city": "Riyadh",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 10,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_112",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV1420",
+    "flies_on": "2027-05-28",
+    "from_city": "Jeddah",
+    "to_city": "Madina",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 9,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_113",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia",
+    "flight_no": "SV131",
+    "flies_on": "2027-06-12",
+    "from_city": "Jeddah",
+    "to_city": "Paris",
+    "contract_type": "group",
+    "pnr": "",
+    "seats": 9,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_114",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -2291,11 +2375,11 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
-    "seats": 5,
+    "seats": 6,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_109",
+    "id": "fb_1447_115",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -2305,39 +2389,25 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "to_city": "Riyadh",
     "contract_type": "group",
     "pnr": "",
-    "seats": 5,
+    "seats": 6,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_110",
+    "id": "fb_1447_116",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
-    "flight_no": "SV36",
+    "flight_no": "SV1053",
     "flies_on": "2027-05-30",
-    "from_city": "WASHINGTON",
+    "from_city": "Riyadh",
     "to_city": "Jeddah",
     "contract_type": "group",
     "pnr": "",
-    "seats": 5,
+    "seats": 4,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_111",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1016",
-    "flies_on": "2027-06-11",
-    "from_city": "Jeddah",
-    "to_city": "Riyadh",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 5,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_112",
+    "id": "fb_1447_117",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -2351,7 +2421,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_113",
+    "id": "fb_1447_118",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -2365,63 +2435,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_114",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1044",
-    "flies_on": "2027-06-08",
-    "from_city": "Jeddah",
-    "to_city": "Riyadh",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 4,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_115",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1420",
-    "flies_on": "2027-05-28",
-    "from_city": "Jeddah",
-    "to_city": "Madina",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 4,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_116",
-    "direction": "return",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV131",
-    "flies_on": "2027-06-12",
-    "from_city": "Jeddah",
-    "to_city": "Paris",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 4,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_117",
-    "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV120",
-    "flies_on": "2027-05-26",
-    "from_city": "London",
-    "to_city": "Jeddah",
-    "contract_type": "group",
-    "pnr": "",
-    "seats": 4,
-    "status": "confirmed"
-  },
-  {
-    "id": "fb_1447_118",
+    "id": "fb_1447_119",
     "direction": "arrival",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -2435,7 +2449,7 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_119",
+    "id": "fb_1447_120",
     "direction": "return",
     "airline_ar": "السعودية",
     "airline_en": "Saudia",
@@ -2449,45 +2463,689 @@ export const SEED_FLIGHT_BLOCKS: DraftFlightBlock[] = [
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_120",
+    "id": "fb_1447_gds_arrival_0",
     "direction": "arrival",
-    "airline_ar": "السعودية",
-    "airline_en": "Saudia",
-    "flight_no": "SV1053",
-    "flies_on": "2027-05-30",
-    "from_city": "Riyadh",
-    "to_city": "Jeddah",
-    "contract_type": "group",
+    "airline_ar": "إير كايرو",
+    "airline_en": "Air Cairo (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-21",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
     "pnr": "",
-    "seats": 1,
+    "seats": 347,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_gds_arrival",
+    "id": "fb_1447_gds_arrival_1",
     "direction": "arrival",
-    "airline_ar": "حجوزات أفراد (GDS)",
-    "airline_en": "GDS individual bookings",
+    "airline_ar": "فلاي دبي",
+    "airline_en": "Flydubai (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-20",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 105,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_2",
+    "direction": "arrival",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia (GDS)",
     "flight_no": "",
     "flies_on": "2027-05-12",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
     "pnr": "",
-    "seats": 1282,
+    "seats": 931,
     "status": "confirmed"
   },
   {
-    "id": "fb_1447_gds_return",
+    "id": "fb_1447_gds_arrival_3",
+    "direction": "arrival",
+    "airline_ar": "طيران أديل",
+    "airline_en": "Flyadeal (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-23",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 250,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_4",
+    "direction": "arrival",
+    "airline_ar": "طيران الاتحاد",
+    "airline_en": "Etihad Airways (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-12",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 121,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_5",
+    "direction": "arrival",
+    "airline_ar": "الخطوط الجوية القطرية",
+    "airline_en": "Qatar Airways (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-12",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 224,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_6",
+    "direction": "arrival",
+    "airline_ar": "الخطوط الجوية التركية",
+    "airline_en": "Turkish Airlines (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-12",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 167,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_7",
+    "direction": "arrival",
+    "airline_ar": "طيران الملكية الأردنية",
+    "airline_en": "Royal Jordanian (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-20",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 205,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_8",
+    "direction": "arrival",
+    "airline_ar": "طيران ناس",
+    "airline_en": "flynas (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-20",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 263,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_9",
+    "direction": "arrival",
+    "airline_ar": "طيران ايجين",
+    "airline_en": "Aegean Airlines (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-25",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 43,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_10",
+    "direction": "arrival",
+    "airline_ar": "VF",
+    "airline_en": "VF (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-21",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 52,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_11",
+    "direction": "arrival",
+    "airline_ar": "طيران الإمارات",
+    "airline_en": "Emirates (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-23",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 34,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_12",
+    "direction": "arrival",
+    "airline_ar": "الخطوط الجوية الأثيوبية",
+    "airline_en": "Ethiopian Airlines (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-24",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 23,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_13",
+    "direction": "arrival",
+    "airline_ar": "نسما للطيران",
+    "airline_en": "Nesma Airlines (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-24",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 24,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_14",
+    "direction": "arrival",
+    "airline_ar": "طيران بيجاسوس",
+    "airline_en": "Pegasus Airlines (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-24",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 28,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_15",
+    "direction": "arrival",
+    "airline_ar": "MSC",
+    "airline_en": "MSC (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-27",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 4,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_16",
+    "direction": "arrival",
+    "airline_ar": "طيران الخليج",
+    "airline_en": "Gulf Air (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-21",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 15,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_17",
+    "direction": "arrival",
+    "airline_ar": "الخطوط الجوية الفرنسية",
+    "airline_en": "Air France (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-30",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 2,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_18",
+    "direction": "arrival",
+    "airline_ar": "طيران الشرق الأوسط",
+    "airline_en": "Middle East Airlines (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-20",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 2,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_19",
+    "direction": "arrival",
+    "airline_ar": "الطيران العماني",
+    "airline_en": "Oman Air (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-25",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 2,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_20",
+    "direction": "arrival",
+    "airline_ar": "طيران الهند",
+    "airline_en": "Air India (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-23",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 4,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_21",
+    "direction": "arrival",
+    "airline_ar": "صاف اير",
+    "airline_en": "Safair (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-27",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 2,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_22",
+    "direction": "arrival",
+    "airline_ar": "طيران ايبريا",
+    "airline_en": "Iberia (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-25",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 2,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_23",
+    "direction": "arrival",
+    "airline_ar": "الخطوط الجوية الكينية",
+    "airline_en": "Kenya Airways (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-23",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 1,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_24",
+    "direction": "arrival",
+    "airline_ar": "طيران تاي إنترناشونال",
+    "airline_en": "Thai Airways International (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-28",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 1,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_arrival_25",
+    "direction": "arrival",
+    "airline_ar": "العربية للطيران",
+    "airline_en": "Air Arabia (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-05-26",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 2,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_0",
     "direction": "return",
-    "airline_ar": "حجوزات أفراد (GDS)",
-    "airline_en": "GDS individual bookings",
+    "airline_ar": "إير كايرو",
+    "airline_en": "Air Cairo (GDS)",
     "flight_no": "",
     "flies_on": "2027-06-08",
     "from_city": "متعدد",
     "to_city": "متعدد",
     "contract_type": "gds",
     "pnr": "",
-    "seats": 1282,
+    "seats": 350,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_1",
+    "direction": "return",
+    "airline_ar": "السعودية",
+    "airline_en": "Saudia (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-07",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 1032,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_2",
+    "direction": "return",
+    "airline_ar": "طيران ايجين",
+    "airline_en": "Aegean Airlines (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 44,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_3",
+    "direction": "return",
+    "airline_ar": "طيران الملكية الأردنية",
+    "airline_en": "Royal Jordanian (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 207,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_4",
+    "direction": "return",
+    "airline_ar": "طيران أديل",
+    "airline_en": "Flyadeal (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 222,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_5",
+    "direction": "return",
+    "airline_ar": "طيران ناس",
+    "airline_en": "flynas (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 268,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_6",
+    "direction": "return",
+    "airline_ar": "الخطوط الجوية التركية",
+    "airline_en": "Turkish Airlines (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 172,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_7",
+    "direction": "return",
+    "airline_ar": "الخطوط الجوية القطرية",
+    "airline_en": "Qatar Airways (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 217,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_8",
+    "direction": "return",
+    "airline_ar": "طيران الاتحاد",
+    "airline_en": "Etihad Airways (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 110,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_9",
+    "direction": "return",
+    "airline_ar": "فلاي دبي",
+    "airline_en": "Flydubai (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 46,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_10",
+    "direction": "return",
+    "airline_ar": "VF",
+    "airline_en": "VF (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 40,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_11",
+    "direction": "return",
+    "airline_ar": "الخطوط الجوية الأثيوبية",
+    "airline_en": "Ethiopian Airlines (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 21,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_12",
+    "direction": "return",
+    "airline_ar": "نسما للطيران",
+    "airline_en": "Nesma Airlines (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 24,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_13",
+    "direction": "return",
+    "airline_ar": "طيران الإمارات",
+    "airline_en": "Emirates (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 35,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_14",
+    "direction": "return",
+    "airline_ar": "طيران بيجاسوس",
+    "airline_en": "Pegasus Airlines (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 26,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_15",
+    "direction": "return",
+    "airline_ar": "طيران الخليج",
+    "airline_en": "Gulf Air (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 17,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_16",
+    "direction": "return",
+    "airline_ar": "AJY",
+    "airline_en": "AJY (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-10",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 5,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_17",
+    "direction": "return",
+    "airline_ar": "طيران ايبريا",
+    "airline_en": "Iberia (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-10",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 5,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_18",
+    "direction": "return",
+    "airline_ar": "الطيران العماني",
+    "airline_en": "Oman Air (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 4,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_19",
+    "direction": "return",
+    "airline_ar": "طيران الهند",
+    "airline_en": "Air India (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-12",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 4,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_20",
+    "direction": "return",
+    "airline_ar": "الخطوط الجوية الفرنسية",
+    "airline_en": "Air France (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-09",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 1,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_21",
+    "direction": "return",
+    "airline_ar": "الخطوط الجوية الكينية",
+    "airline_en": "Kenya Airways (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-08",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 1,
+    "status": "confirmed"
+  },
+  {
+    "id": "fb_1447_gds_return_22",
+    "direction": "return",
+    "airline_ar": "العربية للطيران",
+    "airline_en": "Air Arabia (GDS)",
+    "flight_no": "",
+    "flies_on": "2027-06-09",
+    "from_city": "متعدد",
+    "to_city": "متعدد",
+    "contract_type": "gds",
+    "pnr": "",
+    "seats": 2,
     "status": "confirmed"
   }
 ]
@@ -2523,42 +3181,126 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_66",
-        "seats": 42
+        "blockId": "fb_1447_56",
+        "seats": 50
       },
       {
-        "blockId": "fb_1447_67",
-        "seats": 42
+        "blockId": "fb_1447_57",
+        "seats": 50
       },
       {
-        "blockId": "fb_1447_69",
-        "seats": 22
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 25
       },
       {
-        "blockId": "fb_1447_88",
-        "seats": 22
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 25
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 10
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 4
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 10
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 4
       },
       {
-        "blockId": "fb_1447_15",
-        "seats": 32
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 7
       },
       {
-        "blockId": "fb_1447_76",
-        "seats": 32
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_54",
+        "seats": 28
+      },
+      {
+        "blockId": "fb_1447_93",
+        "seats": 28
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_11",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_13",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_10",
+        "seats": 43
+      },
+      {
+        "blockId": "fb_1447_83",
+        "seats": 43
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_12",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_11",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_24",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_13",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_12",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 1
       }
     ],
     "room_mix": {
-      "2": 36,
-      "3": 47,
-      "4": 117
+      "2": 67,
+      "3": 51,
+      "4": 82
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -2596,26 +3338,102 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_105",
+        "seats": 14
+      },
+      {
         "blockId": "fb_1447_106",
-        "seats": 6
+        "seats": 14
       },
       {
-        "blockId": "fb_1447_107",
-        "seats": 6
+        "blockId": "fb_1447_gds_arrival_11",
+        "seats": 9
       },
       {
-        "blockId": "fb_1447_gds_arrival",
+        "blockId": "fb_1447_gds_return_13",
+        "seats": 9
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
         "seats": 7
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 7
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 10
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_19",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_18",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_16",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_15",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_12",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_11",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_22",
+        "seats": 2
       }
     ],
     "room_mix": {
-      "2": 14,
-      "3": 28,
-      "4": 48
+      "2": 21,
+      "3": 15,
+      "4": 54
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -2653,28 +3471,84 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_70",
+        "blockId": "fb_1447_86",
         "seats": 39
+      },
+      {
+        "blockId": "fb_1447_9",
+        "seats": 39
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 24
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 25
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_17",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_20",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_55",
+        "seats": 58
       },
       {
         "blockId": "fb_1447_6",
-        "seats": 39
-      },
-      {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 43
-      },
-      {
-        "blockId": "fb_1447_gds_return",
-        "seats": 43
-      },
-      {
-        "blockId": "fb_1447_42",
         "seats": 58
       },
       {
-        "blockId": "fb_1447_20",
-        "seats": 58
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_16",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_15",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_13",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_12",
+        "seats": 1
       }
     ],
     "room_mix": {
@@ -2726,15 +3600,7 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_85",
-        "seats": 24
-      },
-      {
-        "blockId": "fb_1447_20",
-        "seats": 24
-      },
-      {
-        "blockId": "fb_1447_7",
+        "blockId": "fb_1447_69",
         "seats": 47
       },
       {
@@ -2742,18 +3608,26 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 47
       },
       {
-        "blockId": "fb_1447_gds_arrival",
+        "blockId": "fb_1447_12",
+        "seats": 47
+      },
+      {
+        "blockId": "fb_1447_9",
+        "seats": 47
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
         "seats": 3
       },
       {
-        "blockId": "fb_1447_gds_return",
+        "blockId": "fb_1447_gds_return_7",
         "seats": 3
       }
     ],
     "room_mix": {
-      "2": 37,
-      "3": 13,
-      "4": 50
+      "2": 35,
+      "3": 27,
+      "4": 38
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -2799,23 +3673,23 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_59",
+        "blockId": "fb_1447_76",
         "seats": 46
       },
       {
-        "blockId": "fb_1447_8",
+        "blockId": "fb_1447_4",
         "seats": 95
       },
       {
-        "blockId": "fb_1447_49",
+        "blockId": "fb_1447_61",
         "seats": 49
       },
       {
-        "blockId": "fb_1447_gds_arrival",
+        "blockId": "fb_1447_gds_arrival_6",
         "seats": 2
       },
       {
-        "blockId": "fb_1447_gds_return",
+        "blockId": "fb_1447_gds_return_6",
         "seats": 2
       }
     ],
@@ -2868,34 +3742,106 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 27
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 2
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 27
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 2
       },
       {
-        "blockId": "fb_1447_82",
-        "seats": 26
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 6
       },
       {
-        "blockId": "fb_1447_83",
-        "seats": 26
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 7
       },
       {
-        "blockId": "fb_1447_52",
+        "blockId": "fb_1447_87",
+        "seats": 39
+      },
+      {
+        "blockId": "fb_1447_88",
+        "seats": 39
+      },
+      {
+        "blockId": "fb_1447_66",
         "seats": 48
       },
       {
-        "blockId": "fb_1447_53",
+        "blockId": "fb_1447_67",
         "seats": 48
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 28
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 28
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_11",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_13",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_16",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_15",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_13",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_12",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 4
       }
     ],
     "room_mix": {
-      "2": 51,
-      "3": 26,
-      "4": 66
+      "2": 38,
+      "3": 28,
+      "4": 77
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -2933,15 +3879,15 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_36",
-        "seats": 64
+        "blockId": "fb_1447_32",
+        "seats": 85
       },
       {
-        "blockId": "fb_1447_37",
-        "seats": 64
+        "blockId": "fb_1447_33",
+        "seats": 85
       },
       {
-        "blockId": "fb_1447_2",
+        "blockId": "fb_1447_1",
         "seats": 131
       },
       {
@@ -2949,18 +3895,50 @@ export const SEED_PACKAGES: DraftPackage[] = [
         "seats": 131
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 12
+        "blockId": "fb_1447_gds_arrival_18",
+        "seats": 2
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 12
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_10",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 2
       }
     ],
     "room_mix": {
-      "2": 42,
-      "3": 34,
-      "4": 164
+      "2": 44,
+      "3": 50,
+      "4": 146
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -2998,26 +3976,34 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_4",
+        "blockId": "fb_1447_7",
         "seats": 42
       },
       {
-        "blockId": "fb_1447_5",
+        "blockId": "fb_1447_8",
         "seats": 42
       },
       {
-        "blockId": "fb_1447_gds_arrival",
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
         "seats": 1
       },
       {
-        "blockId": "fb_1447_gds_return",
+        "blockId": "fb_1447_gds_return_5",
         "seats": 1
       }
     ],
     "room_mix": {
-      "2": 0,
-      "3": 7,
-      "4": 41
+      "2": 2,
+      "3": 6,
+      "4": 40
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -3055,18 +4041,90 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 61
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 9
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 61
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 12
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 10
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 10
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 9
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_11",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_14",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_14",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 30
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 30
+      },
+      {
+        "blockId": "fb_1447_gds_return_17",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 21
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 23
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_13",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_12",
+        "seats": 3
       }
     ],
     "room_mix": {
-      "2": 3,
-      "3": 3,
-      "4": 88
+      "2": 17,
+      "3": 19,
+      "4": 58
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -3104,34 +4162,66 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_61",
-        "seats": 43
-      },
-      {
         "blockId": "fb_1447_62",
-        "seats": 43
+        "seats": 48
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 41
-      },
-      {
-        "blockId": "fb_1447_gds_return",
-        "seats": 41
+        "blockId": "fb_1447_63",
+        "seats": 48
       },
       {
         "blockId": "fb_1447_25",
-        "seats": 75
+        "seats": 92
       },
       {
-        "blockId": "fb_1447_9",
-        "seats": 75
+        "blockId": "fb_1447_5",
+        "seats": 92
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 26
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 26
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 17
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 17
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 1
       }
     ],
     "room_mix": {
-      "2": 26,
-      "3": 19,
-      "4": 149
+      "2": 30,
+      "3": 38,
+      "4": 126
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -3169,42 +4259,114 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_46",
-        "seats": 49
+        "blockId": "fb_1447_65",
+        "seats": 48
       },
       {
-        "blockId": "fb_1447_26",
-        "seats": 74
+        "blockId": "fb_1447_30",
+        "seats": 89
       },
       {
-        "blockId": "fb_1447_84",
-        "seats": 25
+        "blockId": "fb_1447_85",
+        "seats": 41
       },
       {
-        "blockId": "fb_1447_35",
+        "blockId": "fb_1447_53",
         "seats": 65
       },
       {
-        "blockId": "fb_1447_34",
+        "blockId": "fb_1447_52",
         "seats": 66
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 87
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 21
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 87
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 21
       },
       {
-        "blockId": "fb_1447_87",
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 76
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 76
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 11
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 11
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_11",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_13",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_96",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_13",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_12",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_25",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_22",
         "seats": 1
       }
     ],
     "room_mix": {
       "2": 48,
-      "3": 12,
-      "4": 228
+      "3": 54,
+      "4": 186
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -3242,50 +4404,134 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_23",
+        "blockId": "fb_1447_36",
         "seats": 82
       },
       {
-        "blockId": "fb_1447_24",
+        "blockId": "fb_1447_37",
         "seats": 82
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 26
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 19
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 26
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 19
       },
       {
-        "blockId": "fb_1447_38",
+        "blockId": "fb_1447_39",
         "seats": 41
       },
       {
-        "blockId": "fb_1447_1",
+        "blockId": "fb_1447_40",
         "seats": 41
       },
       {
-        "blockId": "fb_1447_54",
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_41",
+        "seats": 41
+      },
+      {
+        "blockId": "fb_1447_2",
+        "seats": 41
+      },
+      {
+        "blockId": "fb_1447_68",
         "seats": 48
       },
       {
-        "blockId": "fb_1447_18",
+        "blockId": "fb_1447_26",
         "seats": 48
       },
       {
-        "blockId": "fb_1447_47",
-        "seats": 24
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 4
       },
       {
-        "blockId": "fb_1447_48",
-        "seats": 24
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_13",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_12",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_9",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_return_2",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_11",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_13",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_16",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_15",
+        "seats": 1
       }
     ],
     "room_mix": {
-      "2": 27,
-      "3": 39,
-      "4": 212
+      "2": 50,
+      "3": 53,
+      "4": 175
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -3324,41 +4570,81 @@ export const SEED_PACKAGES: DraftPackage[] = [
     "flightAllocations": [
       {
         "blockId": "fb_1447_3",
+        "seats": 82
+      },
+      {
+        "blockId": "fb_1447_38",
+        "seats": 82
+      },
+      {
+        "blockId": "fb_1447_43",
+        "seats": 60
+      },
+      {
+        "blockId": "fb_1447_4",
+        "seats": 60
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 23
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 23
+      },
+      {
+        "blockId": "fb_1447_34",
         "seats": 83
       },
       {
-        "blockId": "fb_1447_21",
+        "blockId": "fb_1447_35",
         "seats": 83
       },
       {
-        "blockId": "fb_1447_89",
-        "seats": 22
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 2
       },
       {
-        "blockId": "fb_1447_90",
-        "seats": 22
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 2
       },
       {
-        "blockId": "fb_1447_94",
-        "seats": 11
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 8
       },
       {
-        "blockId": "fb_1447_8",
-        "seats": 11
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 8
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 16
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 1
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 16
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_10",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_return_10",
+        "seats": 6
       }
     ],
     "room_mix": {
-      "2": 42,
-      "3": 58,
-      "4": 176
+      "2": 49,
+      "3": 55,
+      "4": 172
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -3396,52 +4682,160 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_22",
-        "seats": 82
+        "blockId": "fb_1447_11",
+        "seats": 128
+      },
+      {
+        "blockId": "fb_1447_50",
+        "seats": 69
+      },
+      {
+        "blockId": "fb_1447_97",
+        "seats": 21
+      },
+      {
+        "blockId": "fb_1447_98",
+        "seats": 21
+      },
+      {
+        "blockId": "fb_1447_64",
+        "seats": 48
+      },
+      {
+        "blockId": "fb_1447_109",
+        "seats": 11
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_10",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_return_10",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 12
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 84
+      },
+      {
+        "blockId": "fb_1447_59",
+        "seats": 49
       },
       {
         "blockId": "fb_1447_60",
-        "seats": 45
+        "seats": 49
       },
       {
-        "blockId": "fb_1447_91",
-        "seats": 21
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 81
       },
       {
-        "blockId": "fb_1447_92",
-        "seats": 21
+        "blockId": "fb_1447_gds_return_2",
+        "seats": 1
       },
       {
-        "blockId": "fb_1447_74",
-        "seats": 33
+        "blockId": "fb_1447_20",
+        "seats": 95
       },
       {
-        "blockId": "fb_1447_114",
+        "blockId": "fb_1447_21",
+        "seats": 95
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
         "seats": 4
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 62
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 4
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 62
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 2
       },
       {
-        "blockId": "fb_1447_72",
-        "seats": 35
+        "blockId": "fb_1447_gds_return_13",
+        "seats": 5
       },
       {
-        "blockId": "fb_1447_73",
-        "seats": 35
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 13
       },
       {
-        "blockId": "fb_1447_12",
-        "seats": 96
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 18
       },
       {
-        "blockId": "fb_1447_13",
-        "seats": 96
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 26
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 26
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_11",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_23",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_21",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 33
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 33
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_16",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_15",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 21
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 21
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 15
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 15
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_13",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_12",
+        "seats": 3
       }
     ],
     "room_mix": {
@@ -3485,19 +4879,27 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_43",
-        "seats": 56
+        "blockId": "fb_1447_28",
+        "seats": 89
       },
       {
-        "blockId": "fb_1447_44",
-        "seats": 56
+        "blockId": "fb_1447_29",
+        "seats": 89
       },
       {
-        "blockId": "fb_1447_gds_arrival",
+        "blockId": "fb_1447_gds_arrival_4",
         "seats": 2
       },
       {
-        "blockId": "fb_1447_gds_return",
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
         "seats": 2
       }
     ],
@@ -3542,28 +4944,100 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 170
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 56
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 170
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 61
       },
       {
-        "blockId": "fb_1447_112",
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 9
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_117",
         "seats": 4
       },
       {
-        "blockId": "fb_1447_113",
+        "blockId": "fb_1447_118",
         "seats": 4
       },
       {
-        "blockId": "fb_1447_87",
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 22
+      },
+      {
+        "blockId": "fb_1447_96",
         "seats": 21
       },
       {
-        "blockId": "fb_1447_93",
+        "blockId": "fb_1447_99",
         "seats": 21
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 36
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 36
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 18
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_15",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 19
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 14
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 14
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_return_17",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_10",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_10",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 18
       }
     ],
     "room_mix": {
@@ -3607,56 +5081,144 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_19",
-        "seats": 87
+        "blockId": "fb_1447_23",
+        "seats": 93
       },
       {
-        "blockId": "fb_1447_1",
-        "seats": 103
+        "blockId": "fb_1447_2",
+        "seats": 111
       },
       {
-        "blockId": "fb_1447_68",
-        "seats": 40
+        "blockId": "fb_1447_84",
+        "seats": 42
       },
       {
-        "blockId": "fb_1447_18",
-        "seats": 40
-      },
-      {
-        "blockId": "fb_1447_118",
-        "seats": 2
+        "blockId": "fb_1447_26",
+        "seats": 42
       },
       {
         "blockId": "fb_1447_119",
         "seats": 2
       },
       {
-        "blockId": "fb_1447_86",
+        "blockId": "fb_1447_120",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_95",
         "seats": 11
       },
       {
-        "blockId": "fb_1447_17",
+        "blockId": "fb_1447_14",
         "seats": 11
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 104
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 26
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 104
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 26
       },
       {
-        "blockId": "fb_1447_38",
-        "seats": 16
+        "blockId": "fb_1447_41",
+        "seats": 18
       },
       {
-        "blockId": "fb_1447_97",
+        "blockId": "fb_1447_gds_arrival_9",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_return_2",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_103",
         "seats": 15
       },
       {
-        "blockId": "fb_1447_98",
+        "blockId": "fb_1447_104",
         "seats": 15
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 19
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 19
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 13
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 14
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 18
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 18
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_10",
+        "seats": 14
+      },
+      {
+        "blockId": "fb_1447_gds_return_10",
+        "seats": 13
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_14",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_return_14",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 11
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 11
       }
     ],
     "room_mix": {
@@ -3700,28 +5262,48 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_75",
-        "seats": 33
+        "blockId": "fb_1447_72",
+        "seats": 47
+      },
+      {
+        "blockId": "fb_1447_9",
+        "seats": 47
+      },
+      {
+        "blockId": "fb_1447_89",
+        "seats": 38
       },
       {
         "blockId": "fb_1447_6",
-        "seats": 33
+        "seats": 38
       },
       {
-        "blockId": "fb_1447_gds_arrival",
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
         "seats": 5
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 5
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 7
       },
       {
-        "blockId": "fb_1447_117",
-        "seats": 4
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 1
       },
       {
-        "blockId": "fb_1447_20",
-        "seats": 4
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_14",
+        "seats": 2
       }
     ],
     "room_mix": {
@@ -3765,44 +5347,100 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_28",
+        "blockId": "fb_1447_48",
         "seats": 50
       },
       {
-        "blockId": "fb_1447_29",
+        "blockId": "fb_1447_49",
         "seats": 50
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 41
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 25
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 41
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 36
       },
       {
-        "blockId": "fb_1447_15",
-        "seats": 62
+        "blockId": "fb_1447_10",
+        "seats": 90
+      },
+      {
+        "blockId": "fb_1447_27",
+        "seats": 90
       },
       {
         "blockId": "fb_1447_39",
-        "seats": 62
+        "seats": 39
       },
       {
-        "blockId": "fb_1447_47",
-        "seats": 25
+        "blockId": "fb_1447_40",
+        "seats": 39
       },
       {
-        "blockId": "fb_1447_48",
-        "seats": 25
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 4
       },
       {
-        "blockId": "fb_1447_69",
-        "seats": 18
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 4
       },
       {
-        "blockId": "fb_1447_96",
-        "seats": 18
+        "blockId": "fb_1447_54",
+        "seats": 32
+      },
+      {
+        "blockId": "fb_1447_90",
+        "seats": 32
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 14
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 10
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 9
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 12
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 12
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 1
       }
     ],
     "room_mix": {
@@ -3846,36 +5484,104 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_33",
-        "seats": 42
+        "blockId": "fb_1447_24",
+        "seats": 56
       },
       {
-        "blockId": "fb_1447_17",
-        "seats": 42
+        "blockId": "fb_1447_14",
+        "seats": 56
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 26
+        "blockId": "fb_1447_81",
+        "seats": 43
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 26
+        "blockId": "fb_1447_31",
+        "seats": 43
       },
       {
-        "blockId": "fb_1447_95",
-        "seats": 18
+        "blockId": "fb_1447_41",
+        "seats": 19
       },
       {
-        "blockId": "fb_1447_40",
-        "seats": 18
+        "blockId": "fb_1447_2",
+        "seats": 19
       },
       {
-        "blockId": "fb_1447_38",
-        "seats": 7
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 17
       },
       {
-        "blockId": "fb_1447_1",
-        "seats": 7
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 17
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 20
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 20
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_12",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_11",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_10",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 14
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 14
       }
     ],
     "room_mix": {
@@ -3919,56 +5625,132 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_16",
-        "seats": 67
+        "blockId": "fb_1447_13",
+        "seats": 94
       },
       {
-        "blockId": "fb_1447_32",
-        "seats": 67
+        "blockId": "fb_1447_22",
+        "seats": 94
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 48
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 6
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 48
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 6
       },
       {
         "blockId": "fb_1447_3",
-        "seats": 60
+        "seats": 95
       },
       {
-        "blockId": "fb_1447_41",
-        "seats": 60
+        "blockId": "fb_1447_19",
+        "seats": 95
       },
       {
-        "blockId": "fb_1447_120",
-        "seats": 1
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 59
       },
       {
-        "blockId": "fb_1447_103",
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 66
+      },
+      {
+        "blockId": "fb_1447_116",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_100",
+        "seats": 20
+      },
+      {
+        "blockId": "fb_1447_46",
+        "seats": 71
+      },
+      {
+        "blockId": "fb_1447_47",
+        "seats": 71
+      },
+      {
+        "blockId": "fb_1447_79",
+        "seats": 45
+      },
+      {
+        "blockId": "fb_1447_80",
+        "seats": 45
+      },
+      {
+        "blockId": "fb_1447_43",
+        "seats": 16
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_10",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_10",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 23
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 23
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 19
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 19
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 15
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 15
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_11",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_13",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 11
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 11
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_9",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_return_2",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
         "seats": 9
       },
       {
-        "blockId": "fb_1447_64",
-        "seats": 43
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 13
       },
       {
-        "blockId": "fb_1447_65",
-        "seats": 43
-      },
-      {
-        "blockId": "fb_1447_50",
-        "seats": 48
-      },
-      {
-        "blockId": "fb_1447_51",
-        "seats": 48
-      },
-      {
-        "blockId": "fb_1447_94",
-        "seats": 8
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 11
       }
     ],
     "room_mix": {
@@ -4012,40 +5794,100 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_2",
-        "seats": 26
+        "blockId": "fb_1447_1",
+        "seats": 67
       },
       {
-        "blockId": "fb_1447_81",
-        "seats": 26
+        "blockId": "fb_1447_51",
+        "seats": 67
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 9
+      },
+      {
+        "blockId": "fb_1447_12",
+        "seats": 74
+      },
+      {
+        "blockId": "fb_1447_75",
+        "seats": 46
       },
       {
         "blockId": "fb_1447_7",
-        "seats": 66
-      },
-      {
-        "blockId": "fb_1447_71",
-        "seats": 38
-      },
-      {
-        "blockId": "fb_1447_4",
         "seats": 30
       },
       {
-        "blockId": "fb_1447_5",
+        "blockId": "fb_1447_8",
         "seats": 30
       },
       {
-        "blockId": "fb_1447_80",
+        "blockId": "fb_1447_94",
         "seats": 28
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 67
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 12
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 67
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 12
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 21
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 21
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 45
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 45
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_16",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_15",
+        "seats": 1
       }
     ],
     "room_mix": {
@@ -4089,36 +5931,128 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_77",
-        "seats": 31
+        "blockId": "fb_1447_17",
+        "seats": 106
       },
       {
         "blockId": "fb_1447_0",
-        "seats": 70
+        "seats": 130
       },
       {
-        "blockId": "fb_1447_31",
-        "seats": 69
+        "blockId": "fb_1447_42",
+        "seats": 77
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 78
+        "blockId": "fb_1447_5",
+        "seats": 53
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 78
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 20
       },
       {
-        "blockId": "fb_1447_104",
-        "seats": 8
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 19
       },
       {
-        "blockId": "fb_1447_105",
-        "seats": 8
+        "blockId": "fb_1447_110",
+        "seats": 10
       },
       {
-        "blockId": "fb_1447_9",
-        "seats": 30
+        "blockId": "fb_1447_111",
+        "seats": 10
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 13
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 12
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 13
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 13
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 17
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 17
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 11
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 11
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_14",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_14",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_13",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_10",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_10",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_12",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_11",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 15
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 15
       }
     ],
     "room_mix": {
@@ -4162,52 +6096,108 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_78",
+        "blockId": "fb_1447_91",
         "seats": 29
       },
       {
-        "blockId": "fb_1447_79",
+        "blockId": "fb_1447_92",
         "seats": 29
       },
       {
-        "blockId": "fb_1447_86",
-        "seats": 11
+        "blockId": "fb_1447_95",
+        "seats": 16
       },
       {
-        "blockId": "fb_1447_17",
-        "seats": 11
+        "blockId": "fb_1447_14",
+        "seats": 16
       },
       {
-        "blockId": "fb_1447_55",
+        "blockId": "fb_1447_70",
         "seats": 47
       },
       {
-        "blockId": "fb_1447_56",
+        "blockId": "fb_1447_71",
         "seats": 47
       },
       {
-        "blockId": "fb_1447_57",
+        "blockId": "fb_1447_73",
         "seats": 46
       },
       {
-        "blockId": "fb_1447_58",
+        "blockId": "fb_1447_74",
         "seats": 46
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 95
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 1
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 95
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 1
       },
       {
-        "blockId": "fb_1447_115",
-        "seats": 4
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 17
       },
       {
-        "blockId": "fb_1447_116",
-        "seats": 4
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 17
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_15",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 52
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 52
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 16
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 16
+      },
+      {
+        "blockId": "fb_1447_112",
+        "seats": 9
+      },
+      {
+        "blockId": "fb_1447_113",
+        "seats": 9
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_9",
+        "seats": 19
+      },
+      {
+        "blockId": "fb_1447_gds_return_2",
+        "seats": 19
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_14",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_14",
+        "seats": 2
       }
     ],
     "room_mix": {
@@ -4251,28 +6241,52 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_63",
+        "blockId": "fb_1447_82",
         "seats": 43
       },
       {
-        "blockId": "fb_1447_40",
+        "blockId": "fb_1447_31",
         "seats": 43
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 18
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 2
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 18
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 2
       },
       {
-        "blockId": "fb_1447_16",
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 13
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 13
+      },
+      {
+        "blockId": "fb_1447_13",
         "seats": 25
       },
       {
-        "blockId": "fb_1447_1",
+        "blockId": "fb_1447_2",
         "seats": 25
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 2
       }
     ],
     "room_mix": {
@@ -4316,28 +6330,88 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_10",
-        "seats": 104
+        "blockId": "fb_1447_15",
+        "seats": 107
       },
       {
-        "blockId": "fb_1447_11",
-        "seats": 104
+        "blockId": "fb_1447_16",
+        "seats": 107
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 58
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 11
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 58
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 46
       },
       {
-        "blockId": "fb_1447_108",
-        "seats": 5
+        "blockId": "fb_1447_114",
+        "seats": 6
       },
       {
-        "blockId": "fb_1447_109",
-        "seats": 5
+        "blockId": "fb_1447_115",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_20",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_19",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 35
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_14",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_14",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 1
       }
     ],
     "room_mix": {
@@ -4381,20 +6455,92 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 8
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 7
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 8
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 7
       },
       {
-        "blockId": "fb_1447_33",
-        "seats": 24
+        "blockId": "fb_1447_24",
+        "seats": 36
       },
       {
-        "blockId": "fb_1447_17",
-        "seats": 24
+        "blockId": "fb_1447_14",
+        "seats": 36
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_9",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_2",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 10
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 10
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 13
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 13
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_13",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_12",
+        "seats": 1
       }
     ],
     "room_mix": {
@@ -4436,7 +6582,108 @@ export const SEED_PACKAGES: DraftPackage[] = [
       "hc_1447_5",
       "hc_1447_12"
     ],
-    "flightAllocations": [],
+    "flightAllocations": [
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 126
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 147
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_10",
+        "seats": 9
+      },
+      {
+        "blockId": "fb_1447_gds_return_10",
+        "seats": 9
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_11",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_13",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 41
+      },
+      {
+        "blockId": "fb_1447_gds_return_15",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 39
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 95
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 95
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 21
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 33
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 33
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_13",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_12",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_16",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_25",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_22",
+        "seats": 1
+      }
+    ],
     "room_mix": {
       "2": 0,
       "3": 0,
@@ -4486,18 +6733,98 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 88
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 41
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 88
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 37
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 13
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 17
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 20
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 20
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_12",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_11",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_9",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_14",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_return_14",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_11",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_return_13",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_9",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_2",
+        "seats": 1
       }
     ],
     "room_mix": {
-      "2": 49,
-      "3": 26,
-      "4": 35
+      "2": 41,
+      "3": 25,
+      "4": 44
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -4543,22 +6870,22 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_14",
-        "seats": 95
+        "blockId": "fb_1447_18",
+        "seats": 97
       },
       {
-        "blockId": "fb_1447_30",
-        "seats": 71
+        "blockId": "fb_1447_45",
+        "seats": 73
       },
       {
-        "blockId": "fb_1447_27",
+        "blockId": "fb_1447_44",
         "seats": 24
       }
     ],
     "room_mix": {
-      "2": 82,
+      "2": 80,
       "3": 16,
-      "4": 2
+      "4": 4
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -4604,11 +6931,11 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_45",
+        "blockId": "fb_1447_58",
         "seats": 50
       },
       {
-        "blockId": "fb_1447_27",
+        "blockId": "fb_1447_44",
         "seats": 50
       }
     ],
@@ -4653,20 +6980,28 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_4",
+        "blockId": "fb_1447_7",
         "seats": 67
       },
       {
-        "blockId": "fb_1447_5",
+        "blockId": "fb_1447_8",
         "seats": 67
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 6
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 4
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 6
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 2
       }
     ],
     "room_mix": {
@@ -4710,50 +7045,122 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_28",
-        "seats": 21
+        "blockId": "fb_1447_77",
+        "seats": 45
       },
       {
-        "blockId": "fb_1447_29",
-        "seats": 21
+        "blockId": "fb_1447_78",
+        "seats": 45
       },
       {
-        "blockId": "fb_1447_110",
-        "seats": 5
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 6
       },
       {
-        "blockId": "fb_1447_111",
-        "seats": 5
-      },
-      {
-        "blockId": "fb_1447_99",
-        "seats": 15
-      },
-      {
-        "blockId": "fb_1447_100",
-        "seats": 15
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 6
       },
       {
         "blockId": "fb_1447_101",
-        "seats": 12
+        "seats": 15
       },
       {
         "blockId": "fb_1447_102",
+        "seats": 15
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 45
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 47
+      },
+      {
+        "blockId": "fb_1447_48",
+        "seats": 21
+      },
+      {
+        "blockId": "fb_1447_49",
+        "seats": 21
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
         "seats": 12
       },
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 20
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 12
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 20
+        "blockId": "fb_1447_107",
+        "seats": 14
+      },
+      {
+        "blockId": "fb_1447_108",
+        "seats": 14
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_16",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_15",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_12",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_11",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_13",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_12",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_11",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_13",
+        "seats": 1
       }
     ],
     "room_mix": {
-      "2": 57,
-      "3": 66,
-      "4": 127
+      "2": 50,
+      "3": 72,
+      "4": 128
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -4789,7 +7196,84 @@ export const SEED_PACKAGES: DraftPackage[] = [
       "hc_1447_11",
       "hc_1447_12"
     ],
-    "flightAllocations": [],
+    "flightAllocations": [
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 35
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 44
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 7
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_10",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_16",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 11
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 11
+      },
+      {
+        "blockId": "fb_1447_gds_return_18",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 47
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 47
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 8
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 15
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 15
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_13",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_12",
+        "seats": 4
+      }
+    ],
     "room_mix": {
       "2": 0,
       "3": 0,
@@ -4829,7 +7313,72 @@ export const SEED_PACKAGES: DraftPackage[] = [
       "hc_1447_6",
       "hc_1447_12"
     ],
-    "flightAllocations": [],
+    "flightAllocations": [
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 17
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 12
+      },
+      {
+        "blockId": "fb_1447_gds_return_4",
+        "seats": 19
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 12
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 12
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_21",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_11",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 31
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 31
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_3",
+        "seats": 16
+      }
+    ],
     "room_mix": {
       "2": 0,
       "3": 0,
@@ -4871,12 +7420,84 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 22
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 33
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 22
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 40
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_20",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_19",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 20
+      },
+      {
+        "blockId": "fb_1447_gds_return_10",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_9",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_return_2",
+        "seats": 1
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 33
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 33
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 20
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 16
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 14
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_1",
+        "seats": 9
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 3
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 5
       }
     ],
     "room_mix": {
@@ -4918,7 +7539,52 @@ export const SEED_PACKAGES: DraftPackage[] = [
       "hc_1447_6",
       "hc_1447_12"
     ],
-    "flightAllocations": [],
+    "flightAllocations": [
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_7",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_3",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_12",
+        "seats": 4
+      },
+      {
+        "blockId": "fb_1447_gds_return_5",
+        "seats": 25
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 11
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 11
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_8",
+        "seats": 21
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_0",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_0",
+        "seats": 2
+      }
+    ],
     "room_mix": {
       "2": 0,
       "3": 0,
@@ -4968,18 +7634,42 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 16
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 5
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 16
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_4",
+        "seats": 2
+      },
+      {
+        "blockId": "fb_1447_gds_return_8",
+        "seats": 2
       }
     ],
     "room_mix": {
-      "2": 10,
+      "2": 9,
       "3": 0,
-      "4": 10
+      "4": 11
     },
     "publish_status": "approved",
     "sale_status": "unavailable",
@@ -5025,17 +7715,33 @@ export const SEED_PACKAGES: DraftPackage[] = [
     ],
     "flightAllocations": [
       {
-        "blockId": "fb_1447_gds_arrival",
-        "seats": 12
+        "blockId": "fb_1447_gds_arrival_6",
+        "seats": 5
       },
       {
-        "blockId": "fb_1447_gds_return",
-        "seats": 12
+        "blockId": "fb_1447_gds_return_6",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_2",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_return_1",
+        "seats": 5
+      },
+      {
+        "blockId": "fb_1447_gds_arrival_5",
+        "seats": 6
+      },
+      {
+        "blockId": "fb_1447_gds_return_7",
+        "seats": 6
       }
     ],
     "room_mix": {
-      "2": 6,
-      "3": 5,
+      "2": 4,
+      "3": 7,
       "4": 7
     },
     "publish_status": "approved",
