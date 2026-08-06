@@ -1,10 +1,12 @@
 import { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useSnapshot } from "valtio"
-import { Copy, Package as PackageIcon, Plus, Trash2, TriangleAlert } from "lucide-react"
+import { ChevronLeft, Copy, Package as PackageIcon, Plus, Trash2, TriangleAlert } from "lucide-react"
 
+import { BalanceStrip } from "@/components/BalanceStrip"
 import { MasterDetail } from "@/components/MasterDetail"
 import { Card, Note, PageHeader } from "@/components/PageShell"
+import { MASTER_DETAIL_WIDE_QUERY, useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/button"
 import { Checkbox, Field, Input, NumInput, SelectField, cellCls } from "@/components/ui/field"
 import { FilterChips } from "@/components/ui/filter-chips"
@@ -54,6 +56,7 @@ export function PackagesPage() {
   const navigate = useNavigate()
   const snap = useSnapshot(state)
   const issues = useIssues()
+  const wide = useMediaQuery(MASTER_DETAIL_WIDE_QUERY)
   const [tierFilter, setTierFilter] = useState<DraftPackage["tier"] | null>(null)
   const [search, setSearch] = useState("")
 
@@ -96,8 +99,20 @@ export function PackagesPage() {
         }
       />
       <div className="flex min-h-0 flex-1 flex-col gap-3 px-4 py-4">
-        {/* الميزان — the steering instrument for the capacity partition. */}
-        <Card bodyClassName="p-4">
+        {/* الميزان — the steering instrument for the capacity partition.
+            Narrow portrait collapses it to a verdict strip + drawer. */}
+        <BalanceStrip
+          title="ميزان الحصة"
+          summary={
+            <>
+              <span className="text-[12px] font-semibold text-foreground">الحصة</span>
+              <span dir="ltr" className="text-[12px] tabular-nums text-muted-foreground">
+                <b className="font-bold text-foreground">{arNum(used)}</b> / {arNum(quota)}
+              </span>
+              <QuotaChip used={used} quota={quota} />
+            </>
+          }
+        >
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <Meter className="min-w-64 flex-[2]" label="الحصة" value={used} max={quota} />
             <Meter
@@ -113,24 +128,9 @@ export function PackagesPage() {
               max={60}
               bound="min"
             />
-            <span
-              className={cn(
-                "shrink-0 rounded-full px-2.5 py-1 text-[11px] font-bold tabular-nums",
-                used === quota
-                  ? "bg-[color:var(--brand-green-soft)] text-[color:var(--brand-green-deep)]"
-                  : used > quota
-                    ? "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]"
-                    : "bg-surface-sunken text-foreground/80",
-              )}
-            >
-              {used === quota
-                ? "الحصة مستوفاة"
-                : used > quota
-                  ? `تجاوز ${arNum(used - quota)}`
-                  : `متبقٍ ${arNum(quota - used)}`}
-            </span>
+            <QuotaChip used={used} quota={quota} />
           </div>
-        </Card>
+        </BalanceStrip>
 
         <div className="min-h-0 flex-1">
           <MasterDetail
@@ -146,8 +146,10 @@ export function PackagesPage() {
               <>
                 {/* A solid toolbar card, not floating chips: cards scrolling
                     beneath a transparent strip looked like an overlap glitch —
-                    a bordered surface makes passing under it read as intended. */}
-                <div className="sticky top-0 z-10 space-y-2 rounded-xl border border-surface-line bg-surface-raised p-2.5 shadow-[var(--elev-1)]">
+                    a bordered surface makes passing under it read as intended.
+                    Below lg it bleeds to the pane edges so no half-row peeks
+                    through the pane's px-1 gutters beside it. */}
+                <div className="sticky top-0 z-10 space-y-2 rounded-xl border border-surface-line bg-surface-raised p-2.5 shadow-[var(--elev-1)] max-lg:-mx-1 max-lg:rounded-none max-lg:border-x-0">
                   <Input
                     placeholder="بحث بالاسم أو الرقم…"
                     value={search}
@@ -173,7 +175,10 @@ export function PackagesPage() {
                     <MasterRow
                       key={p.id}
                       pkg={p as DraftPackage}
-                      active={p.id === shown?.id}
+                      // On narrow screens the detail is a pushed screen, so the
+                      // wide-mode default highlight would mark a row whose
+                      // detail is not visible — only explicit picks highlight.
+                      active={p.id === (wide ? shown?.id : selected?.id)}
                       errors={errorsByPkg.get(p.id) ?? 0}
                       onSelect={() => navigate(`/packages/${p.id}`)}
                     />
@@ -188,6 +193,28 @@ export function PackagesPage() {
         </div>
       </div>
     </div>
+  )
+}
+
+/** The quota verdict pill — shared by the full meters and the mobile strip. */
+function QuotaChip({ used, quota }: { used: number; quota: number }) {
+  return (
+    <span
+      className={cn(
+        "shrink-0 rounded-full px-2.5 py-1 text-[11px] font-bold tabular-nums",
+        used === quota
+          ? "bg-[color:var(--brand-green-soft)] text-[color:var(--brand-green-deep)]"
+          : used > quota
+            ? "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]"
+            : "bg-surface-sunken text-foreground/80",
+      )}
+    >
+      {used === quota
+        ? "الحصة مستوفاة"
+        : used > quota
+          ? `تجاوز ${arNum(used - quota)}`
+          : `متبقٍ ${arNum(quota - used)}`}
+    </span>
   )
 }
 
@@ -252,6 +279,8 @@ function MasterRow({
               {arNum(errors)}
             </span>
           )}
+          {/* Rows push a detail screen on narrow viewports — say so. */}
+          <ChevronLeft className="size-4 shrink-0 text-muted-foreground/50 lg:hidden" />
         </div>
         <div className="mt-1 text-[11px] tabular-nums text-muted-foreground">
           {TIER_LABEL[pkg.tier]} · <b className="font-semibold text-foreground/80">{arNum(pkg.capacity)} حاج</b>
@@ -322,6 +351,14 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
     label: `${h.name_ar} — ${h.city === "makkah" ? "مكة" : "المدينة"}`,
   }))
   const mixSum = view.room_mix["2"] + view.room_mix["3"] + view.room_mix["4"]
+
+  // Swap with whichever leg already holds the target role — a package never
+  // has two first residences. Shared by the table and the mobile cards.
+  const setLegRole = (leg: (typeof live.legs)[number], next: (typeof leg)["role"]) => {
+    const other = live.legs.find((l) => l.role === next && l.id !== leg.id)
+    if (other) other.role = leg.role
+    leg.role = next
+  }
 
   return (
     <>
@@ -485,7 +522,71 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             لا توجد إقامات بعد — أضف الأولى أو انسخ مسار باقة قائمة.
           </p>
         ) : (
-          <div className="overflow-x-auto">
+          <>
+          {/* Phone: a card per leg. The table needs 42rem and showed 3 of its
+              6 columns on a 390px viewport with no hint the rest existed. */}
+          <ul className="divide-y divide-surface-line sm:hidden">
+            {orderedLegs(live).map((leg, i) => {
+              const nights = legNights(leg)
+              return (
+                <li key={leg.id} className="space-y-2 px-3 py-3">
+                  <div className="flex items-center gap-2">
+                    <span className="w-4 shrink-0 text-center text-[11px] font-bold tabular-nums text-muted-foreground">
+                      {arNum(i + 1)}
+                    </span>
+                    <SelectField
+                      className="flex-1"
+                      allowEmpty={false}
+                      value={leg.role}
+                      options={ROLE_OPTIONS}
+                      onChange={(v) => setLegRole(leg, v as typeof leg.role)}
+                    />
+                    <button
+                      type="button"
+                      aria-label="حذف الإقامة"
+                      onClick={() => removeLeg(leg.id)}
+                      className="grid size-9 shrink-0 place-items-center rounded-md text-muted-foreground/45 transition-colors hover:bg-[color:var(--brand-rose-soft)] hover:text-[color:var(--brand-rose-deep)]"
+                    >
+                      <Trash2 className="size-4" />
+                    </button>
+                  </div>
+                  <SelectField
+                    allowEmpty={false}
+                    value={leg.hotelId}
+                    options={hotelOptions}
+                    onChange={(v) => (leg.hotelId = v)}
+                  />
+                  <div className="grid grid-cols-2 gap-2">
+                    <Field label="البداية">
+                      <Input
+                        type="date"
+                        dir="ltr"
+                        className="text-start"
+                        value={leg.starts_on}
+                        onChange={(e) => {
+                          const v = e.target.value
+                          if (v) retimeLeg(leg.id, v, addDays(v, Math.max(1, nights)))
+                        }}
+                      />
+                    </Field>
+                    <Field label="الليالي">
+                      <NumInput
+                        value={nights}
+                        onChange={(e) => {
+                          const n = Math.max(1, Number(e.target.value) || 1)
+                          retimeLeg(leg.id, leg.starts_on, addDays(leg.starts_on, n))
+                        }}
+                      />
+                    </Field>
+                  </div>
+                  <p className="text-[11px] tabular-nums text-muted-foreground">
+                    النهاية <span dir="ltr">{leg.ends_on}</span>
+                  </p>
+                </li>
+              )
+            })}
+          </ul>
+          <div className="hidden overflow-x-auto sm:block">
             <table className="w-full min-w-[42rem] border-collapse text-sm">
               <thead>
                 <tr className="bg-surface-sunken">
@@ -512,14 +613,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                           allowEmpty={false}
                           value={leg.role}
                           options={ROLE_OPTIONS}
-                          onChange={(v) => {
-                            const next = v as typeof leg.role
-                            // Swap with whichever leg already holds the target
-                            // role — a package never has two first residences.
-                            const other = live.legs.find((l) => l.role === next && l.id !== leg.id)
-                            if (other) other.role = leg.role
-                            leg.role = next
-                          }}
+                          onChange={(v) => setLegRole(leg, v as typeof leg.role)}
                         />
                       </td>
                       <td className="px-1.5 py-1">
@@ -572,6 +666,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
               </tbody>
             </table>
           </div>
+          </>
         )}
       </Card>
 

@@ -27,6 +27,14 @@ export const ROOMY_CANVAS_QUERY = "(min-height: 620px) and (min-width: 700px)"
 export const TALL_ENOUGH_QUERY = "(min-height: 560px)"
 
 /**
+ * The MasterDetail split point — must match its `lg:` classes. Below this the
+ * master IS the page and the detail is a pushed screen, which changes what
+ * "selected" should look like: a highlighted row beside no visible detail
+ * reads as "this is all there is".
+ */
+export const MASTER_DETAIL_WIDE_QUERY = "(min-width: 1024px)"
+
+/**
  * Subscribes to a CSS media query.
  *
  * Base UI ships `unstable_useMediaQuery`, but the stable primitive is a few

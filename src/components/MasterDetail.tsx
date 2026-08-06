@@ -54,7 +54,9 @@ export function MasterDetail({
         {detail ? (
           <div className="space-y-4 px-1 pb-8">
             {detailOpen && (
-              <Button variant="ghost" size="sm" className="lg:hidden" onClick={onBack}>
+              // A real button, not a text link: it is the only way back on a
+              // phone, so it earns a visible surface and a 40px target.
+              <Button variant="outline" className="h-10 px-4 lg:hidden" onClick={onBack}>
                 <ArrowRight className="size-4" />
                 رجوع
               </Button>

@@ -1,6 +1,8 @@
+import { Fragment } from "react"
 import { useSnapshot } from "valtio"
 import {
   BedDouble,
+  ChevronDown,
   CircleCheck,
   FileText,
   Info,
@@ -25,7 +27,7 @@ import {
   unpinAll,
 } from "@/store/season"
 import { ISSUE_CATEGORY_LABEL, ISSUE_CATEGORY_ORDER } from "@/lib/options"
-import { categoryOf, type IssueCategory } from "@/lib/validation"
+import { categoryOf, type Issue, type IssueCategory } from "@/lib/validation"
 import { Button } from "@/components/ui/button"
 import { Card, Note, Stat } from "@/components/PageShell"
 import {
@@ -225,6 +227,61 @@ const CATEGORY_ICON: Record<IssueCategory, LucideIcon> = {
   other: Info,
 }
 
+/** Consecutive-preserving buckets of (level, code) — the unit of folding. */
+function clusterIssues(items: Issue[]): Issue[][] {
+  const order: string[] = []
+  const map = new Map<string, Issue[]>()
+  for (const i of items) {
+    const k = `${i.level}|${i.code}`
+    if (!map.has(k)) {
+      map.set(k, [])
+      order.push(k)
+    }
+    map.get(k)!.push(i)
+  }
+  return order.map((k) => map.get(k)!)
+}
+
+/**
+ * The folded row's label. Messages are «entity: finding» — when every finding
+ * in the bucket is the same sentence (the content-gate case), that sentence IS
+ * the label; when the tails differ (per-contract numbers), stay generic and
+ * let the expanded list carry the detail.
+ */
+function clusterLabel(bucket: Issue[]) {
+  const tail = (m: string) => m.replace(/^[^:]{0,60}:\s*/, "")
+  const first = tail(bucket[0].message)
+  return bucket.every((i) => tail(i.message) === first) ? first : "بنود من النوع نفسه — افتح للتفاصيل"
+}
+
+const pillCls = (level: Issue["level"]) =>
+  cn(
+    "flex w-full gap-2 rounded-lg px-2.5 py-2 text-start text-[11px] leading-snug",
+    level === "error"
+      ? "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]"
+      : "bg-[color:var(--brand-gold-soft)] text-[color:var(--brand-gold-deep)]",
+  )
+
+function IssuePill({ issue }: { issue: Issue }) {
+  // Only issues that can open something are interactive — and those render
+  // as real buttons, so keyboard users get them too.
+  const clickable = issue.scope === "package" || issue.scope === "leg"
+  const cls = cn(pillCls(issue.level), clickable && "cursor-pointer transition-[filter] hover:brightness-97")
+  const content = (
+    <>
+      <TriangleAlert className="mt-0.5 size-3.5 shrink-0" />
+      <span>{issue.message}</span>
+    </>
+  )
+  return clickable ? (
+    <button type="button" onClick={() => (state.selectedId = issue.entityId)} className={cls}>
+      {content}
+    </button>
+  ) : (
+    <div className={cls}>{content}</div>
+  )
+}
+
 export function ValidationPanel() {
   const snap = useSnapshot(state)
   const issues = useIssues()
@@ -292,42 +349,49 @@ export function ValidationPanel() {
                   </header>
                   {/* Two columns once there is width — the rows are one line
                       each, and a full-width column of short pills wasted half
-                      the card. */}
+                      the card. Runs of the same finding (same code and level,
+                      e.g. 7 packages each missing the same content) fold into
+                      one expandable row instead of a wall of near-identical
+                      pills. */}
                   <ul className="mt-1.5 grid items-start gap-1.5 lg:grid-cols-2">
-                    {items.map((i, idx) => {
-                      // Only issues that can open something are interactive —
-                      // and those render as real buttons, so keyboard users
-                      // get them too.
-                      const clickable = i.scope === "package" || i.scope === "leg"
-                      const cls = cn(
-                        "flex w-full gap-2 rounded-lg px-2.5 py-2 text-start text-[11px] leading-snug",
-                        i.level === "error"
-                          ? "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]"
-                          : "bg-[color:var(--brand-gold-soft)] text-[color:var(--brand-gold-deep)]",
-                        clickable && "cursor-pointer transition-[filter] hover:brightness-97",
-                      )
-                      const content = (
-                        <>
-                          <TriangleAlert className="mt-0.5 size-3.5 shrink-0" />
-                          <span>{i.message}</span>
-                        </>
-                      )
-                      return (
-                        <li key={`${i.code}-${i.entityId}-${idx}`}>
-                          {clickable ? (
-                            <button
-                              type="button"
-                              onClick={() => (state.selectedId = i.entityId)}
-                              className={cls}
+                    {clusterIssues(items).map((bucket, bi) =>
+                      bucket.length < 4 ? (
+                        <Fragment key={`${bucket[0].code}-${bi}`}>
+                          {bucket.map((i, idx) => (
+                            <li key={`${i.code}-${i.entityId}-${idx}`}>
+                              <IssuePill issue={i} />
+                            </li>
+                          ))}
+                        </Fragment>
+                      ) : (
+                        <li key={`${bucket[0].code}-${bi}`} className="lg:col-span-2">
+                          <details className="group">
+                            <summary
+                              className={cn(
+                                pillCls(bucket[0].level),
+                                "cursor-pointer list-none items-center [&::-webkit-details-marker]:hidden",
+                              )}
                             >
-                              {content}
-                            </button>
-                          ) : (
-                            <div className={cls}>{content}</div>
-                          )}
+                              <TriangleAlert className="size-3.5 shrink-0" />
+                              <span className="min-w-0 flex-1 font-semibold">
+                                {clusterLabel(bucket)}
+                              </span>
+                              <span className="shrink-0 rounded-full bg-white/60 px-2 py-0.5 text-[10px] font-bold tabular-nums">
+                                {arNum(bucket.length)}
+                              </span>
+                              <ChevronDown className="size-3.5 shrink-0 transition-transform group-open:rotate-180" />
+                            </summary>
+                            <ul className="mt-1.5 space-y-1.5 border-s-2 border-surface-line ps-2.5">
+                              {bucket.map((i, idx) => (
+                                <li key={`${i.code}-${i.entityId}-${idx}`}>
+                                  <IssuePill issue={i} />
+                                </li>
+                              ))}
+                            </ul>
+                          </details>
                         </li>
-                      )
-                    })}
+                      ),
+                    )}
                   </ul>
                 </section>
               )

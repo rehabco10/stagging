@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useSnapshot } from "valtio"
-import { Building2, Pencil, Plus, Trash2, TriangleAlert } from "lucide-react"
+import { Building2, ChevronLeft, Pencil, Plus, Trash2, TriangleAlert } from "lucide-react"
 
 import { addContract, removeHotel, state, type DraftHotel } from "@/store/season"
 import { MasterDetail } from "@/components/MasterDetail"
@@ -70,6 +70,8 @@ export function HousingPage() {
                 {arNum(iss.errors + iss.warnings)}
               </span>
             )}
+            {/* Rows push a detail screen on narrow viewports — say so. */}
+            <ChevronLeft className="size-4 shrink-0 text-muted-foreground/50 lg:hidden" />
           </div>
           <div className="mt-0.5 text-[11px] text-muted-foreground">
             {starLabel(h.star_class)} · فئة {h.grade} ·{" "}

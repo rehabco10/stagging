@@ -153,6 +153,9 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
                 key={f.id}
                 className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-surface-line px-3 py-1.5"
               >
+                {/* The date lives OUTSIDE the truncating span: inside it, a
+                    long carrier name («حجوزات أفراد (GDS)…») swallowed the
+                    date into the ellipsis as one mangled token. */}
                 <span className="min-w-0 flex-1 truncate text-[12px]">
                   {f.airline_ar || f.airline_en || "—"}
                   {f.flight_no && (
@@ -160,10 +163,12 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
                       {f.flight_no}
                     </span>
                   )}
-                  <span dir="ltr" className="ms-2 text-[11px] tabular-nums text-muted-foreground">
-                    {f.flies_on ? dm(f.flies_on) : ""}
-                  </span>
                 </span>
+                {f.flies_on && (
+                  <span dir="ltr" className="shrink-0 text-[11px] tabular-nums text-muted-foreground">
+                    {dm(f.flies_on)}
+                  </span>
+                )}
                 <span className="flex items-center gap-1.5 text-[11px] tabular-nums text-muted-foreground">
                   <NumInput
                     className="h-7 w-16 px-2 text-[12px]"

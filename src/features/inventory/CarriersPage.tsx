@@ -1,11 +1,13 @@
 import { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useSnapshot } from "valtio"
-import { Plane, PlaneLanding, PlaneTakeoff, Plus, Trash2, TriangleAlert } from "lucide-react"
+import { ChevronLeft, Plane, PlaneLanding, PlaneTakeoff, Plus, Trash2, TriangleAlert } from "lucide-react"
 
 import { removeFlightBlock, state, type DraftFlightBlock } from "@/store/season"
+import { BalanceStrip } from "@/components/BalanceStrip"
 import { MasterDetail } from "@/components/MasterDetail"
 import { Card, Note, PageHeader } from "@/components/PageShell"
+import { MASTER_DETAIL_WIDE_QUERY, useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/button"
 import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
 import { FilterChips } from "@/components/ui/filter-chips"
@@ -41,6 +43,7 @@ export function CarriersPage() {
   const navigate = useNavigate()
   const snap = useSnapshot(state)
   const issues = useIssues()
+  const wide = useMediaQuery(MASTER_DETAIL_WIDE_QUERY)
   const [adding, setAdding] = useState<{ ar: string; en: string } | null | "new">(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -88,7 +91,24 @@ export function CarriersPage() {
           </Note>
         )}
 
-        <Card bodyClassName="p-4">
+        <BalanceStrip
+          title="ميزان المقاعد"
+          summary={
+            <>
+              <span className="inline-flex items-center gap-1 text-[12px] tabular-nums text-muted-foreground">
+                <PlaneLanding className="size-3.5" />
+                <b className="font-bold text-foreground">{arNum(confirmed("arrival"))}</b>
+              </span>
+              <span className="inline-flex items-center gap-1 text-[12px] tabular-nums text-muted-foreground">
+                <PlaneTakeoff className="size-3.5" />
+                <b className="font-bold text-foreground">{arNum(confirmed("return"))}</b>
+              </span>
+              <span dir="ltr" className="text-[12px] tabular-nums text-muted-foreground">
+                / {arNum(snap.season.quota_total)}
+              </span>
+            </>
+          }
+        >
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
             <Meter className="min-w-56 flex-1" label="وصول مؤكَّد" value={confirmed("arrival")} max={snap.season.quota_total} />
             <Meter className="min-w-56 flex-1" label="مغادرة مؤكَّدة" value={confirmed("return")} max={snap.season.quota_total} />
@@ -97,7 +117,7 @@ export function CarriersPage() {
               كتلة لناقل جديد
             </Button>
           </div>
-        </Card>
+        </BalanceStrip>
 
         <div className="min-h-0 flex-1">
           <MasterDetail
@@ -118,7 +138,9 @@ export function CarriersPage() {
             )}
             {sorted.map(([name, list]) => {
               const iss = carrierIssues(new Set(list.map((f) => f.id)), issues)
-              const active = name === shown
+              // Narrow screens push the detail — only explicit picks highlight,
+              // or the default row reads as "this is all there is".
+              const active = name === (wide ? shown : selected)
               const en = list.find((f) => f.airline_en)?.airline_en
               return (
                 <li key={name}>
@@ -149,6 +171,8 @@ export function CarriersPage() {
                           {arNum(iss.errors + iss.warnings)}
                         </span>
                       )}
+                      {/* Rows push a detail screen on narrow viewports — say so. */}
+                      <ChevronLeft className="size-4 shrink-0 text-muted-foreground/50 lg:hidden" />
                     </div>
                     <div className="mt-0.5 flex items-center gap-3 text-[11px] tabular-nums text-muted-foreground">
                       {en && (

@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils"
-import { TALL_ENOUGH_QUERY, useMediaQuery } from "@/hooks/use-media-query"
+import { SIDE_PANEL_QUERY, TALL_ENOUGH_QUERY, useMediaQuery } from "@/hooks/use-media-query"
 
 /**
  * Page chrome for the routed pages.
@@ -51,6 +51,12 @@ export function PageHeader({
   actions?: React.ReactNode
 }) {
   const tall = useMediaQuery(TALL_ENOUGH_QUERY)
+  // When the burger bar is showing (narrow portrait), it already carries the
+  // section title — repeating it here as a big h1 + description cost ~180px of
+  // an 844px phone before any content. Keep the h1 for the accessibility tree,
+  // collapse the band to one truncated description line + the actions.
+  const barAbove = !useMediaQuery(SIDE_PANEL_QUERY)
+  const full = tall && !barAbove
   return (
     <header className="relative shrink-0 overflow-hidden border-b border-surface-line bg-surface-raised">
       <div
@@ -82,17 +88,27 @@ export function PageHeader({
       <div
         className={cn(
           "relative flex items-center gap-4 px-4",
-          tall ? "py-3.5" : "py-2",
+          full ? "py-3.5" : "py-2",
         )}
       >
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1">
           <h1
-            className={cn("font-bold text-foreground", tall ? "text-lg tracking-tight" : "text-sm")}
+            className={cn(
+              "font-bold text-foreground",
+              barAbove ? "sr-only" : full ? "text-lg tracking-tight" : "text-sm",
+            )}
           >
             {title}
           </h1>
-          {description && tall && (
-            <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">{description}</p>
+          {description && (full || barAbove) && (
+            <p
+              className={cn(
+                "text-muted-foreground",
+                barAbove ? "truncate text-[11px]" : "mt-0.5 text-xs leading-relaxed",
+              )}
+            >
+              {description}
+            </p>
           )}
         </div>
         {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
