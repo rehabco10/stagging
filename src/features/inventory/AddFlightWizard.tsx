@@ -54,7 +54,7 @@ export function AddFlightWizard({
       open={open}
       onOpenChange={onOpenChange}
       title="إضافة كتلة مقاعد"
-      description="كتلة مقاعد متعاقد عليها — تُقارن بالحصة لا بالباقات."
+      description="إضافة كتلة مقاعد متعاقد عليها."
       finishLabel="إضافة الكتلة"
       onFinish={() => addFlightBlock(draft)}
       steps={[
@@ -98,7 +98,7 @@ export function AddFlightWizard({
                   onChange={(e) => set({ airline_en: e.target.value })}
                 />
               </Field>
-              <Field label="رقم الرحلة" hint="قد لا يُعرف قبل تأكيد الحجز — اتركه فارغًا حينها.">
+              <Field label="رقم الرحلة" hint="يُترك فارغًا إذا لم يُؤكَّد الحجز بعد.">
                 <Input
                   dir="ltr"
                   className="text-start"

@@ -92,10 +92,10 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
       total === 0
         ? null
         : covered >= total
-          ? { text: "يغطي إقامتي كاملة", cls: "text-[color:var(--brand-green-deep)]" }
+          ? { text: "يغطي كامل مدة الإقامة", cls: "text-[color:var(--brand-green-deep)]" }
           : covered > 0
             ? { text: `يغطي ${arNum(covered)} من ${arNum(total)} ليلة`, cls: "text-[color:var(--brand-gold-deep)]" }
-            : { text: "خارج ليالي إقامتي", cls: "text-[color:var(--brand-rose-deep)]" }
+            : { text: "خارج مدة الإقامة", cls: "text-[color:var(--brand-rose-deep)]" }
     return (
       <li key={c.id}>
         <label
@@ -215,7 +215,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
       <div className="space-y-4">
         {legHotels.length === 0 && (
           <p className="text-[12px] text-muted-foreground">
-            لا إقامات بعد — الموارد السكنية تُبنى على فنادق الإقامات.
+            لا يمكن ربط عقود السكن قبل إضافة الإقامات.
           </p>
         )}
         {legHotels.map((hotelId) => {
@@ -250,9 +250,9 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
               </div>
               {contracts.length === 0 ? (
                 <p className="mt-1.5 text-[11px] text-muted-foreground">
-                  لا عقود لهذا الفندق بعد —{" "}
+                  لا عقود لهذا الفندق —{" "}
                   <Link to={`/hotels/${hotelId}`} className="font-semibold underline underline-offset-2">
-                    أضفها من صفحة السكن
+                    إضافة عقد من صفحة السكن
                   </Link>
                   .
                 </p>

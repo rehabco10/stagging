@@ -77,7 +77,7 @@ export function CarriersPage() {
     <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-surface-page">
       <PageHeader
         title="الطيران"
-        description="الناقلات وكتل مقاعدها — التغطية تقاس على الحصة، وصولًا ومغادرة."
+        description="الناقلات وكتل المقاعد المتعاقد عليها، وصولًا ومغادرة."
       />
       <AddFlightWizard
         open={adding !== null}

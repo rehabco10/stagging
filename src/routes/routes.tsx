@@ -25,7 +25,7 @@ export function CanvasPage() {
     <div className="relative flex min-h-0 min-w-0 flex-1 flex-col bg-surface-page">
       <PageHeader
         title="تكوين الباقات"
-        description="ابدأ من عقدة «الباقات» وأضف الباقات وإقاماتها."
+        description="عرض الباقات وإقاماتها على المخطط."
         actions={
           <Button variant="outline" size="sm" onClick={() => setWizardOpen(true)}>
             <PanelRightOpen className="size-3.5" />
@@ -49,7 +49,7 @@ export function CanvasPage() {
         description={subtitle}
         footer={
           <p className="text-[10px] text-muted-foreground">
-            اسحب أي عقدة لتثبيتها في مكانها · انقر عليها مرتين لإعادتها للترتيب التلقائي
+            سحب العقدة يثبّت موضعها · النقر المزدوج يعيدها إلى الترتيب التلقائي
           </p>
         }
       >
@@ -68,7 +68,7 @@ export function RequirementsPage() {
   return (
     <PageShell
       title="الاجتماعات والمتطلبات"
-      description="ما اتُّفق عليه مع الفريق ووزارة الحج والعمرة. المعتمد منه يُطبَّق على التحقق قبل الرفع."
+      description="متطلبات وزارة الحج والعمرة والفريق؛ يُطبَّق المعتمد منها على التحقق قبل الرفع."
     >
       <RequirementsPanel />
     </PageShell>
@@ -79,7 +79,7 @@ export function ValidationPage() {
   return (
     <PageShell
       title="التحقق والرفع"
-      description="ما يمنع رفع الموسم إلى نسك حج، وما يستحق المراجعة قبله."
+      description="الأخطاء المانعة للرفع إلى نسك والتنبيهات المستوجبة للمراجعة."
     >
       <ValidationPanel />
     </PageShell>

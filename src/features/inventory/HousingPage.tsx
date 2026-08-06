@@ -115,7 +115,7 @@ export function HousingPage() {
     <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-surface-page">
       <PageHeader
         title="السكن"
-        description="الفنادق وعقودها على محور الموسم — القياس مقابل سعات الباقات."
+        description="الفنادق وعقود السكن وسعاتها مقابل سعات الباقات."
       />
       <AddHotelWizard
         open={addCity !== null}
