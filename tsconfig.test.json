@@ -11,5 +11,11 @@
     "outDir": "./.tmp-test",
     "rootDir": "./src"
   },
-  "include": ["src/features/graph/layout.ts", "src/lib/validation.ts"]
+  "include": [
+    "src/features/graph/layout.ts",
+    "src/lib/validation.ts",
+    "src/lib/hlc.ts",
+    "src/engine/workflow.ts",
+    "src/persist/connectors.ts"
+  ]
 }

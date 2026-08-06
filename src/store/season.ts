@@ -229,10 +229,10 @@ const SEED_REQUIREMENTS: DraftRequirement[] = [
 export const state = proxy<DraftState>({
   season: { ...SEED_SEASON },
   hotels: SEED_HOTELS,
-  // The real 1447 season, rebased onto the 1448 dates — see seed-1447.ts for
-  // exactly what was adjusted. Starting from last season's packages and signed
-  // supply is how this season actually gets planned: clone, adjust, delete
-  // what won't repeat.
+  // The real 1447 season, unshifted — the wizard opens on the reference
+  // season as it was; planning 1448 starts by editing الإعدادات. Starting
+  // from last season's packages and signed supply is how a season actually
+  // gets planned: clone, adjust, delete what won't repeat.
   contracts: SEED_CONTRACTS,
   flightBlocks: SEED_FLIGHT_BLOCKS,
   requirements: SEED_REQUIREMENTS,

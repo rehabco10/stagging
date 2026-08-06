@@ -1,10 +1,18 @@
 import { StrictMode } from "react"
 import { createRoot } from "react-dom/client"
 import App from "@/App"
+import { initDraftPersistence } from "@/persist/draft"
 import "@/globals.css"
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+const root = createRoot(document.getElementById("root")!)
+
+// Restore the IndexedDB draft BEFORE first paint — rendering the seed and
+// then swapping to the draft flashes 39 wrong packages. If persistence is
+// unavailable the promise still resolves and the app runs memory-only.
+initDraftPersistence().finally(() =>
+  root.render(
+    <StrictMode>
+      <App />
+    </StrictMode>,
+  ),
 )

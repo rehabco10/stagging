@@ -26,6 +26,7 @@ import {
   togglePrices,
   unpinAll,
 } from "@/store/season"
+import { discardDraft, draftStatus } from "@/persist/draft"
 import { ISSUE_CATEGORY_LABEL, ISSUE_CATEGORY_ORDER } from "@/lib/options"
 import { categoryOf, type Issue, type IssueCategory } from "@/lib/validation"
 import { Button } from "@/components/ui/button"
@@ -405,6 +406,41 @@ export function ValidationPanel() {
 
 /* ── settings ───────────────────────────────────────────────────── */
 
+const timeFmt = new Intl.DateTimeFormat("ar-SA-u-nu-latn", {
+  hour: "2-digit",
+  minute: "2-digit",
+})
+
+function StorageStatus() {
+  const draft = useSnapshot(draftStatus)
+  return (
+    <div className="space-y-2.5">
+      {draft.savedAt || draft.available ? (
+        <Note tone="brand" icon={<Database className="size-3.5" />}>
+          المسودة تُحفظ تلقائيًا في المتصفح (IndexedDB)
+          {draft.savedAt && ` — آخر حفظ ${timeFmt.format(new Date(draft.savedAt))}`}
+          {draft.source === "draft" && "، وهذه الجلسة فُتحت منها"}. ربط PocketBase هو
+          الخطوة التالية (docs/architecture-plan.md).
+        </Note>
+      ) : (
+        <Note tone="warn" icon={<Database className="size-3.5" />}>
+          تعذّر الوصول إلى IndexedDB — البيانات في الذاكرة فقط لهذه الجلسة، وتحديث
+          الصفحة يعيد بذرة 1447.
+        </Note>
+      )}
+      <Button
+        variant="outline"
+        size="sm"
+        disabled={!draft.available}
+        title="يحذف المسودة المحفوظة ويعيد فتح التطبيق على بذرة 1447"
+        onClick={() => void discardDraft()}
+      >
+        تجاهل المسودة والعودة إلى بذرة 1447
+      </Button>
+    </div>
+  )
+}
+
 export function SettingsPanel() {
   const snap = useSnapshot(state)
   const used = allocated(state)
@@ -505,10 +541,7 @@ export function SettingsPanel() {
       </Card>
 
       <Card title="التخزين والاتصال">
-        <Note tone="warn" icon={<Database className="size-3.5" />}>
-          البيانات محفوظة في الذاكرة فقط: تحديث الصفحة يمسح المسودة. حفظ IndexedDB
-          وتصدير/استيراد JSON ثم ربط PocketBase هي الخطوات التالية.
-        </Note>
+        <StorageStatus />
       </Card>
       </div>
     </div>
