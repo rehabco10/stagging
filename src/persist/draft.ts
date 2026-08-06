@@ -30,6 +30,7 @@ export const draftStatus = proxy<{
   savedAt: string | null
   /** Whether boot restored a draft (vs opening on the seed). */
   source: "seed" | "draft"
+  /** IndexedDB is usable — set by the boot probe, not by the first save. */
   available: boolean
 }>({ savedAt: null, source: "seed", available: false })
 
@@ -49,7 +50,11 @@ function deviceId(): string {
 export async function initDraftPersistence(): Promise<void> {
   try {
     connector = new IdbConnector()
+    // This read is also the availability probe: it awaits the DB open, so a
+    // blocked IndexedDB (private mode, storage quota) fails HERE — a fresh
+    // session with simply no draft yet resolves to undefined and is fine.
     const saved = (await connector.load(KEY)) as DraftRecord | undefined
+    draftStatus.available = true
     if (saved && saved.version === DRAFT_VERSION && saved.data) {
       // Top-level assignment is enough: DraftState is plain data all the way
       // down, and replacing each slice keeps the proxy identity the UI holds.
@@ -58,7 +63,6 @@ export async function initDraftPersistence(): Promise<void> {
       }
       draftStatus.source = "draft"
       draftStatus.savedAt = saved.savedAt
-      draftStatus.available = true
     }
   } catch {
     // IndexedDB unavailable (private mode, quotas): the app still works
@@ -80,7 +84,6 @@ export async function initDraftPersistence(): Promise<void> {
       await connector!.save(KEY, record)
       await connector!.setStamp(KEY, record.stamp)
       draftStatus.savedAt = record.savedAt
-      draftStatus.available = true
     } catch {
       /* a failed save must never break editing */
     }

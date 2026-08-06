@@ -413,14 +413,17 @@ const timeFmt = new Intl.DateTimeFormat("ar-SA-u-nu-latn", {
 
 function StorageStatus() {
   const draft = useSnapshot(draftStatus)
+  const hasDraft = Boolean(draft.savedAt) || draft.source === "draft"
   return (
     <div className="space-y-2.5">
-      {draft.savedAt || draft.available ? (
+      {draft.available ? (
         <Note tone="brand" icon={<Database className="size-3.5" />}>
           المسودة تُحفظ تلقائيًا في المتصفح (IndexedDB)
-          {draft.savedAt && ` — آخر حفظ ${timeFmt.format(new Date(draft.savedAt))}`}
-          {draft.source === "draft" && "، وهذه الجلسة فُتحت منها"}. ربط PocketBase هو
-          الخطوة التالية (docs/architecture-plan.md).
+          {draft.savedAt
+            ? ` — آخر حفظ ${timeFmt.format(new Date(draft.savedAt))}`
+            : " — ستُحفظ مع أول تعديل"}
+          {draft.source === "draft" && "، وهذه الجلسة فُتحت من مسودة سابقة"}. ربط
+          PocketBase هو الخطوة التالية (docs/architecture-plan.md).
         </Note>
       ) : (
         <Note tone="warn" icon={<Database className="size-3.5" />}>
@@ -431,7 +434,7 @@ function StorageStatus() {
       <Button
         variant="outline"
         size="sm"
-        disabled={!draft.available}
+        disabled={!hasDraft}
         title="يحذف المسودة المحفوظة ويعيد فتح التطبيق على بذرة 1447"
         onClick={() => void discardDraft()}
       >
