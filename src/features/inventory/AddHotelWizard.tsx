@@ -107,7 +107,7 @@ export function AddHotelWizard({
                   onChange={(v) => set({ star_class: v as HotelDraft["star_class"] })}
                 />
               </Field>
-              <Field label="فئة السكن" hint="محور مستقل عن التصنيف — فوكو ٤ نجوم فئة ج.">
+              <Field label="فئة السكن" hint="فئة مستقلة عن تصنيف النجوم.">
                 <SelectField
                   allowEmpty={false}
                   value={draft.grade}

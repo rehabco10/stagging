@@ -166,7 +166,7 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
           label="توزيع الغرف (حاج)"
           hint={(() => {
             const sum = live.room_mix["2"] + live.room_mix["3"] + live.room_mix["4"]
-            if (sum === 0) return "رباعية / ثلاثية / ثنائية — اتركه صفرًا إن لم يُخطَّط بعد."
+            if (sum === 0) return "رباعية / ثلاثية / ثنائية — لم يُحدَّد التوزيع بعد."
             const diff = live.capacity - sum
             if (diff === 0) return `الموزَّع ${arNum(sum)} — مطابق للسعة.`
             return diff > 0 ? `الموزَّع ${arNum(sum)} — ينقص ${arNum(diff)}.` : `الموزَّع ${arNum(sum)} — يزيد ${arNum(-diff)}.`

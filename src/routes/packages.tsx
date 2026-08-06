@@ -90,7 +90,7 @@ export function PackagesPage() {
     <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-surface-page">
       <PageHeader
         title="الباقات"
-        description="مصنع الموسم — الميزان أعلاه، وكل باقة ورشة عمل بترتيب العملية."
+        description="إدارة باقات الموسم وتوزيع الحصة المعتمدة."
         actions={
           <Button size="sm" onClick={() => addPackage()}>
             <Plus className="size-3.5" />
@@ -437,7 +437,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             label="السعة (حاج)"
             hint={
               left > 0
-                ? `في الحصة ${arNum(left)} غير موزَّعة — «خذ المتبقي» يسندها لهذه الباقة.`
+                ? `المتبقي غير الموزَّع من الحصة: ${arNum(left)}.`
                 : "الحصة موزَّعة بالكامل."
             }
           >
@@ -454,9 +454,9 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                 className="-ms-px shrink-0 rounded-s-none"
                 disabled={left <= 0}
                 onClick={() => takeRemaining(id)}
-                title="أسند المتبقي من الحصة لهذه الباقة"
+                title="إسناد المتبقي من الحصة إلى هذه الباقة"
               >
-                خذ المتبقي{left > 0 && ` (${arNum(left)})`}
+                إسناد المتبقي{left > 0 && ` (${arNum(left)})`}
               </Button>
             </div>
           </Field>
@@ -464,7 +464,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             label="توزيع الغرف (رباعية / ثلاثية / ثنائية)"
             hint={
               mixSum === 0
-                ? "اتركه صفرًا إن لم يُخطَّط بعد."
+                ? "لم يُحدَّد التوزيع بعد."
                 : mixSum === view.capacity
                   ? `الموزَّع ${arNum(mixSum)} — مطابق للسعة.`
                   : `الموزَّع ${arNum(mixSum)} — ${mixSum < view.capacity ? `ينقص ${arNum(view.capacity - mixSum)}` : `يزيد ${arNum(mixSum - view.capacity)}`}.`
@@ -519,7 +519,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
       >
         {view.legs.length === 0 ? (
           <p className="px-3 py-6 text-center text-[12px] text-muted-foreground">
-            لا توجد إقامات بعد — أضف الأولى أو انسخ مسار باقة قائمة.
+            لا توجد إقامات.
           </p>
         ) : (
           <>
@@ -673,7 +673,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
       {/* ── ٤ الموارد ── */}
       <Card
         title="الموارد — العقود والمقاعد"
-        description="السكن قرار تغطية لكل فندق؛ والطيران قرار تغطية لكل اتجاه."
+        description="عقود السكن ومقاعد الطيران المخصصة لهذه الباقة."
       >
         <PackageResources pkg={live} />
       </Card>
@@ -681,7 +681,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
       {/* ── ٥ الجاهزية والنشر ── */}
       <Card
         title="الجاهزية والنشر"
-        description="بوابة الرفع: باقة مسعَّرة بلا وصف لا تمر — درس 1447."
+        description="حالة النشر في نسك ومتطلبات اكتمال المحتوى."
       >
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
           <Field label="حالة النشر في نسك">

@@ -173,13 +173,13 @@ export function DashboardPage() {
               to="/canvas"
               icon={Network}
               title="تكوين الباقات — المخطط"
-              sub={pkgs === 0 ? "ابدأ من عقدة «الباقات»" : `${arNum(pkgs)} باقة على اللوحة`}
+              sub={pkgs === 0 ? "لا باقات بعد" : `${arNum(pkgs)} باقة على اللوحة`}
             />
             <SectionTile
               to="/packages"
               icon={Table2}
               title="جدول الباقات"
-              sub="نفس البيانات في جداول قابلة للتحرير"
+              sub="بيانات الباقات في جداول قابلة للتحرير"
             />
             <SectionTile
               to="/requirements"
@@ -210,7 +210,7 @@ export function DashboardPage() {
         <div className="lg:col-span-5">
           {pkgs === 0 ? (
             <Note tone="brand">
-              لا توجد باقات بعد — ابدأ من{" "}
+              لا توجد باقات — تُنشأ من{" "}
               <Link to="/canvas" className="font-semibold underline underline-offset-2">
                 المخطط
               </Link>{" "}

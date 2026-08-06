@@ -44,8 +44,8 @@ export function Price({
   return (
     <button
       type="button"
-      title="سعر مخفي — اضغط للإظهار"
-      aria-label="سعر مخفي — اضغط للإظهار"
+      title="سعر محجوب — النقر يُظهره"
+      aria-label="سعر محجوب — النقر يُظهره"
       onClick={(e) => {
         e.stopPropagation()
         togglePrices()
@@ -64,7 +64,7 @@ export function MaskedPriceInput(props: React.ComponentProps<typeof NumInput>) {
   return (
     <button
       type="button"
-      title="سعر مخفي — اضغط للإظهار"
+      title="سعر محجوب — النقر يُظهره"
       onClick={togglePrices}
       className={cn(
         "flex h-9 w-full cursor-pointer select-none items-center rounded-md border border-input bg-muted/50 px-3 text-[12px] tracking-widest text-muted-foreground transition-colors hover:bg-muted",

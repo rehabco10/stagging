@@ -82,8 +82,8 @@ export function RequirementsPanel() {
   return (
     <>
       <Note tone="brand" icon={<Info className="size-3.5" />}>
-        المتطلبات مصدرها اجتماعات الفريق ووزارة الحج والعمرة. ما كان منها «معتمدًا» يُطبَّق
-        تلقائيًا على التحقق قبل الرفع؛ والملاحظات النصية تحتاج تأكيدًا يدويًا.
+        تُطبَّق المتطلبات المعتمدة تلقائيًا على التحقق قبل الرفع؛ وتتطلب الملاحظات
+        النصية تأكيدًا يدويًا.
       </Note>
 
       <Card
@@ -312,7 +312,7 @@ export function ValidationPanel() {
         </div>
       </Card>
 
-      <Card title="النتائج" description="مجمَّعة حسب المجال — اضغط على أي بند لفتح الباقة المعنية.">
+      <Card title="النتائج" description="مصنَّفة حسب المجال؛ اختيار البند يفتح الباقة المعنية.">
         {issues.length === 0 ? (
           <div className="flex items-center gap-2 rounded-lg bg-[color:var(--brand-green-soft)] px-3 py-2.5 text-[11px] text-[color:var(--brand-green-deep)]">
             <CircleCheck className="size-4 shrink-0" />
@@ -434,7 +434,7 @@ export function SettingsPanel() {
           </Field>
         </div>
         <div className="mt-3">
-          <Field label="الحصة الإجمالية (حاج)" hint="مجموع سعات الباقات يجب أن يساويها تمامًا — الرقم الحالي محمول من 1447 حتى يصدر خطاب 1448.">
+          <Field label="الحصة الإجمالية (حاج)" hint="يجب أن يساوي مجموع سعات الباقات الحصة الإجمالية. الرقم الحالي محمول من موسم 1447 حتى صدور اعتماد 1448.">
             <NumInput
               value={snap.season.quota_total}
               onChange={(e) => (state.season.quota_total = Number(e.target.value) || 0)}
@@ -442,7 +442,7 @@ export function SettingsPanel() {
           </Field>
         </div>
         <div className="mt-3 grid grid-cols-2 gap-3">
-          <Field label="بداية الموسم" hint="منها تبدأ افتراضات الإقامات والعقود والرحلات.">
+          <Field label="بداية الموسم" hint="تُشتق منها التواريخ الافتراضية للإقامات والعقود والرحلات.">
             <Input
               type="date"
               dir="ltr"
@@ -490,7 +490,7 @@ export function SettingsPanel() {
             <div className="text-[12px] font-medium text-foreground">العقد المثبَّتة</div>
             <div className="text-[11px] text-muted-foreground">
               {Object.keys(snap.pinned).length === 0
-                ? "لا توجد عقد مثبَّتة — كل شيء يتبع الترتيب التلقائي."
+                ? "لا توجد عقد مثبَّتة."
                 : `${arNum(Object.keys(snap.pinned).length)} عقدة تحتفظ بموضعها اليدوي.`}
             </div>
           </div>
@@ -500,14 +500,13 @@ export function SettingsPanel() {
       <Card title="العرض" description="ما يظهر على الشاشة أثناء الاجتماعات.">
         <label className="flex items-center gap-2 text-[12px] text-foreground/80">
           <Checkbox checked={snap.showPrices} onCheckedChange={() => togglePrices()} />
-          إظهار الأسعار — تُحجب افتراضيًا («••••») ويكشفها ضغط أي سعر محجوب
+          إظهار الأسعار (محجوبة افتراضيًا «••••»)
         </label>
       </Card>
 
       <Card title="التخزين والاتصال">
         <Note tone="warn" icon={<Database className="size-3.5" />}>
-          البيانات محفوظة في الذاكرة فقط: تحديث الصفحة يمسح المسودة. حفظ IndexedDB
-          وتصدير/استيراد JSON ثم ربط PocketBase هي الخطوات التالية.
+          البيانات محفوظة في الذاكرة فقط؛ تحديث الصفحة يمسح المسودة.
         </Note>
       </Card>
       </div>

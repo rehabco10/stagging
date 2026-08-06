@@ -483,9 +483,9 @@ function PackageGraphInner({ onNodeActivated }: Props) {
               dir="rtl"
               className="rounded-lg border border-dashed border-border bg-card/90 backdrop-blur px-4 py-3 text-center shadow-sm"
             >
-              <div className="text-sm font-semibold text-foreground">ابدأ من عقدة «الباقات»</div>
+              <div className="text-sm font-semibold text-foreground">لا باقات بعد</div>
               <div className="text-xs text-muted-foreground mt-1">
-                اضغط عليها ثم (+) لإضافة أول باقة.
+                تُضاف الباقة الأولى من عقدة «الباقات» بزر (+).
               </div>
             </div>
           </Panel>
