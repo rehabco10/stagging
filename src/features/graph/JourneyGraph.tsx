@@ -261,14 +261,14 @@ function JourneyGraphInner({ pkgId, onBack }: { pkgId: string; onBack: () => voi
           </div>
         </Panel>
 
-        <Panel position="bottom-right" className="!m-3">
+        <Panel position="top-right" className="!m-3">
           <div dir="rtl">
             {/* Same chrome as the canvas panels — a card floating on the
                 surface, not a form control. */}
             <button
               type="button"
               onClick={onBack}
-              className="flex items-center gap-2 rounded-lg border border-surface-line bg-card/90 px-4 py-2 text-[13px] font-semibold text-foreground shadow-sm backdrop-blur transition-colors hover:bg-surface-sunken/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
+              className="flex items-center gap-2 rounded-lg border border-surface-line bg-card/90 px-4 py-2 text-[13px] text-foreground shadow-sm backdrop-blur transition-colors hover:bg-surface-sunken/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
             >
               <ArrowRight className="size-4" />
               رجوع إلى المخطط
