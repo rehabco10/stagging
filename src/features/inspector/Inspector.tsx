@@ -16,6 +16,7 @@ import {
 import { ROLE_LABEL } from "@/features/graph/nodes"
 import { PackageResources } from "@/features/inventory/PackageResources"
 import { displayCategory } from "@/lib/schemas"
+import { DatePicker } from "@/components/ui/date-picker"
 import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
 import { MaskedPriceInput } from "@/components/ui/price"
 import { ROLE_OPTIONS, TIER_OPTIONS } from "@/lib/options"
@@ -65,19 +66,15 @@ function SeasonForm() {
         </Field>
         <div className="grid grid-cols-2 gap-2">
           <Field label="بداية الموسم">
-            <Input
-              type="date"
-              dir="ltr"
+            <DatePicker
               value={snap.season.starts_on}
-              onChange={(e) => e.target.value && (state.season.starts_on = e.target.value)}
+              onChange={(iso) => (state.season.starts_on = iso)}
             />
           </Field>
           <Field label="نهاية الموسم">
-            <Input
-              type="date"
-              dir="ltr"
+            <DatePicker
               value={snap.season.ends_on}
-              onChange={(e) => e.target.value && (state.season.ends_on = e.target.value)}
+              onChange={(iso) => (state.season.ends_on = iso)}
             />
           </Field>
         </div>
@@ -289,15 +286,9 @@ function LegForm({ legId }: { legId: string }) {
 
         <div className="grid grid-cols-2 gap-2">
           <Field label="بداية الإقامة">
-            <Input
-              type="date"
-              dir="ltr"
+            <DatePicker
               value={leg.starts_on}
-              onChange={(e) => {
-                const v = e.target.value
-                if (!v) return
-                retimeLeg(leg.id, v, addDays(v, Math.max(1, nights)))
-              }}
+              onChange={(iso) => retimeLeg(leg.id, iso, addDays(iso, Math.max(1, nights)))}
             />
           </Field>
           <Field label="عدد الليالي">

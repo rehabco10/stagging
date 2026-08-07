@@ -30,6 +30,7 @@ import { discardDraft, draftStatus } from "@/persist/draft"
 import { ISSUE_CATEGORY_LABEL, ISSUE_CATEGORY_ORDER } from "@/lib/options"
 import { categoryOf, type Issue, type IssueCategory } from "@/lib/validation"
 import { Button } from "@/components/ui/button"
+import { DatePicker } from "@/components/ui/date-picker"
 import { Card, Note, Stat } from "@/components/PageShell"
 import {
   Checkbox,
@@ -481,19 +482,15 @@ export function SettingsPanel() {
         </div>
         <div className="mt-3 grid grid-cols-2 gap-3">
           <Field label="بداية الموسم" hint="تُشتق منها التواريخ الافتراضية للإقامات والعقود والرحلات.">
-            <Input
-              type="date"
-              dir="ltr"
+            <DatePicker
               value={snap.season.starts_on}
-              onChange={(e) => e.target.value && (state.season.starts_on = e.target.value)}
+              onChange={(iso) => (state.season.starts_on = iso)}
             />
           </Field>
           <Field label="نهاية الموسم">
-            <Input
-              type="date"
-              dir="ltr"
+            <DatePicker
               value={snap.season.ends_on}
-              onChange={(e) => e.target.value && (state.season.ends_on = e.target.value)}
+              onChange={(iso) => (state.season.ends_on = iso)}
             />
           </Field>
         </div>

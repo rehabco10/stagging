@@ -1,0 +1,19 @@
+# Form controls go through the Base UI-backed primitives in src/components/ui
+# (Input, NumInput, Textarea, SelectField, Checkbox, DatePicker) — raw HTML
+# elements skip the app's focus rings, RTL handling, digit normalisation, and
+# validation styling. Only the ui/ primitives themselves may touch the bare
+# elements.
+id: no-raw-form-elements
+language: tsx
+severity: error
+message: Use the ui/ primitives (Input/NumInput/Textarea/SelectField/Checkbox/DatePicker) instead of raw form elements.
+files:
+  - src/**
+ignores:
+  - src/components/ui/**
+rule:
+  any:
+    - pattern: <input $$$PROPS />
+    - pattern: <select $$$PROPS>$$$BODY</select>
+    - pattern: <textarea $$$PROPS />
+    - pattern: <textarea $$$PROPS>$$$BODY</textarea>

@@ -8,6 +8,7 @@ import { MasterDetail } from "@/components/MasterDetail"
 import { Card, Note, PageHeader } from "@/components/PageShell"
 import { MASTER_DETAIL_WIDE_QUERY, useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/button"
+import { DatePicker } from "@/components/ui/date-picker"
 import { Checkbox, Field, Input, NumInput, SelectField, cellCls } from "@/components/ui/field"
 import { FilterChips } from "@/components/ui/filter-chips"
 import { MaskedPriceInput, Price } from "@/components/ui/price"
@@ -558,15 +559,9 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                   />
                   <div className="grid grid-cols-2 gap-2">
                     <Field label="البداية">
-                      <Input
-                        type="date"
-                        dir="ltr"
-                        className="text-start"
+                      <DatePicker
                         value={leg.starts_on}
-                        onChange={(e) => {
-                          const v = e.target.value
-                          if (v) retimeLeg(leg.id, v, addDays(v, Math.max(1, nights)))
-                        }}
+                        onChange={(iso) => retimeLeg(leg.id, iso, addDays(iso, Math.max(1, nights)))}
                       />
                     </Field>
                     <Field label="الليالي">
@@ -626,15 +621,10 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                         />
                       </td>
                       <td className="px-1.5 py-1">
-                        <Input
-                          type="date"
-                          dir="ltr"
-                          className={cn(cellCls, "text-start")}
+                        <DatePicker
+                          className={cellCls}
                           value={leg.starts_on}
-                          onChange={(e) => {
-                            const v = e.target.value
-                            if (v) retimeLeg(leg.id, v, addDays(v, Math.max(1, nights)))
-                          }}
+                          onChange={(iso) => retimeLeg(leg.id, iso, addDays(iso, Math.max(1, nights)))}
                         />
                       </td>
                       <td className="px-1.5 py-1">

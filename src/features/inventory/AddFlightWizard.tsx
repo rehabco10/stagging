@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 
 import { FormWizard } from "@/components/ui/form-wizard"
+import { DatePicker } from "@/components/ui/date-picker"
 import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
 import {
   FLIGHT_DIRECTION_OPTIONS,
@@ -108,11 +109,9 @@ export function AddFlightWizard({
                 />
               </Field>
               <Field label="التاريخ">
-                <Input
-                  type="date"
-                  dir="ltr"
+                <DatePicker
                   value={draft.flies_on}
-                  onChange={(e) => e.target.value && set({ flies_on: e.target.value })}
+                  onChange={(iso) => set({ flies_on: iso })}
                 />
               </Field>
             </>
