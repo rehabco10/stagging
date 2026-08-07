@@ -104,16 +104,21 @@ const tintVar = (t: Tint) => `var(--brand-${t})`
 interface Props {
   /** Fired when the user picks a node — the host opens the wizard sheet. */
   onNodeActivated?: (id: string) => void
+  /** Context-menu «رحلة الحاج الكاملة» — the host enters journey mode. */
+  onJourney?: (pkgId: string) => void
 }
 
-function PackageGraphInner({ onNodeActivated }: Props) {
+function PackageGraphInner({ onNodeActivated, onJourney }: Props) {
   const snap = useSnapshot(state)
   const flow = useReactFlow()
   const wrapperRef = useRef<HTMLDivElement>(null)
   const dragStart = useRef<{ x: number; y: number } | null>(null)
   // Overlays only earn their space on a tall enough canvas.
   const roomy = useMediaQuery(ROOMY_CANVAS_QUERY)
-  const { menu, closeMenu, longPressHandlers, openFromContextMenu } = useNodeMenu(onNodeActivated)
+  const { menu, closeMenu, longPressHandlers, openFromContextMenu } = useNodeMenu(
+    onNodeActivated,
+    onJourney,
+  )
 
   // Shared with the rail badge and the validation page — one computation.
   const issues = useIssues()
