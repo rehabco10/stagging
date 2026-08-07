@@ -298,7 +298,9 @@ function PackageGraphInner({ onNodeActivated, onJourney }: Props) {
           source: pkg.id,
           target: leg.id,
           type: "smoothstep",
-          style: { stroke: `color-mix(in srgb, ${tintVar(tint)} 55%, transparent)`, strokeWidth: 1.5 },
+          // Black, not the tier tint: the stay edges belong to the hotel
+          // family, and the tinted line blended into the gradient cards.
+          style: { stroke: "black", strokeWidth: 1.5 },
         })
       })
     }
