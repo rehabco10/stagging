@@ -462,7 +462,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             </div>
           </Field>
           <Field
-            label="توزيع الغرف (رباعية / ثلاثية / ثنائية)"
+            label="توزيع الغرف (حاج)"
             hint={
               mixSum === 0
                 ? "لم يُحدَّد التوزيع بعد."
@@ -472,15 +472,24 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             }
           >
             <div className="grid grid-cols-3 gap-1.5">
-              {(["4", "3", "2"] as const).map((rt) => (
-                <NumInput
-                  key={rt}
-                  aria-label={rt === "4" ? "رباعية" : rt === "3" ? "ثلاثية" : "ثنائية"}
-                  placeholder={rt === "4" ? "رباعية" : rt === "3" ? "ثلاثية" : "ثنائية"}
-                  value={view.room_mix[rt] ? String(view.room_mix[rt]) : ""}
-                  onChange={(e) => (live.room_mix[rt] = Math.max(0, Number(e.target.value) || 0))}
-                />
-              ))}
+              {/* A visible label per input — the placeholder disappears the
+                  moment a value exists, leaving three anonymous numbers. */}
+              {(["4", "3", "2"] as const).map((rt) => {
+                const name = rt === "4" ? "رباعية" : rt === "3" ? "ثلاثية" : "ثنائية"
+                return (
+                  <label key={rt} className="block">
+                    <span className="mb-0.5 block text-[10px] font-semibold text-foreground/60">
+                      {name}
+                    </span>
+                    <NumInput
+                      aria-label={name}
+                      placeholder="0"
+                      value={view.room_mix[rt] ? String(view.room_mix[rt]) : ""}
+                      onChange={(e) => (live.room_mix[rt] = Math.max(0, Number(e.target.value) || 0))}
+                    />
+                  </label>
+                )
+              })}
             </div>
           </Field>
         </div>
