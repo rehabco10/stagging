@@ -14,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { DatePicker } from "@/components/ui/date-picker"
 import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { MaskedPriceInput } from "@/components/ui/price"
 import { StatusPill } from "@/components/ui/status-pill"
 import { CONTRACT_CITY_OPTIONS, CONTRACT_STATUS_OPTIONS, ROOM_TYPE_OPTIONS } from "@/lib/options"
@@ -113,42 +114,45 @@ export function ContractCard({
         </Field>
       </div>
 
-      <table className="mt-3 w-full border-collapse text-sm">
-        <thead>
-          <tr className="border-b border-surface-line">
-            <th className={TH}>نوع الغرفة</th>
-            <th className={cn(TH, "w-28")}>الغرف</th>
-            <th className={cn(TH, "w-24")}>الأسرّة</th>
-            <th className={TH}>سعر السرير/ليلة</th>
-            <th className={cn(TH, "w-12")} />
-          </tr>
-        </thead>
-        <tbody>
+      {/* min-w + the Table container's overflow: phones scroll the room
+          lines horizontally instead of crushing «سعر السرير/ليلة» into
+          three wrapped lines. */}
+      <Table className="mt-3 min-w-[26rem]">
+        <TableHeader>
+          <TableRow className="border-b border-surface-line">
+            <TableHead className={TH}>نوع الغرفة</TableHead>
+            <TableHead className={cn(TH, "w-28")}>الغرف</TableHead>
+            <TableHead className={cn(TH, "w-24")}>الأسرّة</TableHead>
+            <TableHead className={TH}>سعر السرير/ليلة</TableHead>
+            <TableHead className={cn(TH, "w-12")} />
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {c.lines.map((l) => {
             const liveLine = live.lines.find((x) => x.id === l.id)!
             return (
-              <tr key={l.id} className="border-b border-surface-line/60 align-middle">
-                <td className="py-1.5 pe-2">
+              <TableRow key={l.id} className="border-t-0 border-b border-surface-line/60">
+                <TableCell className="py-1.5 pe-2 ps-0">
                   <SelectField
                     allowEmpty={false}
                     value={l.room_type}
                     options={ROOM_TYPE_OPTIONS}
                     onChange={(v) => (liveLine.room_type = v as DraftRoomLine["room_type"])}
                   />
-                </td>
-                <td className="py-1.5 pe-2">
+                </TableCell>
+                <TableCell className="py-1.5 pe-2 ps-0">
                   <NumInput
                     value={String(l.rooms || "")}
                     placeholder="0"
                     onChange={(e) => (liveLine.rooms = Math.max(0, Number(e.target.value) || 0))}
                   />
-                </td>
+                </TableCell>
                 {/* Derived, read-only — entering beds directly is how the 1447
                     sheet ended up holding rooms in a beds column. */}
-                <td className="px-3 py-1.5 text-sm font-semibold tabular-nums">
+                <TableCell className="px-3 py-1.5 text-sm font-semibold tabular-nums">
                   {arNum(lineBeds(l as DraftRoomLine))}
-                </td>
-                <td className="py-1.5 pe-2">
+                </TableCell>
+                <TableCell className="py-1.5 pe-2 ps-0">
                   <MaskedPriceInput
                     value={l.rate_sar == null ? "" : String(l.rate_sar)}
                     placeholder="اختياري"
@@ -157,8 +161,8 @@ export function ContractCard({
                         e.target.value === "" ? null : Math.max(0, Number(e.target.value) || 0))
                     }
                   />
-                </td>
-                <td className="py-1.5">
+                </TableCell>
+                <TableCell className="py-1.5 ps-0">
                   <button
                     type="button"
                     aria-label="حذف نوع الغرفة"
@@ -167,12 +171,12 @@ export function ContractCard({
                   >
                     <Trash2 className="size-4" />
                   </button>
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             )
           })}
-        </tbody>
-      </table>
+        </TableBody>
+      </Table>
       {c.lines.length < 3 && (
         <Button variant="ghost" size="sm" className="mt-2" onClick={() => addRoomLine(c.id)}>
           <Plus className="size-3.5" />

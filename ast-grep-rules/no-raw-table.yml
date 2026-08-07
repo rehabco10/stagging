@@ -1,0 +1,14 @@
+# Tables go through the ui/table primitives — every Table renders inside its
+# own overflow-x-auto container, so wide tables scroll within their card on
+# phones instead of crushing columns or stretching the page. A raw <table>
+# has no such container.
+id: no-raw-table
+language: tsx
+severity: error
+message: Use Table/TableHeader/TableBody… from @/components/ui/table — raw <table> has no responsive overflow container.
+files:
+  - src/**
+ignores:
+  - src/components/ui/**
+rule:
+  pattern: <table $$$PROPS>$$$BODY</table>
