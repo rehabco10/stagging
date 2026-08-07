@@ -4,6 +4,7 @@ import { PlaneLanding, PlaneTakeoff, X } from "lucide-react"
 
 import {
   contractBeds,
+  lineBeds,
   setFlightAllocationSeats,
   state,
   toggleContractLink,
@@ -21,6 +22,8 @@ const dm = (iso: string) => {
   const d = new Date(dayMs(iso))
   return `${d.getUTCDate()}/${d.getUTCMonth() + 1}`
 }
+
+const RT_LABEL: Record<string, string> = { "4": "رباعية", "3": "ثلاثية", "2": "ثنائية" }
 
 /**
  * The package's resources, organized by the two decisions being made
@@ -68,21 +71,50 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
     return { covered, total }
   }
 
-  /** Worst-night beds this package has bound at the hotel, across its stay. */
-  const worstNightBeds = (hotelId: string) => {
-    const bound = live.contractIds
+  const boundAt = (hotelId: string) =>
+    live.contractIds
       .map((cid) => snap.contracts.find((x) => x.id === cid))
       .filter((c): c is NonNullable<typeof c> => Boolean(c && c.hotelId === hotelId))
+
+  /** Worst-night beds this package has bound at the hotel, across its stay. */
+  const worstNight = (hotelId: string, beds: (c: DraftContract) => number, shiftingExempt = false) => {
+    const bound = boundAt(hotelId).filter((c) => !shiftingExempt || c.city !== "shifting")
     let worst = Infinity
     for (const sp of stayAt(hotelId)) {
       for (let night = sp.s; night < sp.e; night += DAY_MS) {
-        const beds = bound
+        const total = bound
           .filter((c) => night >= dayMs(c.starts_on) && night < dayMs(c.ends_on))
-          .reduce((t, c) => t + contractBeds(c as DraftContract), 0)
-        worst = Math.min(worst, beds)
+          .reduce((t, c) => t + beds(c as DraftContract), 0)
+        worst = Math.min(worst, total)
       }
     }
     return worst === Infinity ? 0 : worst
+  }
+  const worstNightBeds = (hotelId: string) => worstNight(hotelId, (c) => contractBeds(c))
+
+  /**
+   * The package's room mix against the hotel's bound bed SPLIT, worst night:
+   * a hotel can have beds to spare overall and still starve one room type —
+   * the validation engine flags it per contract; this is the same arithmetic
+   * at the moment the planner picks contracts. Shifting contracts are exempt
+   * (quad-only nuzul housing sells any mix), matching the engine.
+   */
+  const mixCoverage = (hotelId: string) => {
+    const mixTotal = live.room_mix["2"] + live.room_mix["3"] + live.room_mix["4"]
+    if (mixTotal === 0) return null
+    const eligible = boundAt(hotelId).filter((c) => c.city !== "shifting")
+    if (!eligible.length) return null
+    return (["4", "3", "2"] as const)
+      .filter((rt) => live.room_mix[rt] > 0)
+      .map((rt) => ({
+        rt,
+        need: live.room_mix[rt],
+        have: worstNight(
+          hotelId,
+          (c) => c.lines.filter((l) => l.room_type === rt).reduce((t, l) => t + lineBeds(l), 0),
+          true,
+        ),
+      }))
   }
 
   const contractRow = (c: (typeof snap.contracts)[number], hotelId: string) => {
@@ -115,6 +147,14 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
           </span>
           <span className="text-[12px] font-semibold tabular-nums">
             {arNum(contractBeds(c as DraftContract))} سرير
+          </span>
+          {/* The split behind the total — picking contracts by total beds is
+              how a mix ends up starved of one room type. */}
+          <span className="text-[10px] tabular-nums text-muted-foreground">
+            {c.lines
+              .filter((l) => l.rooms > 0)
+              .map((l) => `${RT_LABEL[l.room_type]} ${arNum(lineBeds(l as never))}`)
+              .join(" · ")}
           </span>
           <StatusPill status={c.status} />
           {verdict && <span className={cn("ms-auto text-[11px]", verdict.cls)}>{verdict.text}</span>}
@@ -222,6 +262,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
           const hotel = snap.hotels.find((h) => h.id === hotelId)
           const contracts = snap.contracts.filter((c) => c.hotelId === hotelId)
           const worst = worstNightBeds(hotelId)
+          const cov = mixCoverage(hotelId)
           const spans = stayAt(hotelId)
           const range =
             spans.length > 0
@@ -248,6 +289,26 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
                   />
                 )}
               </div>
+              {/* The mix against the bound bed SPLIT, worst night — total
+                  beds can suffice while one room type starves. */}
+              {cov && (
+                <div className="mt-1 flex flex-wrap items-center gap-1.5">
+                  {cov.map(({ rt, need, have }) => (
+                    <span
+                      key={rt}
+                      title={`أسرّة ${RT_LABEL[rt]} المرتبطة في أسوأ ليلة مقابل توزيع الغرف`}
+                      className={cn(
+                        "rounded-full px-2 py-0.5 text-[10px] font-semibold tabular-nums",
+                        have >= need
+                          ? "bg-[color:var(--brand-green-soft)] text-[color:var(--brand-green-deep)]"
+                          : "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]",
+                      )}
+                    >
+                      {RT_LABEL[rt]} <span dir="ltr">{arNum(have)} / {arNum(need)}</span>
+                    </span>
+                  ))}
+                </div>
+              )}
               {contracts.length === 0 ? (
                 <p className="mt-1.5 text-[11px] text-muted-foreground">
                   لا عقود لهذا الفندق —{" "}
