@@ -13,6 +13,7 @@ import { Checkbox, Field, Input, NumInput, SelectField, cellCls } from "@/compon
 import { FilterChips } from "@/components/ui/filter-chips"
 import { MaskedPriceInput, Price } from "@/components/ui/price"
 import { Meter } from "@/components/ui/meter"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { PackageResources } from "@/features/inventory/PackageResources"
 import {
   PUBLISH_STATUS_OPTIONS,
@@ -590,81 +591,79 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
               )
             })}
           </ul>
-          <div className="hidden overflow-x-auto sm:block">
-            <table className="w-full min-w-[42rem] border-collapse text-sm">
-              <thead>
-                <tr className="bg-surface-sunken">
-                  <th className={cn(TH, "w-10")}>#</th>
-                  <th className={cn(TH, "w-36")}>الدور</th>
-                  <th className={TH}>الفندق</th>
-                  <th className={cn(TH, "w-36")}>البداية</th>
-                  <th className={cn(TH, "w-20")}>الليالي</th>
-                  <th className={cn(TH, "w-28")}>النهاية</th>
-                  <th className={cn(TH, "w-10")} />
-                </tr>
-              </thead>
-              <tbody>
-                {orderedLegs(live).map((leg, i) => {
-                  const nights = legNights(leg)
-                  return (
-                    <tr key={leg.id} className="border-t border-surface-line align-middle">
-                      <td className="px-2.5 py-1 text-[11px] tabular-nums text-muted-foreground">
-                        {arNum(i + 1)}
-                      </td>
-                      <td className="px-1.5 py-1">
-                        <SelectField
-                          className={cellCls}
-                          allowEmpty={false}
-                          value={leg.role}
-                          options={ROLE_OPTIONS}
-                          onChange={(v) => setLegRole(leg, v as typeof leg.role)}
-                        />
-                      </td>
-                      <td className="px-1.5 py-1">
-                        <SelectField
-                          className={cellCls}
-                          allowEmpty={false}
-                          value={leg.hotelId}
-                          options={hotelOptions}
-                          onChange={(v) => (leg.hotelId = v)}
-                        />
-                      </td>
-                      <td className="px-1.5 py-1">
-                        <DatePicker
-                          className={cellCls}
-                          value={leg.starts_on}
-                          onChange={(iso) => retimeLeg(leg.id, iso, addDays(iso, Math.max(1, nights)))}
-                        />
-                      </td>
-                      <td className="px-1.5 py-1">
-                        <NumInput
-                          className={cellCls}
-                          value={nights}
-                          onChange={(e) => {
-                            const n = Math.max(1, Number(e.target.value) || 1)
-                            retimeLeg(leg.id, leg.starts_on, addDays(leg.starts_on, n))
-                          }}
-                        />
-                      </td>
-                      <td className="px-2.5 py-1 text-[11px] tabular-nums text-muted-foreground" dir="ltr">
-                        {leg.ends_on}
-                      </td>
-                      <td className="px-1 py-1">
-                        <button
-                          type="button"
-                          aria-label="حذف الإقامة"
-                          onClick={() => removeLeg(leg.id)}
-                          className="grid size-7 place-items-center rounded-md text-muted-foreground/45 transition-colors hover:bg-[color:var(--brand-rose-soft)] hover:text-[color:var(--brand-rose-deep)]"
-                        >
-                          <Trash2 className="size-3.5" />
-                        </button>
-                      </td>
-                    </tr>
-                  )
-                })}
-              </tbody>
-            </table>
-          </div>
+          <Table className="min-w-[42rem]" containerClassName="hidden sm:block">
+            <TableHeader>
+              <TableRow className="border-t-0 bg-surface-sunken">
+                <TableHead className={cn(TH, "w-10")}>#</TableHead>
+                <TableHead className={cn(TH, "w-36")}>الدور</TableHead>
+                <TableHead className={TH}>الفندق</TableHead>
+                <TableHead className={cn(TH, "w-36")}>البداية</TableHead>
+                <TableHead className={cn(TH, "w-20")}>الليالي</TableHead>
+                <TableHead className={cn(TH, "w-28")}>النهاية</TableHead>
+                <TableHead className={cn(TH, "w-10")} />
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {orderedLegs(live).map((leg, i) => {
+                const nights = legNights(leg)
+                return (
+                  <TableRow key={leg.id}>
+                    <TableCell className="px-2.5 text-[11px] tabular-nums text-muted-foreground">
+                      {arNum(i + 1)}
+                    </TableCell>
+                    <TableCell>
+                      <SelectField
+                        className={cellCls}
+                        allowEmpty={false}
+                        value={leg.role}
+                        options={ROLE_OPTIONS}
+                        onChange={(v) => setLegRole(leg, v as typeof leg.role)}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <SelectField
+                        className={cellCls}
+                        allowEmpty={false}
+                        value={leg.hotelId}
+                        options={hotelOptions}
+                        onChange={(v) => (leg.hotelId = v)}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <DatePicker
+                        className={cellCls}
+                        value={leg.starts_on}
+                        onChange={(iso) => retimeLeg(leg.id, iso, addDays(iso, Math.max(1, nights)))}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <NumInput
+                        className={cellCls}
+                        value={nights}
+                        onChange={(e) => {
+                          const n = Math.max(1, Number(e.target.value) || 1)
+                          retimeLeg(leg.id, leg.starts_on, addDays(leg.starts_on, n))
+                        }}
+                      />
+                    </TableCell>
+                    <TableCell className="px-2.5 text-[11px] tabular-nums text-muted-foreground" dir="ltr">
+                      {leg.ends_on}
+                    </TableCell>
+                    <TableCell className="px-1">
+                      <button
+                        type="button"
+                        aria-label="حذف الإقامة"
+                        onClick={() => removeLeg(leg.id)}
+                        className="grid size-7 place-items-center rounded-md text-muted-foreground/45 transition-colors hover:bg-[color:var(--brand-rose-soft)] hover:text-[color:var(--brand-rose-deep)]"
+                      >
+                        <Trash2 className="size-3.5" />
+                      </button>
+                    </TableCell>
+                  </TableRow>
+                )
+              })}
+            </TableBody>
+          </Table>
           </>
         )}
       </Card>

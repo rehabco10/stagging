@@ -20,6 +20,7 @@ import { Meter } from "@/components/ui/meter"
 import { Price } from "@/components/ui/price"
 import { StatusPill } from "@/components/ui/status-pill"
 import { dayMs } from "@/features/inventory/supply"
+import { SIDE_PANEL_QUERY, useMediaQuery } from "@/hooks/use-media-query"
 import { ROLE_OPTIONS, TIER_LABEL } from "@/lib/options"
 import { contractBeds, legNights, packageNights, state, type DraftContract, type DraftPackage } from "@/store/season"
 import { cn, arNum } from "@/lib/utils"
@@ -49,6 +50,8 @@ interface StopData extends Record<string, unknown> {
   kind: StopKind
   pkgId: string
   legId?: string
+  /** Narrow portrait stacks the chain vertically — handles flip with it. */
+  vertical: boolean
 }
 
 /* ── per-stop card ──────────────────────────────────────────────── */
@@ -82,13 +85,21 @@ function JourneyStopNode({ data }: NodeProps<Node<StopData>>) {
       style={{ width: NODE_W }}
       className="rounded-xl border border-surface-line bg-surface-raised p-3 shadow-[var(--elev-2)]"
     >
-      <Handle type="target" position={Position.Left} className="!size-0 !min-h-0 !min-w-0 !border-0 !bg-transparent" />
+      <Handle
+        type="target"
+        position={data.vertical ? Position.Top : Position.Left}
+        className="!size-0 !min-h-0 !min-w-0 !border-0 !bg-transparent"
+      />
       <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
         <span className={cn("grid size-7 shrink-0 place-items-center rounded-full", tone)}>{icon}</span>
         {title}
       </div>
       {body}
-      <Handle type="source" position={Position.Right} className="!size-0 !min-h-0 !min-w-0 !border-0 !bg-transparent" />
+      <Handle
+        type="source"
+        position={data.vertical ? Position.Bottom : Position.Right}
+        className="!size-0 !min-h-0 !min-w-0 !border-0 !bg-transparent"
+      />
     </div>
   )
 
@@ -189,25 +200,46 @@ const journeyNodeTypes = { stop: JourneyStopNode }
 
 function JourneyGraphInner({ pkgId, onBack }: { pkgId: string; onBack: () => void }) {
   const { snap, pkg } = useJourneyPkg(pkgId)
+  // Wide/landscape reads left-to-right like the main tree; narrow portrait
+  // stacks the trip vertically — a 4-stop horizontal chain fitted into a
+  // 390px viewport rendered as unreadable specks.
+  const horizontal = useMediaQuery(SIDE_PANEL_QUERY)
 
   const { nodes, edges } = useMemo(() => {
     if (!pkg) return { nodes: [] as Node<StopData>[], edges: [] as Edge[] }
     const legs = [...pkg.legs].sort((a, b) => a.starts_on.localeCompare(b.starts_on))
+    const rowsOf = (s: { kind: StopKind; legId?: string }) =>
+      s.kind === "stay"
+        ? snap.contracts.filter(
+            (c) =>
+              c.hotelId === legs.find((l) => l.id === s.legId)?.hotelId &&
+              pkg.contractIds.includes(c.id),
+          ).length || 1
+        : flightsOf(snap, pkg, s.kind).length || 1
     const stops: { id: string; data: StopData }[] = [
-      { id: "j_arrival", data: { kind: "arrival", pkgId } },
-      ...legs.map((l) => ({ id: `j_${l.id}`, data: { kind: "stay" as const, pkgId, legId: l.id } })),
-      { id: "j_return", data: { kind: "return", pkgId } },
+      { id: "j_arrival", data: { kind: "arrival", pkgId, vertical: !horizontal } },
+      ...legs.map((l) => ({
+        id: `j_${l.id}`,
+        data: { kind: "stay" as const, pkgId, legId: l.id, vertical: !horizontal },
+      })),
+      { id: "j_return", data: { kind: "return", pkgId, vertical: !horizontal } },
     ]
-    // Horizontal chain: fixed node width makes the stacking exact — no
-    // height estimation needed, tops stay aligned.
-    const nodes: Node<StopData>[] = stops.map((s, i) => ({
-      id: s.id,
-      type: "stop",
-      position: { x: i * (NODE_W + GAP), y: 0 },
-      data: s.data,
-      draggable: false,
-      connectable: false,
-    }))
+    // Horizontal: fixed node width makes the stacking exact. Vertical:
+    // estimated heights (auto-sized cards) only need to prevent overlap.
+    const estimate = (rows: number) => 64 + rows * 40
+    let y = 0
+    const nodes: Node<StopData>[] = stops.map((s, i) => {
+      const node: Node<StopData> = {
+        id: s.id,
+        type: "stop",
+        position: horizontal ? { x: i * (NODE_W + GAP), y: 0 } : { x: 0, y },
+        data: s.data,
+        draggable: false,
+        connectable: false,
+      }
+      y += estimate(rowsOf(s.data)) + GAP
+      return node
+    })
     const edges: Edge[] = stops.slice(1).map((s, i) => ({
       id: `je_${i}`,
       source: stops[i].id,
@@ -216,13 +248,15 @@ function JourneyGraphInner({ pkgId, onBack }: { pkgId: string; onBack: () => voi
       style: { stroke: "var(--brand-teal)", strokeWidth: 1.5, opacity: 0.5 },
     }))
     return { nodes, edges }
-  }, [snap, pkg, pkgId])
+  }, [snap, pkg, pkgId, horizontal])
 
   if (!pkg) return null
 
   return (
     <div dir="ltr" className="relative h-full w-full">
       <ReactFlow
+        // Remount on orientation flip so fitView frames the new layout.
+        key={horizontal ? "h" : "v"}
         nodes={nodes}
         edges={edges}
         nodeTypes={journeyNodeTypes}
@@ -240,23 +274,29 @@ function JourneyGraphInner({ pkgId, onBack }: { pkgId: string; onBack: () => voi
       >
         <Background gap={20} size={1} color="rgba(148,163,184,0.18)" />
 
-        <Panel position="top-center" className="!mt-3">
+        {/* Wide: a centred title card. Narrow: a compact start-edge pill so
+            it never collides with the back button on the end edge. */}
+        <Panel position={horizontal ? "top-center" : "top-left"} className="!m-3">
           <div
             dir="rtl"
-            className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-surface-line bg-card/90 px-4 py-2 shadow-sm backdrop-blur"
+            className="flex max-w-[55vw] flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-surface-line bg-card/90 px-3 py-2 shadow-sm backdrop-blur sm:max-w-none sm:px-4"
           >
-            <span className="text-[13px] font-bold">رحلة الحاج — باقة {pkg.package_no}</span>
-            <span dir="ltr" className="text-[11px] text-muted-foreground">
+            <span className="truncate text-[13px] font-bold">
+              رحلة الحاج — باقة {pkg.package_no}
+            </span>
+            <span dir="ltr" className="hidden text-[11px] text-muted-foreground sm:inline">
               {pkg.name_en}
             </span>
-            <span className="rounded-full bg-surface-sunken px-2 py-0.5 text-[10px] font-semibold">
+            <span className="hidden rounded-full bg-surface-sunken px-2 py-0.5 text-[10px] font-semibold sm:inline">
               {TIER_LABEL[pkg.tier]}
             </span>
-            <span className="text-[11px] tabular-nums text-muted-foreground">
+            <span className="hidden text-[11px] tabular-nums text-muted-foreground sm:inline">
               {arNum(pkg.capacity)} حاج · {arNum(packageNights(pkg as DraftPackage))} ليلة
             </span>
             {pkg.initial_price_sar > 0 && (
-              <Price value={`${arNum(Math.round(pkg.initial_price_sar))} ر.س`} />
+              <span className="hidden sm:inline-flex">
+                <Price value={`${arNum(Math.round(pkg.initial_price_sar))} ر.س`} />
+              </span>
             )}
           </div>
         </Panel>
