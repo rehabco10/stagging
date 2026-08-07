@@ -28,6 +28,20 @@ const TINT_BAR: Record<Tint, string> = {
   slate: "bg-[color:var(--brand-slate)]",
 }
 
+/**
+ * The hotel-stay family: a soft tint→white gradient behind a thinner but
+ * more saturated outline. Packages keep the flat fill with a 2px border, so
+ * the two entity kinds read apart even when their hues collide (a green
+ * premium package next to a green Madinah stay).
+ */
+const TINT_GRADIENT: Record<Tint, string> = {
+  teal: "bg-gradient-to-b from-[color:var(--brand-teal-soft)] to-white border-[color:color-mix(in_srgb,var(--brand-teal)_55%,transparent)]",
+  green: "bg-gradient-to-b from-[color:var(--brand-green-soft)] to-white border-[color:color-mix(in_srgb,var(--brand-green)_55%,transparent)]",
+  gold: "bg-gradient-to-b from-[color:var(--brand-gold-soft)] to-white border-[color:color-mix(in_srgb,var(--brand-gold)_60%,transparent)]",
+  rose: "bg-gradient-to-b from-[color:var(--brand-rose-soft)] to-white border-[color:color-mix(in_srgb,var(--brand-rose)_55%,transparent)]",
+  slate: "bg-gradient-to-b from-[color:var(--brand-slate-soft)] to-white border-[color:color-mix(in_srgb,var(--brand-slate)_50%,transparent)]",
+}
+
 export const TIER_TINT: Record<DraftPackage["tier"], Tint> = {
   luxury: "gold",
   premium: "green",
@@ -120,6 +134,7 @@ function Card({
   invalid,
   width,
   height,
+  variant = "flat",
   children,
 }: {
   tint: Tint
@@ -127,6 +142,8 @@ function Card({
   invalid?: boolean
   width: number
   height: number
+  /** `flat` = package/tier chrome; `gradient` = the hotel-stay family. */
+  variant?: "flat" | "gradient"
   children: React.ReactNode
 }) {
   return (
@@ -136,9 +153,9 @@ function Card({
       // be measured and layout can't disagree with what's painted.
       style={{ width, height }}
       className={cn(
-        "group relative rounded-xl border-2 shadow-sm px-3 py-2.5 flex flex-col gap-1.5",
+        "group relative rounded-xl shadow-sm px-3 py-2.5 flex flex-col gap-1.5",
         "transition-shadow hover:shadow-md",
-        TINT_BG[tint],
+        variant === "flat" ? cn("border-2", TINT_BG[tint]) : cn("border", TINT_GRADIENT[tint]),
         selected && "ring-2 ring-[color:var(--brand-teal)] ring-offset-2 ring-offset-background shadow-lg",
         invalid && "border-[color:var(--brand-rose)]",
       )}
@@ -389,7 +406,14 @@ export function LegNode({ data }: NodeProps<Node<LegData>>) {
   const tint: Tint = leg.role === "transitional" ? "rose" : hotel?.city === "makkah" ? "teal" : "green"
 
   return (
-    <Card tint={tint} selected={data.selected} invalid={data.invalid} width={LEG_W} height={LEG_H}>
+    <Card
+      tint={tint}
+      variant="gradient"
+      selected={data.selected}
+      invalid={data.invalid}
+      width={LEG_W}
+      height={LEG_H}
+    >
       <PinnedMark pinned={data.pinned} />
       <Handle type="target" position={Position.Left} className="!opacity-0" />
 
