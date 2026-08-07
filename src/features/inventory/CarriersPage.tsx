@@ -9,6 +9,7 @@ import { MasterDetail } from "@/components/MasterDetail"
 import { Card, Note, PageHeader } from "@/components/PageShell"
 import { MASTER_DETAIL_WIDE_QUERY, useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/button"
+import { DatePicker } from "@/components/ui/date-picker"
 import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
 import { FilterChips } from "@/components/ui/filter-chips"
 import { Meter } from "@/components/ui/meter"
@@ -314,11 +315,9 @@ function CarrierDetail({
                         />
                       </Field>
                       <Field label="التاريخ">
-                        <Input
-                          type="date"
-                          dir="ltr"
+                        <DatePicker
                           value={f.flies_on}
-                          onChange={(e) => e.target.value && (live.flies_on = e.target.value)}
+                          onChange={(iso) => (live.flies_on = iso)}
                         />
                       </Field>
                       <Field label="المقاعد">

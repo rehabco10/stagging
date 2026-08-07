@@ -1,0 +1,13 @@
+# Native date inputs render their value in the BROWSER locale (MM/DD/YYYY on
+# most machines — «05/12/2026» reads as 5 ديسمبر but means May 12) and their
+# popup ignores the app's RTL and typography. Dates go through the Base UI
+# DatePicker (src/components/ui/date-picker.tsx).
+id: no-native-date-input
+language: tsx
+severity: error
+message: Use <DatePicker> from @/components/ui/date-picker — native type="date" renders browser-locale MM/DD/YYYY.
+files:
+  - src/**
+rule:
+  kind: jsx_attribute
+  regex: '^type="date"$'

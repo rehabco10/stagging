@@ -12,6 +12,7 @@ import {
   type DraftRoomLine,
 } from "@/store/season"
 import { Button } from "@/components/ui/button"
+import { DatePicker } from "@/components/ui/date-picker"
 import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
 import { MaskedPriceInput } from "@/components/ui/price"
 import { StatusPill } from "@/components/ui/status-pill"
@@ -91,19 +92,15 @@ export function ContractCard({
           />
         </Field>
         <Field label="من">
-          <Input
-            type="date"
-            dir="ltr"
+          <DatePicker
             value={c.starts_on}
-            onChange={(e) => e.target.value && (live.starts_on = e.target.value)}
+            onChange={(iso) => (live.starts_on = iso)}
           />
         </Field>
         <Field label="إلى">
-          <Input
-            type="date"
-            dir="ltr"
+          <DatePicker
             value={c.ends_on}
-            onChange={(e) => e.target.value && (live.ends_on = e.target.value)}
+            onChange={(iso) => (live.ends_on = iso)}
           />
         </Field>
         <Field label="الحالة" hint={c.status === "signed" ? undefined : "لا يُحتسب إلا الموقَّع"}>
