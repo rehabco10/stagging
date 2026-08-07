@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react"
-import { Copy, Pin, PinOff, Plus, SquarePen, Trash2 } from "lucide-react"
+import { Copy, Pin, PinOff, Plus, Route, SquarePen, Trash2 } from "lucide-react"
 
 import {
   addLeg,
@@ -26,7 +26,10 @@ import type { MenuAction, MenuTarget } from "./NodeMenu"
  * a snapshot — a menu is built at the moment it opens, so there is nothing to
  * go stale.
  */
-export function useNodeMenu(onNodeActivated?: (id: string) => void) {
+export function useNodeMenu(
+  onNodeActivated?: (id: string) => void,
+  onJourney?: (pkgId: string) => void,
+) {
   const [menu, setMenu] = useState<MenuTarget | null>(null)
 
   const menuFor = useCallback(
@@ -83,6 +86,13 @@ export function useNodeMenu(onNodeActivated?: (id: string) => void) {
             },
             { id: "edit", label: "فتح في المعالج", icon: SquarePen, run: open },
             {
+              id: "journey",
+              label: "رحلة الحاج الكاملة",
+              icon: Route,
+              hint: "الطيران والسكن بترتيب الرحلة",
+              run: () => onJourney?.(pkg.id),
+            },
+            {
               id: "dup",
               label: "تكرار الباقة",
               icon: Copy,
@@ -112,7 +122,7 @@ export function useNodeMenu(onNodeActivated?: (id: string) => void) {
       }
       return null
     },
-    [onNodeActivated],
+    [onNodeActivated, onJourney],
   )
 
   /** Long-press resolves the node from the DOM — React Flow has no hook for it. */

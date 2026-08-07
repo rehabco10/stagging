@@ -1,3 +1,4 @@
+import { NuqsAdapter } from "nuqs/adapters/react-router/v7"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 
 import { Navigation } from "@/components/NavRail"
@@ -16,6 +17,7 @@ export default function App() {
   return (
     // Mount under whatever `base` this build was made for ("/" or "/stagging/").
     <BrowserRouter basename={import.meta.env.BASE_URL}>
+      <NuqsAdapter>
       {/* RTL row order: the rail sits on the start edge, the page fills the rest. */}
       <div className="flex h-dvh w-full flex-col overflow-hidden bg-background lg:flex-row landscape:flex-row">
         <Navigation />
@@ -34,6 +36,7 @@ export default function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
+      </NuqsAdapter>
     </BrowserRouter>
   )
 }
