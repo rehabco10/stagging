@@ -448,8 +448,11 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                 only the outer corners are rounded, and the focused input
                 lifts above the button so its ring is never clipped. */}
             <div className="flex">
+              {/* Physical sides on purpose: NumInput pins dir="ltr", which
+                  flips its logical s/e against the RTL row it sits in — the
+                  joined edge is its physical LEFT here, always. */}
               <NumInput
-                className="relative rounded-e-none border-e-0 focus-visible:z-10"
+                className="relative rounded-l-none border-l-0 focus-visible:z-10"
                 value={view.capacity}
                 onChange={(e) => (live.capacity = Number(e.target.value) || 0)}
               />
