@@ -443,17 +443,20 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                 : "الحصة موزَّعة بالكامل."
             }
           >
-            {/* Joined input-group: the action is welded to the field it acts
-                on instead of floating beside it at its own baseline. */}
+            {/* Joined input-group, Base UI NumberField-style: one shared
+                height, the input drops its shared edge (no -ms-px overlap),
+                only the outer corners are rounded, and the focused input
+                lifts above the button so its ring is never clipped. */}
             <div className="flex">
               <NumInput
-                className="rounded-e-none"
+                className="relative rounded-e-none border-e-0 focus-visible:z-10"
                 value={view.capacity}
                 onChange={(e) => (live.capacity = Number(e.target.value) || 0)}
               />
               <Button
                 variant="outline"
-                className="-ms-px shrink-0 rounded-s-none"
+                size="sm"
+                className="shrink-0 rounded-s-none bg-clip-padding"
                 disabled={left <= 0}
                 onClick={() => takeRemaining(id)}
                 title="إسناد المتبقي من الحصة إلى هذه الباقة"
