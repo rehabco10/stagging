@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { useTranslation } from "react-i18next"
 import { NavLink, useLocation } from "react-router-dom"
 import { useSnapshot } from "valtio"
 import {
@@ -24,21 +25,22 @@ import { cn, arNum } from "@/lib/utils"
 
 interface Item {
   to: string
-  label: string
+  /** Catalog key under `nav.` — the label is resolved at render. */
+  key: string
   icon: LucideIcon
   /** Show the blocking-error count on this item. */
   badge?: boolean
 }
 
 const ITEMS: Item[] = [
-  { to: "/", label: "لوحة المعلومات", icon: LayoutDashboard },
-  { to: "/canvas", label: "تكوين الباقات — المخطط", icon: Network },
-  { to: "/packages", label: "جدول الباقات", icon: Table2 },
-  { to: "/requirements", label: "الاجتماعات والمتطلبات", icon: ClipboardList },
-  { to: "/hotels", label: "الفنادق والمخيمات", icon: Building2 },
-  { to: "/flights", label: "مقاعد الطيران", icon: Plane },
-  { to: "/validation", label: "التحقق والرفع", icon: ShieldCheck, badge: true },
-  { to: "/settings", label: "الإعدادات", icon: Settings },
+  { to: "/", key: "dashboard", icon: LayoutDashboard },
+  { to: "/canvas", key: "canvas", icon: Network },
+  { to: "/packages", key: "packages", icon: Table2 },
+  { to: "/requirements", key: "requirements", icon: ClipboardList },
+  { to: "/hotels", key: "hotels", icon: Building2 },
+  { to: "/flights", key: "flights", icon: Plane },
+  { to: "/validation", key: "validation", icon: ShieldCheck, badge: true },
+  { to: "/settings", key: "settings", icon: Settings },
 ]
 
 /**
@@ -61,6 +63,7 @@ export function NavRail() {
   const snap = useSnapshot(state)
   const errorCount = useErrorCount()
   const localePath = useLocalePath()
+  const { t } = useTranslation()
 
   return (
     <nav
@@ -87,8 +90,8 @@ export function NavRail() {
             <NavLink
               to={localePath(item.to)}
               end={item.to === "/"}
-              title={item.label}
-              aria-label={item.label}
+              title={t(`nav.${item.key}`)}
+              aria-label={t(`nav.${item.key}`)}
               className={({ isActive }) =>
                 cn(
                   "group relative grid size-11 place-items-center rounded-xl transition-colors",
@@ -114,7 +117,7 @@ export function NavRail() {
                   {item.badge && errorCount > 0 && (
                     <span
                       className="absolute -top-0.5 -end-0.5 min-w-4 rounded-full bg-[color:var(--brand-rose)] px-1 text-[9px] font-bold leading-4 text-white ring-2 ring-[color:var(--surface-brand)] tabular-nums"
-                      aria-label={`${errorCount} خطأ`}
+                      aria-label={t("nav.error_count", { count: errorCount })}
                     >
                       {arNum(errorCount)}
                     </span>
@@ -144,6 +147,7 @@ function NavBurger() {
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
   const navigate = useLocaleNavigate()
+  const { t } = useTranslation()
 
   // A route change means the user picked something — close behind them.
   useEffect(() => setOpen(false), [pathname])
@@ -158,14 +162,14 @@ function NavBurger() {
       {/* A slim brand bar instead of a rail: mark, current section, burger. */}
       <div className="fixed inset-x-0 top-0 z-30 flex h-12 items-center gap-2 bg-surface-brand px-3 text-surface-brand-foreground shadow-[var(--elev-2)]">
         <span className="grid size-8 shrink-0 place-items-center rounded-lg bg-white shadow-[var(--elev-1)]">
-          <img src={`${import.meta.env.BASE_URL}logo-icon.svg`} alt="إثراء الخير" className="size-6" />
+          <img src={`${import.meta.env.BASE_URL}logo-icon.svg`} alt={t("brand")} className="size-6" />
         </span>
         <span className="min-w-0 flex-1 truncate text-[13px] font-bold">
-          {current?.label ?? "إثراء الخير"}
+          {current ? t(`nav.${current.key}`) : t("brand")}
         </span>
         <button
           type="button"
-          aria-label="فتح القائمة"
+          aria-label={t("nav.open_menu")}
           aria-expanded={open}
           onClick={() => setOpen(true)}
           className="relative grid size-9 shrink-0 place-items-center rounded-lg text-white/85 transition-colors hover:bg-white/12 hover:text-white"
@@ -184,9 +188,9 @@ function NavBurger() {
       <Drawer open={open} onOpenChange={setOpen} showSwipeHandle swipeDirection="down">
         <DrawerContent className="bg-popover">
           <DrawerTitle className="border-b border-surface-line px-4 py-3 text-[13px] font-bold">
-            الأقسام
+            {t("nav.sections")}
             <span className="ms-2 text-[10px] font-normal text-muted-foreground tabular-nums">
-              موسم {String(snap.season.year_hijri)}هـ
+              {t("nav.season_badge", { year: String(snap.season.year_hijri) })}
             </span>
           </DrawerTitle>
           <ul className="py-1 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
@@ -205,7 +209,7 @@ function NavBurger() {
                     )}
                   >
                     <item.icon className="size-4.5 shrink-0" />
-                    <span className="flex-1">{item.label}</span>
+                    <span className="flex-1">{t(`nav.${item.key}`)}</span>
                     {item.badge && errorCount > 0 && (
                       <span className="rounded-full bg-[color:var(--brand-rose)] px-1.5 text-[10px] font-bold leading-5 text-white tabular-nums">
                         {arNum(errorCount)}

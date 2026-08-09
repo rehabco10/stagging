@@ -29,7 +29,7 @@ import {
 } from "@/store/season"
 import { useLocale, useSwitchLocale } from "@/i18n/LocaleProvider"
 import { LOCALES, type Locale } from "@/i18n/locale"
-import { ISSUE_CATEGORY_LABEL, ISSUE_CATEGORY_ORDER } from "@/lib/options"
+import { ISSUE_CATEGORY_ORDER, issueCategoryLabel } from "@/lib/options"
 import { categoryOf, type Issue, type IssueCategory } from "@/lib/validation"
 import { Button } from "@/components/ui/button"
 import { DatePicker } from "@/components/ui/date-picker"
@@ -343,7 +343,7 @@ export function ValidationPanel() {
                       <Icon className="size-3.5" />
                     </span>
                     <h3 className="text-[12px] font-bold text-foreground">
-                      {ISSUE_CATEGORY_LABEL[cat]}
+                      {issueCategoryLabel(cat)}
                     </h3>
                     <span className="text-[10px] tabular-nums text-muted-foreground">
                       {errorCount > 0 && `${arNum(errorCount)} خطأ`}

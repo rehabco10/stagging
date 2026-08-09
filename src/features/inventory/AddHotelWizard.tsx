@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 
 import { FormWizard } from "@/components/ui/form-wizard"
 import { Field, Input, SelectField } from "@/components/ui/field"
-import { CITY_OPTIONS, GRADE_OPTIONS, STAR_OPTIONS } from "@/lib/options"
+import { cityOptions, gradeOptions, starOptions } from "@/lib/options"
 import { addHotel, type DraftHotel } from "@/store/season"
 import type { CityValue } from "@/lib/schemas"
 
@@ -70,7 +70,7 @@ export function AddHotelWizard({
                 <SelectField
                   allowEmpty={false}
                   value={draft.city}
-                  options={CITY_OPTIONS}
+                  options={cityOptions()}
                   onChange={(v) => set({ city: v as CityValue })}
                 />
               </Field>
@@ -103,7 +103,7 @@ export function AddHotelWizard({
                 <SelectField
                   allowEmpty={false}
                   value={draft.star_class}
-                  options={STAR_OPTIONS}
+                  options={starOptions()}
                   onChange={(v) => set({ star_class: v as HotelDraft["star_class"] })}
                 />
               </Field>
@@ -111,7 +111,7 @@ export function AddHotelWizard({
                 <SelectField
                   allowEmpty={false}
                   value={draft.grade}
-                  options={GRADE_OPTIONS}
+                  options={gradeOptions()}
                   onChange={(v) => set({ grade: v as HotelDraft["grade"] })}
                 />
               </Field>
@@ -127,8 +127,8 @@ export function AddHotelWizard({
                 rows={[
                   ["الاسم", draft.name_ar],
                   ["الاسم (إنجليزي)", draft.name_en],
-                  ["المدينة", optionLabel(CITY_OPTIONS, draft.city)],
-                  ["التصنيف", optionLabel(STAR_OPTIONS, draft.star_class)],
+                  ["المدينة", optionLabel(cityOptions(), draft.city)],
+                  ["التصنيف", optionLabel(starOptions(), draft.star_class)],
                   ["فئة السكن", draft.grade],
                 ]}
               />

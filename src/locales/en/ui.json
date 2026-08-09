@@ -1,4 +1,119 @@
 {
+  "brand": "Ithraa Al Khair",
+  "nav": {
+    "sections": "Sections",
+    "open_menu": "Open menu",
+    "error_count": "{count, plural, =0 {No errors} one {# error} other {# errors}}",
+    "season_badge": "{year} AH season",
+    "dashboard": "Dashboard",
+    "canvas": "Package builder — canvas",
+    "packages": "Packages table",
+    "requirements": "Meetings & requirements",
+    "hotels": "Hotels & camps",
+    "flights": "Flight seats",
+    "validation": "Validation & submission",
+    "settings": "Settings"
+  },
+  "page": {
+    "dashboard": "Dashboard",
+    "dashboard_desc": "{hijri} AH — {gregorian} season · quota, progress and readiness at a glance.",
+    "canvas": "Package builder",
+    "canvas_desc": "Packages and their stays on the canvas.",
+    "packages": "Packages",
+    "packages_desc": "Plan the season's packages and distribute the approved quota.",
+    "requirements": "Meetings & requirements",
+    "requirements_desc": "Requirements from the Ministry of Hajj and Umrah and from the team; approved ones are enforced by validation before submission.",
+    "hotels": "Housing",
+    "hotels_desc": "Hotels, their housing contracts and capacity against package capacities.",
+    "flights": "Flights",
+    "flights_desc": "Carriers and their contracted seat blocks, arrival and departure.",
+    "validation": "Validation & submission",
+    "validation_desc": "Errors that block submission to Nusuk, and warnings worth reviewing first.",
+    "settings": "Settings",
+    "settings_desc": "Season, canvas and storage."
+  },
+  "canvas": {
+    "open_wizard": "Package wizard",
+    "wizard_title": "Package wizard",
+    "pin_hint": "Drag a node to pin it in place · double-click to return it to the automatic layout"
+  },
+  "tier": {
+    "luxury": "Luxury",
+    "premium": "Premium",
+    "standard": "Standard"
+  },
+  "role": {
+    "first": "First residence",
+    "second": "Second residence",
+    "transitional": "Transitional residence"
+  },
+  "publish_status": {
+    "draft": "Draft",
+    "submitted": "Submitted",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "sale_status": {
+    "unavailable": "Not for sale",
+    "available": "On sale"
+  },
+  "city": {
+    "makkah": "Makkah",
+    "madinah": "Madinah",
+    "makkah_short": "Makkah",
+    "madinah_short": "Madinah"
+  },
+  "star": {
+    "5": "5 stars",
+    "4": "4 stars",
+    "3": "3 stars",
+    "2": "2 stars",
+    "1": "1 star",
+    "nuzul": "Nuzul"
+  },
+  "grade": {
+    "أ": "A",
+    "ب": "B",
+    "ج": "C",
+    "م": "M"
+  },
+  "room_type": {
+    "4": "Quad",
+    "3": "Triple",
+    "2": "Double"
+  },
+  "contract_city": {
+    "makkah": "Makkah",
+    "madinah": "Madinah",
+    "shifting": "Transitional (Makkah)"
+  },
+  "contract_status": {
+    "proposed": "Proposed",
+    "signed": "Signed",
+    "cancelled": "Cancelled"
+  },
+  "flight_direction": {
+    "arrival": "Arrival",
+    "return": "Departure"
+  },
+  "flight_type": {
+    "group": "Group flights",
+    "gds": "GDS flights"
+  },
+  "flight_status": {
+    "proposed": "Proposed",
+    "confirmed": "Confirmed",
+    "cancelled": "Cancelled"
+  },
+  "issue_category": {
+    "governance": "Quota & rules",
+    "itinerary": "Itineraries & stays",
+    "package": "Package data",
+    "contracts": "Housing contracts",
+    "housing": "Occupancy & availability",
+    "flights": "Flight seats",
+    "other": "Other"
+  },
   "settings": {
     "language": "Interface language",
     "language_hint": "Arabic lives at “/”, English at “/en” — the link carries the language.",

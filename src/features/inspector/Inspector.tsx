@@ -19,7 +19,7 @@ import { displayCategory } from "@/lib/schemas"
 import { DatePicker } from "@/components/ui/date-picker"
 import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
 import { MaskedPriceInput } from "@/components/ui/price"
-import { ROLE_OPTIONS, TIER_OPTIONS } from "@/lib/options"
+import { roleOptions, tierOptions } from "@/lib/options"
 import { cn, arNum } from "@/lib/utils"
 import { useIssues } from "@/store/use-issues"
 
@@ -134,7 +134,7 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
             <SelectField
               allowEmpty={false}
               value={live.tier}
-              options={TIER_OPTIONS}
+              options={tierOptions()}
               onChange={(v) => (pkg.tier = v as DraftPackage["tier"])}
             />
           </Field>
@@ -266,7 +266,7 @@ function LegForm({ legId }: { legId: string }) {
           <SelectField
             allowEmpty={false}
             value={leg.role}
-            options={ROLE_OPTIONS}
+            options={roleOptions()}
             onChange={(v) => {
               const next = v as typeof leg.role
               // Swap with whichever leg already holds the target role, so a

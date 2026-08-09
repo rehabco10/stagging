@@ -22,7 +22,7 @@ import { Price } from "@/components/ui/price"
 import { StatusPill } from "@/components/ui/status-pill"
 import { dayMs } from "@/features/inventory/supply"
 import { SIDE_PANEL_QUERY, useMediaQuery } from "@/hooks/use-media-query"
-import { ROLE_OPTIONS, TIER_LABEL } from "@/lib/options"
+import { roleLabel, tierLabel } from "@/lib/options"
 import { contractBeds, legNights, packageNights, state, type DraftContract, type DraftPackage } from "@/store/season"
 import { cn, arNum } from "@/lib/utils"
 
@@ -41,7 +41,6 @@ const dm = (iso: string) => {
   const d = new Date(dayMs(iso))
   return `${d.getUTCDate()}/${d.getUTCMonth() + 1}`
 }
-const roleLabel = (role: string) => ROLE_OPTIONS.find((o) => o.value === role)?.label ?? role
 
 const NODE_W = 380
 const GAP = 56
@@ -289,7 +288,7 @@ function JourneyGraphInner({ pkgId, onBack }: { pkgId: string; onBack: () => voi
               {pkg.name_en}
             </span>
             <span className="hidden rounded-full bg-surface-sunken px-2 py-0.5 text-[10px] font-semibold sm:inline">
-              {TIER_LABEL[pkg.tier]}
+              {tierLabel(pkg.tier)}
             </span>
             <span className="hidden text-[11px] tabular-nums text-muted-foreground sm:inline">
               {arNum(pkg.capacity)} حاج · {arNum(packageNights(pkg as DraftPackage))} ليلة

@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { useParams } from "react-router-dom"
 import { useSnapshot } from "valtio"
 import { ChevronLeft, Copy, Package as PackageIcon, Plus, Trash2, TriangleAlert } from "lucide-react"
@@ -17,11 +18,11 @@ import { Meter } from "@/components/ui/meter"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { PackageResources } from "@/features/inventory/PackageResources"
 import {
-  PUBLISH_STATUS_OPTIONS,
-  ROLE_OPTIONS,
-  SALE_STATUS_OPTIONS,
-  TIER_LABEL,
-  TIER_OPTIONS,
+  publishStatusOptions,
+  roleOptions,
+  saleStatusOptions,
+  tierLabel,
+  tierOptions,
 } from "@/lib/options"
 import { displayCategory } from "@/lib/schemas"
 import {
@@ -59,6 +60,7 @@ export function PackagesPage() {
   const navigate = useLocaleNavigate()
   const snap = useSnapshot(state)
   const issues = useIssues()
+  const { t } = useTranslation()
   const wide = useMediaQuery(MASTER_DETAIL_WIDE_QUERY)
   const [tierFilter, setTierFilter] = useState<DraftPackage["tier"] | null>(null)
   const [search, setSearch] = useState("")
@@ -92,8 +94,8 @@ export function PackagesPage() {
   return (
     <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-surface-page">
       <PageHeader
-        title="الباقات"
-        description="إدارة باقات الموسم وتوزيع الحصة المعتمدة."
+        title={t("page.packages")}
+        description={t("page.packages_desc")}
         actions={
           <Button size="sm" onClick={() => addPackage()}>
             <Plus className="size-3.5" />
@@ -163,7 +165,7 @@ export function PackagesPage() {
                     onChange={setTierFilter}
                     options={(["luxury", "premium", "standard"] as const).map((t) => ({
                       value: t,
-                      label: TIER_LABEL[t],
+                      label: tierLabel(t),
                       count: snap.packages.filter((p) => p.tier === t).length,
                     }))}
                   />
@@ -286,7 +288,7 @@ function MasterRow({
           <ChevronLeft className="size-4 shrink-0 text-muted-foreground/50 lg:hidden" />
         </div>
         <div className="mt-1 text-[11px] tabular-nums text-muted-foreground">
-          {TIER_LABEL[pkg.tier]} · <b className="font-semibold text-foreground/80">{arNum(pkg.capacity)} حاج</b>
+          {tierLabel(pkg.tier)} · <b className="font-semibold text-foreground/80">{arNum(pkg.capacity)} حاج</b>
           {pkg.initial_price_sar > 0 && (
             <>
               {" "}
@@ -404,7 +406,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             <SelectField
               allowEmpty={false}
               value={view.tier}
-              options={TIER_OPTIONS}
+              options={tierOptions()}
               onChange={(v) => (live.tier = v as DraftPackage["tier"])}
             />
           </Field>
@@ -420,7 +422,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             label="السعر الابتدائي (ر.س)"
             hint={
               bounds
-                ? `حدود ${TIER_LABEL[view.tier]} المعتمدة: ${arNum(bounds.min_sar ?? 0)} – ${bounds.max_sar != null ? arNum(bounds.max_sar) : "—"}`
+                ? `حدود ${tierLabel(view.tier)} المعتمدة: ${arNum(bounds.min_sar ?? 0)} – ${bounds.max_sar != null ? arNum(bounds.max_sar) : "—"}`
                 : "لا حدود سعرية معتمدة لهذه الفئة بعد."
             }
             error={outOfBounds ? "خارج الحدود المعتمدة للفئة." : undefined}
@@ -556,7 +558,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                       className="flex-1"
                       allowEmpty={false}
                       value={leg.role}
-                      options={ROLE_OPTIONS}
+                      options={roleOptions()}
                       onChange={(v) => setLegRole(leg, v as typeof leg.role)}
                     />
                     <button
@@ -623,7 +625,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                         className={cellCls}
                         allowEmpty={false}
                         value={leg.role}
-                        options={ROLE_OPTIONS}
+                        options={roleOptions()}
                         onChange={(v) => setLegRole(leg, v as typeof leg.role)}
                       />
                     </TableCell>
@@ -693,7 +695,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             <SelectField
               allowEmpty={false}
               value={view.publish_status}
-              options={PUBLISH_STATUS_OPTIONS}
+              options={publishStatusOptions()}
               onChange={(v) => (live.publish_status = v as DraftPackage["publish_status"])}
             />
           </Field>
@@ -701,7 +703,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             <SelectField
               allowEmpty={false}
               value={view.sale_status}
-              options={SALE_STATUS_OPTIONS}
+              options={saleStatusOptions()}
               onChange={(v) => (live.sale_status = v as DraftPackage["sale_status"])}
             />
           </Field>

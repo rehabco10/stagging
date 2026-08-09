@@ -17,7 +17,7 @@ import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { MaskedPriceInput } from "@/components/ui/price"
 import { StatusPill } from "@/components/ui/status-pill"
-import { CONTRACT_CITY_OPTIONS, CONTRACT_STATUS_OPTIONS, ROOM_TYPE_OPTIONS } from "@/lib/options"
+import { contractCityOptions, contractStatusOptions, roomTypeOptions } from "@/lib/options"
 import { cn, arNum } from "@/lib/utils"
 
 const TH = "px-3 py-2 text-start text-[11px] font-semibold text-muted-foreground"
@@ -88,7 +88,7 @@ export function ContractCard({
           <SelectField
             allowEmpty={false}
             value={c.city}
-            options={CONTRACT_CITY_OPTIONS}
+            options={contractCityOptions()}
             onChange={(v) => (live.city = v as DraftContract["city"])}
           />
         </Field>
@@ -108,7 +108,7 @@ export function ContractCard({
           <SelectField
             allowEmpty={false}
             value={c.status}
-            options={CONTRACT_STATUS_OPTIONS}
+            options={contractStatusOptions()}
             onChange={(v) => (live.status = v as DraftContract["status"])}
           />
         </Field>
@@ -136,7 +136,7 @@ export function ContractCard({
                   <SelectField
                     allowEmpty={false}
                     value={l.room_type}
-                    options={ROOM_TYPE_OPTIONS}
+                    options={roomTypeOptions()}
                     onChange={(v) => (liveLine.room_type = v as DraftRoomLine["room_type"])}
                   />
                 </TableCell>

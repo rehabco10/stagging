@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { useParams } from "react-router-dom"
 import { useSnapshot } from "valtio"
 import { Building2, ChevronLeft, Pencil, Plus, Trash2, TriangleAlert } from "lucide-react"
@@ -15,11 +16,10 @@ import { AddHotelWizard } from "@/features/inventory/AddHotelWizard"
 import { ContractCard } from "@/features/inventory/ContractCard"
 import { ContractsTimeline } from "@/features/inventory/ContractsTimeline"
 import { hotelIssues, hotelSummary } from "@/features/inventory/supply"
-import { CITY_OPTIONS, GRADE_OPTIONS, STAR_OPTIONS } from "@/lib/options"
+import { cityOptions, gradeOptions, starLabel, starOptions } from "@/lib/options"
 import { useIssues } from "@/store/use-issues"
 import { cn, arNum } from "@/lib/utils"
 
-const starLabel = (v: string) => STAR_OPTIONS.find((o) => o.value === v)?.label ?? v
 
 /**
  * السكن as a place: hotels are a read-only registry on the start edge — name,
@@ -28,6 +28,7 @@ const starLabel = (v: string) => STAR_OPTIONS.find((o) => o.value === v)?.label 
  * the entity the user chose; the registry itself never shows an input.
  */
 export function HousingPage() {
+  const { t } = useTranslation()
   const { hotelId } = useParams()
   const navigate = useLocaleNavigate()
   const snap = useSnapshot(state)
@@ -114,10 +115,7 @@ export function HousingPage() {
     // Chat-app scrolling: the page is fixed; the master column and the detail
     // column scroll independently inside MasterDetail.
     <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-surface-page">
-      <PageHeader
-        title="السكن"
-        description="الفنادق وعقود السكن وسعاتها مقابل سعات الباقات."
-      />
+      <PageHeader title={t("page.hotels")} description={t("page.hotels_desc")} />
       <AddHotelWizard
         open={addCity !== null}
         onOpenChange={(o) => !o && setAddCity(null)}
@@ -251,7 +249,7 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
               <SelectField
                 allowEmpty={false}
                 value={h.city}
-                options={CITY_OPTIONS}
+                options={cityOptions()}
                 onChange={(v) => (live.city = v as DraftHotel["city"])}
               />
             </Field>
@@ -260,7 +258,7 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
                 <SelectField
                   allowEmpty={false}
                   value={h.star_class}
-                  options={STAR_OPTIONS}
+                  options={starOptions()}
                   onChange={(v) => (live.star_class = v as DraftHotel["star_class"])}
                 />
               </Field>
@@ -268,7 +266,7 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
                 <SelectField
                   allowEmpty={false}
                   value={h.grade}
-                  options={GRADE_OPTIONS}
+                  options={gradeOptions()}
                   onChange={(v) => (live.grade = v as DraftHotel["grade"])}
                 />
               </Field>
