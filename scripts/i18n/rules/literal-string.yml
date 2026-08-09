@@ -1,0 +1,17 @@
+# Arabic in plain string literals (option label maps, validation messages, consts)
+# — excluding attribute strings and template contents, which their own rules own.
+id: i18n-literal-string
+language: tsx
+severity: hint
+message: Arabic literal string
+files:
+  - src/**
+ignores:
+  - src/store/seed-1447.ts
+rule:
+  kind: string_fragment
+  regex: '[؀-ۿ]'
+  not:
+    any:
+      - inside: { kind: jsx_attribute, stopBy: end }
+      - inside: { kind: template_string, stopBy: end }

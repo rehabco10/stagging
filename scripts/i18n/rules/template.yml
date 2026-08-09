@@ -1,0 +1,13 @@
+# Arabic in template literals — every match is an ICU-message candidate
+# (interpolations become {params}, counted ones become plurals).
+id: i18n-template
+language: tsx
+severity: hint
+message: Arabic template literal
+files:
+  - src/**
+ignores:
+  - src/store/seed-1447.ts
+rule:
+  kind: template_string
+  regex: '[؀-ۿ]'
