@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { useCallback, useEffect, useMemo, useRef } from "react"
 import {
   Background,
@@ -62,6 +63,7 @@ import {
   unpinAll,
   unpinNode,
 } from "@/store/season"
+import { tierLabel } from "@/lib/options"
 import { useIssues } from "@/store/use-issues"
 import { ROOMY_CANVAS_QUERY, useMediaQuery } from "@/hooks/use-media-query"
 
@@ -86,12 +88,6 @@ const boxOf = (id: string) =>
         ? SIZES.leg
         : SIZES.pkg
 
-const TIER_AR: Record<string, string> = {
-  luxury: "فاخرة",
-  premium: "مميزة",
-  standard: "أساسية",
-}
-
 type AnyData = QuotaData | TierData | PackageData | LegData
 
 interface Built {
@@ -109,6 +105,7 @@ interface Props {
 }
 
 function PackageGraphInner({ onNodeActivated, onJourney }: Props) {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   const flow = useReactFlow()
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -217,7 +214,7 @@ function PackageGraphInner({ onNodeActivated, onJourney }: Props) {
         className: snap.pinned[id] ? "is-pinned" : undefined,
         data: {
           tier: tier as PackageData["pkg"]["tier"],
-          label: TIER_AR[tier] ?? tier,
+          label: tierLabel(tier),
           count: members.length,
           capacity,
           pct: totalAllocated > 0 ? (capacity / totalAllocated) * 100 : 0,
@@ -490,9 +487,9 @@ function PackageGraphInner({ onNodeActivated, onJourney }: Props) {
               dir="rtl"
               className="rounded-lg border border-dashed border-border bg-card/90 backdrop-blur px-4 py-3 text-center shadow-sm"
             >
-              <div className="text-sm font-semibold text-foreground">لا باقات بعد</div>
+              <div className="text-sm font-semibold text-foreground">{t("لا باقات بعد")}</div>
               <div className="text-xs text-muted-foreground mt-1">
-                تُضاف الباقة الأولى من عقدة «الباقات» بزر (+).
+                {t("تُضاف الباقة الأولى من عقدة «الباقات» بزر (+).")}
               </div>
             </div>
           </Panel>

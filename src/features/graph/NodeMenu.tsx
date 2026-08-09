@@ -10,6 +10,8 @@ import {
 } from "lucide-react"
 
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer"
+import { useLocale } from "@/i18n/LocaleProvider"
+import { LOCALE_DIR } from "@/i18n/locale"
 import { SIDE_PANEL_QUERY, useMediaQuery } from "@/hooks/use-media-query"
 import { cn } from "@/lib/utils"
 
@@ -50,6 +52,7 @@ export function NodeMenu({
   target: MenuTarget | null
   onClose: () => void
 }) {
+  const locale = useLocale()
   const isSide = useMediaQuery(SIDE_PANEL_QUERY)
 
   React.useEffect(() => {
@@ -137,7 +140,7 @@ export function NodeMenu({
         }}
       />
       <div
-        dir="rtl"
+        dir={LOCALE_DIR[locale]}
         role="menu"
         className="fixed z-50 overflow-hidden rounded-xl border border-surface-line bg-popover shadow-[var(--elev-3)]"
         style={{ left, top, width: MENU_W }}

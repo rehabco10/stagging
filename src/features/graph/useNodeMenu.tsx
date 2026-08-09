@@ -12,6 +12,7 @@ import {
   state,
   unpinNode,
 } from "@/store/season"
+import i18n from "@/i18n/config"
 import { roleLabel } from "@/lib/options"
 import { useLongPress } from "@/hooks/use-long-press"
 import { arNum } from "@/lib/utils"
@@ -56,7 +57,7 @@ export function useNodeMenu(
         return {
           nodeId,
           title: "الباقات",
-          subtitle: `الحصة ${arNum(state.season.quota_total)} حاج`,
+          subtitle: i18n.t("الحصة {n} حاج", { n: arNum(state.season.quota_total) }),
           x,
           y,
           actions: [
@@ -71,7 +72,7 @@ export function useNodeMenu(
         const canAdd = availableRoles(pkg).length > 0
         return {
           nodeId,
-          title: `باقة ${pkg.package_no}`,
+          title: i18n.t("graph.package_no", { no: pkg.package_no }),
           subtitle: pkg.name_en || undefined,
           x,
           y,
@@ -110,7 +111,7 @@ export function useNodeMenu(
         return {
           nodeId,
           title: roleLabel(found.leg.role),
-          subtitle: `باقة ${found.pkg.package_no}`,
+          subtitle: i18n.t("graph.package_no", { no: found.pkg.package_no }),
           x,
           y,
           actions: [

@@ -93,7 +93,7 @@ export function CarriersPage() {
         )}
 
         <BalanceStrip
-          title="ميزان المقاعد"
+          title={t("ميزان المقاعد")}
           summary={
             <>
               <span className="inline-flex items-center gap-1 text-[12px] tabular-nums text-muted-foreground">
@@ -111,11 +111,11 @@ export function CarriersPage() {
           }
         >
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Meter className="min-w-56 flex-1" label="وصول مؤكَّد" value={confirmed("arrival")} max={snap.season.quota_total} />
-            <Meter className="min-w-56 flex-1" label="مغادرة مؤكَّدة" value={confirmed("return")} max={snap.season.quota_total} />
+            <Meter className="min-w-56 flex-1" label={t("وصول مؤكَّد")} value={confirmed("arrival")} max={snap.season.quota_total} />
+            <Meter className="min-w-56 flex-1" label={t("مغادرة مؤكَّدة")} value={confirmed("return")} max={snap.season.quota_total} />
             <Button variant="outline" size="sm" onClick={() => setAdding("new")}>
               <Plus className="size-3.5" />
-              كتلة لناقل جديد
+              {t("كتلة لناقل جديد")}
             </Button>
           </div>
         </BalanceStrip>
@@ -127,14 +127,14 @@ export function CarriersPage() {
         placeholder={
           <span className="flex items-center gap-2">
             <Plane className="size-4" />
-            اختر ناقلًا لعرض كتله
+            {t("اختر ناقلًا لعرض كتله")}
           </span>
         }
         master={
           <ul className="space-y-2">
             {sorted.length === 0 && (
               <li className="rounded-xl border border-dashed border-surface-line px-3 py-5 text-center text-[12px] text-muted-foreground">
-                لا كتل مقاعد بعد.
+                {t("لا كتل مقاعد بعد.")}
               </li>
             )}
             {sorted.map(([name, list]) => {
@@ -336,7 +336,7 @@ function CarrierDetail({
                 {opened && (
                   <div className="border-t border-dashed border-surface-line bg-surface-sunken/40 px-4 py-3">
                     <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-                      <Field label="الاتجاه">
+                      <Field label={t("الاتجاه")}>
                         <SelectField
                           allowEmpty={false}
                           value={f.direction}
@@ -344,7 +344,7 @@ function CarrierDetail({
                           onChange={(v) => (live.direction = v as DraftFlightBlock["direction"])}
                         />
                       </Field>
-                      <Field label="رقم الرحلة">
+                      <Field label={t("رقم الرحلة")}>
                         <Input
                           dir="ltr"
                           className="text-start"
@@ -353,23 +353,23 @@ function CarrierDetail({
                           onChange={(e) => (live.flight_no = e.target.value)}
                         />
                       </Field>
-                      <Field label="التاريخ">
+                      <Field label={t("التاريخ")}>
                         <DatePicker
                           value={f.flies_on}
                           onChange={(iso) => (live.flies_on = iso)}
                         />
                       </Field>
-                      <Field label="المقاعد">
+                      <Field label={t("المقاعد")}>
                         <NumInput
                           value={String(f.seats || "")}
                           placeholder="0"
                           onChange={(e) => (live.seats = Math.max(0, Number(e.target.value) || 0))}
                         />
                       </Field>
-                      <Field label="من">
+                      <Field label={t("من")}>
                         <Input value={f.from_city} onChange={(e) => (live.from_city = e.target.value)} />
                       </Field>
-                      <Field label="إلى">
+                      <Field label={t("إلى")}>
                         <Input value={f.to_city} onChange={(e) => (live.to_city = e.target.value)} />
                       </Field>
                       <Field label="PNR">
@@ -382,7 +382,7 @@ function CarrierDetail({
                         />
                       </Field>
                       <div className="grid grid-cols-2 gap-3">
-                        <Field label="النوع">
+                        <Field label={t("النوع")}>
                           <SelectField
                             allowEmpty={false}
                             value={f.contract_type}
@@ -390,7 +390,7 @@ function CarrierDetail({
                             onChange={(v) => (live.contract_type = v as DraftFlightBlock["contract_type"])}
                           />
                         </Field>
-                        <Field label="الحالة">
+                        <Field label={t("الحالة")}>
                           <SelectField
                             allowEmpty={false}
                             value={f.status}
@@ -407,11 +407,11 @@ function CarrierDetail({
                         title={used > 0 ? "مرتبطة بباقة — لا يمكن حذفها" : undefined}
                         onClick={() => {
                           const r = removeFlightBlock(f.id)
-                          onError(r.ok ? null : `لا يمكن حذف الكتلة: مرتبطة بـ${arNum(r.usedBy)} باقة.`)
+                          onError(r.ok ? null : t("لا يمكن حذف الكتلة: مرتبطة بـ{n} باقة.", { n: arNum(r.usedBy) }))
                         }}
                       >
                         <Trash2 className="size-3.5" />
-                        حذف الكتلة
+                        {t("حذف الكتلة")}
                       </Button>
                     </div>
                   </div>
@@ -441,7 +441,7 @@ function CarrierDetail({
           </div>
           <Button variant="outline" size="sm" onClick={onAdd}>
             <Plus className="size-3.5" />
-            إضافة كتلة
+            {t("إضافة كتلة")}
           </Button>
         </div>
         <FilterChips

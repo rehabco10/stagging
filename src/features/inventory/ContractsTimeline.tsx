@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { Suspense, lazy } from "react"
 import { useSnapshot } from "valtio"
 
@@ -48,6 +49,7 @@ const dm = (t: number) => {
 }
 
 export function ContractsTimeline({ hotelId }: { hotelId: string }) {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   const contracts = snap.contracts.filter((c) => c.hotelId === hotelId && c.status !== "cancelled")
   const nightly = hotelNightly(hotelId, snap as never)
@@ -82,7 +84,7 @@ export function ContractsTimeline({ hotelId }: { hotelId: string }) {
           return (
             <div
               key={c.id}
-              title={`عقد ${c.contract_no || "بدون رقم"} · ${c.starts_on} → ${c.ends_on} · ${arNum(contractBeds(c))} سرير`}
+              title={t("عقد {no} · {from} → {to} · {beds} سرير", { no: c.contract_no || t("بدون رقم"), from: c.starts_on, to: c.ends_on, beds: arNum(contractBeds(c)) })}
               className={cn(
                 "absolute flex h-7 items-center gap-2 overflow-hidden rounded-md px-2",
                 signed
@@ -112,8 +114,7 @@ export function ContractsTimeline({ hotelId }: { hotelId: string }) {
       )}
 
       <p className="mt-1.5 text-[11px] leading-relaxed text-muted-foreground">
-        الأعلى: نوافذ العقود (المتقطّع مقترح غير موقَّع). الأسفل: سعات الباقات ليلةً بليلة على
-        غلاف الأسرّة الموقَّعة — الشريط الوردي هو مقدار التجاوز حيث يقع.
+        {t("الأعلى: نوافذ العقود (المتقطّع مقترح غير موقَّع). الأسفل: سعات الباقات ليلةً بليلة على\n        غلاف الأسرّة الموقَّعة — الشريط الوردي هو مقدار التجاوز حيث يقع.")}
       </p>
     </div>
   )

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { useMemo } from "react"
 import {
   Background,
@@ -22,6 +23,9 @@ import { Price } from "@/components/ui/price"
 import { StatusPill } from "@/components/ui/status-pill"
 import { dayMs } from "@/features/inventory/supply"
 import { SIDE_PANEL_QUERY, useMediaQuery } from "@/hooks/use-media-query"
+import { useLocale } from "@/i18n/LocaleProvider"
+import { LOCALE_DIR } from "@/i18n/locale"
+import { airlineName, localName } from "@/lib/names"
 import { roleLabel, tierLabel } from "@/lib/options"
 import { contractBeds, legNights, packageNights, state, type DraftContract, type DraftPackage } from "@/store/season"
 import { cn, arNum } from "@/lib/utils"
@@ -76,12 +80,14 @@ function flightsOf(
 }
 
 function JourneyStopNode({ data }: NodeProps<Node<StopData>>) {
+  const { t } = useTranslation()
+  const locale = useLocale()
   const { snap, pkg } = useJourneyPkg(data.pkgId)
   if (!pkg) return null
 
   const shell = (tone: string, icon: React.ReactNode, title: React.ReactNode, body: React.ReactNode) => (
     <div
-      dir="rtl"
+      dir={LOCALE_DIR[locale]}
       style={{ width: NODE_W }}
       className="rounded-xl border border-surface-line bg-surface-raised p-3 shadow-[var(--elev-2)]"
     >
@@ -111,7 +117,7 @@ function JourneyStopNode({ data }: NodeProps<Node<StopData>>) {
           className="flex flex-wrap items-center gap-x-3 gap-y-0.5 rounded-lg bg-surface-sunken/70 px-2.5 py-1.5"
         >
           <span className="min-w-0 flex-1 truncate text-[12px] font-semibold">
-            {f.airline_ar || f.airline_en || "—"}
+            {airlineName(f) || "—"}
             {f.flight_no && (
               <span dir="ltr" className="ms-1.5 font-mono text-[11px] font-normal text-muted-foreground">
                 {f.flight_no}
@@ -141,7 +147,7 @@ function JourneyStopNode({ data }: NodeProps<Node<StopData>>) {
       list.length ? (
         flightRows(list)
       ) : (
-        <p className="mt-1.5 text-[11px] text-[color:var(--brand-rose-deep)]">لا مقاعد مخصصة.</p>
+        <p className="mt-1.5 text-[11px] text-[color:var(--brand-rose-deep)]">{t("لا مقاعد مخصصة.")}</p>
       ),
     )
   }
@@ -155,7 +161,7 @@ function JourneyStopNode({ data }: NodeProps<Node<StopData>>) {
     <BedDouble className="size-4 text-[color:var(--brand-gold-deep)]" />,
     <>
       <Link to={`/hotels/${leg.hotelId}`} className="text-[13px] font-bold text-foreground hover:underline">
-        {hotel?.name_ar ?? leg.hotelId}
+        {hotel ? localName(hotel) : leg.hotelId}
       </Link>
       <span className="rounded-full bg-surface-sunken px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
         {hotel?.city === "makkah" ? "مكة" : "المدينة"}
@@ -189,7 +195,7 @@ function JourneyStopNode({ data }: NodeProps<Node<StopData>>) {
         ))}
       </ul>
     ) : (
-      <p className="mt-1.5 text-[11px] text-[color:var(--brand-rose-deep)]">لا عقود سكن مرتبطة.</p>
+      <p className="mt-1.5 text-[11px] text-[color:var(--brand-rose-deep)]">{t("لا عقود سكن مرتبطة.")}</p>
     ),
   )
 }
@@ -199,6 +205,8 @@ const journeyNodeTypes = { stop: JourneyStopNode }
 /* ── the vertical chain ─────────────────────────────────────────── */
 
 function JourneyGraphInner({ pkgId, onBack }: { pkgId: string; onBack: () => void }) {
+  const { t } = useTranslation()
+  const locale = useLocale()
   const { snap, pkg } = useJourneyPkg(pkgId)
   // Wide/landscape reads left-to-right like the main tree; narrow portrait
   // stacks the trip vertically — a 4-stop horizontal chain fitted into a
@@ -278,7 +286,7 @@ function JourneyGraphInner({ pkgId, onBack }: { pkgId: string; onBack: () => voi
             it never collides with the back button on the end edge. */}
         <Panel position={horizontal ? "top-center" : "top-left"} className="!m-3">
           <div
-            dir="rtl"
+            dir={LOCALE_DIR[locale]}
             className="flex max-w-[55vw] flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-surface-line bg-card/90 px-3 py-2 shadow-sm backdrop-blur sm:max-w-none sm:px-4"
           >
             <span className="truncate text-[13px] font-bold">
@@ -295,14 +303,14 @@ function JourneyGraphInner({ pkgId, onBack }: { pkgId: string; onBack: () => voi
             </span>
             {pkg.initial_price_sar > 0 && (
               <span className="hidden sm:inline-flex">
-                <Price value={`${arNum(Math.round(pkg.initial_price_sar))} ر.س`} />
+                <Price value={t("{n} ر.س", { n: arNum(Math.round(pkg.initial_price_sar)) })} />
               </span>
             )}
           </div>
         </Panel>
 
         <Panel position="top-right" className="!m-3">
-          <div dir="rtl">
+          <div dir={LOCALE_DIR[locale]}>
             {/* Same chrome as the canvas panels — a card floating on the
                 surface, not a form control. */}
             <button
@@ -311,7 +319,7 @@ function JourneyGraphInner({ pkgId, onBack }: { pkgId: string; onBack: () => voi
               className="flex items-center gap-2 rounded-lg border border-surface-line bg-card/90 px-4 py-2 text-[13px] text-foreground shadow-sm backdrop-blur transition-colors hover:bg-surface-sunken/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
             >
               <ArrowRight className="size-4" />
-              رجوع إلى المخطط
+              {t("رجوع إلى المخطط")}
             </button>
           </div>
         </Panel>

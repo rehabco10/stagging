@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 // Locale-aware Link — see @/i18n/LocaleProvider.
 import { LocaleLink as Link } from "@/i18n/LocaleProvider"
 import { useSnapshot } from "valtio"
@@ -14,6 +15,7 @@ import {
   type DraftPackage,
 } from "@/store/season"
 import { Checkbox, NumInput, SelectField } from "@/components/ui/field"
+import { roomTypeLabel } from "@/lib/options"
 import { Meter } from "@/components/ui/meter"
 import { StatusPill } from "@/components/ui/status-pill"
 import { dayMs, DAY_MS } from "@/features/inventory/supply"
@@ -40,6 +42,7 @@ const RT_LABEL: Record<string, string> = { "4": "رباعية", "3": "ثلاثي
  *   checklist was unusable); adding is a select per direction.
  */
 export function PackageResources({ pkg }: { pkg: DraftPackage }) {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   const live = snap.packages.find((p) => p.id === pkg.id)
   if (!live) return null
@@ -127,7 +130,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
         : covered >= total
           ? { text: "يغطي كامل مدة الإقامة", cls: "text-[color:var(--brand-green-deep)]" }
           : covered > 0
-            ? { text: `يغطي ${arNum(covered)} من ${arNum(total)} ليلة`, cls: "text-[color:var(--brand-gold-deep)]" }
+            ? { text: t("يغطي {covered} من {total} ليلة", { covered: arNum(covered), total: arNum(total) }), cls: "text-[color:var(--brand-gold-deep)]" }
             : { text: "خارج مدة الإقامة", cls: "text-[color:var(--brand-rose-deep)]" }
     return (
       <li key={c.id}>
@@ -213,7 +216,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
                 <span className="flex items-center gap-1.5 text-[11px] tabular-nums text-muted-foreground">
                   <NumInput
                     className="h-7 w-16 px-2 text-[12px]"
-                    aria-label="المقاعد المخصصة"
+                    aria-label={t("المقاعد المخصصة")}
                     value={a.seats ? String(a.seats) : ""}
                     placeholder="0"
                     onChange={(e) =>
@@ -225,7 +228,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
                 {f.status === "cancelled" ? <StatusPill status="cancelled" /> : null}
                 <button
                   type="button"
-                  aria-label="إزالة التخصيص"
+                  aria-label={t("إزالة التخصيص")}
                   onClick={() => toggleFlightAllocation(pkg.id, f.id)}
                   className="grid size-7 place-items-center rounded-md text-muted-foreground/50 transition-colors hover:bg-[color:var(--brand-rose-soft)] hover:text-[color:var(--brand-rose-deep)]"
                 >
@@ -237,7 +240,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
         )}
         <div className="mt-2 max-w-96">
           <SelectField
-            placeholder={`إضافة كتلة ${label}…`}
+            placeholder={t("إضافة كتلة {label}…", { label })}
             value=""
             options={addable.map((f) => ({
               value: f.id,
@@ -256,7 +259,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
       <div className="space-y-4">
         {legHotels.length === 0 && (
           <p className="text-[12px] text-muted-foreground">
-            لا يمكن ربط عقود السكن قبل إضافة الإقامات.
+            {t("لا يمكن ربط عقود السكن قبل إضافة الإقامات.")}
           </p>
         )}
         {legHotels.map((hotelId) => {
@@ -297,7 +300,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
                   {cov.map(({ rt, need, have }) => (
                     <span
                       key={rt}
-                      title={`أسرّة ${RT_LABEL[rt]} المرتبطة في أسوأ ليلة مقابل توزيع الغرف`}
+                      title={t("أسرّة {type} المرتبطة في أسوأ ليلة مقابل توزيع الغرف", { type: roomTypeLabel(rt) })}
                       className={cn(
                         "rounded-full px-2 py-0.5 text-[10px] font-semibold tabular-nums",
                         have >= need
@@ -314,7 +317,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
                 <p className="mt-1.5 text-[11px] text-muted-foreground">
                   لا عقود لهذا الفندق —{" "}
                   <Link to={`/hotels/${hotelId}`} className="font-semibold underline underline-offset-2">
-                    إضافة عقد من صفحة السكن
+                    {t("إضافة عقد من صفحة السكن")}
                   </Link>
                   .
                 </p>
@@ -327,7 +330,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
         {strayIds.length > 0 && (
           <div>
             <div className="text-[12px] font-bold text-[color:var(--brand-gold-deep)]">
-              عقود مرتبطة خارج فنادق الإقامات
+              {t("عقود مرتبطة خارج فنادق الإقامات")}
             </div>
             <ul className="mt-2 space-y-1">
               {strayIds.map((cid) => {

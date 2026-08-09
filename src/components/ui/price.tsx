@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import * as React from "react"
 import { useSnapshot } from "valtio"
 
@@ -28,6 +29,7 @@ export function Price({
    */
   interactive?: boolean
 }) {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   if (snap.showPrices) return <span className={className}>{value}</span>
   const maskCls = cn(
@@ -36,7 +38,7 @@ export function Price({
   )
   if (!interactive) {
     return (
-      <span title="سعر مخفي" className={maskCls}>
+      <span title={t("سعر مخفي")} className={maskCls}>
         ••••
       </span>
     )
@@ -44,8 +46,8 @@ export function Price({
   return (
     <button
       type="button"
-      title="سعر محجوب — النقر يُظهره"
-      aria-label="سعر محجوب — النقر يُظهره"
+      title={t("سعر محجوب — النقر يُظهره")}
+      aria-label={t("سعر محجوب — النقر يُظهره")}
       onClick={(e) => {
         e.stopPropagation()
         togglePrices()
@@ -59,12 +61,13 @@ export function Price({
 
 /** A price input that stays masked until prices are revealed. */
 export function MaskedPriceInput(props: React.ComponentProps<typeof NumInput>) {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   if (snap.showPrices) return <NumInput {...props} />
   return (
     <button
       type="button"
-      title="سعر محجوب — النقر يُظهره"
+      title={t("سعر محجوب — النقر يُظهره")}
       onClick={togglePrices}
       className={cn(
         "flex h-9 w-full cursor-pointer select-none items-center rounded-md border border-input bg-muted/50 px-3 text-[12px] tracking-widest text-muted-foreground transition-colors hover:bg-muted",
