@@ -13,7 +13,8 @@ import {
 } from "@xyflow/react"
 import "@xyflow/react/dist/style.css"
 import { ArrowRight, BedDouble, PlaneLanding, PlaneTakeoff } from "lucide-react"
-import { Link } from "react-router-dom"
+// Locale-aware Link — see @/i18n/LocaleProvider.
+import { LocaleLink as Link } from "@/i18n/LocaleProvider"
 import { useSnapshot } from "valtio"
 
 import { Meter } from "@/components/ui/meter"

@@ -4,6 +4,7 @@ import { CalendarDays } from "lucide-react"
 
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import { formats } from "@/lib/intl"
 import { cn } from "@/lib/utils"
 
 /**
@@ -16,15 +17,10 @@ import { cn } from "@/lib/utils"
  * reads as 5 ديسمبر but means May 12), and its popup ignores the app's RTL
  * and typography entirely. Enforced by ast-grep `no-native-date-input`.
  *
- * Locale note: the calendar keyword is load-bearing — plain "ar-SA" formats
- * dates in the Islamic calendar, and the wizard's supply data (contracts,
- * flights, PocketBase) is all Gregorian. Digits stay Latin per the app rule.
+ * Formatting follows the active locale (@/lib/intl), which pins the Gregorian
+ * calendar and Latin digits for Arabic — plain "ar-SA" would format dates in
+ * the Islamic calendar while all the supply data is Gregorian.
  */
-const DATE_FMT = new Intl.DateTimeFormat("ar-SA-u-ca-gregory-nu-latn", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-})
 
 /** Local-midnight parse — `new Date("yyyy-MM-dd")` alone would be UTC. */
 const fromIso = (iso: string) => new Date(`${iso}T00:00:00`)
@@ -61,7 +57,7 @@ export function DatePicker({
         )}
       >
         <span className="truncate tabular-nums">
-          {selected ? DATE_FMT.format(selected) : placeholder}
+          {selected ? formats().date.format(selected) : placeholder}
         </span>
         <CalendarDays className="size-4 shrink-0 text-muted-foreground" />
       </PopoverTrigger>

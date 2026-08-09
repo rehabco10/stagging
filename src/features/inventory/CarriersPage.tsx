@@ -1,10 +1,11 @@
 import { useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useSnapshot } from "valtio"
 import { ChevronLeft, MapPin, Plane, PlaneLanding, PlaneTakeoff, Plus, Trash2, TriangleAlert } from "lucide-react"
 
 import { removeFlightBlock, state, type DraftFlightBlock } from "@/store/season"
 import { BalanceStrip } from "@/components/BalanceStrip"
+import { useLocaleNavigate } from "@/i18n/LocaleProvider"
 import { MasterDetail } from "@/components/MasterDetail"
 import { Card, Note, PageHeader } from "@/components/PageShell"
 import { MASTER_DETAIL_WIDE_QUERY, useMediaQuery } from "@/hooks/use-media-query"
@@ -41,7 +42,7 @@ const safeDecode = (s: string) => {
 export function CarriersPage() {
   const params = useParams()
   const carrier = params.carrier ? safeDecode(params.carrier) : undefined
-  const navigate = useNavigate()
+  const navigate = useLocaleNavigate()
   const snap = useSnapshot(state)
   const issues = useIssues()
   const wide = useMediaQuery(MASTER_DETAIL_WIDE_QUERY)

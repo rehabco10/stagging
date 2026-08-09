@@ -1,22 +1,18 @@
 import { clsx, type ClassValue } from "clsx"
 import { twMerge } from "tailwind-merge"
 
+import { formats } from "@/lib/intl"
+
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
 /**
- * Arabic locale, Latin digits (`-u-nu-latn`).
+ * Numbers, in whichever locale is active — the formats themselves (and the
+ * Latin-digits rule that survives in Arabic) live in `@/lib/intl`.
  *
- * Plain `ar-SA` renders Arabic-Indic numerals (٧٬٠٠٠). Nusuk Hajj, the ministry
- * forms and every export in `ocr/` use Latin digits, so numbers here have to
- * match what the operator will type into the platform and read back off it.
+ * The name stays `arNum` on purpose: it is called from ~40 places, and the
+ * rename would be the only churn in an otherwise behaviour-free change.
  */
-const NUM = new Intl.NumberFormat("ar-SA-u-nu-latn", { useGrouping: true })
-const SAR = new Intl.NumberFormat("ar-SA-u-nu-latn", {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-})
-
-export const arNum = (n: number) => NUM.format(n)
-export const sar = (n: number) => SAR.format(n)
+export const arNum = (n: number) => formats().number.format(n)
+export const sar = (n: number) => formats().money.format(n)

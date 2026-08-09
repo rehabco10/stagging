@@ -1,4 +1,6 @@
-import { Link } from "react-router-dom"
+// Every internal link goes through the locale-aware Link, or an English
+// session would land back on the Arabic route.
+import { LocaleLink as Link } from "@/i18n/LocaleProvider"
 import { useSnapshot } from "valtio"
 import {
   ArrowLeft,

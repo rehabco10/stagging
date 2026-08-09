@@ -1,4 +1,5 @@
 import { Fragment } from "react"
+import { useTranslation } from "react-i18next"
 import { useSnapshot } from "valtio"
 import {
   BedDouble,
@@ -27,6 +28,9 @@ import {
   unpinAll,
 } from "@/store/season"
 import { discardDraft, draftStatus } from "@/persist/draft"
+import { useLocale, useSwitchLocale } from "@/i18n/LocaleProvider"
+import { LOCALES, type Locale } from "@/i18n/locale"
+import { formats } from "@/lib/intl"
 import { ISSUE_CATEGORY_LABEL, ISSUE_CATEGORY_ORDER } from "@/lib/options"
 import { categoryOf, type Issue, type IssueCategory } from "@/lib/validation"
 import { Button } from "@/components/ui/button"
@@ -407,11 +411,6 @@ export function ValidationPanel() {
 
 /* ── settings ───────────────────────────────────────────────────── */
 
-const timeFmt = new Intl.DateTimeFormat("ar-SA-u-nu-latn", {
-  hour: "2-digit",
-  minute: "2-digit",
-})
-
 function StorageStatus() {
   const draft = useSnapshot(draftStatus)
   const hasDraft = Boolean(draft.savedAt) || draft.source === "draft"
@@ -421,7 +420,7 @@ function StorageStatus() {
         <Note tone="brand" icon={<Database className="size-3.5" />}>
           تُحفظ المسودة تلقائيًا في المتصفح (IndexedDB)
           {draft.savedAt
-            ? ` — آخر حفظ ${timeFmt.format(new Date(draft.savedAt))}`
+            ? ` — آخر حفظ ${formats().time.format(new Date(draft.savedAt))}`
             : " — تُحفظ مع أول تعديل"}
           {draft.source === "draft" && "؛ فُتحت هذه الجلسة من مسودة سابقة"}.
         </Note>
@@ -441,6 +440,28 @@ function StorageStatus() {
         تجاهل المسودة والعودة إلى بذرة 1447
       </Button>
     </div>
+  )
+}
+
+/**
+ * The language control — switching rewrites the URL prefix (`/` ⇄ `/en`) on
+ * the current page, so the choice is shareable and the browser's own back
+ * button undoes it. The first strings in the catalogs; the rest of the UI
+ * follows in the extraction phase (docs/i18n-plan.md).
+ */
+function LanguageField() {
+  const { t } = useTranslation()
+  const locale = useLocale()
+  const switchLocale = useSwitchLocale()
+  return (
+    <Field label={t("settings.language")} hint={t("settings.language_hint")}>
+      <SelectField
+        allowEmpty={false}
+        value={locale}
+        options={LOCALES.map((l) => ({ value: l, label: t(`settings.language_${l}`) }))}
+        onChange={(v) => switchLocale(v as Locale)}
+      />
+    </Field>
   )
 }
 
@@ -533,10 +554,13 @@ export function SettingsPanel() {
       </Card>
 
       <Card title="العرض" description="ما يظهر على الشاشة أثناء الاجتماعات.">
-        <label className="flex items-center gap-2 text-[12px] text-foreground/80">
-          <Checkbox checked={snap.showPrices} onCheckedChange={() => togglePrices()} />
-          إظهار الأسعار (محجوبة افتراضيًا «••••»)
-        </label>
+        <div className="space-y-3">
+          <LanguageField />
+          <label className="flex items-center gap-2 text-[12px] text-foreground/80">
+            <Checkbox checked={snap.showPrices} onCheckedChange={() => togglePrices()} />
+            إظهار الأسعار (محجوبة افتراضيًا «••••»)
+          </label>
+        </div>
       </Card>
 
       <Card title="التخزين والاتصال">

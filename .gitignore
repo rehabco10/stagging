@@ -8,8 +8,9 @@ dist-stage
 *.local
 .DS_Store
 
-# generated captures (recreate with scripts/shots*.mjs)
+# generated captures (recreate with scripts/shots*.mjs, scripts/i18n/shots.mjs)
 /screenshots/
+scripts/i18n/shots/
 
 # ── private — internal company material, never push ────────────────
 # Source ministry/company PDFs and their OCR extraction contain real

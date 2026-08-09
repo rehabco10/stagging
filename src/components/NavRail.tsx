@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { NavLink, useLocation, useNavigate } from "react-router-dom"
+import { NavLink, useLocation } from "react-router-dom"
 import { useSnapshot } from "valtio"
 import {
   Building2,
@@ -15,6 +15,8 @@ import {
 } from "lucide-react"
 
 import { Drawer, DrawerContent, DrawerTitle } from "@/components/ui/drawer"
+import { useLocaleNavigate, useLocalePath } from "@/i18n/LocaleProvider"
+import { withLocale } from "@/i18n/locale"
 import { SIDE_PANEL_QUERY, useMediaQuery } from "@/hooks/use-media-query"
 import { state } from "@/store/season"
 import { useErrorCount } from "@/store/use-issues"
@@ -58,6 +60,7 @@ export function Navigation() {
 export function NavRail() {
   const snap = useSnapshot(state)
   const errorCount = useErrorCount()
+  const localePath = useLocalePath()
 
   return (
     <nav
@@ -82,7 +85,7 @@ export function NavRail() {
             {/* Groups: overview | the two editors | supporting data. */}
             {(i === 1 || i === 3) && <span className="my-1.5 h-px w-7 bg-white/15" />}
             <NavLink
-              to={item.to}
+              to={localePath(item.to)}
               end={item.to === "/"}
               title={item.label}
               aria-label={item.label}
@@ -140,12 +143,15 @@ function NavBurger() {
   const errorCount = useErrorCount()
   const [open, setOpen] = useState(false)
   const { pathname } = useLocation()
-  const navigate = useNavigate()
+  const navigate = useLocaleNavigate()
 
   // A route change means the user picked something — close behind them.
   useEffect(() => setOpen(false), [pathname])
 
-  const current = ITEMS.find((i) => (i.to === "/" ? pathname === "/" : pathname.startsWith(i.to)))
+  // Match against the locale-stripped path so `/en/hotels` still resolves to
+  // the hotels item.
+  const bare = withLocale(pathname, "ar")
+  const current = ITEMS.find((i) => (i.to === "/" ? bare === "/" : bare.startsWith(i.to)))
 
   return (
     <>
@@ -185,7 +191,7 @@ function NavBurger() {
           </DrawerTitle>
           <ul className="py-1 pb-[max(0.5rem,env(safe-area-inset-bottom))]">
             {ITEMS.map((item) => {
-              const active = item.to === "/" ? pathname === "/" : pathname.startsWith(item.to)
+              const active = item.to === "/" ? bare === "/" : bare.startsWith(item.to)
               return (
                 <li key={item.to}>
                   <button
