@@ -1,6 +1,9 @@
 import { Panel } from "@xyflow/react"
+import { useTranslation } from "react-i18next"
 import { LayoutGrid, PinOff, Plus } from "lucide-react"
 
+import { useLocale } from "@/i18n/LocaleProvider"
+import { LOCALE_DIR } from "@/i18n/locale"
 import { cn } from "@/lib/utils"
 
 /**
@@ -21,32 +24,36 @@ export function CanvasToolbar({
   onFitView: () => void
   onUnpinAll: () => void
 }) {
+  const { t } = useTranslation()
+  // The canvas itself stays LTR in both languages, so the toolbar has to be
+  // told the reading direction explicitly.
+  const locale = useLocale()
   return (
     <Panel position={roomy ? "top-right" : "bottom-right"} className="!m-3">
       <div
-        dir="rtl"
+        dir={LOCALE_DIR[locale]}
         className="flex items-center gap-1 rounded-lg border border-surface-line bg-card/95 px-1 py-1 shadow-[var(--elev-1)] backdrop-blur"
       >
-        <ToolbarButton title="إضافة باقة جديدة" onClick={onAddPackage}>
+        <ToolbarButton title={t("toolbar.add_package_title")} onClick={onAddPackage}>
           <Plus className="size-3.5" />
-          <span>باقة جديدة</span>
+          <span>{t("toolbar.add_package")}</span>
         </ToolbarButton>
         <div className="h-5 w-px bg-border" />
-        <ToolbarButton title="إعادة تأطير العرض" onClick={onFitView}>
+        <ToolbarButton title={t("toolbar.fit_view_title")} onClick={onFitView}>
           <LayoutGrid className="size-3.5" />
-          <span>ملء الشاشة</span>
+          <span>{t("toolbar.fit_view")}</span>
         </ToolbarButton>
         <ToolbarButton
           title={
             pinnedCount === 0
-              ? "لا توجد عقد مثبَّتة"
-              : `إعادة ${pinnedCount} عقدة مثبَّتة إلى الترتيب التلقائي`
+              ? t("toolbar.no_pinned")
+              : t("toolbar.unpin_all_title", { n: pinnedCount })
           }
           disabled={pinnedCount === 0}
           onClick={onUnpinAll}
         >
           <PinOff className="size-3.5" />
-          <span>فكّ التثبيت</span>
+          <span>{t("toolbar.unpin_all")}</span>
           {pinnedCount > 0 && (
             <span className="rounded-md bg-primary/10 px-1.5 py-0.5 text-[10px] font-semibold text-primary tabular-nums">
               {pinnedCount}
