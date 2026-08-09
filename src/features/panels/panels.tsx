@@ -82,23 +82,23 @@ const STATUS_LABEL: Record<string, string> = {
 }
 
 export function RequirementsPanel() {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   const agreed = snap.requirements.filter((r) => r.status === "agreed").length
 
   return (
     <>
       <Note tone="brand" icon={<Info className="size-3.5" />}>
-        تُطبَّق المتطلبات المعتمدة تلقائيًا على التحقق قبل الرفع؛ وتتطلب الملاحظات
-        النصية تأكيدًا يدويًا.
+        {t("تُطبَّق المتطلبات المعتمدة تلقائيًا على التحقق قبل الرفع؛ وتتطلب الملاحظات النصية تأكيدًا يدويًا.")}
       </Note>
 
       <Card
-        title="المتطلبات"
+        title={t("المتطلبات")}
         description={`${arNum(agreed)} معتمد من ${arNum(snap.requirements.length)}`}
         actions={
           <Button variant="outline" size="sm" onClick={() => addRequirement("note")}>
             <Plus className="size-3.5" />
-            إضافة
+            {t("إضافة")}
           </Button>
         }
         bodyClassName="p-3"
@@ -106,7 +106,7 @@ export function RequirementsPanel() {
         <ul className="grid items-start gap-3 xl:grid-cols-2">
           {snap.requirements.length === 0 && (
             <li className="px-4 py-8 text-center text-[11px] text-muted-foreground xl:col-span-2">
-              لم يُسجَّل أي متطلب بعد.
+              {t("لم يُسجَّل أي متطلب بعد.")}
             </li>
           )}
           {snap.requirements.map((r) => {
@@ -117,7 +117,7 @@ export function RequirementsPanel() {
                 <div className="flex items-center gap-2">
                   <Input
                     className={cn(cellCls, "flex-1 text-[13px] font-semibold")}
-                    placeholder="عنوان المتطلب"
+                    placeholder={t("عنوان المتطلب")}
                     value={r.title}
                     onChange={(e) => (live.title = e.target.value)}
                   />
@@ -131,7 +131,7 @@ export function RequirementsPanel() {
                   </span>
                   <button
                     type="button"
-                    aria-label="حذف المتطلب"
+                    aria-label={t("حذف المتطلب")}
                     onClick={() => removeRequirement(r.id)}
                     className="grid size-7 shrink-0 place-items-center rounded-md text-muted-foreground/45 transition-colors hover:bg-[color:var(--brand-rose-soft)] hover:text-[color:var(--brand-rose-deep)]"
                   >
@@ -142,13 +142,13 @@ export function RequirementsPanel() {
                 <Textarea
                   rows={2}
                   className="mt-2 resize-y"
-                  placeholder="التفاصيل كما وردت في الاجتماع"
+                  placeholder={t("التفاصيل كما وردت في الاجتماع")}
                   value={r.detail}
                   onChange={(e) => (live.detail = e.target.value)}
                 />
 
                 <div className="mt-2.5 grid grid-cols-2 gap-2 sm:grid-cols-4">
-                  <Field label="النوع">
+                  <Field label={t("النوع")}>
                     <SelectField
                       allowEmpty={false}
                       value={r.kind}
@@ -156,7 +156,7 @@ export function RequirementsPanel() {
                       onChange={(v) => (live.kind = v as typeof live.kind)}
                     />
                   </Field>
-                  <Field label="الحالة">
+                  <Field label={t("الحالة")}>
                     <SelectField
                       allowEmpty={false}
                       value={r.status}
@@ -167,7 +167,7 @@ export function RequirementsPanel() {
 
                   {r.kind === "mix" && (
                     <>
-                      <Field label="المجموعة">
+                      <Field label={t("المجموعة")}>
                         <SelectField
                           allowEmpty={false}
                           value={String(params.group ?? "standard")}
@@ -175,10 +175,10 @@ export function RequirementsPanel() {
                           onChange={(v) => (live.params = { ...params, group: v })}
                         />
                       </Field>
-                      <Field label="الحد (%)">
+                      <Field label={t("الحد (%)")}>
                         <div className="flex gap-1.5">
                           <NumInput
-                            placeholder="أدنى"
+                            placeholder={t("أدنى")}
                             value={String(params.min_pct ?? "")}
                             onChange={(e) =>
                               (live.params = {
@@ -188,7 +188,7 @@ export function RequirementsPanel() {
                             }
                           />
                           <NumInput
-                            placeholder="أعلى"
+                            placeholder={t("أعلى")}
                             value={String(params.max_pct ?? "")}
                             onChange={(e) =>
                               (live.params = {
@@ -209,7 +209,7 @@ export function RequirementsPanel() {
                       checked={r.acknowledged}
                       onCheckedChange={(checked) => (live.acknowledged = Boolean(checked))}
                     />
-                    تم التأكيد قبل الرفع
+                    {t("تم التأكيد قبل الرفع")}
                   </label>
                 )}
               </li>
@@ -289,6 +289,7 @@ function IssuePill({ issue }: { issue: Issue }) {
 }
 
 export function ValidationPanel() {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   const issues = useIssues()
   const errors = issues.filter((i) => i.level === "error")
@@ -310,15 +311,15 @@ export function ValidationPanel() {
         <div className="grid grid-cols-3 gap-2">
           <Stat
             value={arNum(errors.length)}
-            label="أخطاء تمنع الرفع"
+            label={t("أخطاء تمنع الرفع")}
             tone={errors.length === 0 ? "good" : "bad"}
           />
-          <Stat value={arNum(warnings.length)} label="تنبيهات" tone="warn" />
-          <Stat value={arNum(snap.packages.length)} label="باقات" />
+          <Stat value={arNum(warnings.length)} label={t("تنبيهات")} tone="warn" />
+          <Stat value={arNum(snap.packages.length)} label={t("باقات")} />
         </div>
       </Card>
 
-      <Card title="النتائج" description="مصنَّفة حسب المجال؛ اختيار البند يفتح الباقة المعنية.">
+      <Card title={t("النتائج")} description={t("مصنَّفة حسب المجال؛ اختيار البند يفتح الباقة المعنية.")}>
         {issues.length === 0 ? (
           <div className="flex items-center gap-2 rounded-lg bg-[color:var(--brand-green-soft)] px-3 py-2.5 text-[11px] text-[color:var(--brand-green-deep)]">
             <CircleCheck className="size-4 shrink-0" />
@@ -466,6 +467,7 @@ function LanguageField() {
 }
 
 export function SettingsPanel() {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   const used = allocated(state)
   const left = snap.season.quota_total - used
@@ -476,17 +478,17 @@ export function SettingsPanel() {
     <div className="grid items-start gap-4 lg:grid-cols-3">
       <Card
         className="lg:col-span-2"
-        title="الموسم"
-        description="السنة والحصة المعتمدة من الوزارة."
+        title={t("الموسم")}
+        description={t("السنة والحصة المعتمدة من الوزارة.")}
       >
         <div className="grid grid-cols-2 gap-3">
-          <Field label="السنة الهجرية">
+          <Field label={t("السنة الهجرية")}>
             <NumInput
               value={snap.season.year_hijri}
               onChange={(e) => (state.season.year_hijri = Number(e.target.value) || 0)}
             />
           </Field>
-          <Field label="السنة الميلادية">
+          <Field label={t("السنة الميلادية")}>
             <NumInput
               value={snap.season.year_gregorian}
               onChange={(e) => (state.season.year_gregorian = Number(e.target.value) || 0)}
@@ -494,7 +496,7 @@ export function SettingsPanel() {
           </Field>
         </div>
         <div className="mt-3">
-          <Field label="الحصة الإجمالية (حاج)" hint="يجب أن يساوي مجموع سعات الباقات الحصة الإجمالية. الرقم الحالي محمول من موسم 1447 حتى صدور اعتماد 1448.">
+          <Field label={t("الحصة الإجمالية (حاج)")} hint={t("يجب أن يساوي مجموع سعات الباقات الحصة الإجمالية. الرقم الحالي محمول من موسم 1447 حتى صدور اعتماد 1448.")}>
             <NumInput
               value={snap.season.quota_total}
               onChange={(e) => (state.season.quota_total = Number(e.target.value) || 0)}
@@ -502,13 +504,13 @@ export function SettingsPanel() {
           </Field>
         </div>
         <div className="mt-3 grid grid-cols-2 gap-3">
-          <Field label="بداية الموسم" hint="تُشتق منها التواريخ الافتراضية للإقامات والعقود والرحلات.">
+          <Field label={t("بداية الموسم")} hint={t("تُشتق منها التواريخ الافتراضية للإقامات والعقود والرحلات.")}>
             <DatePicker
               value={snap.season.starts_on}
               onChange={(iso) => (state.season.starts_on = iso)}
             />
           </Field>
-          <Field label="نهاية الموسم">
+          <Field label={t("نهاية الموسم")}>
             <DatePicker
               value={snap.season.ends_on}
               onChange={(iso) => (state.season.ends_on = iso)}
@@ -516,10 +518,16 @@ export function SettingsPanel() {
           </Field>
         </div>
         <div className="mt-3 grid grid-cols-2 gap-2">
-          <Stat value={arNum(used)} label="موزَّع على الباقات" />
+          <Stat value={arNum(used)} label={t("موزَّع على الباقات")} />
           <Stat
-            value={left === 0 ? "مكتمل" : arNum(Math.abs(left))}
-            label={left === 0 ? "الحصة مستوفاة" : left < 0 ? "تجاوز الحصة" : "متبقٍ للتوزيع"}
+            value={left === 0 ? t("dashboard.complete") : arNum(Math.abs(left))}
+            label={
+              left === 0
+                ? t("dashboard.quota_met")
+                : left < 0
+                  ? t("dashboard.quota_over")
+                  : t("dashboard.quota_left")
+            }
             tone={left === 0 ? "good" : left < 0 ? "bad" : "neutral"}
           />
         </div>
@@ -527,8 +535,8 @@ export function SettingsPanel() {
 
       <div className="space-y-4">
       <Card
-        title="المخطط"
-        description="سلوك لوحة تكوين الباقات."
+        title={t("المخطط")}
+        description={t("سلوك لوحة تكوين الباقات.")}
         actions={
           <Button
             variant="outline"
@@ -536,34 +544,34 @@ export function SettingsPanel() {
             disabled={Object.keys(snap.pinned).length === 0}
             onClick={unpinAll}
           >
-            فكّ الكل
+            {t("فكّ الكل")}
           </Button>
         }
       >
         <div className="flex items-start gap-2.5">
           <LayoutGrid className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
           <div>
-            <div className="text-[12px] font-medium text-foreground">العقد المثبَّتة</div>
+            <div className="text-[12px] font-medium text-foreground">{t("العقد المثبَّتة")}</div>
             <div className="text-[11px] text-muted-foreground">
               {Object.keys(snap.pinned).length === 0
-                ? "لا توجد عقد مثبَّتة."
-                : `${arNum(Object.keys(snap.pinned).length)} عقدة تحتفظ بموضعها اليدوي.`}
+                ? t("لا توجد عقد مثبَّتة.")
+                : t("عقد تحتفظ بموضعها اليدوي", { n: arNum(Object.keys(snap.pinned).length) })}
             </div>
           </div>
         </div>
       </Card>
 
-      <Card title="العرض" description="ما يظهر على الشاشة أثناء الاجتماعات.">
+      <Card title={t("العرض")} description={t("ما يظهر على الشاشة أثناء الاجتماعات.")}>
         <div className="space-y-3">
           <LanguageField />
           <label className="flex items-center gap-2 text-[12px] text-foreground/80">
             <Checkbox checked={snap.showPrices} onCheckedChange={() => togglePrices()} />
-            إظهار الأسعار (محجوبة افتراضيًا «••••»)
+            {t("إظهار الأسعار (محجوبة افتراضيًا «••••»)")}
           </label>
         </div>
       </Card>
 
-      <Card title="التخزين والاتصال">
+      <Card title={t("التخزين والاتصال")}>
         <StorageStatus />
       </Card>
       </div>

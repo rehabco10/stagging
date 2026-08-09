@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { useSnapshot } from "valtio"
 import { Plus, Trash2 } from "lucide-react"
 
@@ -35,6 +36,7 @@ export function ContractCard({
   id: string
   onError: (m: string | null) => void
 }) {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   const c = snap.contracts.find((x) => x.id === id)
   const live = state.contracts.find((x) => x.id === id)
@@ -62,7 +64,7 @@ export function ContractCard({
         )}
         <button
           type="button"
-          aria-label="حذف العقد"
+          aria-label={t("حذف العقد")}
           title={usedBy > 0 ? "مرتبط بباقة — لا يمكن حذفه" : "حذف"}
           onClick={() => {
             const r = removeContract(c.id)
@@ -75,7 +77,7 @@ export function ContractCard({
       </div>
 
       <div className="mt-3 grid grid-cols-2 gap-3 lg:grid-cols-6">
-        <Field label="رقم العقد" className="col-span-2">
+        <Field label={t("رقم العقد")} className="col-span-2">
           <Input
             dir="ltr"
             className="text-start font-mono tabular-nums"
@@ -84,7 +86,7 @@ export function ContractCard({
             onChange={(e) => (live.contract_no = e.target.value)}
           />
         </Field>
-        <Field label="المدينة">
+        <Field label={t("المدينة")}>
           <SelectField
             allowEmpty={false}
             value={c.city}
@@ -92,19 +94,19 @@ export function ContractCard({
             onChange={(v) => (live.city = v as DraftContract["city"])}
           />
         </Field>
-        <Field label="من">
+        <Field label={t("من")}>
           <DatePicker
             value={c.starts_on}
             onChange={(iso) => (live.starts_on = iso)}
           />
         </Field>
-        <Field label="إلى">
+        <Field label={t("إلى")}>
           <DatePicker
             value={c.ends_on}
             onChange={(iso) => (live.ends_on = iso)}
           />
         </Field>
-        <Field label="الحالة" hint={c.status === "signed" ? undefined : "لا يُحتسب إلا الموقَّع"}>
+        <Field label={t("الحالة")} hint={c.status === "signed" ? undefined : "لا يُحتسب إلا الموقَّع"}>
           <SelectField
             allowEmpty={false}
             value={c.status}
@@ -120,10 +122,10 @@ export function ContractCard({
       <Table className="mt-3 min-w-[26rem]">
         <TableHeader>
           <TableRow className="border-b border-surface-line">
-            <TableHead className={TH}>نوع الغرفة</TableHead>
-            <TableHead className={cn(TH, "w-28")}>الغرف</TableHead>
-            <TableHead className={cn(TH, "w-24")}>الأسرّة</TableHead>
-            <TableHead className={TH}>سعر السرير/ليلة</TableHead>
+            <TableHead className={TH}>{t("نوع الغرفة")}</TableHead>
+            <TableHead className={cn(TH, "w-28")}>{t("الغرف")}</TableHead>
+            <TableHead className={cn(TH, "w-24")}>{t("الأسرّة")}</TableHead>
+            <TableHead className={TH}>{t("سعر السرير/ليلة")}</TableHead>
             <TableHead className={cn(TH, "w-12")} />
           </TableRow>
         </TableHeader>
@@ -155,7 +157,7 @@ export function ContractCard({
                 <TableCell className="py-1.5 pe-2 ps-0">
                   <MaskedPriceInput
                     value={l.rate_sar == null ? "" : String(l.rate_sar)}
-                    placeholder="اختياري"
+                    placeholder={t("اختياري")}
                     onChange={(e) =>
                       (liveLine.rate_sar =
                         e.target.value === "" ? null : Math.max(0, Number(e.target.value) || 0))
@@ -165,7 +167,7 @@ export function ContractCard({
                 <TableCell className="py-1.5 ps-0">
                   <button
                     type="button"
-                    aria-label="حذف نوع الغرفة"
+                    aria-label={t("حذف نوع الغرفة")}
                     onClick={() => removeRoomLine(c.id, l.id)}
                     className="grid size-8 place-items-center rounded-md text-muted-foreground/45 transition-colors hover:bg-[color:var(--brand-rose-soft)] hover:text-[color:var(--brand-rose-deep)]"
                   >
@@ -180,7 +182,7 @@ export function ContractCard({
       {c.lines.length < 3 && (
         <Button variant="ghost" size="sm" className="mt-2" onClick={() => addRoomLine(c.id)}>
           <Plus className="size-3.5" />
-          نوع غرفة
+          {t("نوع غرفة")}
         </Button>
       )}
     </div>

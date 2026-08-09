@@ -3,8 +3,10 @@ import ICU from "i18next-icu"
 import { initReactI18next } from "react-i18next"
 
 import arUi from "@/locales/ar/ui.json"
+import arCopy from "@/locales/ar/copy.json"
 import arValidation from "@/locales/ar/validation.json"
 import enUi from "@/locales/en/ui.json"
+import enCopy from "@/locales/en/copy.json"
 import enValidation from "@/locales/en/validation.json"
 import { DEFAULT_LOCALE, localeFromPath, stripBase, type Locale } from "./locale"
 import { setIntlLocale } from "@/lib/intl"
@@ -23,6 +25,17 @@ import { setIntlLocale } from "@/lib/intl"
  * and a language switch must not wait on the network.
  */
 
+/** `{nav:{dashboard:"…"}}` → `{"nav.dashboard":"…"}`. */
+function flatten(obj: Record<string, unknown>, prefix = ""): Record<string, string> {
+  const out: Record<string, string> = {}
+  for (const [k, v] of Object.entries(obj)) {
+    const key = prefix ? `${prefix}.${k}` : k
+    if (v && typeof v === "object") Object.assign(out, flatten(v as Record<string, unknown>, key))
+    else out[key] = String(v)
+  }
+  return out
+}
+
 /** The locale the first paint should use — read from the URL, then storage. */
 function initialLocale(): Locale {
   if (typeof window === "undefined") return DEFAULT_LOCALE
@@ -34,9 +47,19 @@ void i18n
   .use(initReactI18next)
   .init({
     resources: {
-      ar: { ui: arUi, validation: arValidation },
-      en: { ui: enUi, validation: enValidation },
+      // Arabic carries no `copy` catalog on purpose: those keys ARE the
+      // Arabic sentences, so i18next's key fallback renders them verbatim
+      // and the Arabic UI cannot drift from the source.
+      ar: { ui: { ...flatten(arUi), ...arCopy }, validation: arValidation },
+      en: { ui: { ...flatten(enUi), ...enCopy }, validation: enValidation },
     },
+    // The two key schemes have to coexist: structured keys for the shared
+    // vocabulary (`units.seats`) and whole Arabic sentences for one-off copy.
+    // A sentence ends in "." and contains ":", so i18next must not read any
+    // key as a path — hence the structured catalogs are pre-flattened to
+    // dotted keys above and both separators are turned off here.
+    keySeparator: false,
+    nsSeparator: false,
     lng: initialLocale(),
     fallbackLng: DEFAULT_LOCALE,
     ns: ["ui", "validation"],
