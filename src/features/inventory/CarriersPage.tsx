@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { useSnapshot } from "valtio"
-import { ChevronLeft, Plane, PlaneLanding, PlaneTakeoff, Plus, Trash2, TriangleAlert } from "lucide-react"
+import { ChevronLeft, MapPin, Plane, PlaneLanding, PlaneTakeoff, Plus, Trash2, TriangleAlert } from "lucide-react"
 
 import { removeFlightBlock, state, type DraftFlightBlock } from "@/store/season"
 import { BalanceStrip } from "@/components/BalanceStrip"
@@ -253,14 +253,49 @@ function CarrierDetail({
       .sort((a, b) => a.flies_on.localeCompare(b.flies_on))
     if (!list.length) return null
     const seats = list.reduce((t, f) => t + f.seats, 0)
+
+    // Split by the SAUDI-side point — where arrivals land and returns lift
+    // off (to_city or from_city respectively). The 1447 values are free
+    // text (Jeddah / Madina / Riyadh / متعدد), so match loosely.
+    const saudiSide = (f: (typeof list)[number]) =>
+      direction === "arrival" ? f.to_city : f.from_city
+    const pointKey = (s: string) => {
+      const v = s.trim().toLowerCase()
+      if (/jed|جدة|جده/.test(v)) return "jeddah"
+      if (/mad|med|المدينة|المدينه/.test(v)) return "madinah"
+      if (/riyadh|ruh|الرياض/.test(v)) return "riyadh"
+      if (v === "متعدد" || v === "") return "multi"
+      return "other"
+    }
+    const POINTS: { key: string; label: string }[] = [
+      { key: "jeddah", label: "جدة" },
+      { key: "madinah", label: "المدينة المنورة" },
+      { key: "riyadh", label: "الرياض (ترانزيت)" },
+      { key: "multi", label: "متعدد / غير محدد" },
+      { key: "other", label: "أخرى" },
+    ]
+    const groups = POINTS.map((p) => ({
+      ...p,
+      list: list.filter((f) => pointKey(saudiSide(f)) === p.key),
+    })).filter((g) => g.list.length > 0)
+
     return (
       <Card
         title={title}
         description={`${arNum(list.length)} كتلة · ${arNum(seats)} مقعد`}
         bodyClassName="p-0"
       >
+        {groups.map((g) => (
+          <div key={g.key}>
+            <div className="flex items-center gap-2 border-t border-surface-line bg-surface-sunken/60 px-4 py-1.5 first:border-t-0">
+              <MapPin className="size-3.5 shrink-0 text-muted-foreground" />
+              <span className="text-[11px] font-bold text-foreground">{g.label}</span>
+              <span className="text-[10px] tabular-nums text-muted-foreground">
+                {arNum(g.list.length)} كتلة · {arNum(g.list.reduce((t, f) => t + f.seats, 0))} مقعد
+              </span>
+            </div>
         <ul>
-          {list.map((f) => {
+          {g.list.map((f) => {
             const live = state.flightBlocks.find((x) => x.id === f.id)!
             const opened = open.has(f.id)
             const used = usage(f.id)
@@ -381,6 +416,8 @@ function CarrierDetail({
             )
           })}
         </ul>
+          </div>
+        ))}
       </Card>
     )
   }
