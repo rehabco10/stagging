@@ -62,6 +62,35 @@
     "nights": "{n} ليلة",
     "pinned_hint": "مثبَّت — لن تحركه إعادة الترتيب. انقر مرتين لفكّ التثبيت."
   },
+  "status": {
+    "signed": "موقَّع",
+    "confirmed": "مؤكَّد",
+    "proposed": "مقترح",
+    "cancelled": "ملغى"
+  },
+  "units": {
+    "_note": "n is a PRE-FORMATTED string (arNum) so grouping and Latin digits stay ours; count is the raw number, for plural selection only.",
+    "seat": "مقعد",
+    "seats": "{n} مقعد",
+    "bed": "سرير",
+    "beds": "{n} سرير",
+    "package": "باقة",
+    "packages": "{n} باقة",
+    "pilgrim": "حاج",
+    "pilgrims": "{n} حاج",
+    "night": "ليلة",
+    "nights": "{n} ليلة",
+    "block": "كتلة",
+    "blocks": "{n} كتلة",
+    "contract": "عقد",
+    "contracts": "{n} عقد",
+    "stay": "إقامة",
+    "stays": "{n} إقامة",
+    "hotel": "فندق",
+    "hotels": "{n} فندق",
+    "readiness": "جاهزية {done}/{total}",
+    "grade": "فئة {grade}"
+  },
   "tier": {
     "luxury": "فاخرة",
     "premium": "مميزة",

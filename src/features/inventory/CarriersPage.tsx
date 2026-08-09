@@ -181,7 +181,7 @@ export function CarriersPage() {
                           {en}
                         </span>
                       )}
-                      <span>{arNum(list.length)} كتلة</span>
+                      <span>{t("units.blocks", { n: arNum(list.length), count: list.length })}</span>
                       <span className="inline-flex items-center gap-1">
                         <PlaneLanding className="size-3" />
                         {arNum(seatsOf(list, "arrival"))}
@@ -233,7 +233,10 @@ function CarrierDetail({
   onAdd: () => void
   onError: (m: string | null) => void
 }) {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
+  const arrivalSeats = blocks.filter((f) => f.direction === "arrival").reduce((s, f) => s + f.seats, 0)
+  const returnSeats = blocks.filter((f) => f.direction === "return").reduce((s, f) => s + f.seats, 0)
   const [open, setOpen] = useState<Set<string>>(new Set())
   const [dirFilter, setDirFilter] = useState<"arrival" | "return" | null>(null)
   const usage = (id: string) =>
@@ -282,7 +285,7 @@ function CarrierDetail({
     return (
       <Card
         title={title}
-        description={`${arNum(list.length)} كتلة · ${arNum(seats)} مقعد`}
+        description={`${t("units.blocks", { n: arNum(list.length), count: list.length })} · ${t("units.seats", { n: arNum(seats), count: seats })}`}
         bodyClassName="p-0"
       >
         {groups.map((g) => (
@@ -291,7 +294,8 @@ function CarrierDetail({
               <MapPin className="size-3.5 shrink-0 text-muted-foreground" />
               <span className="text-[11px] font-bold text-foreground">{g.label}</span>
               <span className="text-[10px] tabular-nums text-muted-foreground">
-                {arNum(g.list.length)} كتلة · {arNum(g.list.reduce((t, f) => t + f.seats, 0))} مقعد
+                {t("units.blocks", { n: arNum(g.list.length), count: g.list.length })} ·{" "}
+                {t("units.seats", { n: arNum(g.list.reduce((sum, f) => sum + f.seats, 0)), count: g.list.reduce((sum, f) => sum + f.seats, 0) })}
               </span>
             </div>
         <ul>
@@ -320,7 +324,7 @@ function CarrierDetail({
                     {f.from_city || "—"} → {f.to_city || "—"}
                   </span>
                   <span className="shrink-0 text-[13px] font-semibold tabular-nums">
-                    {arNum(f.seats)} مقعد
+                    {t("units.seats", { n: arNum(f.seats), count: f.seats })}
                   </span>
                   {used > 0 && (
                     <span className="shrink-0 rounded-full bg-[color:var(--brand-teal-soft)] px-2 py-0.5 text-[11px] font-semibold tabular-nums text-[color:var(--brand-teal-deep)]">
@@ -429,11 +433,10 @@ function CarrierDetail({
           <div className="min-w-0 flex-1">
             <h2 className="truncate text-lg font-bold text-foreground">{name}</h2>
             <div className="mt-0.5 text-[12px] tabular-nums text-muted-foreground">
-              {arNum(blocks.length)} كتلة · وصول{" "}
-              {arNum(blocks.filter((f) => f.direction === "arrival").reduce((t, f) => t + f.seats, 0))}{" "}
-              مقعد · مغادرة{" "}
-              {arNum(blocks.filter((f) => f.direction === "return").reduce((t, f) => t + f.seats, 0))}{" "}
-              مقعد
+              {t("units.blocks", { n: arNum(blocks.length), count: blocks.length })} · {t("flight_direction.arrival")}{" "}
+              {t("units.seats", { n: arNum(arrivalSeats), count: arrivalSeats })} ·{" "}
+              {t("flight_direction.return")}{" "}
+              {t("units.seats", { n: arNum(returnSeats), count: returnSeats })}
             </div>
           </div>
           <Button variant="outline" size="sm" onClick={onAdd}>
