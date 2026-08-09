@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next"
+
 import { cn, arNum } from "@/lib/utils"
 
 /**
@@ -9,7 +11,7 @@ export function FilterChips<T extends string>({
   value,
   onChange,
   options,
-  allLabel = "الكل",
+  allLabel,
   className,
 }: {
   value: T | null
@@ -18,6 +20,8 @@ export function FilterChips<T extends string>({
   allLabel?: string
   className?: string
 }) {
+  const { t } = useTranslation()
+  const all = allLabel ?? t("الكل")
   const chip = (active: boolean, label: React.ReactNode, onClick: () => void, key: string) => (
     <button
       key={key}
@@ -36,7 +40,7 @@ export function FilterChips<T extends string>({
   )
   return (
     <div className={cn("flex flex-wrap items-center gap-1.5", className)}>
-      {chip(value === null, allLabel, () => onChange(null), "__all")}
+      {chip(value === null, all, () => onChange(null), "__all")}
       {options.map((o) =>
         chip(
           value === o.value,

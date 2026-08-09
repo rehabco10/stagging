@@ -20,6 +20,7 @@ import { PackageResources } from "@/features/inventory/PackageResources"
 import { localName } from "@/lib/names"
 import {
   cityShortLabel,
+  roomTypeLabel,
   publishStatusOptions,
   roleOptions,
   saleStatusOptions,
@@ -218,7 +219,7 @@ function QuotaChip({ used, quota }: { used: number; quota: number }) {
       )}
     >
       {used === quota
-        ? "الحصة مستوفاة"
+        ? t("dashboard.quota_met")
         : used > quota
           ? t("graph.over_by", { n: arNum(used - quota) })
           : t("graph.left", { n: arNum(quota - used) })}
@@ -378,11 +379,13 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
       {/* ── ١ الهوية والتسعير ── */}
       <Card
         title={t("graph.package_no", { no: view.package_no })}
-        description={`التصنيف في نسك: ${displayCategory({
-          tier: view.tier,
-          is_shifting: shifting,
-          variant_suffix: view.variant_suffix,
-        })}`}
+        description={t("التصنيف في نسك: {c}", {
+          c: displayCategory({
+            tier: view.tier,
+            is_shifting: shifting,
+            variant_suffix: view.variant_suffix,
+          }),
+        })}
         actions={
           <>
             <Button variant="outline" size="sm" onClick={() => navigate(`/packages/${duplicatePackage(id)}`)}>
@@ -431,9 +434,9 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             hint={
               bounds
                 ? t("حدود {tier} المعتمدة: {min} – {max}", { tier: tierLabel(view.tier), min: arNum(bounds.min_sar ?? 0), max: bounds.max_sar != null ? arNum(bounds.max_sar) : "—" })
-                : "لا حدود سعرية معتمدة لهذه الفئة بعد."
+                : t("لا حدود سعرية معتمدة لهذه الفئة بعد.")
             }
-            error={outOfBounds ? "خارج الحدود المعتمدة للفئة." : undefined}
+            error={outOfBounds ? t("خارج الحدود المعتمدة للفئة.") : undefined}
           >
             <MaskedPriceInput
               value={view.initial_price_sar}
@@ -451,7 +454,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             hint={
               left > 0
                 ? t("المتبقي غير الموزَّع من الحصة: {n}.", { n: arNum(left) })
-                : "الحصة موزَّعة بالكامل."
+                : t("الحصة موزَّعة بالكامل.")
             }
           >
             {/* Joined input-group, Base UI NumberField-style: one shared
@@ -475,7 +478,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                 onClick={() => takeRemaining(id)}
                 title={t("إسناد المتبقي من الحصة إلى هذه الباقة")}
               >
-                إسناد المتبقي{left > 0 && ` (${arNum(left)})`}
+                {t("إسناد المتبقي")}{left > 0 && ` (${arNum(left)})`}
               </Button>
             </div>
           </Field>
@@ -483,7 +486,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             label={t("توزيع الغرف (حاج)")}
             hint={
               mixSum === 0
-                ? "لم يُحدَّد التوزيع بعد."
+                ? t("لم يُحدَّد التوزيع بعد.")
                 : mixSum === view.capacity
                   ? t("الموزَّع {n} — مطابق للسعة.", { n: arNum(mixSum) })
                   : mixSum < view.capacity ? t("الموزَّع {n} — ينقص {d}.", { n: arNum(mixSum), d: arNum(view.capacity - mixSum) }) : t("الموزَّع {n} — يزيد {d}.", { n: arNum(mixSum), d: arNum(mixSum - view.capacity) })
@@ -493,7 +496,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
               {/* A visible label per input — the placeholder disappears the
                   moment a value exists, leaving three anonymous numbers. */}
               {(["4", "3", "2"] as const).map((rt) => {
-                const name = rt === "4" ? "رباعية" : rt === "3" ? "ثلاثية" : "ثنائية"
+                const name = roomTypeLabel(rt)
                 return (
                   <label key={rt} className="block">
                     <span className="mb-0.5 block text-[10px] font-semibold text-foreground/60">
@@ -535,7 +538,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
               variant="outline"
               size="sm"
               disabled={!canAdd}
-              title={canAdd ? undefined : "كل الأدوار مستخدمة (أول، ثانٍ، انتقالي)"}
+              title={canAdd ? undefined : t("graph.roles_used")}
               onClick={() => addLeg(id)}
             >
               <Plus className="size-3.5" />
@@ -718,9 +721,9 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
           <div className="col-span-2 space-y-1.5">
             {(
               [
-                ["content_ready_ar", "الوصف العربي جاهز"],
-                ["content_ready_en", "الوصف الإنجليزي جاهز"],
-                ["hero_approved", "الصورة الرئيسية معتمدة"],
+                ["content_ready_ar", t("الوصف العربي جاهز")],
+                ["content_ready_en", t("الوصف الإنجليزي جاهز")],
+                ["hero_approved", t("الصورة الرئيسية معتمدة")],
               ] as const
             ).map(([key, label]) => (
               <label key={key} className="flex items-center gap-2 text-[12px] text-foreground/80">

@@ -21,6 +21,44 @@ import type {
  * `error` blocks submission. `warning` is advisory.
  */
 
+/* ── message translation bridge (docs/i18n-plan.md §2) ──────────────
+ *
+ * The engine's messages are Arabic templates with `{param}` slots. This
+ * module stays pure and node-testable, so it carries its own formatter: the
+ * default substitutes params into the Arabic template — byte-identical to
+ * the pre-i18n literals, which is what keeps the tests untouched. The app
+ * swaps the formatter for i18next at bootstrap (see i18n/config.ts), where
+ * an English catalog entry wins and a missing one falls back to Arabic.
+ */
+export type MessageParams = Record<string, string | number>
+
+export const formatMessage = (key: string, params?: MessageParams): string =>
+  key.replace(/\{(\w+)\}/g, (_, k) => String(params?.[k] ?? ""))
+
+let translateMessage: (key: string, params?: MessageParams) => string = formatMessage
+
+export const setMessageTranslator = (fn: typeof translateMessage): void => {
+  translateMessage = fn
+}
+
+const M = (key: string, params?: MessageParams): string => translateMessage(key, params)
+
+/**
+ * Entity display names inside messages (hotels, for now). The engine cannot
+ * import `lib/names` — that module reaches the i18n config, which imports this
+ * file for the translator hook — so the same choice is injected the same way:
+ * default Arabic, and the app swaps in the locale-aware picker at startup.
+ */
+export type NamedEntity = { name_ar?: string | null; name_en?: string | null }
+
+let pickEntityName: (e: NamedEntity) => string = (e) => e.name_ar || e.name_en || ""
+
+export const setEntityNameLocalizer = (fn: typeof pickEntityName): void => {
+  pickEntityName = fn
+}
+
+const N = (e: NamedEntity | undefined): string => (e ? pickEntityName(e) : "")
+
 export type IssueLevel = "error" | "warning"
 
 export interface Issue {
@@ -117,7 +155,7 @@ export function validateItinerary(
     issues.push({ level, code, scope, entityId, message: `${where}${message}` })
 
   if (itin.legs.length === 0) {
-    at(ctx.draft ? "warning" : "error", "itinerary.empty", "لم تُضَف أي إقامة بعد.")
+    at(ctx.draft ? "warning" : "error", "itinerary.empty", M("لم تُضَف أي إقامة بعد."))
     return issues
   }
 
@@ -126,15 +164,15 @@ export function validateItinerary(
     const span = nightsBetween(leg.starts_on, leg.ends_on)
     const legId = leg.id ?? `${id}#${leg.sequence}`
     if (span === null) {
-      at("error", "leg.bad_date", "تاريخ غير صالح في الإقامة.", "leg", legId)
+      at("error", "leg.bad_date", M("تاريخ غير صالح في الإقامة."), "leg", legId)
       continue
     }
     if (span <= 0) {
-      at("error", "leg.non_positive", "تاريخ النهاية يجب أن يكون بعد تاريخ البداية.", "leg", legId)
+      at("error", "leg.non_positive", M("تاريخ النهاية يجب أن يكون بعد تاريخ البداية."), "leg", legId)
       continue
     }
     if (span !== leg.nights) {
-      at("error", "leg.nights_mismatch", `عدد الليالي (${leg.nights}) لا يطابق المدة بين التاريخين (${span}).`, "leg", legId)
+      at("error", "leg.nights_mismatch", M("عدد الليالي ({p0}) لا يطابق المدة بين التاريخين ({span}).", { p0: leg.nights, span: span }), "leg", legId)
     }
   }
 
@@ -142,9 +180,9 @@ export function validateItinerary(
   const byRole = new Map<string, number>()
   for (const leg of itin.legs) byRole.set(leg.role, (byRole.get(leg.role) ?? 0) + 1)
   for (const [role, n] of byRole) {
-    if (n > 1) at("error", "itinerary.duplicate_role", `تكرار الإقامة بدور «${role}» ${n} مرات.`)
+    if (n > 1) at("error", "itinerary.duplicate_role", M("تكرار الإقامة بدور «{role}» {n} مرات.", { role: role, n: n }))
   }
-  if (!byRole.has("first")) at("error", "itinerary.missing_first", "لا توجد إقامة أولى.")
+  if (!byRole.has("first")) at("error", "itinerary.missing_first", M("لا توجد إقامة أولى."))
 
   // contiguity, in chronological order — no gaps, no overlaps
   const chrono = chronological(itin.legs)
@@ -155,7 +193,7 @@ export function validateItinerary(
       at(
         "error",
         "itinerary.not_contiguous",
-        `فجوة أو تداخل بين الإقامات: تنتهي ${prev.ends_on.slice(0, 10)} وتبدأ التالية ${cur.starts_on.slice(0, 10)}.`,
+        M("فجوة أو تداخل بين الإقامات: تنتهي {p0} وتبدأ التالية {p1}.", { p0: prev.ends_on.slice(0, 10), p1: cur.starts_on.slice(0, 10) }),
       )
     }
   }
@@ -163,19 +201,19 @@ export function validateItinerary(
   // derived fields must agree with the legs
   const sum = itin.legs.reduce((t, l) => t + (l.nights || 0), 0)
   if (itin.total_nights !== sum) {
-    at("error", "itinerary.total_nights", `إجمالي الليالي المخزَّن (${itin.total_nights}) لا يطابق مجموع الإقامات (${sum}).`)
+    at("error", "itinerary.total_nights", M("إجمالي الليالي المخزَّن ({p0}) لا يطابق مجموع الإقامات ({sum}).", { p0: itin.total_nights, sum: sum }))
   }
 
   const hasTransitional = itin.legs.some((l) => l.role === "transitional")
   if (itin.is_shifting !== hasTransitional) {
-    at("error", "itinerary.shifting_flag", "علامة «الانتقالي» لا تطابق وجود إقامة انتقالية.")
+    at("error", "itinerary.shifting_flag", M("علامة «الانتقالي» لا تطابق وجود إقامة انتقالية."))
   }
 
   if (chrono.length) {
     const first = chrono[0].starts_on.slice(0, 10)
     const last = chrono[chrono.length - 1].ends_on.slice(0, 10)
-    if (itin.starts_on?.slice(0, 10) !== first) at("warning", "itinerary.starts_on", "تاريخ بداية المسار لا يطابق أول إقامة.")
-    if (itin.ends_on?.slice(0, 10) !== last) at("warning", "itinerary.ends_on", "تاريخ نهاية المسار لا يطابق آخر إقامة.")
+    if (itin.starts_on?.slice(0, 10) !== first) at("warning", "itinerary.starts_on", M("تاريخ بداية المسار لا يطابق أول إقامة."))
+    if (itin.ends_on?.slice(0, 10) !== last) at("warning", "itinerary.ends_on", M("تاريخ نهاية المسار لا يطابق آخر إقامة."))
   }
 
   return issues
@@ -200,29 +238,29 @@ export function validatePackage(
     issues.push({ level, code, scope: "package", entityId: id, message })
 
   if (!itin) {
-    at("error", "package.no_itinerary", "الباقة غير مرتبطة بمسار.")
+    at("error", "package.no_itinerary", M("الباقة غير مرتبطة بمسار."))
   } else if (pkg.is_shifting !== itin.is_shifting) {
-    at("error", "package.shifting_mismatch", "نوع الباقة (انتقالية) لا يطابق المسار المرتبط بها.")
+    at("error", "package.shifting_mismatch", M("نوع الباقة (انتقالية) لا يطابق المسار المرتبط بها."))
   }
 
   // Unset while still drafting is "not done yet", not "wrong". The season-level
   // quota check is what actually blocks a set of capacities that doesn't add up.
   const unset: IssueLevel = pkg.publish_status === "draft" ? "warning" : "error"
-  if (!(pkg.capacity > 0)) at(unset, "package.capacity", "لم تُحدَّد سعة الباقة بعد.")
-  if (!(pkg.initial_price_sar > 0)) at(unset, "package.price", "لم يُحدَّد السعر الابتدائي بعد.")
+  if (!(pkg.capacity > 0)) at(unset, "package.capacity", M("لم تُحدَّد سعة الباقة بعد."))
+  if (!(pkg.initial_price_sar > 0)) at(unset, "package.price", M("لم يُحدَّد السعر الابتدائي بعد."))
 
   // A partially-entered mix is wrong, not merely unfinished — a mix that
   // doesn't sum to the capacity houses ghosts or leaves pilgrims roomless.
   const mixSum = roomMixTotal(pkg)
   if (mixSum > 0 && pkg.capacity > 0 && mixSum !== pkg.capacity) {
-    at("error", "package.room_mix_total", `توزيع الغرف (${n(mixSum)} حاج) لا يساوي سعة الباقة (${n(pkg.capacity)}).`)
+    at("error", "package.room_mix_total", M("توزيع الغرف ({p0} حاج) لا يساوي سعة الباقة ({p1}).", { p0: n(mixSum), p1: n(pkg.capacity) }))
   }
 
   // The gate that would have caught packages 33–39 in 1447: priced, but never described.
   if (pkg.publish_status !== "draft") {
-    if (!readiness.hasArabicBody) at("error", "package.no_body_ar", "لا يمكن رفع باقة بدون وصف عربي.")
-    if (!readiness.hasEnglishBody) at("warning", "package.no_body_en", "لا يوجد وصف إنجليزي للباقة.")
-    if (readiness.approvedHeroCount < 1) at("error", "package.no_hero", "لا توجد صورة رئيسية معتمدة للباقة.")
+    if (!readiness.hasArabicBody) at("error", "package.no_body_ar", M("لا يمكن رفع باقة بدون وصف عربي."))
+    if (!readiness.hasEnglishBody) at("warning", "package.no_body_en", M("لا يوجد وصف إنجليزي للباقة."))
+    if (readiness.approvedHeroCount < 1) at("error", "package.no_hero", M("لا توجد صورة رئيسية معتمدة للباقة."))
   }
 
   return issues
@@ -244,21 +282,21 @@ const ROOM_TYPE_LABEL: Record<string, string> = {
 /* ── contract ───────────────────────────────────────────────────── */
 
 /** The slice of a hotel the inventory rules need. */
-export type HotelRef = Pick<Hotel, "id" | "name_ar" | "city">
+export type HotelRef = Pick<Hotel, "id" | "name_ar" | "city"> & NamedEntity
 
 export function validateContract(c: ContractWithLines, hotel: HotelRef | undefined): Issue[] {
   const issues: Issue[] = []
   const id = c.id ?? c.contract_no
-  const label = `عقد ${c.contract_no || "بدون رقم"}${hotel ? ` — ${hotel.name_ar}` : ""}`
+  const label = M("عقد {p0}{p1}", { p0: c.contract_no || M("بدون رقم"), p1: hotel ? ` — ${N(hotel)}` : "" })
   const at = (level: IssueLevel, code: string, message: string) =>
     issues.push({ level, code, scope: "contract", entityId: id, message: `${label}: ${message}` })
 
   const span = nightsBetween(c.starts_on, c.ends_on)
-  if (span === null) at("error", "contract.bad_date", "تاريخ غير صالح في نافذة العقد.")
-  else if (span <= 0) at("error", "contract.window", "نهاية العقد يجب أن تكون بعد بدايته.")
+  if (span === null) at("error", "contract.bad_date", M("تاريخ غير صالح في نافذة العقد."))
+  else if (span <= 0) at("error", "contract.window", M("نهاية العقد يجب أن تكون بعد بدايته."))
 
-  if (!c.contract_no) at("warning", "contract.no_number", "لم يُدخَل رقم العقد بعد.")
-  if (!hotel) at("error", "contract.no_hotel", "العقد غير مرتبط بفندق.")
+  if (!c.contract_no) at("warning", "contract.no_number", M("لم يُدخَل رقم العقد بعد."))
+  if (!hotel) at("error", "contract.no_hotel", M("العقد غير مرتبط بفندق."))
 
   // The 1447 lesson: the entered total lied (rooms, or double-sold beds).
   // Beds are only ever the sum of the room-type lines.
@@ -269,19 +307,19 @@ export function validateContract(c: ContractWithLines, hotel: HotelRef | undefin
       at(
         "error",
         "contract.line_beds",
-        `أسرّة الغرف ${line.room_type === "2" ? "الثنائية" : line.room_type === "3" ? "الثلاثية" : "الرباعية"} (${n(line.beds)}) لا تطابق عدد الغرف × السعة (${n(expect)}).`,
+        M("أسرّة الغرف {p0} ({p1}) لا تطابق عدد الغرف × السعة ({p2}).", { p0: M(ROOM_TYPE_LABEL[line.room_type] ?? line.room_type), p1: n(line.beds), p2: n(expect) }),
       )
     }
     total += line.beds
   }
-  if (c.lines.length === 0) at("warning", "contract.no_lines", "لا توجد أنواع غرف — العقد لا يوفّر أي سرير.")
+  if (c.lines.length === 0) at("warning", "contract.no_lines", M("لا توجد أنواع غرف — العقد لا يوفّر أي سرير."))
   if (c.beds_total !== total) {
-    at("error", "contract.beds_total", `إجمالي الأسرّة المخزَّن (${n(c.beds_total)}) لا يطابق مجموع الغرف (${n(total)}).`)
+    at("error", "contract.beds_total", M("إجمالي الأسرّة المخزَّن ({p0}) لا يطابق مجموع الغرف ({p1}).", { p0: n(c.beds_total), p1: n(total) }))
   }
 
   // Shifting supply is Makkah supply by definition; a madinah hotel can't carry it.
   if (c.city === "shifting" && hotel && hotel.city !== "makkah") {
-    at("error", "contract.shifting_city", "عقد انتقالي على فندق خارج مكة المكرمة.")
+    at("error", "contract.shifting_city", M("عقد انتقالي على فندق خارج مكة المكرمة."))
   }
 
   return issues
@@ -329,7 +367,7 @@ export function validateSeason(input: SeasonInput): Issue[] {
     issues.push(
       ...validateItinerary(itin, {
         draft: owner ? owner.publish_status === "draft" : true,
-        label: owner ? `باقة ${owner.package_no}` : undefined,
+        label: owner ? M("باقة {p0}", { p0: owner.package_no }) : undefined,
       }),
     )
   }
@@ -338,7 +376,7 @@ export function validateSeason(input: SeasonInput): Issue[] {
     const itin = pkg.itinerary ? itineraries.get(pkg.itinerary) : undefined
     const own = validatePackage(pkg, itin, readiness.get(pkg.id ?? "") ?? EMPTY_READINESS)
     // Same treatment for package-level messages.
-    for (const i of own) issues.push({ ...i, message: `باقة ${pkg.package_no}: ${i.message}` })
+    for (const i of own) issues.push({ ...i, message: M("باقة {p0}: {p1}", { p0: pkg.package_no, p1: i.message }) })
   }
 
   // uniqueness within the season
@@ -353,7 +391,7 @@ export function validateSeason(input: SeasonInput): Issue[] {
       seen.set(v, (seen.get(v) ?? 0) + 1)
     }
     for (const [v, n] of seen) {
-      if (n > 1) at("error", `season.duplicate_${field}`, `${label} «${v}» مكرر ${n} مرات.`)
+      if (n > 1) at("error", `season.duplicate_${field}`, M("{label} «{v}» مكرر {n} مرات.", { label: M(label), v: v, n: n }))
     }
   }
 
@@ -369,7 +407,7 @@ export function validateSeason(input: SeasonInput): Issue[] {
     at(
       "error",
       "season.quota_total",
-      `مجموع سعات الباقات ${n(total)} ${diff > 0 ? "أكبر" : "أقل"} من الحصة ${n(quota)} بمقدار ${n(Math.abs(diff))}.`,
+      M("مجموع سعات الباقات {p0} {p1} من الحصة {p2} بمقدار {p3}.", { p0: n(total), p1: diff > 0 ? "أكبر" : "أقل", p2: n(quota), p3: n(Math.abs(diff)) }),
     )
   }
 
@@ -385,10 +423,10 @@ export function validateSeason(input: SeasonInput): Issue[] {
       if (params?.kind !== "mix") continue
       const actual = pct[params.group]
       if (params.max_pct != null && actual > params.max_pct + 1e-9) {
-        at("error", "season.mix_max", `«${req.title}»: النسبة ${actual.toFixed(1)}% تتجاوز الحد الأعلى ${params.max_pct}%.`)
+        at("error", "season.mix_max", M("«{p0}»: النسبة {p1}% تتجاوز الحد الأعلى {p2}%.", { p0: req.title, p1: actual.toFixed(1), p2: params.max_pct }))
       }
       if (params.min_pct != null && actual < params.min_pct - 1e-9) {
-        at("error", "season.mix_min", `«${req.title}»: النسبة ${actual.toFixed(1)}% أقل من الحد الأدنى ${params.min_pct}%.`)
+        at("error", "season.mix_min", M("«{p0}»: النسبة {p1}% أقل من الحد الأدنى {p2}%.", { p0: req.title, p1: actual.toFixed(1), p2: params.min_pct }))
       }
     }
   }
@@ -399,10 +437,10 @@ export function validateSeason(input: SeasonInput): Issue[] {
     if (params?.kind !== "pricing") continue
     for (const p of packages.filter((x) => x.tier === params.tier)) {
       if (params.max_sar != null && p.initial_price_sar > params.max_sar) {
-        at("error", "season.price_max", `«${req.title}»: سعر الباقة ${p.package_no} يتجاوز الحد الأعلى ${params.max_sar}.`)
+        at("error", "season.price_max", M("«{p0}»: سعر الباقة {p1} يتجاوز الحد الأعلى {p2}.", { p0: req.title, p1: p.package_no, p2: params.max_sar }))
       }
       if (params.min_sar != null && p.initial_price_sar < params.min_sar) {
-        at("error", "season.price_min", `«${req.title}»: سعر الباقة ${p.package_no} أقل من الحد الأدنى ${params.min_sar}.`)
+        at("error", "season.price_min", M("«{p0}»: سعر الباقة {p1} أقل من الحد الأدنى {p2}.", { p0: req.title, p1: p.package_no, p2: params.min_sar }))
       }
     }
   }
@@ -415,17 +453,17 @@ export function validateSeason(input: SeasonInput): Issue[] {
     if (params?.kind !== "hotel") continue
     const used = usedHotels.has(params.hotel)
     if (params.rule === "must_not_use" && used) {
-      at("error", "season.hotel_forbidden", `«${req.title}»: فندق مستبعد ما زال مستخدمًا في أحد المسارات.`)
+      at("error", "season.hotel_forbidden", M("«{p0}»: فندق مستبعد ما زال مستخدمًا في أحد المسارات.", { p0: req.title }))
     }
     if (params.rule === "must_use" && !used) {
-      at("warning", "season.hotel_unused", `«${req.title}»: فندق مطلوب لم يُستخدم في أي مسار.`)
+      at("warning", "season.hotel_unused", M("«{p0}»: فندق مطلوب لم يُستخدم في أي مسار.", { p0: req.title }))
     }
   }
 
   // free-text requirements are not machine-checkable — they must be signed off
   for (const req of agreed) {
     if (req.kind === "note" && !req.acknowledged) {
-      at("warning", "season.note_unacknowledged", `متطلب غير مؤكَّد: «${req.title}».`)
+      at("warning", "season.note_unacknowledged", M("متطلب غير مؤكَّد: «{p0}».", { p0: req.title }))
     }
   }
 
@@ -456,7 +494,7 @@ export function validateSeason(input: SeasonInput): Issue[] {
           code,
           scope: "inventory",
           entityId: seasonId,
-          message: `مقاعد ${label} المؤكَّدة (${n(seats)}) أقل من الحصة (${n(quotaForFlights)}).`,
+          message: M("مقاعد {label} المؤكَّدة ({p1}) أقل من الحصة ({p2}).", { label: M(label), p1: n(seats), p2: n(quotaForFlights) }),
         })
       }
     }
@@ -530,7 +568,7 @@ function sweepShortfalls(demand: Span[], supply: Span[]): SweepRun[] {
 }
 
 const rangeLabel = (r: SweepRun) =>
-  r.from === r.to ? `ليلة ${iso(r.from)}` : `الليالي من ${iso(r.from)} حتى ${iso(r.to)}`
+  r.from === r.to ? M("ليلة {p0}", { p0: iso(r.from) }) : M("الليالي من {p0} حتى {p1}", { p0: iso(r.from), p1: iso(r.to) })
 
 /**
  * The check 1447 structurally could not run: its rooms carried no dates, so a
@@ -552,7 +590,7 @@ function validateInventory(input: {
 }): Issue[] {
   const { packages, itineraries, hotels, contracts } = input
   const issues: Issue[] = []
-  const hotelName = (id: string) => hotels.find((h) => h.id === id)?.name_ar || id
+  const hotelName = (id: string) => N(hotels.find((h) => h.id === id)) || id
 
   // Duplicate business keys — a warning, since the platform occasionally reissues.
   const seen = new Map<string, number>()
@@ -564,7 +602,7 @@ function validateInventory(input: {
         code: "inventory.duplicate_contract_no",
         scope: "inventory",
         entityId: no,
-        message: `رقم العقد ${no} مكرر ${n(count)} مرات.`,
+        message: M("رقم العقد {no} مكرر {p1} مرات.", { no: no, p1: n(count) }),
       })
     }
   }
@@ -605,7 +643,7 @@ function validateInventory(input: {
         code: "inventory.no_contract",
         scope: "inventory",
         entityId: hotelId,
-        message: `فندق «${hotelName(hotelId)}»: لا يوجد عقد سكن موقَّع لهذا الفندق.`,
+        message: M("فندق «{p0}»: لا يوجد عقد سكن موقَّع لهذا الفندق.", { p0: hotelName(hotelId) }),
       })
       continue
     }
@@ -617,7 +655,7 @@ function validateInventory(input: {
           code: "inventory.window_gap",
           scope: "inventory",
           entityId: hotelId,
-          message: `فندق «${hotelName(hotelId)}»: ${rangeLabel(r)} خارج نافذة أي عقد موقَّع.`,
+          message: M("فندق «{p0}»: {p1} خارج نافذة أي عقد موقَّع.", { p0: hotelName(hotelId), p1: rangeLabel(r) }),
         })
       } else {
         issues.push({
@@ -627,7 +665,7 @@ function validateInventory(input: {
           entityId: hotelId,
           // «سعات الباقات», not «الطلب»: the figure is planned capacity at
           // full sell-out, not today's bookings.
-          message: `فندق «${hotelName(hotelId)}»: سعات الباقات تتجاوز الأسرّة المتعاقد عليها بمقدار ${n(r.short)} سرير (${rangeLabel(r)}).`,
+          message: M("فندق «{p0}»: سعات الباقات تتجاوز الأسرّة المتعاقد عليها بمقدار {p1} سرير ({p2}).", { p0: hotelName(hotelId), p1: n(r.short), p2: rangeLabel(r) }),
         })
       }
     }
@@ -657,7 +695,7 @@ function validateBindings(input: {
 }): Issue[] {
   const { packages, itineraries, hotels, contracts, flightBlocks, quota } = input
   const issues: Issue[] = []
-  const hotelName = (id: string) => hotels.find((h) => h.id === id)?.name_ar || id
+  const hotelName = (id: string) => N(hotels.find((h) => h.id === id)) || id
   const contractById = new Map(contracts.map((c) => [c.id ?? c.contract_no, c]))
   const at = (
     level: IssueLevel,
@@ -701,7 +739,7 @@ function validateBindings(input: {
       const c = contractById.get(cid)
       if (!c) {
         // The store refuses removals while bound, so this only happens to imported data.
-        at("warning", "inventory.link_dangling", "package", pkgId, `باقة ${pkg.package_no}: مرتبطة بعقد سكن لم يعد موجودًا.`)
+        at("warning", "inventory.link_dangling", "package", pkgId, M("باقة {p0}: مرتبطة بعقد سكن لم يعد موجودًا.", { p0: pkg.package_no }))
         continue
       }
       if (!c.hotel || !legHotels.has(c.hotel)) {
@@ -710,7 +748,7 @@ function validateBindings(input: {
           "inventory.link_idle",
           "package",
           pkgId,
-          `باقة ${pkg.package_no}: مرتبطة بعقد ${c.contract_no || "بدون رقم"} على فندق «${hotelName(c.hotel ?? "")}» ولا إقامة لها فيه.`,
+          M("باقة {p0}: مرتبطة بعقد {p1} على فندق «{p2}» ولا إقامة لها فيه.", { p0: pkg.package_no, p1: c.contract_no || M("بدون رقم"), p2: hotelName(c.hotel ?? "") }),
         )
         continue
       }
@@ -720,7 +758,7 @@ function validateBindings(input: {
           "inventory.link_unsigned",
           "package",
           pkgId,
-          `باقة ${pkg.package_no}: مرتبطة بعقد ${c.contract_no || "بدون رقم"} غير موقَّع.`,
+          M("باقة {p0}: مرتبطة بعقد {p1} غير موقَّع.", { p0: pkg.package_no, p1: c.contract_no || M("بدون رقم") }),
         )
       }
       bound.add(c.hotel)
@@ -793,14 +831,14 @@ function validateBindings(input: {
   // its real 62% occupancy while these same gaps existed on paper.
   for (const [cid, nights] of nightLoad) {
     const c = contractById.get(cid)!
-    const label = `عقد ${c.contract_no || "بدون رقم"} — ${hotelName(c.hotel)}`
+    const label = M("عقد {p0} — {p1}", { p0: c.contract_no || M("بدون رقم"), p1: hotelName(c.hotel) })
     for (const r of overRuns(nights, contractBedsOf(c))) {
       at(
         "error",
         "inventory.contract_overallocated",
         "contract",
         cid,
-        `${label}: سعات الباقات المرتبطة به تتجاوز أسرّته بمقدار ${n(r.short)} سرير (${rangeLabel(r)}).`,
+        M("{label}: سعات الباقات المرتبطة به تتجاوز أسرّته بمقدار {p1} سرير ({p2}).", { label: label, p1: n(r.short), p2: rangeLabel(r) }),
       )
     }
   }
@@ -819,7 +857,7 @@ function validateBindings(input: {
         "inventory.room_type_overallocated",
         "contract",
         cid,
-        `عقد ${c.contract_no || "بدون رقم"} — ${hotelName(c.hotel)}: الغرف ${ROOM_TYPE_LABEL[rt]} تنقص ${n(r.short)} سريرًا عن خطة توزيع الغرف عند اكتمال سعات الباقات المرتبطة (${rangeLabel(r)}).`,
+        M("عقد {p0} — {p1}: الغرف {p2} تنقص {p3} سريرًا عن خطة توزيع الغرف عند اكتمال سعات الباقات المرتبطة ({p4}).", { p0: c.contract_no || M("بدون رقم"), p1: hotelName(c.hotel), p2: M(ROOM_TYPE_LABEL[rt]), p3: n(r.short), p4: rangeLabel(r) }),
       )
     }
   }
@@ -858,7 +896,7 @@ function validateBindings(input: {
           "inventory.link_window",
           "package",
           pkgId,
-          `باقة ${pkg.package_no}: ${rangeLabel(r)} في فندق «${hotelName(hotelId)}» خارج نوافذ العقود المرتبطة.`,
+          M("باقة {p0}: {p1} في فندق «{p2}» خارج نوافذ العقود المرتبطة.", { p0: pkg.package_no, p1: rangeLabel(r), p2: hotelName(hotelId) }),
         )
       }
     }
@@ -882,7 +920,7 @@ function validateBindings(input: {
         "inventory.no_contract_link",
         "package",
         pkgId,
-        `باقة ${pkg.package_no}: لا ترتبط بأي عقد سكن لفندق «${hotelName(leg.hotel)}» رغم وجود عقود موقَّعة عليه.`,
+        M("باقة {p0}: لا ترتبط بأي عقد سكن لفندق «{p1}» رغم وجود عقود موقَّعة عليه.", { p0: pkg.package_no, p1: hotelName(leg.hotel) }),
       )
     }
     // Once beds are bound, the mix decides *which* beds — nudge for it.
@@ -892,7 +930,7 @@ function validateBindings(input: {
         "inventory.no_room_mix",
         "package",
         pkgId,
-        `باقة ${pkg.package_no}: مرتبطة بعقود سكن دون توزيع الحجاج على أنواع الغرف.`,
+        M("باقة {p0}: مرتبطة بعقود سكن دون توزيع الحجاج على أنواع الغرف.", { p0: pkg.package_no }),
       )
     }
   }
@@ -901,7 +939,7 @@ function validateBindings(input: {
 
   const blockById = new Map(flightBlocks.map((f) => [f.id ?? "", f]))
   const blockLabel = (f: FlightBlock) =>
-    `كتلة ${f.direction === "arrival" ? "الوصول" : "المغادرة"} ${[f.airline_ar, f.flight_no].filter(Boolean).join(" ") || f.pnr || ""}`.trim()
+    M("كتلة {p0} {p1}", { p0: M(f.direction === "arrival" ? "الوصول" : "المغادرة"), p1: [N({ name_ar: f.airline_ar, name_en: f.airline_en }), f.flight_no].filter(Boolean).join(" ") || f.pnr || "" }).trim()
 
   // Allocations carry seat counts, so the block check is exact arithmetic:
   // Σ allocated seats per block against its seats. No splitting heuristics —
@@ -915,11 +953,11 @@ function validateBindings(input: {
     for (const alloc of pkg.flight_allocations ?? []) {
       const f = blockById.get(alloc.block)
       if (!f) {
-        at("warning", "inventory.flight_link_dangling", "package", pkgId, `باقة ${pkg.package_no}: مرتبطة بكتلة مقاعد لم تعد موجودة.`)
+        at("warning", "inventory.flight_link_dangling", "package", pkgId, M("باقة {p0}: مرتبطة بكتلة مقاعد لم تعد موجودة.", { p0: pkg.package_no }))
         continue
       }
       if (f.status === "cancelled") {
-        at("warning", "inventory.link_cancelled", "package", pkgId, `باقة ${pkg.package_no}: مرتبطة بكتلة مقاعد ملغاة (${blockLabel(f)}).`)
+        at("warning", "inventory.link_cancelled", "package", pkgId, M("باقة {p0}: مرتبطة بكتلة مقاعد ملغاة ({p1}).", { p0: pkg.package_no, p1: blockLabel(f) }))
         continue
       }
       tally.linked.add(f.direction)
@@ -935,7 +973,7 @@ function validateBindings(input: {
         "inventory.flight_overallocated",
         "inventory",
         fid,
-        `${blockLabel(f)}: المقاعد المخصصة للباقات (${n(load)}) تتجاوز مقاعدها (${n(f.seats || 0)}).`,
+        M("{p0}: المقاعد المخصصة للباقات ({p1}) تتجاوز مقاعدها ({p2}).", { p0: blockLabel(f), p1: n(load), p2: n(f.seats || 0) }),
       )
     }
   }
@@ -950,7 +988,7 @@ function validateBindings(input: {
       .filter((f) => f.direction === direction && f.status !== "cancelled")
       .reduce((t, f) => t + (f.seats || 0), 0)
     const fleetCovers = fleet > 0 && fleet >= quota
-    const label = direction === "arrival" ? "الوصول" : "المغادرة"
+    const label = M(direction === "arrival" ? "الوصول" : "المغادرة")
     for (const pkg of packages) {
       if (!(pkg.capacity > 0)) continue
       const pkgId = pkg.id ?? pkg.package_no
@@ -962,19 +1000,19 @@ function validateBindings(input: {
           "inventory.flight_overlinked",
           "package",
           pkgId,
-          `باقة ${pkg.package_no}: مقاعد ${label} المخصصة (${n(allocated)}) أكثر من سعتها (${n(pkg.capacity)}).`,
+          M("باقة {p0}: مقاعد {label} المخصصة ({p2}) أكثر من سعتها ({p3}).", { p0: pkg.package_no, label: label, p2: n(allocated), p3: n(pkg.capacity) }),
         )
       }
       if (!fleetCovers) continue
       if (!tally.linked.has(direction)) {
-        at("warning", "inventory.no_flight_link", "package", pkgId, `باقة ${pkg.package_no}: لا ترتبط بأي كتلة مقاعد ${label}.`)
+        at("warning", "inventory.no_flight_link", "package", pkgId, M("باقة {p0}: لا ترتبط بأي كتلة مقاعد {label}.", { p0: pkg.package_no, label: label }))
       } else if (allocated < pkg.capacity) {
         at(
           "warning",
           "inventory.flight_shortfall",
           "package",
           pkgId,
-          `باقة ${pkg.package_no}: مقاعد ${label} المخصصة (${n(allocated)}) أقل من سعتها (${n(pkg.capacity)}).`,
+          M("باقة {p0}: مقاعد {label} المخصصة ({p2}) أقل من سعتها ({p3}).", { p0: pkg.package_no, label: label, p2: n(allocated), p3: n(pkg.capacity) }),
         )
       }
     }

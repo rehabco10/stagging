@@ -48,24 +48,24 @@ export function ContractCard({
     <div className="rounded-xl border border-surface-line bg-surface-raised p-4">
       <div className="flex items-center gap-2.5">
         <span className="min-w-0 flex-1 truncate text-sm font-semibold">
-          عقد{" "}
+          {t("عقد")}{" "}
           <span dir="ltr" className="font-mono text-[13px] tabular-nums">
             {c.contract_no || "—"}
           </span>
         </span>
         <StatusPill status={c.status} />
         <span className="shrink-0 rounded-full bg-[color:var(--brand-teal-soft)] px-2.5 py-0.5 text-[11px] font-semibold tabular-nums text-[color:var(--brand-teal-deep)]">
-          {arNum(beds)} سرير
+          {t("units.beds", { n: arNum(beds), count: beds })}
         </span>
         {usedBy > 0 && (
           <span className="shrink-0 rounded-full bg-[color:var(--brand-gold-soft)] px-2.5 py-0.5 text-[11px] font-semibold tabular-nums text-[color:var(--brand-gold-deep)]">
-            {arNum(usedBy)} باقة
+            {t("units.packages", { n: arNum(usedBy), count: usedBy })}
           </span>
         )}
         <button
           type="button"
           aria-label={t("حذف العقد")}
-          title={usedBy > 0 ? "مرتبط بباقة — لا يمكن حذفه" : "حذف"}
+          title={usedBy > 0 ? t("مرتبط بباقة — لا يمكن حذفه") : t("حذف")}
           onClick={() => {
             const r = removeContract(c.id)
             onError(r.ok ? null : t("لا يمكن حذف العقد: مرتبط بـ{n} باقة.", { n: arNum(r.usedBy) }))

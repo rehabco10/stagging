@@ -15,6 +15,7 @@ import {
   type DraftPackage,
 } from "@/store/season"
 import { Checkbox, NumInput, SelectField } from "@/components/ui/field"
+import { airlineName, localName } from "@/lib/names"
 import { roomTypeLabel } from "@/lib/options"
 import { Meter } from "@/components/ui/meter"
 import { StatusPill } from "@/components/ui/status-pill"
@@ -26,7 +27,7 @@ const dm = (iso: string) => {
   return `${d.getUTCDate()}/${d.getUTCMonth() + 1}`
 }
 
-const RT_LABEL: Record<string, string> = { "4": "رباعية", "3": "ثلاثية", "2": "ثنائية" }
+
 
 /**
  * The package's resources, organized by the two decisions being made
@@ -128,10 +129,10 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
       total === 0
         ? null
         : covered >= total
-          ? { text: "يغطي كامل مدة الإقامة", cls: "text-[color:var(--brand-green-deep)]" }
+          ? { text: t("يغطي كامل مدة الإقامة"), cls: "text-[color:var(--brand-green-deep)]" }
           : covered > 0
             ? { text: t("يغطي {covered} من {total} ليلة", { covered: arNum(covered), total: arNum(total) }), cls: "text-[color:var(--brand-gold-deep)]" }
-            : { text: "خارج مدة الإقامة", cls: "text-[color:var(--brand-rose-deep)]" }
+            : { text: t("خارج مدة الإقامة"), cls: "text-[color:var(--brand-rose-deep)]" }
     return (
       <li key={c.id}>
         <label
@@ -150,14 +151,14 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
             {dm(c.starts_on)}–{dm(c.ends_on)}
           </span>
           <span className="text-[12px] font-semibold tabular-nums">
-            {arNum(contractBeds(c as DraftContract))} سرير
+            {t("units.beds", { n: arNum(contractBeds(c as DraftContract)), count: contractBeds(c as DraftContract) })}
           </span>
           {/* The split behind the total — picking contracts by total beds is
               how a mix ends up starved of one room type. */}
           <span className="text-[10px] tabular-nums text-muted-foreground">
             {c.lines
               .filter((l) => l.rooms > 0)
-              .map((l) => `${RT_LABEL[l.room_type]} ${arNum(lineBeds(l as never))}`)
+              .map((l) => `${roomTypeLabel(l.room_type)} ${arNum(lineBeds(l as never))}`)
               .join(" · ")}
           </span>
           <StatusPill status={c.status} />
@@ -244,7 +245,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
             value=""
             options={addable.map((f) => ({
               value: f.id,
-              label: `${f.airline_ar || f.airline_en} ${f.flight_no || ""} · ${f.flies_on ? dm(f.flies_on) : ""} · ${arNum(f.seats)} مقعد`,
+              label: `${airlineName(f)} ${f.flight_no || ""} · ${f.flies_on ? dm(f.flies_on) : ""} · ${arNum(f.seats)} مقعد`,
             }))}
             onChange={(v) => v && toggleFlightAllocation(pkg.id, v)}
           />
@@ -279,7 +280,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
                   to={`/hotels/${hotelId}`}
                   className="text-[12px] font-bold text-foreground hover:underline"
                 >
-                  {hotel?.name_ar ?? hotelId}
+                  {localName(hotel) || hotelId}
                 </Link>
                 <span dir="ltr" className="text-[11px] tabular-nums text-muted-foreground">
                   {range}
@@ -308,7 +309,7 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
                           : "bg-[color:var(--brand-rose-soft)] text-[color:var(--brand-rose-deep)]",
                       )}
                     >
-                      {RT_LABEL[rt]} <span dir="ltr">{arNum(have)} / {arNum(need)}</span>
+                      {roomTypeLabel(rt)} <span dir="ltr">{arNum(have)} / {arNum(need)}</span>
                     </span>
                   ))}
                 </div>
@@ -344,8 +345,8 @@ export function PackageResources({ pkg }: { pkg: DraftPackage }) {
 
       {/* ── الطيران ── */}
       <div className="space-y-4 border-t border-surface-line pt-4">
-        {directionGroup("arrival", "الوصول", PlaneLanding)}
-        {directionGroup("return", "المغادرة", PlaneTakeoff)}
+        {directionGroup("arrival", t("الوصول"), PlaneLanding)}
+        {directionGroup("return", t("المغادرة"), PlaneTakeoff)}
       </div>
     </div>
   )

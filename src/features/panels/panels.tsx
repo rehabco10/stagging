@@ -28,6 +28,7 @@ import {
   unpinAll,
 } from "@/store/season"
 import { discardDraft, draftStatus } from "@/persist/draft"
+import i18n from "@/i18n/config"
 import { useLocale, useSwitchLocale } from "@/i18n/LocaleProvider"
 import { LOCALES, type Locale } from "@/i18n/locale"
 import { formats } from "@/lib/intl"
@@ -49,23 +50,23 @@ import {
 import { useIssues } from "@/store/use-issues"
 import { cn, arNum } from "@/lib/utils"
 
-const KIND_OPTIONS: SelectOption[] = [
-  { value: "mix", label: "نسب الفئات" },
-  { value: "pricing", label: "حدود السعر" },
-  { value: "hotel", label: "قيد على فندق" },
-  { value: "window", label: "نافذة زمنية" },
-  { value: "note", label: "ملاحظة" },
+const kindOptions = (): SelectOption[] => [
+  { value: "mix", label: i18n.t("نسب الفئات") },
+  { value: "pricing", label: i18n.t("حدود السعر") },
+  { value: "hotel", label: i18n.t("قيد على فندق") },
+  { value: "window", label: i18n.t("نافذة زمنية") },
+  { value: "note", label: i18n.t("ملاحظة") },
 ]
 
-const REQ_STATUS_OPTIONS: SelectOption[] = [
-  { value: "proposed", label: "مقترح" },
-  { value: "agreed", label: "معتمد" },
-  { value: "superseded", label: "ملغى" },
+const reqStatusOptions = (): SelectOption[] => [
+  { value: "proposed", label: i18n.t("مقترح") },
+  { value: "agreed", label: i18n.t("معتمد") },
+  { value: "superseded", label: i18n.t("ملغى") },
 ]
 
-const MIX_GROUP_OPTIONS: SelectOption[] = [
-  { value: "standard", label: "الأساسية" },
-  { value: "premium_and_above", label: "المميزة فأعلى" },
+const mixGroupOptions = (): SelectOption[] => [
+  { value: "standard", label: i18n.t("tier.standard") },
+  { value: "premium_and_above", label: i18n.t("المميزة فأعلى") },
 ]
 
 /* ── meetings & requirements ────────────────────────────────────── */
@@ -75,10 +76,10 @@ const STATUS_STYLE: Record<string, string> = {
   proposed: "bg-[color:var(--brand-gold-soft)] text-[color:var(--brand-gold-deep)]",
   superseded: "bg-muted text-muted-foreground",
 }
-const STATUS_LABEL: Record<string, string> = {
-  agreed: "معتمد",
-  proposed: "مقترح",
-  superseded: "ملغى",
+const statusLabel: Record<string, () => string> = {
+  agreed: () => i18n.t("معتمد"),
+  proposed: () => i18n.t("مقترح"),
+  superseded: () => i18n.t("ملغى"),
 }
 
 export function RequirementsPanel() {
@@ -127,7 +128,7 @@ export function RequirementsPanel() {
                       STATUS_STYLE[r.status],
                     )}
                   >
-                    {STATUS_LABEL[r.status]}
+                    {statusLabel[r.status]?.() ?? r.status}
                   </span>
                   <button
                     type="button"
@@ -152,7 +153,7 @@ export function RequirementsPanel() {
                     <SelectField
                       allowEmpty={false}
                       value={r.kind}
-                      options={KIND_OPTIONS}
+                      options={kindOptions()}
                       onChange={(v) => (live.kind = v as typeof live.kind)}
                     />
                   </Field>
@@ -160,7 +161,7 @@ export function RequirementsPanel() {
                     <SelectField
                       allowEmpty={false}
                       value={r.status}
-                      options={REQ_STATUS_OPTIONS}
+                      options={reqStatusOptions()}
                       onChange={(v) => (live.status = v as typeof live.status)}
                     />
                   </Field>
@@ -171,7 +172,7 @@ export function RequirementsPanel() {
                         <SelectField
                           allowEmpty={false}
                           value={String(params.group ?? "standard")}
-                          options={MIX_GROUP_OPTIONS}
+                          options={mixGroupOptions()}
                           onChange={(v) => (live.params = { ...params, group: v })}
                         />
                       </Field>
@@ -257,7 +258,7 @@ function clusterIssues(items: Issue[]): Issue[][] {
 function clusterLabel(bucket: Issue[]) {
   const tail = (m: string) => m.replace(/^[^:]{0,60}:\s*/, "")
   const first = tail(bucket[0].message)
-  return bucket.every((i) => tail(i.message) === first) ? first : "بنود من النوع نفسه — افتح للتفاصيل"
+  return bucket.every((i) => tail(i.message) === first) ? first : i18n.t("بنود من النوع نفسه — افتح للتفاصيل")
 }
 
 const pillCls = (level: Issue["level"]) =>

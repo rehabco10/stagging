@@ -18,6 +18,7 @@ import { Meter } from "@/components/ui/meter"
 import { StatusPill } from "@/components/ui/status-pill"
 import { AddFlightWizard } from "@/features/inventory/AddFlightWizard"
 import { carrierIssues } from "@/features/inventory/supply"
+import { airlineName } from "@/lib/names"
 import { flightDirectionOptions, flightStatusOptions, flightTypeOptions } from "@/lib/options"
 import { useIssues } from "@/store/use-issues"
 import { cn, arNum } from "@/lib/utils"
@@ -271,11 +272,11 @@ function CarrierDetail({
       return "other"
     }
     const POINTS: { key: string; label: string }[] = [
-      { key: "jeddah", label: "جدة" },
-      { key: "madinah", label: "المدينة المنورة" },
-      { key: "riyadh", label: "الرياض (ترانزيت)" },
-      { key: "multi", label: "متعدد / غير محدد" },
-      { key: "other", label: "أخرى" },
+      { key: "jeddah", label: t("جدة") },
+      { key: "madinah", label: t("المدينة المنورة") },
+      { key: "riyadh", label: t("الرياض (ترانزيت)") },
+      { key: "multi", label: t("متعدد / غير محدد") },
+      { key: "other", label: t("أخرى") },
     ]
     const groups = POINTS.map((p) => ({
       ...p,
@@ -328,7 +329,7 @@ function CarrierDetail({
                   </span>
                   {used > 0 && (
                     <span className="shrink-0 rounded-full bg-[color:var(--brand-teal-soft)] px-2 py-0.5 text-[11px] font-semibold tabular-nums text-[color:var(--brand-teal-deep)]">
-                      {arNum(used)} باقة
+                      {t("units.packages", { n: arNum(used), count: used })}
                     </span>
                   )}
                   <StatusPill status={f.status} />
@@ -404,7 +405,7 @@ function CarrierDetail({
                       <Button
                         variant="destructive"
                         size="sm"
-                        title={used > 0 ? "مرتبطة بباقة — لا يمكن حذفها" : undefined}
+                        title={used > 0 ? t("مرتبطة بباقة — لا يمكن حذفها") : undefined}
                         onClick={() => {
                           const r = removeFlightBlock(f.id)
                           onError(r.ok ? null : t("لا يمكن حذف الكتلة: مرتبطة بـ{n} باقة.", { n: arNum(r.usedBy) }))
@@ -431,7 +432,7 @@ function CarrierDetail({
       <Card bodyClassName="p-4">
         <div className="flex flex-wrap items-center gap-3">
           <div className="min-w-0 flex-1">
-            <h2 className="truncate text-lg font-bold text-foreground">{name}</h2>
+            <h2 className="truncate text-lg font-bold text-foreground">{airlineName(blocks[0]) || name}</h2>
             <div className="mt-0.5 text-[12px] tabular-nums text-muted-foreground">
               {t("units.blocks", { n: arNum(blocks.length), count: blocks.length })} · {t("flight_direction.arrival")}{" "}
               {t("units.seats", { n: arNum(arrivalSeats), count: arrivalSeats })} ·{" "}
@@ -451,19 +452,19 @@ function CarrierDetail({
           options={[
             {
               value: "arrival",
-              label: "وصول",
+              label: t("flight_direction.arrival"),
               count: blocks.filter((f) => f.direction === "arrival").length,
             },
             {
               value: "return",
-              label: "مغادرة",
+              label: t("flight_direction.return"),
               count: blocks.filter((f) => f.direction === "return").length,
             },
           ]}
         />
       </Card>
-      {(dirFilter === null || dirFilter === "arrival") && section("arrival", "الوصول", PlaneLanding)}
-      {(dirFilter === null || dirFilter === "return") && section("return", "المغادرة", PlaneTakeoff)}
+      {(dirFilter === null || dirFilter === "arrival") && section("arrival", t("الوصول"), PlaneLanding)}
+      {(dirFilter === null || dirFilter === "return") && section("return", t("المغادرة"), PlaneTakeoff)}
     </>
   )
 }
