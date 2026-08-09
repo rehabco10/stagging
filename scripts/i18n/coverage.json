@@ -32,7 +32,7 @@
     },
     {
       "page": "hotel-detail",
-      "untranslated": 97,
+      "untranslated": 67,
       "dataNames": 12
     },
     {
@@ -42,16 +42,16 @@
     },
     {
       "page": "validation",
-      "untranslated": 101,
+      "untranslated": 96,
       "dataNames": 0
     },
     {
       "page": "settings",
-      "untranslated": 22,
+      "untranslated": 0,
       "dataNames": 0
     }
   ],
-  "distinct": 234,
+  "distinct": 199,
   "strings": [
     {
       "text": "باقة",
@@ -84,17 +84,6 @@
       "text": "فئة",
       "count": 23,
       "pages": [
-        "hotels",
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "المدينة",
-      "count": 10,
-      "pages": [
-        "journey",
-        "packages",
-        "package-detail",
         "hotels",
         "hotel-detail"
       ]
@@ -146,6 +135,17 @@
     },
     {
       "text": "مكة",
+      "count": 7,
+      "pages": [
+        "journey",
+        "packages",
+        "package-detail",
+        "hotels",
+        "hotel-detail"
+      ]
+    },
+    {
+      "text": "المدينة",
       "count": 7,
       "pages": [
         "journey",
@@ -328,15 +328,6 @@
       ]
     },
     {
-      "text": "الحصة مستوفاة",
-      "count": 3,
-      "pages": [
-        "packages",
-        "package-detail",
-        "settings"
-      ]
-    },
-    {
       "text": "رجوع",
       "count": 3,
       "pages": [
@@ -358,69 +349,6 @@
       "count": 3,
       "pages": [
         "hotels",
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "رقم العقد",
-      "count": 3,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "من",
-      "count": 3,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "إلى",
-      "count": 3,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "الحالة",
-      "count": 3,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "نوع الغرفة",
-      "count": 3,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "الغرف",
-      "count": 3,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "الأسرّة",
-      "count": 3,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "سعر السرير/ليلة",
-      "count": 3,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "نوع غرفة",
-      "count": 3,
-      "pages": [
         "hotel-detail"
       ]
     },
@@ -497,6 +425,14 @@
     },
     {
       "text": "٦٠٪",
+      "count": 2,
+      "pages": [
+        "packages",
+        "package-detail"
+      ]
+    },
+    {
+      "text": "الحصة مستوفاة",
       "count": 2,
       "pages": [
         "packages",
@@ -1190,41 +1126,6 @@
       ]
     },
     {
-      "text": "أخطاء تمنع الرفع",
-      "count": 1,
-      "pages": [
-        "validation"
-      ]
-    },
-    {
-      "text": "تنبيهات",
-      "count": 1,
-      "pages": [
-        "validation"
-      ]
-    },
-    {
-      "text": "باقات",
-      "count": 1,
-      "pages": [
-        "validation"
-      ]
-    },
-    {
-      "text": "النتائج",
-      "count": 1,
-      "pages": [
-        "validation"
-      ]
-    },
-    {
-      "text": "مصنَّفة حسب المجال؛ اختيار البند يفتح الباقة المعنية.",
-      "count": 1,
-      "pages": [
-        "validation"
-      ]
-    },
-    {
       "text": "لا يمكن رفع باقة بدون وصف عربي.",
       "count": 1,
       "pages": [
@@ -1670,153 +1571,6 @@
       "count": 1,
       "pages": [
         "validation"
-      ]
-    },
-    {
-      "text": "الموسم",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "السنة والحصة المعتمدة من الوزارة.",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "السنة الهجرية",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "السنة الميلادية",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "الحصة الإجمالية (حاج)",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "يجب أن يساوي مجموع سعات الباقات الحصة الإجمالية. الرقم الحالي محمول من موسم 1447 حتى صدور اعتماد 1448.",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "بداية الموسم",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "تُشتق منها التواريخ الافتراضية للإقامات والعقود والرحلات.",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "نهاية الموسم",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "موزَّع على الباقات",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "مكتمل",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "المخطط",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "سلوك لوحة تكوين الباقات.",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "فكّ الكل",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "العقد المثبَّتة",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "لا توجد عقد مثبَّتة.",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "العرض",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "ما يظهر على الشاشة أثناء الاجتماعات.",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "إظهار الأسعار (محجوبة افتراضيًا «",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "التخزين والاتصال",
-      "count": 1,
-      "pages": [
-        "settings"
-      ]
-    },
-    {
-      "text": "البيانات محفوظة في الذاكرة فقط؛ تحديث الصفحة يمسح المسودة.",
-      "count": 1,
-      "pages": [
-        "settings"
       ]
     }
   ]

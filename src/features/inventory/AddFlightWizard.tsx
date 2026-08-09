@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { useEffect, useState } from "react"
 
 import { FormWizard } from "@/components/ui/form-wizard"
@@ -39,6 +40,7 @@ export function AddFlightWizard({
   /** Preset carrier — the per-airline add button passes its own group. */
   airline?: { ar: string; en: string }
 }) {
+  const { t } = useTranslation()
   const [draft, setDraft] = useState<FlightDraft>(() => fresh(airline))
   const set = (patch: Partial<FlightDraft>) => setDraft((d) => ({ ...d, ...patch }))
 
@@ -51,9 +53,9 @@ export function AddFlightWizard({
     <FormWizard
       open={open}
       onOpenChange={onOpenChange}
-      title="إضافة كتلة مقاعد"
-      description="إضافة كتلة مقاعد متعاقد عليها."
-      finishLabel="إضافة الكتلة"
+      title={t("إضافة كتلة مقاعد")}
+      description={t("إضافة كتلة مقاعد متعاقد عليها.")}
+      finishLabel={t("إضافة الكتلة")}
       onFinish={() => addFlightBlock(draft)}
       steps={[
         {
@@ -62,7 +64,7 @@ export function AddFlightWizard({
           valid: draft.airline_ar.trim().length > 0,
           content: (
             <>
-              <Field label="الاتجاه">
+              <Field label={t("الاتجاه")}>
                 <SelectField
                   allowEmpty={false}
                   value={draft.direction}
@@ -79,15 +81,15 @@ export function AddFlightWizard({
                   }}
                 />
               </Field>
-              <Field label="شركة الطيران">
+              <Field label={t("شركة الطيران")}>
                 <Input
                   autoFocus
-                  placeholder="السعودية"
+                  placeholder={t("السعودية")}
                   value={draft.airline_ar}
                   onChange={(e) => set({ airline_ar: e.target.value })}
                 />
               </Field>
-              <Field label="شركة الطيران (إنجليزي)">
+              <Field label={t("شركة الطيران (إنجليزي)")}>
                 <Input
                   dir="ltr"
                   className="text-start"
@@ -96,7 +98,7 @@ export function AddFlightWizard({
                   onChange={(e) => set({ airline_en: e.target.value })}
                 />
               </Field>
-              <Field label="رقم الرحلة" hint="يُترك فارغًا إذا لم يُؤكَّد الحجز بعد.">
+              <Field label={t("رقم الرحلة")} hint={t("يُترك فارغًا إذا لم يُؤكَّد الحجز بعد.")}>
                 <Input
                   dir="ltr"
                   className="text-start"
@@ -105,7 +107,7 @@ export function AddFlightWizard({
                   onChange={(e) => set({ flight_no: e.target.value })}
                 />
               </Field>
-              <Field label="التاريخ">
+              <Field label={t("التاريخ")}>
                 <DatePicker
                   value={draft.flies_on}
                   onChange={(iso) => set({ flies_on: iso })}
@@ -119,14 +121,14 @@ export function AddFlightWizard({
           title: "المسار",
           content: (
             <>
-              <Field label="من">
+              <Field label={t("من")}>
                 <Input
                   placeholder={draft.direction === "arrival" ? "أمستردام" : "جدة"}
                   value={draft.from_city}
                   onChange={(e) => set({ from_city: e.target.value })}
                 />
               </Field>
-              <Field label="إلى">
+              <Field label={t("إلى")}>
                 <Input
                   placeholder={draft.direction === "arrival" ? "جدة" : "أمستردام"}
                   value={draft.to_city}
@@ -142,14 +144,14 @@ export function AddFlightWizard({
           valid: draft.seats > 0,
           content: (
             <>
-              <Field label="عدد المقاعد">
+              <Field label={t("عدد المقاعد")}>
                 <NumInput
                   placeholder="45"
                   value={draft.seats ? String(draft.seats) : ""}
                   onChange={(e) => set({ seats: Math.max(0, Number(e.target.value) || 0) })}
                 />
               </Field>
-              <Field label="نوع العقد">
+              <Field label={t("نوع العقد")}>
                 <SelectField
                   allowEmpty={false}
                   value={draft.contract_type}
@@ -157,7 +159,7 @@ export function AddFlightWizard({
                   onChange={(v) => set({ contract_type: v as FlightDraft["contract_type"] })}
                 />
               </Field>
-              <Field label="PNR" hint="مرجع الحجز لدى الناقل، إن وُجد.">
+              <Field label="PNR" hint={t("مرجع الحجز لدى الناقل، إن وُجد.")}>
                 <Input
                   dir="ltr"
                   className="text-start uppercase"
@@ -177,7 +179,7 @@ export function AddFlightWizard({
                 ]}
               />
               <p className="text-[10px] leading-relaxed text-muted-foreground">
-                تُضاف الكتلة بحالة «مقترح» — لا تُحتسب في تغطية الحصة إلا بعد تأكيدها من الجدول.
+                {t("تُضاف الكتلة بحالة «مقترح» — لا تُحتسب في تغطية الحصة إلا بعد تأكيدها من الجدول.")}
               </p>
             </>
           ),

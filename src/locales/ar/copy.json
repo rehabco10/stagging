@@ -1,0 +1,4 @@
+{
+  "_note": "Arabic normally needs no entry here — a natural-language key IS the Arabic sentence and i18next falls back to it. Only PARAMETERISED sentences appear below, because the fallback returns the key verbatim without running ICU over it.",
+  "عقد تحتفظ بموضعها اليدوي": "{n} عقدة تحتفظ بموضعها اليدوي."
+}

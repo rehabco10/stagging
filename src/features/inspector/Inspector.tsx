@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { useSnapshot } from "valtio"
 import { Trash2, TriangleAlert, Info, CircleCheck } from "lucide-react"
 
@@ -38,41 +39,42 @@ function Section({ title, children }: { title: string; children: React.ReactNode
 /* ── season (root selected) ─────────────────────────────────────── */
 
 function SeasonForm() {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   const used = allocated(state)
   const left = snap.season.quota_total - used
 
   return (
     <>
-      <Section title="الموسم">
+      <Section title={t("الموسم")}>
         <div className="grid grid-cols-2 gap-2">
-          <Field label="السنة الهجرية">
+          <Field label={t("السنة الهجرية")}>
             <NumInput
               value={snap.season.year_hijri}
               onChange={(e) => (state.season.year_hijri = Number(e.target.value) || 0)}
             />
           </Field>
-          <Field label="السنة الميلادية">
+          <Field label={t("السنة الميلادية")}>
             <NumInput
               value={snap.season.year_gregorian}
               onChange={(e) => (state.season.year_gregorian = Number(e.target.value) || 0)}
             />
           </Field>
         </div>
-        <Field label="الحصة الإجمالية (حاج)" hint="مجموع سعات الباقات يجب أن يساويها تمامًا.">
+        <Field label={t("الحصة الإجمالية (حاج)")} hint={t("مجموع سعات الباقات يجب أن يساويها تمامًا.")}>
           <NumInput
             value={snap.season.quota_total}
             onChange={(e) => (state.season.quota_total = Number(e.target.value) || 0)}
           />
         </Field>
         <div className="grid grid-cols-2 gap-2">
-          <Field label="بداية الموسم">
+          <Field label={t("بداية الموسم")}>
             <DatePicker
               value={snap.season.starts_on}
               onChange={(iso) => (state.season.starts_on = iso)}
             />
           </Field>
-          <Field label="نهاية الموسم">
+          <Field label={t("نهاية الموسم")}>
             <DatePicker
               value={snap.season.ends_on}
               onChange={(iso) => (state.season.ends_on = iso)}
@@ -96,19 +98,19 @@ function SeasonForm() {
         </div>
       </Section>
 
-      <Section title="الضوابط المعتمدة">
+      <Section title={t("الضوابط المعتمدة")}>
         <ul className="space-y-1.5 text-[11px] text-foreground/75">
           <li className="flex gap-1.5">
             <Info className="size-3.5 shrink-0 mt-0.5 text-muted-foreground" />
-            الفاخرة والمميزة (وانتقالياتهما) ‏40% من الحصة كحد أعلى.
+            {t("الفاخرة والمميزة (وانتقالياتهما) ‏40% من الحصة كحد أعلى.")}
           </li>
           <li className="flex gap-1.5">
             <Info className="size-3.5 shrink-0 mt-0.5 text-muted-foreground" />
-            الأساسية ‏60% من الحصة كحد أدنى.
+            {t("الأساسية ‏60% من الحصة كحد أدنى.")}
           </li>
         </ul>
         <p className="text-[10px] text-muted-foreground leading-relaxed">
-          مصدرها اجتماعات وزارة الحج والعمرة، وتُدار من صفحة «الاجتماعات والمتطلبات».
+          {t("مصدرها اجتماعات وزارة الحج والعمرة، وتُدار من صفحة «الاجتماعات والمتطلبات».")}
         </p>
       </Section>
     </>
@@ -118,6 +120,7 @@ function SeasonForm() {
 /* ── package ────────────────────────────────────────────────────── */
 
 function PackageForm({ pkg }: { pkg: DraftPackage }) {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   const live = snap.packages.find((p) => p.id === pkg.id)
   if (!live) return null
@@ -128,10 +131,10 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
     <>
       <Section title={`باقة ${live.package_no}`}>
         <div className="grid grid-cols-2 gap-2">
-          <Field label="رقم الباقة">
+          <Field label={t("رقم الباقة")}>
             <Input value={live.package_no} onChange={(e) => (pkg.package_no = e.target.value)} />
           </Field>
-          <Field label="الفئة">
+          <Field label={t("الفئة")}>
             <SelectField
               allowEmpty={false}
               value={live.tier}
@@ -141,18 +144,18 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
           </Field>
         </div>
 
-        <Field label="الاسم (إنجليزي)">
+        <Field label={t("الاسم (إنجليزي)")}>
           <Input dir="ltr" value={live.name_en} onChange={(e) => (pkg.name_en = e.target.value)} />
         </Field>
 
         <div className="grid grid-cols-2 gap-2">
-          <Field label="السعة (حاج)">
+          <Field label={t("السعة (حاج)")}>
             <NumInput
               value={live.capacity}
               onChange={(e) => (pkg.capacity = Number(e.target.value) || 0)}
             />
           </Field>
-          <Field label="السعر الابتدائي (ر.س)">
+          <Field label={t("السعر الابتدائي (ر.س)")}>
             <MaskedPriceInput
               value={live.initial_price_sar}
               onChange={(e) => (pkg.initial_price_sar = Number(e.target.value) || 0)}
@@ -161,7 +164,7 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
         </div>
 
         <Field
-          label="توزيع الغرف (حاج)"
+          label={t("توزيع الغرف (حاج)")}
           hint={(() => {
             const sum = live.room_mix["2"] + live.room_mix["3"] + live.room_mix["4"]
             if (sum === 0) return "رباعية / ثلاثية / ثنائية — لم يُحدَّد التوزيع بعد."
@@ -193,8 +196,8 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
         </Field>
 
         <Field
-          label="لاحقة التصنيف"
-          hint="نص يُحمل كما هو إلى نسك (مثل SA في 1447). معناه غير مؤكَّد، ولا يعتمد عليه أي منطق."
+          label={t("لاحقة التصنيف")}
+          hint={t("نص يُحمل كما هو إلى نسك (مثل SA في 1447). معناه غير مؤكَّد، ولا يعتمد عليه أي منطق.")}
         >
           <Input
             dir="ltr"
@@ -206,7 +209,7 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
 
         <div className="rounded-md bg-muted px-2.5 py-2 text-[11px] space-y-1">
           <div className="flex justify-between">
-            <span className="text-muted-foreground">التصنيف في نسك</span>
+            <span className="text-muted-foreground">{t("التصنيف في نسك")}</span>
             <span className="font-semibold" dir="ltr">
               {displayCategory({
                 tier: live.tier,
@@ -216,7 +219,7 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
             </span>
           </div>
           <div className="flex justify-between tabular-nums">
-            <span className="text-muted-foreground">الإقامات / الليالي</span>
+            <span className="text-muted-foreground">{t("الإقامات / الليالي")}</span>
             <span className="font-semibold">
               {arNum(live.legs.length)} / {arNum(nights)}
             </span>
@@ -226,14 +229,14 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
 
       <BindingsSection pkg={pkg} />
 
-      <Section title="إجراءات">
+      <Section title={t("إجراءات")}>
         <button
           type="button"
           onClick={() => removePackage(pkg.id)}
           className="inline-flex items-center gap-1.5 rounded-md border border-[color:var(--brand-rose)] px-2.5 py-1.5 text-xs font-medium text-[color:var(--brand-rose-deep)] hover:bg-[color:var(--brand-rose-soft)] cursor-pointer"
         >
           <Trash2 className="size-3.5" />
-          حذف الباقة
+          {t("حذف الباقة")}
         </button>
       </Section>
     </>
@@ -244,8 +247,9 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
 
 /** The per-decision resources panel, shared with the /packages workspace. */
 function BindingsSection({ pkg }: { pkg: DraftPackage }) {
+  const { t } = useTranslation()
   return (
-    <Section title="الموارد — العقود والمقاعد">
+    <Section title={t("الموارد — العقود والمقاعد")}>
       <PackageResources pkg={pkg} />
     </Section>
   )
@@ -254,6 +258,7 @@ function BindingsSection({ pkg }: { pkg: DraftPackage }) {
 /* ── leg ────────────────────────────────────────────────────────── */
 
 function LegForm({ legId }: { legId: string }) {
+  const { t } = useTranslation()
   useSnapshot(state)
   const found = findLeg(legId)
   if (!found) return null
@@ -263,7 +268,7 @@ function LegForm({ legId }: { legId: string }) {
   return (
     <>
       <Section title={`${roleLabel(leg.role)} — ${i18n.t("graph.package_no", { no: pkg.package_no })}`}>
-        <Field label="الدور">
+        <Field label={t("الدور")}>
           <SelectField
             allowEmpty={false}
             value={leg.role}
@@ -279,7 +284,7 @@ function LegForm({ legId }: { legId: string }) {
           />
         </Field>
 
-        <Field label="الفندق">
+        <Field label={t("الفندق")}>
           {/* City is carried in the label rather than an optgroup: Base UI's
               Select has no group primitive, and the city is derivable from the
               hotel anyway. */}
@@ -295,13 +300,13 @@ function LegForm({ legId }: { legId: string }) {
         </Field>
 
         <div className="grid grid-cols-2 gap-2">
-          <Field label="بداية الإقامة">
+          <Field label={t("بداية الإقامة")}>
             <DatePicker
               value={leg.starts_on}
               onChange={(iso) => retimeLeg(leg.id, iso, addDays(iso, Math.max(1, nights)))}
             />
           </Field>
-          <Field label="عدد الليالي">
+          <Field label={t("عدد الليالي")}>
             <NumInput
               value={nights}
               onChange={(e) => {
@@ -313,19 +318,18 @@ function LegForm({ legId }: { legId: string }) {
         </div>
 
         <p className="text-[10px] text-muted-foreground leading-relaxed">
-          تغيير التاريخ أو الليالي يزيح الإقامات التالية بنفس المقدار، فتبقى السلسلة متصلة بلا
-          فجوات. النهاية الحالية: <span dir="ltr" className="font-medium">{leg.ends_on}</span>
+          {t("تغيير التاريخ أو الليالي يزيح الإقامات التالية بنفس المقدار، فتبقى السلسلة متصلة بلا فجوات. النهاية الحالية:")} <span dir="ltr" className="font-medium">{leg.ends_on}</span>
         </p>
       </Section>
 
-      <Section title="إجراءات">
+      <Section title={t("إجراءات")}>
         <button
           type="button"
           onClick={() => removeLeg(leg.id)}
           className="inline-flex items-center gap-1.5 rounded-md border border-[color:var(--brand-rose)] px-2.5 py-1.5 text-xs font-medium text-[color:var(--brand-rose-deep)] hover:bg-[color:var(--brand-rose-soft)] cursor-pointer"
         >
           <Trash2 className="size-3.5" />
-          حذف الإقامة
+          {t("حذف الإقامة")}
         </button>
       </Section>
     </>
@@ -335,6 +339,7 @@ function LegForm({ legId }: { legId: string }) {
 /* ── issues ─────────────────────────────────────────────────────── */
 
 function Issues() {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   const issues = useIssues()
   const errors = issues.filter((i) => i.level === "error")
@@ -347,7 +352,7 @@ function Issues() {
       {issues.length === 0 ? (
         <div className="flex items-center gap-2 rounded-md bg-[color:var(--brand-green-soft)] px-2.5 py-2 text-[11px] text-[color:var(--brand-green-deep)]">
           <CircleCheck className="size-4 shrink-0" />
-          <span className="font-medium">الموسم مطابق للضوابط. جاهز للرفع.</span>
+          <span className="font-medium">{t("الموسم مطابق للضوابط. جاهز للرفع.")}</span>
         </div>
       ) : (
         <ul className="space-y-1.5">

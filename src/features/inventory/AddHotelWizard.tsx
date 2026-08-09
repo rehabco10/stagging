@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import { useEffect, useState } from "react"
 
 import { FormWizard } from "@/components/ui/form-wizard"
@@ -44,6 +45,7 @@ export function AddHotelWizard({
   /** Preselected city — each city table's add button passes its own. */
   city?: CityValue
 }) {
+  const { t } = useTranslation()
   const [draft, setDraft] = useState<HotelDraft>(() => fresh(city))
   const set = (patch: Partial<HotelDraft>) => setDraft((d) => ({ ...d, ...patch }))
 
@@ -55,9 +57,9 @@ export function AddHotelWizard({
     <FormWizard
       open={open}
       onOpenChange={onOpenChange}
-      title="إضافة فندق"
-      description="فندق جديد في مخزون هذا الموسم."
-      finishLabel="إضافة الفندق"
+      title={t("إضافة فندق")}
+      description={t("فندق جديد في مخزون هذا الموسم.")}
+      finishLabel={t("إضافة الفندق")}
       onFinish={() => addHotel(draft)}
       steps={[
         {
@@ -66,7 +68,7 @@ export function AddHotelWizard({
           valid: draft.name_ar.trim().length > 0,
           content: (
             <>
-              <Field label="المدينة">
+              <Field label={t("المدينة")}>
                 <SelectField
                   allowEmpty={false}
                   value={draft.city}
@@ -74,15 +76,15 @@ export function AddHotelWizard({
                   onChange={(v) => set({ city: v as CityValue })}
                 />
               </Field>
-              <Field label="الاسم (عربي)">
+              <Field label={t("الاسم (عربي)")}>
                 <Input
                   autoFocus
-                  placeholder="بولمان زمزم مكة"
+                  placeholder={t("بولمان زمزم مكة")}
                   value={draft.name_ar}
                   onChange={(e) => set({ name_ar: e.target.value })}
                 />
               </Field>
-              <Field label="الاسم (إنجليزي)" hint="كما يظهر في نسك، إن وُجد.">
+              <Field label={t("الاسم (إنجليزي)")} hint={t("كما يظهر في نسك، إن وُجد.")}>
                 <Input
                   dir="ltr"
                   className="text-start"
@@ -99,7 +101,7 @@ export function AddHotelWizard({
           title: "التصنيف",
           content: (
             <>
-              <Field label="التصنيف" hint="«خمسة نجوم … نزل» — تصنيف الوزارة.">
+              <Field label={t("التصنيف")} hint={t("«خمسة نجوم … نزل» — تصنيف الوزارة.")}>
                 <SelectField
                   allowEmpty={false}
                   value={draft.star_class}
@@ -107,7 +109,7 @@ export function AddHotelWizard({
                   onChange={(v) => set({ star_class: v as HotelDraft["star_class"] })}
                 />
               </Field>
-              <Field label="فئة السكن" hint="فئة مستقلة عن تصنيف النجوم.">
+              <Field label={t("فئة السكن")} hint={t("فئة مستقلة عن تصنيف النجوم.")}>
                 <SelectField
                   allowEmpty={false}
                   value={draft.grade}
@@ -133,7 +135,7 @@ export function AddHotelWizard({
                 ]}
               />
               <p className="text-[10px] leading-relaxed text-muted-foreground">
-                يُضاف الفندق كمرشّح بلا عقود — عقود السكن تُنشأ من صفحة الفنادق.
+                {t("يُضاف الفندق كمرشّح بلا عقود — عقود السكن تُنشأ من صفحة الفنادق.")}
               </p>
             </>
           ),
