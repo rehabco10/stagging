@@ -17,7 +17,7 @@ import { ContractCard } from "@/features/inventory/ContractCard"
 import { ContractsTimeline } from "@/features/inventory/ContractsTimeline"
 import { hotelIssues, hotelSummary } from "@/features/inventory/supply"
 import { localName } from "@/lib/names"
-import { cityOptions, gradeOptions, starLabel, starOptions } from "@/lib/options"
+import { cityLabel, cityOptions, gradeOptions, starLabel, starOptions } from "@/lib/options"
 import { useIssues } from "@/store/use-issues"
 import { cn, arNum } from "@/lib/utils"
 
@@ -58,7 +58,7 @@ export function HousingPage() {
         >
           <div className="flex items-center gap-2">
             <span className="min-w-0 flex-1 truncate text-sm font-semibold text-foreground">
-              {h.name_ar || h.name_en || "فندق بلا اسم"}
+              {localName(h) || t("فندق بلا اسم")}
             </span>
             {iss.errors + iss.warnings > 0 && (
               <span
@@ -77,7 +77,7 @@ export function HousingPage() {
             <ChevronLeft className="size-4 shrink-0 text-muted-foreground/50 lg:hidden" />
           </div>
           <div className="mt-0.5 text-[11px] text-muted-foreground">
-            {starLabel(h.star_class)} · فئة {h.grade} ·{" "}
+            {starLabel(h.star_class)} · {t("units.grade", { grade: h.grade })} ·{" "}
             {sum.contracts === 0 ? t("بلا عقود") : t("units.contracts", { n: arNum(sum.contracts), count: sum.contracts })}
           </div>
           {sum.peakSupply > 0 && (
@@ -150,21 +150,21 @@ export function HousingPage() {
                     options={[
                       {
                         value: "makkah",
-                        label: "مكة",
+                        label: t("city.makkah_short"),
                         count: snap.hotels.filter((h) => h.city === "makkah").length,
                       },
                       {
                         value: "madinah",
-                        label: "المدينة",
+                        label: t("city.madinah_short"),
                         count: snap.hotels.filter((h) => h.city === "madinah").length,
                       },
                     ]}
                   />
                 </div>
                 {(cityFilter === null || cityFilter === "makkah") &&
-                  citySection("makkah", "مكة المكرمة")}
+                  citySection("makkah", t("city.makkah"))}
                 {(cityFilter === null || cityFilter === "madinah") &&
-                  citySection("madinah", "المدينة المنورة")}
+                  citySection("madinah", t("city.madinah"))}
               </>
             }
             detail={selected && <HotelDetail key={selected.id} id={selected.id} onError={setError} />}
@@ -199,14 +199,14 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
           <div className="flex flex-wrap items-center gap-3">
             <div className="min-w-0 flex-1">
               <h2 className="truncate text-lg font-bold text-foreground">
-                {h.name_ar || "فندق بلا اسم"}
+                {localName(h) || t("فندق بلا اسم")}
               </h2>
               <div className="mt-0.5 text-[12px] text-muted-foreground">
                 <span dir="ltr">{h.name_en}</span>
                 {h.name_en && " · "}
-                {starLabel(h.star_class)} · فئة {h.grade} ·{" "}
-                {h.city === "makkah" ? "مكة المكرمة" : "المدينة المنورة"} ·{" "}
-                {arNum(usedLegs)} إقامة في الباقات
+                {starLabel(h.star_class)} · {t("units.grade", { grade: h.grade })} ·{" "}
+                {cityLabel(h.city)} ·{" "}
+                {t("{n} إقامة في الباقات", { n: arNum(usedLegs) })}
               </div>
             </div>
             <Button variant="outline" size="sm" onClick={() => setEditing(true)}>
@@ -287,7 +287,7 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
         description={
           sum.peakSupply > 0
             ? t("ذروة الأسرّة الموقَّعة {supply} · ذروة سعات الباقات {demand}", { supply: arNum(sum.peakSupply), demand: arNum(sum.peakDemand) })
-            : "لا عقود موقَّعة بعد."
+            : t("لا عقود موقَّعة بعد.")
         }
         actions={
           <Button variant="outline" size="sm" onClick={() => addContract(id)}>

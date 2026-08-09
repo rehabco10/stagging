@@ -1,6 +1,7 @@
 import { useMemo } from "react"
 import { useSnapshot } from "valtio"
 
+import { useLocale } from "@/i18n/LocaleProvider"
 import { issuesFor, state } from "@/store/season"
 import type { Issue } from "@/lib/validation"
 
@@ -19,9 +20,13 @@ import type { Issue } from "@/lib/validation"
 export function useIssues(): Issue[] {
   const snap = useSnapshot(state)
   const { packages, requirements, season, hotels, contracts, flightBlocks } = snap
+  // Messages are rendered in the interface language (the validation bridge),
+  // so a language switch must recompute them even though no data changed.
+  const locale = useLocale()
   return useMemo(
     () => issuesFor(state),
-    [packages, requirements, season, hotels, contracts, flightBlocks],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [packages, requirements, season, hotels, contracts, flightBlocks, locale],
   )
 }
 

@@ -642,7 +642,7 @@ export function issuesFor(s: DraftState): Issue[] {
         },
       ]),
     ),
-    hotels: s.hotels.map((h) => ({ id: h.id, name_ar: h.name_ar, city: h.city })),
+    hotels: s.hotels.map((h) => ({ id: h.id, name_ar: h.name_ar, name_en: h.name_en, city: h.city })),
     // Derived fields (beds, beds_total) are computed here, not stored — so the
     // mismatch rules exist for imported data, and the draft can't trip them.
     contracts: s.contracts.map((c) => ({
@@ -669,6 +669,7 @@ export function issuesFor(s: DraftState): Issue[] {
       season: "draft",
       direction: f.direction,
       airline_ar: f.airline_ar || null,
+      airline_en: f.airline_en || null,
       flight_no: f.flight_no || null,
       flies_on: f.flies_on || null,
       from_city: f.from_city || null,

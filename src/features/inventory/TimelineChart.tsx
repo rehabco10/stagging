@@ -88,11 +88,11 @@ export default function TimelineChart({ data }: { data: TimelinePoint[] }) {
                       {new Date(p.night).toISOString().slice(0, 10)}
                     </div>
                     <div className="space-y-0.5 tabular-nums text-muted-foreground">
-                      <div>سعات الباقات: {arNum(p.demand)}</div>
-                      <div>الأسرّة الموقَّعة: {arNum(p.supply)}</div>
+                      <div>{t("سعات الباقات: {n}", { n: arNum(p.demand) })}</div>
+                      <div>{t("الأسرّة الموقَّعة: {n}", { n: arNum(p.supply) })}</div>
                       {p.overrun > 0 && (
                         <div className="font-semibold text-[color:var(--brand-rose-deep)]">
-                          تجاوز: {arNum(p.overrun)} سرير
+                          {t("تجاوز: {n} سرير", { n: arNum(p.overrun) })}
                         </div>
                       )}
                     </div>

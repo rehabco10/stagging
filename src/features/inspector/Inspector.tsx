@@ -22,7 +22,7 @@ import { DatePicker } from "@/components/ui/date-picker"
 import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
 import { MaskedPriceInput } from "@/components/ui/price"
 import { localName } from "@/lib/names"
-import { cityShortLabel, roleOptions, tierOptions } from "@/lib/options"
+import { cityShortLabel, roomTypeLabel, roleOptions, tierOptions } from "@/lib/options"
 import { cn, arNum } from "@/lib/utils"
 import { useIssues } from "@/store/use-issues"
 
@@ -83,7 +83,7 @@ function SeasonForm() {
           </Field>
         </div>
         <div className="flex items-center justify-between rounded-md bg-muted px-2.5 py-2 text-[11px] tabular-nums">
-          <span className="text-muted-foreground">موزَّع {arNum(used)}</span>
+          <span className="text-muted-foreground">{t("graph.allocated")} {arNum(used)}</span>
           <span
             className={cn(
               "font-semibold",
@@ -168,7 +168,7 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
           label={t("توزيع الغرف (حاج)")}
           hint={(() => {
             const sum = live.room_mix["2"] + live.room_mix["3"] + live.room_mix["4"]
-            if (sum === 0) return "رباعية / ثلاثية / ثنائية — لم يُحدَّد التوزيع بعد."
+            if (sum === 0) return t("رباعية / ثلاثية / ثنائية — لم يُحدَّد التوزيع بعد.")
             const diff = live.capacity - sum
             if (diff === 0) return t("الموزَّع {n} — مطابق للسعة.", { n: arNum(sum) })
             return diff > 0 ? t("الموزَّع {n} — ينقص {d}.", { n: arNum(sum), d: arNum(diff) }) : t("الموزَّع {n} — يزيد {d}.", { n: arNum(sum), d: arNum(-diff) })
@@ -178,7 +178,7 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
             {/* A visible label per input — the placeholder disappears the
                 moment a value exists, leaving three anonymous numbers. */}
             {(["4", "3", "2"] as const).map((rt) => {
-              const name = rt === "4" ? "رباعية" : rt === "3" ? "ثلاثية" : "ثنائية"
+              const name = roomTypeLabel(rt)
               return (
                 <label key={rt} className="block">
                   <span className="mb-0.5 block text-[10px] font-semibold text-foreground/60">

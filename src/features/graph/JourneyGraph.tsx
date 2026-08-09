@@ -26,7 +26,7 @@ import { SIDE_PANEL_QUERY, useMediaQuery } from "@/hooks/use-media-query"
 import { useLocale } from "@/i18n/LocaleProvider"
 import { LOCALE_DIR } from "@/i18n/locale"
 import { airlineName, localName } from "@/lib/names"
-import { roleLabel, tierLabel } from "@/lib/options"
+import { cityShortLabel, roleLabel, tierLabel } from "@/lib/options"
 import { contractBeds, legNights, packageNights, state, type DraftContract, type DraftPackage } from "@/store/season"
 import { cn, arNum } from "@/lib/utils"
 
@@ -127,7 +127,7 @@ function JourneyStopNode({ data }: NodeProps<Node<StopData>>) {
           <span dir="ltr" className="shrink-0 text-[11px] tabular-nums text-muted-foreground">
             {f.flies_on ? dm(f.flies_on) : ""}
           </span>
-          <span className="shrink-0 text-[12px] font-semibold tabular-nums">{arNum(a.seats)} مقعد</span>
+          <span className="shrink-0 text-[12px] font-semibold tabular-nums">{t("units.seats", { n: arNum(a.seats), count: a.seats })}</span>
         </li>
       ))}
     </ul>
@@ -141,7 +141,7 @@ function JourneyStopNode({ data }: NodeProps<Node<StopData>>) {
       "bg-[color:var(--brand-teal-soft)]",
       <Icon className="size-4 text-[color:var(--brand-teal-deep)]" />,
       <>
-        <span className="text-[13px] font-bold">{data.kind === "arrival" ? "الوصول" : "المغادرة"}</span>
+        <span className="text-[13px] font-bold">{data.kind === "arrival" ? t("الوصول") : t("المغادرة")}</span>
         <Meter className="min-w-28 flex-1" value={seats} max={pkg.capacity} bound="min" />
       </>,
       list.length ? (
@@ -164,14 +164,14 @@ function JourneyStopNode({ data }: NodeProps<Node<StopData>>) {
         {hotel ? localName(hotel) : leg.hotelId}
       </Link>
       <span className="rounded-full bg-surface-sunken px-2 py-0.5 text-[10px] font-semibold text-muted-foreground">
-        {hotel?.city === "makkah" ? "مكة" : "المدينة"}
+        {hotel ? cityShortLabel(hotel.city) : ""}
       </span>
       <span className="text-[10px] text-muted-foreground">{roleLabel(leg.role)}</span>
       <span dir="ltr" className="ms-auto text-[11px] tabular-nums text-muted-foreground">
         {dm(leg.starts_on)} – {dm(leg.ends_on)}
       </span>
       <span className="text-[11px] tabular-nums text-muted-foreground">
-        {arNum(legNights(leg as never))} ليلة
+        {t("units.nights", { n: arNum(legNights(leg as never)), count: legNights(leg as never) })}
       </span>
     </>,
     bound.length ? (
@@ -188,7 +188,7 @@ function JourneyStopNode({ data }: NodeProps<Node<StopData>>) {
               {dm(c.starts_on)}–{dm(c.ends_on)}
             </span>
             <span className="ms-auto text-[12px] font-semibold tabular-nums">
-              {arNum(contractBeds(c as DraftContract))} سرير
+              {t("units.beds", { n: arNum(contractBeds(c as DraftContract)), count: contractBeds(c as DraftContract) })}
             </span>
             <StatusPill status={c.status} />
           </li>
@@ -290,7 +290,7 @@ function JourneyGraphInner({ pkgId, onBack }: { pkgId: string; onBack: () => voi
             className="flex max-w-[55vw] flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-surface-line bg-card/90 px-3 py-2 shadow-sm backdrop-blur sm:max-w-none sm:px-4"
           >
             <span className="truncate text-[13px] font-bold">
-              رحلة الحاج — باقة {pkg.package_no}
+              {t("رحلة الحاج — باقة {no}", { no: pkg.package_no })}
             </span>
             <span dir="ltr" className="hidden text-[11px] text-muted-foreground sm:inline">
               {pkg.name_en}
@@ -299,7 +299,7 @@ function JourneyGraphInner({ pkgId, onBack }: { pkgId: string; onBack: () => voi
               {tierLabel(pkg.tier)}
             </span>
             <span className="hidden text-[11px] tabular-nums text-muted-foreground sm:inline">
-              {arNum(pkg.capacity)} حاج · {arNum(packageNights(pkg as DraftPackage))} ليلة
+              {t("units.pilgrims", { n: arNum(pkg.capacity), count: pkg.capacity })} · {t("units.nights", { n: arNum(packageNights(pkg as DraftPackage)), count: packageNights(pkg as DraftPackage) })}
             </span>
             {pkg.initial_price_sar > 0 && (
               <span className="hidden sm:inline-flex">

@@ -94,7 +94,7 @@ export function ContractsTimeline({ hotelId }: { hotelId: string }) {
               style={{ insetInlineStart: `${s}%`, width: `${w}%`, top: `${lane * 2}rem` }}
             >
               <span className="truncate text-[11px] font-semibold tabular-nums">
-                {arNum(contractBeds(c as DraftContract))} سرير
+                {t("units.beds", { n: arNum(contractBeds(c as DraftContract)), count: contractBeds(c as DraftContract) })}
               </span>
               <span dir="ltr" className="ms-auto hidden truncate text-[10px] tabular-nums opacity-60 sm:block">
                 {dm(dayMs(c.starts_on))}–{dm(dayMs(c.ends_on))}

@@ -10,6 +10,7 @@ import enCopy from "@/locales/en/copy.json"
 import enValidation from "@/locales/en/validation.json"
 import { DEFAULT_LOCALE, localeFromPath, stripBase, type Locale } from "./locale"
 import { setIntlLocale } from "@/lib/intl"
+import { formatMessage, setEntityNameLocalizer, setMessageTranslator } from "@/lib/validation"
 
 /**
  * The i18next runtime (docs/i18n-plan.md §2).
@@ -70,5 +71,20 @@ void i18n
   })
 
 setIntlLocale(initialLocale())
+
+// The validation engine's message bridge: English looks up the `validation`
+// namespace; anything missing — and Arabic always — formats the Arabic
+// template directly, so the engine's output stays byte-identical to its
+// pre-i18n literals (which is also what its node tests assert against).
+setMessageTranslator((key, params) => {
+  if (i18n.resolvedLanguage !== "en") return formatMessage(key, params)
+  const out = i18n.t(key, { ns: "validation", ...params }) as string
+  return out === key ? formatMessage(key, params) : out
+})
+
+// Same display rule as `lib/names`, which the engine cannot import directly.
+setEntityNameLocalizer((e) =>
+  (i18n.resolvedLanguage === "en" ? e.name_en || e.name_ar : e.name_ar || e.name_en) ?? "",
+)
 
 export default i18n
