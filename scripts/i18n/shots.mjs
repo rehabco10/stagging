@@ -11,6 +11,12 @@
  * With `--baseline`, the Arabic pages are also shot against a second build
  * and compared byte-for-byte: that is the "no visual change" gate each
  * infrastructure phase has to pass before any string moves.
+ *
+ * One caveat learned the hard way: the canvas pages render ~4px node text at
+ * a 0.2 fitView scale, where Chrome's antialiasing is not byte-stable between
+ * runs. When they are the only pages that differ, corroborate with the page's
+ * innerText and the `.react-flow__viewport` transform — identical text and
+ * transform means identical content, whatever the bytes say.
  */
 import { createServer } from "node:http"
 import { readFile, mkdir, writeFile } from "node:fs/promises"
