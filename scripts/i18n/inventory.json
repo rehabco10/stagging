@@ -1,15 +1,15 @@
 {
   "generatedFrom": "ast-grep scan -c scripts/i18n/sgconfig.yml (see docs/i18n-plan.md §1)",
   "totals": {
-    "matches": 762,
-    "distinctMessages": 532,
-    "withParams": 101,
-    "pluralCandidates": 51,
+    "matches": 638,
+    "distinctMessages": 470,
+    "withParams": 94,
+    "pluralCandidates": 50,
     "byRule": {
-      "i18n-jsx-text": 127,
-      "i18n-attr-string": 308,
-      "i18n-literal-string": 221,
-      "i18n-template": 106
+      "i18n-literal-string": 155,
+      "i18n-jsx-text": 108,
+      "i18n-attr-string": 278,
+      "i18n-template": 97
     }
   },
   "messages": [
@@ -22,8 +22,8 @@
       "files": [
         "src/lib/options.ts",
         "src/lib/schemas.ts",
-        "src/features/inventory/AddHotelWizard.tsx",
-        "src/store/season.ts"
+        "src/store/season.ts",
+        "src/features/inventory/AddHotelWizard.tsx"
       ]
     },
     {
@@ -34,26 +34,11 @@
         "literal-string"
       ],
       "files": [
+        "src/features/inventory/ContractCard.tsx",
+        "src/features/inspector/Inspector.tsx",
         "src/features/inventory/AddHotelWizard.tsx",
-        "src/features/inspector/Inspector.tsx",
-        "src/features/inventory/ContractCard.tsx",
-        "src/features/inventory/HousingPage.tsx",
-        "src/features/graph/JourneyGraph.tsx"
-      ]
-    },
-    {
-      "text": "باقة",
-      "count": 7,
-      "kinds": [
-        "attr-string",
-        "jsx-text"
-      ],
-      "files": [
-        "src/features/inspector/Inspector.tsx",
-        "src/routes/packages.tsx",
-        "src/features/inventory/ContractCard.tsx",
-        "src/features/inventory/CarriersPage.tsx",
-        "src/features/graph/nodes.tsx"
+        "src/features/graph/JourneyGraph.tsx",
+        "src/features/inventory/HousingPage.tsx"
       ]
     },
     {
@@ -72,8 +57,8 @@
       "text": "جدة",
       "count": 7,
       "kinds": [
-        "literal-string",
-        "attr-string"
+        "attr-string",
+        "literal-string"
       ],
       "files": [
         "src/features/inventory/AddFlightWizard.tsx",
@@ -88,11 +73,11 @@
         "attr-string"
       ],
       "files": [
+        "src/features/inventory/ContractCard.tsx",
         "src/features/inventory/TimelineChart.tsx",
         "src/features/inventory/ContractsTimeline.tsx",
-        "src/features/inventory/ContractCard.tsx",
-        "src/features/inventory/PackageResources.tsx",
-        "src/features/graph/JourneyGraph.tsx"
+        "src/features/graph/JourneyGraph.tsx",
+        "src/features/inventory/PackageResources.tsx"
       ]
     },
     {
@@ -104,8 +89,8 @@
       ],
       "files": [
         "src/features/inventory/CarriersPage.tsx",
-        "src/features/inventory/PackageResources.tsx",
-        "src/features/graph/JourneyGraph.tsx"
+        "src/features/graph/JourneyGraph.tsx",
+        "src/features/inventory/PackageResources.tsx"
       ]
     },
     {
@@ -115,23 +100,10 @@
         "attr-string"
       ],
       "files": [
-        "src/features/inventory/AddHotelWizard.tsx",
         "src/features/inspector/Inspector.tsx",
-        "src/routes/packages.tsx",
-        "src/features/inventory/HousingPage.tsx"
-      ]
-    },
-    {
-      "text": "المدينة المنورة",
-      "count": 5,
-      "kinds": [
-        "literal-string",
-        "attr-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/inventory/CarriersPage.tsx",
-        "src/features/inventory/HousingPage.tsx"
+        "src/features/inventory/AddHotelWizard.tsx",
+        "src/features/inventory/HousingPage.tsx",
+        "src/routes/packages.tsx"
       ]
     },
     {
@@ -142,8 +114,8 @@
       ],
       "files": [
         "src/features/inventory/CarriersPage.tsx",
-        "src/features/inventory/PackageResources.tsx",
         "src/features/graph/JourneyGraph.tsx",
+        "src/features/inventory/PackageResources.tsx",
         "src/lib/validation.ts"
       ]
     },
@@ -166,59 +138,23 @@
       ],
       "files": [
         "src/features/inventory/CarriersPage.tsx",
-        "src/features/inventory/PackageResources.tsx",
         "src/features/graph/JourneyGraph.tsx",
+        "src/features/inventory/PackageResources.tsx",
         "src/lib/validation.ts"
       ]
     },
     {
-      "text": "ليلة",
+      "text": "باقة",
       "count": 5,
       "kinds": [
-        "attr-string",
-        "jsx-text"
+        "jsx-text",
+        "attr-string"
       ],
       "files": [
-        "src/routes/packages.tsx",
-        "src/features/graph/JourneyGraph.tsx",
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
-      "text": "مقترح",
-      "count": 5,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/components/ui/status-pill.tsx",
-        "src/features/panels/panels.tsx",
-        "src/lib/options.ts"
-      ]
-    },
-    {
-      "text": "ملغى",
-      "count": 5,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/components/ui/status-pill.tsx",
-        "src/features/panels/panels.tsx",
-        "src/lib/options.ts"
-      ]
-    },
-    {
-      "text": "أساسية",
-      "count": 4,
-      "kinds": [
-        "literal-string",
-        "jsx-text"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/graph/nodes.tsx",
-        "src/features/graph/PackageGraph.tsx"
+        "src/features/inventory/ContractCard.tsx",
+        "src/features/inspector/Inspector.tsx",
+        "src/features/inventory/CarriersPage.tsx",
+        "src/routes/packages.tsx"
       ]
     },
     {
@@ -230,32 +166,6 @@
       "files": [
         "src/features/inventory/AddHotelWizard.tsx",
         "src/features/inventory/HousingPage.tsx"
-      ]
-    },
-    {
-      "text": "ثلاثية",
-      "count": 4,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/inspector/Inspector.tsx",
-        "src/routes/packages.tsx",
-        "src/features/inventory/PackageResources.tsx"
-      ]
-    },
-    {
-      "text": "ثنائية",
-      "count": 4,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/inspector/Inspector.tsx",
-        "src/routes/packages.tsx",
-        "src/features/inventory/PackageResources.tsx"
       ]
     },
     {
@@ -273,19 +183,6 @@
       ]
     },
     {
-      "text": "رباعية",
-      "count": 4,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/inspector/Inspector.tsx",
-        "src/routes/packages.tsx",
-        "src/features/inventory/PackageResources.tsx"
-      ]
-    },
-    {
       "text": "م",
       "count": 4,
       "kinds": [
@@ -298,28 +195,16 @@
       ]
     },
     {
-      "text": "مكة المكرمة",
-      "count": 4,
-      "kinds": [
-        "literal-string",
-        "attr-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/inventory/HousingPage.tsx"
-      ]
-    },
-    {
       "text": "من",
       "count": 4,
       "kinds": [
-        "jsx-text",
-        "attr-string"
+        "attr-string",
+        "jsx-text"
       ],
       "files": [
+        "src/features/inventory/ContractCard.tsx",
         "src/routes/dashboard.tsx",
         "src/features/inventory/AddFlightWizard.tsx",
-        "src/features/inventory/ContractCard.tsx",
         "src/features/inventory/CarriersPage.tsx"
       ]
     },
@@ -330,84 +215,22 @@
         "template"
       ],
       "files": [
-        "src/routes/packages.tsx",
         "src/features/graph/JourneyGraph.tsx",
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
-      "text": "إثراء الخير",
-      "count": 3,
-      "kinds": [
-        "literal-string",
-        "attr-string"
-      ],
-      "files": [
-        "src/components/NavRail.tsx"
+        "src/features/graph/nodes.tsx",
+        "src/routes/packages.tsx"
       ]
     },
     {
       "text": "إضافة",
       "count": 3,
       "kinds": [
-        "literal-string",
-        "jsx-text"
-      ],
-      "files": [
-        "src/components/ui/form-wizard.tsx",
-        "src/features/panels/panels.tsx",
-        "src/routes/packages.tsx"
-      ]
-    },
-    {
-      "text": "إضافة باقة",
-      "count": 3,
-      "kinds": [
-        "literal-string",
-        "attr-string"
-      ],
-      "files": [
-        "src/features/graph/useNodeMenu.tsx",
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
-      "text": "الاجتماعات والمتطلبات",
-      "count": 3,
-      "kinds": [
-        "attr-string",
+        "jsx-text",
         "literal-string"
       ],
       "files": [
-        "src/routes/routes.tsx",
-        "src/routes/dashboard.tsx",
-        "src/components/NavRail.tsx"
-      ]
-    },
-    {
-      "text": "الأقسام",
-      "count": 3,
-      "kinds": [
-        "attr-string",
-        "jsx-text"
-      ],
-      "files": [
-        "src/routes/dashboard.tsx",
-        "src/components/NavRail.tsx"
-      ]
-    },
-    {
-      "text": "الباقات",
-      "count": 3,
-      "kinds": [
-        "literal-string",
-        "attr-string",
-        "jsx-text"
-      ],
-      "files": [
-        "src/features/graph/useNodeMenu.tsx",
-        "src/routes/packages.tsx",
-        "src/features/graph/nodes.tsx"
+        "src/features/panels/panels.tsx",
+        "src/components/ui/form-wizard.tsx",
+        "src/routes/packages.tsx"
       ]
     },
     {
@@ -430,8 +253,8 @@
         "literal-string"
       ],
       "files": [
-        "src/routes/dashboard.tsx",
         "src/features/panels/panels.tsx",
+        "src/routes/dashboard.tsx",
         "src/routes/packages.tsx"
       ]
     },
@@ -443,8 +266,8 @@
       ],
       "files": [
         "src/features/inspector/Inspector.tsx",
-        "src/routes/packages.tsx",
-        "src/features/inventory/HousingPage.tsx"
+        "src/features/inventory/HousingPage.tsx",
+        "src/routes/packages.tsx"
       ]
     },
     {
@@ -456,7 +279,19 @@
       ],
       "files": [
         "src/features/inspector/Inspector.tsx",
-        "src/routes/packages.tsx",
+        "src/features/inventory/HousingPage.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "المدينة المنورة",
+      "count": 3,
+      "kinds": [
+        "literal-string",
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx",
         "src/features/inventory/HousingPage.tsx"
       ]
     },
@@ -467,8 +302,8 @@
         "attr-string"
       ],
       "files": [
-        "src/features/inventory/AddFlightWizard.tsx",
         "src/features/inventory/ContractCard.tsx",
+        "src/features/inventory/AddFlightWizard.tsx",
         "src/features/inventory/CarriersPage.tsx"
       ]
     },
@@ -485,29 +320,40 @@
       ]
     },
     {
-      "text": "جدول الباقات",
+      "text": "ثلاثية",
       "count": 3,
       "kinds": [
-        "jsx-text",
-        "attr-string",
         "literal-string"
       ],
       "files": [
-        "src/routes/dashboard.tsx",
-        "src/components/NavRail.tsx"
+        "src/features/inspector/Inspector.tsx",
+        "src/features/inventory/PackageResources.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "ثنائية",
+      "count": 3,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/features/inventory/PackageResources.tsx",
+        "src/routes/packages.tsx"
       ]
     },
     {
       "text": "حذف",
       "count": 3,
       "kinds": [
-        "jsx-text",
-        "attr-string"
+        "attr-string",
+        "jsx-text"
       ],
       "files": [
-        "src/routes/packages.tsx",
         "src/features/inventory/ContractCard.tsx",
-        "src/features/inventory/HousingPage.tsx"
+        "src/features/inventory/HousingPage.tsx",
+        "src/routes/packages.tsx"
       ]
     },
     {
@@ -517,9 +363,21 @@
         "attr-string"
       ],
       "files": [
-        "src/routes/packages.tsx",
         "src/features/graph/JourneyGraph.tsx",
-        "src/features/graph/nodes.tsx"
+        "src/features/graph/nodes.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "رباعية",
+      "count": 3,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/features/inventory/PackageResources.tsx",
+        "src/routes/packages.tsx"
       ]
     },
     {
@@ -546,17 +404,6 @@
       ]
     },
     {
-      "text": "فاخرة",
-      "count": 3,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/graph/PackageGraph.tsx"
-      ]
-    },
-    {
       "text": "كتلة ·",
       "count": 3,
       "kinds": [
@@ -569,16 +416,26 @@
       ]
     },
     {
-      "text": "مقاعد الطيران",
+      "text": "ليلة",
       "count": 3,
       "kinds": [
-        "attr-string",
+        "jsx-text",
+        "attr-string"
+      ],
+      "files": [
+        "src/features/graph/JourneyGraph.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "مقترح",
+      "count": 3,
+      "kinds": [
         "literal-string"
       ],
       "files": [
-        "src/routes/dashboard.tsx",
-        "src/lib/options.ts",
-        "src/components/NavRail.tsx"
+        "src/components/ui/status-pill.tsx",
+        "src/features/panels/panels.tsx"
       ]
     },
     {
@@ -590,8 +447,8 @@
       ],
       "files": [
         "src/features/inspector/Inspector.tsx",
-        "src/features/inventory/HousingPage.tsx",
-        "src/features/graph/JourneyGraph.tsx"
+        "src/features/graph/JourneyGraph.tsx",
+        "src/features/inventory/HousingPage.tsx"
       ]
     },
     {
@@ -602,32 +459,20 @@
         "literal-string"
       ],
       "files": [
-        "src/routes/dashboard.tsx",
         "src/features/panels/panels.tsx",
-        "src/features/inspector/Inspector.tsx"
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/dashboard.tsx"
       ]
     },
     {
-      "text": "مميزة",
+      "text": "ملغى",
       "count": 3,
       "kinds": [
         "literal-string"
       ],
       "files": [
-        "src/lib/options.ts",
-        "src/features/graph/PackageGraph.tsx"
-      ]
-    },
-    {
-      "text": "موزَّع",
-      "count": 3,
-      "kinds": [
-        "jsx-text"
-      ],
-      "files": [
-        "src/routes/dashboard.tsx",
-        "src/features/inspector/Inspector.tsx",
-        "src/features/graph/nodes.tsx"
+        "src/components/ui/status-pill.tsx",
+        "src/features/panels/panels.tsx"
       ]
     },
     {
@@ -663,28 +508,6 @@
       ]
     },
     {
-      "text": "`تجاوز ${arNum(-left)}`",
-      "count": 2,
-      "kinds": [
-        "template"
-      ],
-      "files": [
-        "src/features/inspector/Inspector.tsx",
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
-      "text": "`متبقٍ ${arNum(left)}`",
-      "count": 2,
-      "kinds": [
-        "template"
-      ],
-      "files": [
-        "src/features/inspector/Inspector.tsx",
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
       "text": "إجراءات",
       "count": 2,
       "kinds": [
@@ -692,40 +515,6 @@
       ],
       "files": [
         "src/features/inspector/Inspector.tsx"
-      ]
-    },
-    {
-      "text": "أخرى",
-      "count": 2,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/inventory/CarriersPage.tsx"
-      ]
-    },
-    {
-      "text": "أربعة نجوم",
-      "count": 2,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
-      "text": "إضافة إقامة",
-      "count": 2,
-      "kinds": [
-        "literal-string",
-        "attr-string"
-      ],
-      "files": [
-        "src/features/graph/useNodeMenu.tsx",
-        "src/features/graph/nodes.tsx"
       ]
     },
     {
@@ -738,18 +527,6 @@
       "files": [
         "src/features/inventory/CarriersPage.tsx",
         "src/features/inventory/PackageResources.tsx"
-      ]
-    },
-    {
-      "text": "إقامة ·",
-      "count": 2,
-      "kinds": [
-        "attr-string",
-        "jsx-text"
-      ],
-      "files": [
-        "src/routes/packages.tsx",
-        "src/features/graph/nodes.tsx"
       ]
     },
     {
@@ -767,20 +544,20 @@
       "text": "الأساسية",
       "count": 2,
       "kinds": [
-        "attr-string",
-        "literal-string"
+        "literal-string",
+        "attr-string"
       ],
       "files": [
-        "src/routes/dashboard.tsx",
-        "src/features/panels/panels.tsx"
+        "src/features/panels/panels.tsx",
+        "src/routes/dashboard.tsx"
       ]
     },
     {
       "text": "الأسرّة الموقَّعة",
       "count": 2,
       "kinds": [
-        "attr-string",
-        "jsx-text"
+        "jsx-text",
+        "attr-string"
       ],
       "files": [
         "src/features/inventory/TimelineChart.tsx"
@@ -798,14 +575,13 @@
       ]
     },
     {
-      "text": "الإعدادات",
+      "text": "الأقسام",
       "count": 2,
       "kinds": [
-        "attr-string",
-        "literal-string"
+        "attr-string"
       ],
       "files": [
-        "src/routes/routes.tsx",
+        "src/routes/dashboard.tsx",
         "src/components/NavRail.tsx"
       ]
     },
@@ -829,18 +605,6 @@
       "files": [
         "src/features/inventory/AddFlightWizard.tsx",
         "src/features/inventory/CarriersPage.tsx"
-      ]
-    },
-    {
-      "text": "التحقق والرفع",
-      "count": 2,
-      "kinds": [
-        "attr-string",
-        "literal-string"
-      ],
-      "files": [
-        "src/routes/routes.tsx",
-        "src/components/NavRail.tsx"
       ]
     },
     {
@@ -910,39 +674,6 @@
       ]
     },
     {
-      "text": "السكن الانتقالي",
-      "count": 2,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
-      "text": "السكن الأول",
-      "count": 2,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
-      "text": "السكن الثاني",
-      "count": 2,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
       "text": "السنة الميلادية",
       "count": 2,
       "kinds": [
@@ -965,18 +696,6 @@
       ]
     },
     {
-      "text": "الفنادق والمخيمات",
-      "count": 2,
-      "kinds": [
-        "attr-string",
-        "literal-string"
-      ],
-      "files": [
-        "src/routes/dashboard.tsx",
-        "src/components/NavRail.tsx"
-      ]
-    },
-    {
       "text": "الليالي",
       "count": 2,
       "kinds": [
@@ -991,12 +710,12 @@
       "text": "المخطط",
       "count": 2,
       "kinds": [
-        "jsx-text",
-        "attr-string"
+        "attr-string",
+        "jsx-text"
       ],
       "files": [
-        "src/routes/dashboard.tsx",
-        "src/features/panels/panels.tsx"
+        "src/features/panels/panels.tsx",
+        "src/routes/dashboard.tsx"
       ]
     },
     {
@@ -1121,20 +840,20 @@
       "text": "بولمان زمزم مكة",
       "count": 2,
       "kinds": [
-        "attr-string",
-        "literal-string"
+        "literal-string",
+        "attr-string"
       ],
       "files": [
-        "src/features/inventory/AddHotelWizard.tsx",
-        "src/store/season.ts"
+        "src/store/season.ts",
+        "src/features/inventory/AddHotelWizard.tsx"
       ]
     },
     {
       "text": "تجاوز",
       "count": 2,
       "kinds": [
-        "attr-string",
-        "jsx-text"
+        "jsx-text",
+        "attr-string"
       ],
       "files": [
         "src/features/inventory/TimelineChart.tsx"
@@ -1147,20 +866,8 @@
         "attr-string"
       ],
       "files": [
-        "src/routes/dashboard.tsx",
-        "src/features/panels/panels.tsx"
-      ]
-    },
-    {
-      "text": "تكوين الباقات — المخطط",
-      "count": 2,
-      "kinds": [
-        "attr-string",
-        "literal-string"
-      ],
-      "files": [
-        "src/routes/dashboard.tsx",
-        "src/components/NavRail.tsx"
+        "src/features/panels/panels.tsx",
+        "src/routes/dashboard.tsx"
       ]
     },
     {
@@ -1175,25 +882,14 @@
       ]
     },
     {
-      "text": "ثلاثة نجوم",
+      "text": "جدول الباقات",
       "count": 2,
       "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
-      "text": "حاج",
-      "count": 2,
-      "kinds": [
+        "attr-string",
         "jsx-text"
       ],
       "files": [
-        "src/routes/packages.tsx",
-        "src/features/graph/nodes.tsx"
+        "src/routes/dashboard.tsx"
       ]
     },
     {
@@ -1206,17 +902,6 @@
       "files": [
         "src/features/graph/useNodeMenu.tsx",
         "src/features/inspector/Inspector.tsx"
-      ]
-    },
-    {
-      "text": "خمسة نجوم",
-      "count": 2,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/graph/nodes.tsx"
       ]
     },
     {
@@ -1234,8 +919,8 @@
       "text": "سعات الباقات",
       "count": 2,
       "kinds": [
-        "attr-string",
-        "jsx-text"
+        "jsx-text",
+        "attr-string"
       ],
       "files": [
         "src/features/inventory/TimelineChart.tsx"
@@ -1245,12 +930,12 @@
       "text": "عقد",
       "count": 2,
       "kinds": [
-        "attr-string",
-        "jsx-text"
+        "jsx-text",
+        "attr-string"
       ],
       "files": [
-        "src/features/inventory/ContractsTimeline.tsx",
-        "src/features/inventory/ContractCard.tsx"
+        "src/features/inventory/ContractCard.tsx",
+        "src/features/inventory/ContractsTimeline.tsx"
       ]
     },
     {
@@ -1281,17 +966,6 @@
       ],
       "files": [
         "src/features/inventory/HousingPage.tsx"
-      ]
-    },
-    {
-      "text": "كل الأدوار مستخدمة (أول، ثانٍ، انتقالي)",
-      "count": 2,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/routes/packages.tsx",
-        "src/features/graph/nodes.tsx"
       ]
     },
     {
@@ -1328,48 +1002,14 @@
       ]
     },
     {
-      "text": "لوحة المعلومات",
-      "count": 2,
-      "kinds": [
-        "attr-string",
-        "literal-string"
-      ],
-      "files": [
-        "src/routes/dashboard.tsx",
-        "src/components/NavRail.tsx"
-      ]
-    },
-    {
-      "text": "مؤكَّد",
-      "count": 2,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/components/ui/status-pill.tsx",
-        "src/lib/options.ts"
-      ]
-    },
-    {
       "text": "متبقٍ للتوزيع",
       "count": 2,
       "kinds": [
         "attr-string"
       ],
       "files": [
-        "src/routes/dashboard.tsx",
-        "src/features/panels/panels.tsx"
-      ]
-    },
-    {
-      "text": "معالج تكوين الباقات",
-      "count": 2,
-      "kinds": [
-        "attr-string",
-        "jsx-text"
-      ],
-      "files": [
-        "src/routes/routes.tsx"
+        "src/features/panels/panels.tsx",
+        "src/routes/dashboard.tsx"
       ]
     },
     {
@@ -1383,18 +1023,6 @@
       ]
     },
     {
-      "text": "مغادرة",
-      "count": 2,
-      "kinds": [
-        "literal-string",
-        "attr-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/inventory/CarriersPage.tsx"
-      ]
-    },
-    {
       "text": "مقعد وصول مؤكَّد",
       "count": 2,
       "kinds": [
@@ -1405,70 +1033,36 @@
       ]
     },
     {
+      "text": "مكة المكرمة",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "موزَّع",
+      "count": 2,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
       "text": "موزَّع على الباقات",
       "count": 2,
       "kinds": [
         "attr-string"
       ],
       "files": [
-        "src/routes/dashboard.tsx",
-        "src/features/panels/panels.tsx"
-      ]
-    },
-    {
-      "text": "موسم",
-      "count": 2,
-      "kinds": [
-        "attr-string",
-        "jsx-text"
-      ],
-      "files": [
-        "src/routes/dashboard.tsx",
-        "src/components/NavRail.tsx"
-      ]
-    },
-    {
-      "text": "موقَّع",
-      "count": 2,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/components/ui/status-pill.tsx",
-        "src/lib/options.ts"
-      ]
-    },
-    {
-      "text": "نجمة واحدة",
-      "count": 2,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
-      "text": "نجمتان",
-      "count": 2,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
-      "text": "نزل",
-      "count": 2,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/graph/nodes.tsx"
+        "src/features/panels/panels.tsx",
+        "src/routes/dashboard.tsx"
       ]
     },
     {
@@ -1483,18 +1077,6 @@
       ]
     },
     {
-      "text": "وصول",
-      "count": 2,
-      "kinds": [
-        "literal-string",
-        "attr-string"
-      ],
-      "files": [
-        "src/lib/options.ts",
-        "src/features/inventory/CarriersPage.tsx"
-      ]
-    },
-    {
       "text": "— اختر —",
       "count": 1,
       "kinds": [
@@ -1502,26 +1084,6 @@
       ],
       "files": [
         "src/components/ui/select-field.tsx"
-      ]
-    },
-    {
-      "text": "— اختر فندقًا —",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
-      "text": "— باقة",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/features/inspector/Inspector.tsx"
       ]
     },
     {
@@ -1715,16 +1277,6 @@
       ]
     },
     {
-      "text": "`${arNum(packageCount)} باقة`",
-      "count": 1,
-      "kinds": [
-        "template"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
       "text": "`${arNum(pkgs)} باقة على اللوحة`",
       "count": 1,
       "kinds": [
@@ -1815,16 +1367,6 @@
       ]
     },
     {
-      "text": "`${errorCount} خطأ`",
-      "count": 1,
-      "kinds": [
-        "template"
-      ],
-      "files": [
-        "src/components/NavRail.tsx"
-      ]
-    },
-    {
       "text": "`${f.airline_ar || f.airline_en} ${f.flight_no || \"\"} · ${f.flies_on ? dm(f.flies_on) : \"\"} · ${arNum(f.seats)} مقعد`",
       "count": 1,
       "kinds": [
@@ -1832,16 +1374,6 @@
       ],
       "files": [
         "src/features/inventory/PackageResources.tsx"
-      ]
-    },
-    {
-      "text": "`${hotel.city === \"makkah\" ? \"مكة المكرمة\" : \"المدينة المنورة\"} · ${STAR_LABEL[hotel.star_class]}`",
-      "count": 1,
-      "kinds": [
-        "template"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
       ]
     },
     {
@@ -1862,26 +1394,6 @@
       ],
       "files": [
         "src/lib/validation.ts"
-      ]
-    },
-    {
-      "text": "`${ROLE_LABEL[leg.leg.role]} — باقة ${leg.pkg.package_no}`",
-      "count": 1,
-      "kinds": [
-        "template"
-      ],
-      "files": [
-        "src/features/inspector/Inspector.tsx"
-      ]
-    },
-    {
-      "text": "`${ROLE_LABEL[leg.role]} — باقة ${pkg.package_no}`",
-      "count": 1,
-      "kinds": [
-        "template"
-      ],
-      "files": [
-        "src/features/inspector/Inspector.tsx"
       ]
     },
     {
@@ -1922,16 +1434,6 @@
       ],
       "files": [
         "src/lib/validation.ts"
-      ]
-    },
-    {
-      "text": "`إضافة باقة ${data.label}`",
-      "count": 1,
-      "kinds": [
-        "template"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
       ]
     },
     {
@@ -2255,6 +1757,16 @@
       ]
     },
     {
+      "text": "`تجاوز ${arNum(-left)}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
       "text": "`تجاوز ${arNum(used - quota)}`",
       "count": 1,
       "kinds": [
@@ -2285,7 +1797,7 @@
       ]
     },
     {
-      "text": "`حدود ${TIER_LABEL[view.tier]} المعتمدة: ${arNum(bounds.min_sar ?? 0)} – ${bounds.max_sar != null ? arNum(bounds.max_sar) : \"—\"}`",
+      "text": "`حدود ${tierLabel(view.tier)} المعتمدة: ${arNum(bounds.min_sar ?? 0)} – ${bounds.max_sar != null ? arNum(bounds.max_sar) : \"—\"}`",
       "count": 1,
       "kinds": [
         "template"
@@ -2475,6 +1987,16 @@
       ]
     },
     {
+      "text": "`متبقٍ ${arNum(left)}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
       "text": "`متبقٍ ${arNum(quota - used)}`",
       "count": 1,
       "kinds": [
@@ -2515,16 +2037,6 @@
       ]
     },
     {
-      "text": "`موسم ${snap.season.year_hijri}هـ — ${snap.season.year_gregorian}م · نظرة عامة على الحصة والتقدم والجاهزية.`",
-      "count": 1,
-      "kinds": [
-        "template"
-      ],
-      "files": [
-        "src/routes/dashboard.tsx"
-      ]
-    },
-    {
       "text": "`موسم ${snap.season.year_hijri}هـ — ${snap.season.year_gregorian}م`",
       "count": 1,
       "kinds": [
@@ -2562,6 +2074,16 @@
       ],
       "files": [
         "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "إثراء الخير",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/components/NavRail.tsx"
       ]
     },
     {
@@ -2635,6 +2157,16 @@
       ]
     },
     {
+      "text": "أخرى",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
       "text": "أخطاء تمنع الرفع",
       "count": 1,
       "kinds": [
@@ -2642,16 +2174,6 @@
       ],
       "files": [
         "src/features/panels/panels.tsx"
-      ]
-    },
-    {
-      "text": "إدارة باقات الموسم وتوزيع الحصة المعتمدة.",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/routes/packages.tsx"
       ]
     },
     {
@@ -2672,6 +2194,16 @@
       ],
       "files": [
         "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "أساسية",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/PackageGraph.tsx"
       ]
     },
     {
@@ -2725,6 +2257,16 @@
       ]
     },
     {
+      "text": "إضافة إقامة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
       "text": "إضافة الفندق",
       "count": 1,
       "kinds": [
@@ -2742,6 +2284,16 @@
       ],
       "files": [
         "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "إضافة باقة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
       ]
     },
     {
@@ -2885,6 +2437,16 @@
       ]
     },
     {
+      "text": "إقامة ·",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
       "text": "إقامة في الباقات",
       "count": 1,
       "kinds": [
@@ -2905,13 +2467,13 @@
       ]
     },
     {
-      "text": "الأخطاء المانعة للرفع إلى نسك والتنبيهات المستوجبة للمراجعة.",
+      "text": "الاجتماعات والمتطلبات",
       "count": 1,
       "kinds": [
         "attr-string"
       ],
       "files": [
-        "src/routes/routes.tsx"
+        "src/routes/dashboard.tsx"
       ]
     },
     {
@@ -2995,6 +2557,16 @@
       ]
     },
     {
+      "text": "الباقات",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
       "text": "الباقات الأساسية (الاقتصادية) من إجمالي الحصة المخصصة.",
       "count": 1,
       "kinds": [
@@ -3052,16 +2624,6 @@
       ],
       "files": [
         "src/features/panels/panels.tsx"
-      ]
-    },
-    {
-      "text": "التسكين والتوفّر",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
       ]
     },
     {
@@ -3135,16 +2697,6 @@
       ]
     },
     {
-      "text": "الحصة الإجمالية",
-      "count": 1,
-      "kinds": [
-        "jsx-text"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
       "text": "الحصة المعتمدة (حاج)",
       "count": 1,
       "kinds": [
@@ -3162,16 +2714,6 @@
       ],
       "files": [
         "src/routes/packages.tsx"
-      ]
-    },
-    {
-      "text": "الحصة والضوابط",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
       ]
     },
     {
@@ -3225,16 +2767,6 @@
       ]
     },
     {
-      "text": "السكن",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/features/inventory/HousingPage.tsx"
-      ]
-    },
-    {
       "text": "السنة والحصة المعتمدة من الوزارة.",
       "count": 1,
       "kinds": [
@@ -3262,16 +2794,6 @@
       ],
       "files": [
         "src/features/inspector/Inspector.tsx"
-      ]
-    },
-    {
-      "text": "الطيران",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/features/inventory/CarriersPage.tsx"
       ]
     },
     {
@@ -3365,13 +2887,13 @@
       ]
     },
     {
-      "text": "الفنادق وعقود السكن وسعاتها مقابل سعات الباقات.",
+      "text": "الفنادق والمخيمات",
       "count": 1,
       "kinds": [
         "attr-string"
       ],
       "files": [
-        "src/features/inventory/HousingPage.tsx"
+        "src/routes/dashboard.tsx"
       ]
     },
     {
@@ -3445,16 +2967,6 @@
       ]
     },
     {
-      "text": "المسارات والإقامات",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
-      ]
-    },
-    {
       "text": "المعتمدة:",
       "count": 1,
       "kinds": [
@@ -3515,26 +3027,6 @@
       ]
     },
     {
-      "text": "الموسم، المخطط، والتخزين.",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/routes/routes.tsx"
-      ]
-    },
-    {
-      "text": "الناقلات وكتل المقاعد المتعاقد عليها، وصولًا ومغادرة.",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/features/inventory/CarriersPage.tsx"
-      ]
-    },
-    {
       "text": "النتائج",
       "count": 1,
       "kinds": [
@@ -3562,26 +3054,6 @@
       ],
       "files": [
         "src/routes/packages.tsx"
-      ]
-    },
-    {
-      "text": "انتقالي (مكة)",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
-      ]
-    },
-    {
-      "text": "انتقالية",
-      "count": 1,
-      "kinds": [
-        "jsx-text"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
       ]
     },
     {
@@ -3655,16 +3127,6 @@
       ]
     },
     {
-      "text": "بدون إقامات",
-      "count": 1,
-      "kinds": [
-        "jsx-text"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
       "text": "بدون رقم",
       "count": 1,
       "kinds": [
@@ -3672,16 +3134,6 @@
       ],
       "files": [
         "src/features/inventory/ContractsTimeline.tsx"
-      ]
-    },
-    {
-      "text": "بدون سعر",
-      "count": 1,
-      "kinds": [
-        "jsx-text"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
       ]
     },
     {
@@ -3712,16 +3164,6 @@
       ],
       "files": [
         "src/routes/packages.tsx"
-      ]
-    },
-    {
-      "text": "بيانات الباقات",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
       ]
     },
     {
@@ -3905,13 +3347,13 @@
       ]
     },
     {
-      "text": "تكوين الباقات",
+      "text": "تكوين الباقات — المخطط",
       "count": 1,
       "kinds": [
         "attr-string"
       ],
       "files": [
-        "src/routes/routes.tsx"
+        "src/routes/dashboard.tsx"
       ]
     },
     {
@@ -3966,6 +3408,16 @@
     },
     {
       "text": "جاهزية",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "حاج",
       "count": 1,
       "kinds": [
         "jsx-text"
@@ -4125,16 +3577,6 @@
       ]
     },
     {
-      "text": "خطأ",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/components/NavRail.tsx"
-      ]
-    },
-    {
       "text": "خطأ،",
       "count": 1,
       "kinds": [
@@ -4215,26 +3657,6 @@
       ]
     },
     {
-      "text": "رحلات مجموعات",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
-      ]
-    },
-    {
-      "text": "رحلات GDS",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
-      ]
-    },
-    {
       "text": "رحلة الحاج — باقة",
       "count": 1,
       "kinds": [
@@ -4262,16 +3684,6 @@
       ],
       "files": [
         "src/features/inventory/ContractCard.tsx"
-      ]
-    },
-    {
-      "text": "سحب العقدة يثبّت موضعها · النقر المزدوج يعيدها إلى الترتيب التلقائي",
-      "count": 1,
-      "kinds": [
-        "jsx-text"
-      ],
-      "files": [
-        "src/routes/routes.tsx"
       ]
     },
     {
@@ -4355,16 +3767,6 @@
       ]
     },
     {
-      "text": "طيّ الإقامات",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
       "text": "عدد الليالي",
       "count": 1,
       "kinds": [
@@ -4382,26 +3784,6 @@
       ],
       "files": [
         "src/features/inventory/AddFlightWizard.tsx"
-      ]
-    },
-    {
-      "text": "عرض الإقامات",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
-      "text": "عرض الباقات وإقاماتها على المخطط.",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/routes/routes.tsx"
       ]
     },
     {
@@ -4455,16 +3837,6 @@
       ]
     },
     {
-      "text": "عقود السكن",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
-      ]
-    },
-    {
       "text": "عقود السكن ومقاعد الطيران المخصصة لهذه الباقة.",
       "count": 1,
       "kinds": [
@@ -4505,26 +3877,6 @@
       ]
     },
     {
-      "text": "غير متاح",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
-      ]
-    },
-    {
-      "text": "فئة",
-      "count": 1,
-      "kinds": [
-        "jsx-text"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
-      ]
-    },
-    {
       "text": "فئة مستقلة عن تصنيف النجوم.",
       "count": 1,
       "kinds": [
@@ -4535,6 +3887,16 @@
       ]
     },
     {
+      "text": "فاخرة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/PackageGraph.tsx"
+      ]
+    },
+    {
       "text": "فاخرة+مميزة ≤٤٠٪",
       "count": 1,
       "kinds": [
@@ -4542,16 +3904,6 @@
       ],
       "files": [
         "src/routes/packages.tsx"
-      ]
-    },
-    {
-      "text": "فتح القائمة",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/components/NavRail.tsx"
       ]
     },
     {
@@ -4665,6 +4017,16 @@
       ]
     },
     {
+      "text": "كل الأدوار مستخدمة (أول، ثانٍ، انتقالي)",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
       "text": "كما يظهر في نسك، إن وُجد.",
       "count": 1,
       "kinds": [
@@ -4742,16 +4104,6 @@
       ],
       "files": [
         "src/routes/dashboard.tsx"
-      ]
-    },
-    {
-      "text": "لا توجد باقات بعد",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
       ]
     },
     {
@@ -5025,16 +4377,6 @@
       ]
     },
     {
-      "text": "م · نظرة عامة على الحصة والتقدم والجاهزية.",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/routes/dashboard.tsx"
-      ]
-    },
-    {
       "text": "ما يظهر على الشاشة أثناء الاجتماعات.",
       "count": 1,
       "kinds": [
@@ -5045,13 +4387,13 @@
       ]
     },
     {
-      "text": "متاح للبيع",
+      "text": "مؤكَّد",
       "count": 1,
       "kinds": [
         "literal-string"
       ],
       "files": [
-        "src/lib/options.ts"
+        "src/components/ui/status-pill.tsx"
       ]
     },
     {
@@ -5062,16 +4404,6 @@
       ],
       "files": [
         "src/routes/dashboard.tsx"
-      ]
-    },
-    {
-      "text": "متطلبات وزارة الحج والعمرة والفريق؛ يُطبَّق المعتمد منها على التحقق قبل الرفع.",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/routes/routes.tsx"
       ]
     },
     {
@@ -5092,16 +4424,6 @@
       ],
       "files": [
         "src/features/inventory/CarriersPage.tsx"
-      ]
-    },
-    {
-      "text": "مثبَّت — لن تحركه إعادة الترتيب. انقر مرتين لفكّ التثبيت.",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/features/graph/nodes.tsx"
       ]
     },
     {
@@ -5175,36 +4497,6 @@
       ]
     },
     {
-      "text": "مرفوضة",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
-      ]
-    },
-    {
-      "text": "مرفوعة",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
-      ]
-    },
-    {
-      "text": "مسودة",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
-      ]
-    },
-    {
       "text": "مصدرها اجتماعات وزارة الحج والعمرة، وتُدار من صفحة «الاجتماعات والمتطلبات».",
       "count": 1,
       "kinds": [
@@ -5235,16 +4527,6 @@
       ]
     },
     {
-      "text": "معتمدة",
-      "count": 1,
-      "kinds": [
-        "literal-string"
-      ],
-      "files": [
-        "src/lib/options.ts"
-      ]
-    },
-    {
       "text": "معرّف نسك",
       "count": 1,
       "kinds": [
@@ -5255,6 +4537,16 @@
       ]
     },
     {
+      "text": "مغادرة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
       "text": "مغادرة مؤكَّدة",
       "count": 1,
       "kinds": [
@@ -5262,6 +4554,16 @@
       ],
       "files": [
         "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "مقاعد الطيران",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
       ]
     },
     {
@@ -5295,6 +4597,16 @@
       ]
     },
     {
+      "text": "مميزة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/PackageGraph.tsx"
+      ]
+    },
+    {
       "text": "موارد",
       "count": 1,
       "kinds": [
@@ -5302,6 +4614,16 @@
       ],
       "files": [
         "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "موقَّع",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/components/ui/status-pill.tsx"
       ]
     },
     {
@@ -5445,26 +4767,6 @@
       ]
     },
     {
-      "text": "هـ",
-      "count": 1,
-      "kinds": [
-        "jsx-text"
-      ],
-      "files": [
-        "src/components/NavRail.tsx"
-      ]
-    },
-    {
-      "text": "هـ —",
-      "count": 1,
-      "kinds": [
-        "attr-string"
-      ],
-      "files": [
-        "src/routes/dashboard.tsx"
-      ]
-    },
-    {
       "text": "هيلتون المدينة",
       "count": 1,
       "kinds": [
@@ -5472,6 +4774,16 @@
       ],
       "files": [
         "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "وصول",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
       ]
     },
     {

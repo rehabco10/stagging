@@ -62,6 +62,35 @@
     "nights": "{n, plural, one {# night} other {# nights}}",
     "pinned_hint": "Pinned — re-layout leaves it alone. Double-click to unpin."
   },
+  "status": {
+    "signed": "Signed",
+    "confirmed": "Confirmed",
+    "proposed": "Proposed",
+    "cancelled": "Cancelled"
+  },
+  "units": {
+    "_note": "n is a PRE-FORMATTED string (arNum) so grouping stays ours; count is the raw number, for plural selection only.",
+    "seat": "seat",
+    "seats": "{count, plural, one {{n} seat} other {{n} seats}}",
+    "bed": "bed",
+    "beds": "{count, plural, one {{n} bed} other {{n} beds}}",
+    "package": "package",
+    "packages": "{count, plural, one {{n} package} other {{n} packages}}",
+    "pilgrim": "pilgrims",
+    "pilgrims": "{count, plural, one {{n} pilgrim} other {{n} pilgrims}}",
+    "night": "night",
+    "nights": "{count, plural, one {{n} night} other {{n} nights}}",
+    "block": "block",
+    "blocks": "{count, plural, one {{n} block} other {{n} blocks}}",
+    "contract": "contract",
+    "contracts": "{count, plural, one {{n} contract} other {{n} contracts}}",
+    "stay": "stay",
+    "stays": "{count, plural, one {{n} stay} other {{n} stays}}",
+    "hotel": "hotel",
+    "hotels": "{count, plural, one {{n} hotel} other {{n} hotels}}",
+    "readiness": "Ready {done}/{total}",
+    "grade": "Grade {grade}"
+  },
   "tier": {
     "luxury": "Luxury",
     "premium": "Premium",

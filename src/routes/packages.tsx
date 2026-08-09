@@ -251,6 +251,7 @@ function MasterRow({
   errors: number
   onSelect: () => void
 }) {
+  const { t } = useTranslation()
   const dots = readinessDots(pkg)
   const done = dots.filter((d) => d.ok).length
   return (
@@ -288,7 +289,10 @@ function MasterRow({
           <ChevronLeft className="size-4 shrink-0 text-muted-foreground/50 lg:hidden" />
         </div>
         <div className="mt-1 text-[11px] tabular-nums text-muted-foreground">
-          {tierLabel(pkg.tier)} · <b className="font-semibold text-foreground/80">{arNum(pkg.capacity)} حاج</b>
+          {tierLabel(pkg.tier)} ·{" "}
+          <b className="font-semibold text-foreground/80">
+            {t("units.pilgrims", { n: arNum(pkg.capacity), count: pkg.capacity })}
+          </b>
           {pkg.initial_price_sar > 0 && (
             <>
               {" "}
@@ -312,7 +316,7 @@ function MasterRow({
             />
           ))}
           <span className="text-[10px] tabular-nums text-muted-foreground">
-            جاهزية {arNum(done)}/{arNum(dots.length)}
+            {t("units.readiness", { done: arNum(done), total: arNum(dots.length) })}
           </span>
         </div>
       </button>
