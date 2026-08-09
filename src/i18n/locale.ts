@@ -43,23 +43,9 @@ export function withLocale(path: string, locale: Locale): string {
   return prefixed === "" ? "/" : prefixed
 }
 
-/* ── remembered preference ──────────────────────────────────────── */
-
-const STORAGE_KEY = "hpw-locale"
-
-export function storedLocale(): Locale | null {
-  try {
-    const v = localStorage.getItem(STORAGE_KEY)
-    return v && isLocale(v) ? v : null
-  } catch {
-    return null
-  }
-}
-
-export function rememberLocale(locale: Locale): void {
-  try {
-    localStorage.setItem(STORAGE_KEY, locale)
-  } catch {
-    /* private mode — the prefix in the URL still carries the choice */
-  }
-}
+/*
+ * No stored preference on purpose: the prefix in the URL is the only source
+ * of truth for the language, so a link always opens in the language it was
+ * shared in. See `useSwitchLocale` for the reasoning the screenshot matrix
+ * forced.
+ */

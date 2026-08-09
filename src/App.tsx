@@ -2,7 +2,7 @@ import { NuqsAdapter } from "nuqs/adapters/react-router/v7"
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom"
 
 import { Navigation } from "@/components/NavRail"
-import { LocaleProvider, RootLocaleRedirect } from "@/i18n/LocaleProvider"
+import { LocaleProvider } from "@/i18n/LocaleProvider"
 import type { Locale } from "@/i18n/locale"
 import { DashboardPage } from "@/routes/dashboard"
 import { PackagesPage } from "@/routes/packages"
@@ -53,18 +53,16 @@ export default function App() {
     // Mount under whatever `base` this build was made for ("/" or "/stagging/").
     <BrowserRouter basename={import.meta.env.BASE_URL}>
       <NuqsAdapter>
-        <RootLocaleRedirect>
-          <Routes>
-            <Route path="/" element={<LocaleShell locale="ar" />}>
-              {sections("ar")}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Route>
-            <Route path="/en" element={<LocaleShell locale="en" />}>
-              {sections("en")}
-              <Route path="*" element={<Navigate to="/en" replace />} />
-            </Route>
-          </Routes>
-        </RootLocaleRedirect>
+        <Routes>
+          <Route path="/" element={<LocaleShell locale="ar" />}>
+            {sections("ar")}
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Route>
+          <Route path="/en" element={<LocaleShell locale="en" />}>
+            {sections("en")}
+            <Route path="*" element={<Navigate to="/en" replace />} />
+          </Route>
+        </Routes>
       </NuqsAdapter>
     </BrowserRouter>
   )
