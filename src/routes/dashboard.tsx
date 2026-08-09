@@ -76,8 +76,8 @@ export function DashboardPage() {
         {/* ── hero: quota progress + tier mix ─────────────────────── */}
         <Card
           className="lg:col-span-7"
-          title="تقدّم توزيع الحصة"
-          description="مجموع سعات الباقات مقابل الحصة المعتمدة."
+          title={t("dashboard.quota_progress")}
+          description={t("dashboard.quota_progress_desc")}
         >
           <div className="h-3 w-full overflow-hidden rounded-full bg-surface-sunken">
             <div
@@ -89,10 +89,7 @@ export function DashboardPage() {
             />
           </div>
           <div className="mt-2 flex items-center justify-between text-[11px] tabular-nums text-muted-foreground">
-            <span>
-              موزَّع <b className="font-semibold text-foreground">{arNum(used)}</b> من{" "}
-              {arNum(quota)}
-            </span>
+            <span>{t("dashboard.allocated_of", { used: arNum(used), quota: arNum(quota) })}</span>
             <span className={cn("font-semibold", over && "text-[color:var(--brand-rose-deep)]")}>
               {usedPct.toFixed(1)}%
             </span>
@@ -100,11 +97,16 @@ export function DashboardPage() {
 
           {pkgs > 0 && (
             <div className="mt-4 space-y-3 border-t border-surface-line pt-3">
-              <MixBar label="الأساسية" pct={stdPct} boundLabel="حد أدنى 60%" ok={stdPct >= 60} />
               <MixBar
-                label="الفاخرة والمميزة"
+                label={t("dashboard.standard")}
+                pct={stdPct}
+                boundLabel={t("dashboard.min_bound", { pct: 60 })}
+                ok={stdPct >= 60}
+              />
+              <MixBar
+                label={t("dashboard.premium_luxury")}
                 pct={premPct}
-                boundLabel="حد أعلى 40%"
+                boundLabel={t("dashboard.max_bound", { pct: 40 })}
                 ok={premPct <= 40}
               />
             </div>
@@ -113,22 +115,31 @@ export function DashboardPage() {
 
         {/* ── stat tiles + readiness ──────────────────────────────── */}
         <div className="grid grid-cols-2 gap-4 lg:col-span-5">
-          <Stat value={arNum(quota)} label="الحصة المعتمدة (حاج)" />
-          <Stat value={arNum(used)} label="موزَّع على الباقات" />
+          <Stat value={arNum(quota)} label={t("dashboard.quota_approved")} />
+          <Stat value={arNum(used)} label={t("dashboard.allocated_label")} />
           <Stat
-            value={left === 0 ? "مكتمل" : arNum(Math.abs(left))}
-            label={left === 0 ? "الحصة مستوفاة" : over ? "تجاوز الحصة" : "متبقٍ للتوزيع"}
+            value={left === 0 ? t("dashboard.complete") : arNum(Math.abs(left))}
+            label={
+              left === 0
+                ? t("dashboard.quota_met")
+                : over
+                  ? t("dashboard.quota_over")
+                  : t("dashboard.quota_left")
+            }
             tone={left === 0 ? "good" : over ? "bad" : "neutral"}
           />
-          <Stat value={arNum(pkgs)} label={`باقة · ${arNum(withLegs)} لها إقامات`} />
+          <Stat
+            value={arNum(pkgs)}
+            label={t("dashboard.packages_with_legs", { n: arNum(withLegs) })}
+          />
           <Stat
             value={arNum(signedBeds)}
-            label="سرير متعاقد عليه (ذروة الليلة)"
+            label={t("dashboard.beds_peak")}
             tone={signedBeds >= quota ? "good" : "neutral"}
           />
           <Stat
             value={arNum(arrivalSeats)}
-            label="مقعد وصول مؤكَّد"
+            label={t("dashboard.arrival_seats")}
             tone={arrivalSeats >= quota ? "good" : "neutral"}
           />
 
@@ -156,7 +167,9 @@ export function DashboardPage() {
                     : "text-[color:var(--brand-rose-deep)]",
                 )}
               >
-                {errors === 0 ? "لا أخطاء تمنع الرفع" : `${arNum(errors)} خطأ يمنع الرفع`}
+                {errors === 0
+                  ? t("dashboard.no_blocking_errors")
+                  : t("dashboard.blocking_errors", { n: errors })}
               </span>
               <span
                 className={cn(
@@ -166,7 +179,9 @@ export function DashboardPage() {
                     : "text-[color:var(--brand-rose-deep)]/80",
                 )}
               >
-                {warnings === 0 ? "لا تنبيهات" : `${arNum(warnings)} تنبيه`} · افتح التحقق والرفع
+                {warnings === 0 ? t("dashboard.no_warnings") : t("dashboard.warnings", { n: warnings })}
+                {" · "}
+                {t("dashboard.open_validation")}
               </span>
             </span>
             <ArrowLeft className="ms-auto size-4 shrink-0 text-muted-foreground" />
@@ -174,40 +189,53 @@ export function DashboardPage() {
         </div>
 
         {/* ── sections ────────────────────────────────────────────── */}
-        <Card className="lg:col-span-7" title="الأقسام" bodyClassName="p-3">
+        <Card className="lg:col-span-7" title={t("dashboard.sections")} bodyClassName="p-3">
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             <SectionTile
               to="/canvas"
               icon={Network}
-              title="تكوين الباقات — المخطط"
-              sub={pkgs === 0 ? "لا باقات بعد" : `${arNum(pkgs)} باقة على اللوحة`}
+              title={t("nav.canvas")}
+              sub={
+                pkgs === 0
+                  ? t("dashboard.no_packages_yet")
+                  : t("dashboard.canvas_sub", { n: pkgs })
+              }
             />
             <SectionTile
               to="/packages"
               icon={Table2}
-              title="جدول الباقات"
-              sub="بيانات الباقات في جداول قابلة للتحرير"
+              title={t("nav.packages")}
+              sub={t("dashboard.packages_sub")}
             />
             <SectionTile
               to="/requirements"
               icon={ClipboardList}
-              title="الاجتماعات والمتطلبات"
-              sub={`${arNum(agreed)} متطلب معتمد من ${arNum(snap.requirements.length)}`}
+              title={t("nav.requirements")}
+              sub={t("dashboard.requirements_sub", {
+                agreed: arNum(agreed),
+                total: arNum(snap.requirements.length),
+              })}
             />
             <SectionTile
               to="/hotels"
               icon={Building2}
-              title="الفنادق والمخيمات"
-              sub={`${arNum(snap.hotels.length)} فندق · ${arNum(snap.contracts.length)} عقد سكن`}
+              title={t("nav.hotels")}
+              sub={t("dashboard.hotels_sub", {
+                hotels: arNum(snap.hotels.length),
+                contracts: arNum(snap.contracts.length),
+              })}
             />
             <SectionTile
               to="/flights"
               icon={Plane}
-              title="مقاعد الطيران"
+              title={t("nav.flights")}
               sub={
                 snap.flightBlocks.length === 0
-                  ? "لا كتل مقاعد بعد"
-                  : `${arNum(snap.flightBlocks.length)} كتلة · ${arNum(arrivalSeats)} مقعد وصول مؤكَّد`
+                  ? t("dashboard.no_blocks_yet")
+                  : t("dashboard.flights_sub", {
+                      blocks: arNum(snap.flightBlocks.length),
+                      seats: arNum(arrivalSeats),
+                    })
               }
             />
           </div>
@@ -217,25 +245,25 @@ export function DashboardPage() {
         <div className="lg:col-span-5">
           {pkgs === 0 ? (
             <Note tone="brand">
-              لا توجد باقات — تُنشأ من{" "}
+              {t("dashboard.empty_hint_before")}{" "}
               <Link to="/canvas" className="font-semibold underline underline-offset-2">
-                المخطط
+                {t("page.canvas")}
               </Link>{" "}
-              أو من{" "}
+              {t("dashboard.empty_hint_or")}{" "}
               <Link to="/packages" className="font-semibold underline underline-offset-2">
-                جدول الباقات
+                {t("nav.packages")}
               </Link>
               .
             </Note>
           ) : preview.length > 0 ? (
             <Card
-              title="أحدث الملاحظات"
+              title={t("dashboard.latest_issues")}
               actions={
                 <Link
                   to="/validation"
                   className="inline-flex items-center gap-1 text-[11px] font-semibold text-[color:var(--brand-teal-deep)] hover:underline"
                 >
-                  عرض الكل ({arNum(issues.length)})
+                  {t("dashboard.view_all", { n: arNum(issues.length) })}
                   <ArrowLeft className="size-3" />
                 </Link>
               }
@@ -260,7 +288,7 @@ export function DashboardPage() {
             </Card>
           ) : (
             <Note tone="brand" icon={<ShieldCheck className="size-3.5" />}>
-              لا ملاحظات — الموسم مطابق للضوابط.
+              {t("dashboard.no_issues")}
             </Note>
           )}
         </div>

@@ -2,12 +2,12 @@
   "perPage": [
     {
       "page": "dashboard",
-      "untranslated": 40,
+      "untranslated": 5,
       "dataNames": 0
     },
     {
       "page": "canvas",
-      "untranslated": 6,
+      "untranslated": 3,
       "dataNames": 0
     },
     {
@@ -51,13 +51,12 @@
       "dataNames": 0
     }
   ],
-  "distinct": 262,
+  "distinct": 234,
   "strings": [
     {
       "text": "باقة",
-      "count": 102,
+      "count": 101,
       "pages": [
-        "dashboard",
         "journey",
         "hotel-detail",
         "flights"
@@ -213,15 +212,6 @@
       ]
     },
     {
-      "text": "فندق",
-      "count": 5,
-      "pages": [
-        "dashboard",
-        "hotels",
-        "hotel-detail"
-      ]
-    },
-    {
       "text": "ليلة",
       "count": 5,
       "pages": [
@@ -239,32 +229,6 @@
         "hotels",
         "hotel-detail",
         "flights"
-      ]
-    },
-    {
-      "text": "من",
-      "count": 4,
-      "pages": [
-        "dashboard",
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "الحصة مستوفاة",
-      "count": 4,
-      "pages": [
-        "dashboard",
-        "packages",
-        "package-detail",
-        "settings"
-      ]
-    },
-    {
-      "text": "تنبيه",
-      "count": 4,
-      "pages": [
-        "dashboard",
-        "validation"
       ]
     },
     {
@@ -320,6 +284,14 @@
       ]
     },
     {
+      "text": "فندق",
+      "count": 4,
+      "pages": [
+        "hotels",
+        "hotel-detail"
+      ]
+    },
+    {
       "text": "المدينة المنورة",
       "count": 4,
       "pages": [
@@ -356,12 +328,12 @@
       ]
     },
     {
-      "text": "باقة جديدة",
+      "text": "الحصة مستوفاة",
       "count": 3,
       "pages": [
-        "canvas",
         "packages",
-        "package-detail"
+        "package-detail",
+        "settings"
       ]
     },
     {
@@ -391,6 +363,13 @@
     },
     {
       "text": "رقم العقد",
+      "count": 3,
+      "pages": [
+        "hotel-detail"
+      ]
+    },
+    {
+      "text": "من",
       "count": 3,
       "pages": [
         "hotel-detail"
@@ -446,34 +425,10 @@
       ]
     },
     {
-      "text": "موزَّع على الباقات",
-      "count": 2,
+      "text": "تنبيه",
+      "count": 3,
       "pages": [
-        "dashboard",
-        "settings"
-      ]
-    },
-    {
-      "text": "مكتمل",
-      "count": 2,
-      "pages": [
-        "dashboard",
-        "settings"
-      ]
-    },
-    {
-      "text": "مقعد وصول مؤكَّد",
-      "count": 2,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "المخطط",
-      "count": 2,
-      "pages": [
-        "dashboard",
-        "settings"
+        "validation"
       ]
     },
     {
@@ -514,6 +469,14 @@
       "pages": [
         "dashboard",
         "validation"
+      ]
+    },
+    {
+      "text": "باقة جديدة",
+      "count": 2,
+      "pages": [
+        "packages",
+        "package-detail"
       ]
     },
     {
@@ -1077,195 +1040,6 @@
       "count": 2,
       "pages": [
         "validation"
-      ]
-    },
-    {
-      "text": "تقدّم توزيع الحصة",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "مجموع سعات الباقات مقابل الحصة المعتمدة.",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "موزَّع",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "الأساسية",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "حد أدنى 60%",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "الفاخرة والمميزة",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "حد أعلى 40%",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "الحصة المعتمدة (حاج)",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "لها إقامات",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "سرير متعاقد عليه (ذروة الليلة)",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "خطأ يمنع الرفع",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "افتح التحقق والرفع",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "الأقسام",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "تكوين الباقات",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "باقة على اللوحة",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "جدول الباقات",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "بيانات الباقات في جداول قابلة للتحرير",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "الاجتماعات والمتطلبات",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "متطلب معتمد من 2",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "الفنادق والمخيمات",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "عقد سكن",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "مقاعد الطيران",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "كتلة",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "أحدث الملاحظات",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "عرض الكل (",
-      "count": 1,
-      "pages": [
-        "dashboard"
-      ]
-    },
-    {
-      "text": "ملء الشاشة",
-      "count": 1,
-      "pages": [
-        "canvas"
-      ]
-    },
-    {
-      "text": "فكّ التثبيت",
-      "count": 1,
-      "pages": [
-        "canvas"
       ]
     },
     {
@@ -1956,6 +1730,27 @@
     },
     {
       "text": "نهاية الموسم",
+      "count": 1,
+      "pages": [
+        "settings"
+      ]
+    },
+    {
+      "text": "موزَّع على الباقات",
+      "count": 1,
+      "pages": [
+        "settings"
+      ]
+    },
+    {
+      "text": "مكتمل",
+      "count": 1,
+      "pages": [
+        "settings"
+      ]
+    },
+    {
+      "text": "المخطط",
       "count": 1,
       "pages": [
         "settings"
