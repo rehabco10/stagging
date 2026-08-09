@@ -1,35 +1,34 @@
 import { DayPicker, type DayPickerProps } from "react-day-picker"
-import { arSA } from "date-fns/locale"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
+import { useLocale } from "@/i18n/LocaleProvider"
+import { LOCALE_DIR } from "@/i18n/locale"
+import { formats } from "@/lib/intl"
 import { cn } from "@/lib/utils"
-
-const WEEKDAY_NARROW = new Intl.DateTimeFormat("ar-SA-u-ca-gregory-nu-latn", {
-  weekday: "narrow",
-})
 
 /**
  * shadcn-style Calendar on React DayPicker (the shadcn base date-picker
  * recipe: Popover + Calendar, no DatePicker root primitive).
  *
- * Locale notes: date-fns' arSA gives Arabic month/weekday names with Latin
- * digits (date-fns never localises digits — exactly the app's rule), and
- * DayPicker is Gregorian-only, which matches the wizard's supply data.
+ * Locale notes: month and weekday names come from date-fns via @/lib/intl
+ * (arSA / enUS — date-fns never localises digits, exactly the app's rule),
+ * and DayPicker is Gregorian-only, which matches the wizard's supply data.
  * The KSA week runs Sunday–Saturday, so weekStartsOn is pinned rather than
  * inherited from the locale.
  */
 export function Calendar({ className, classNames, ...props }: DayPickerProps) {
+  const locale = useLocale()
   return (
     <DayPicker
-      dir="rtl"
-      locale={arSA}
+      dir={LOCALE_DIR[locale]}
+      locale={formats().dateFns}
       weekStartsOn={0}
       showOutsideDays
       fixedWeeks
       formatters={{
         // arSA's weekday names are full words that collide in a 32px cell —
         // narrow initials (ح ن ث ر خ ج س) fit every grid density.
-        formatWeekdayName: (day) => WEEKDAY_NARROW.format(day),
+        formatWeekdayName: (day) => formats().weekdayNarrow.format(day),
       }}
       components={{
         Chevron: ({ orientation, ...rest }) =>

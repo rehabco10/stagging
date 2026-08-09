@@ -1,9 +1,10 @@
 import { useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useSnapshot } from "valtio"
 import { ChevronLeft, Copy, Package as PackageIcon, Plus, Trash2, TriangleAlert } from "lucide-react"
 
 import { BalanceStrip } from "@/components/BalanceStrip"
+import { useLocaleNavigate } from "@/i18n/LocaleProvider"
 import { MasterDetail } from "@/components/MasterDetail"
 import { Card, Note, PageHeader } from "@/components/PageShell"
 import { MASTER_DETAIL_WIDE_QUERY, useMediaQuery } from "@/hooks/use-media-query"
@@ -55,7 +56,7 @@ const TH = "px-2.5 py-2 text-start text-[11px] font-semibold text-muted-foregrou
  */
 export function PackagesPage() {
   const { pkgId } = useParams()
-  const navigate = useNavigate()
+  const navigate = useLocaleNavigate()
   const snap = useSnapshot(state)
   const issues = useIssues()
   const wide = useMediaQuery(MASTER_DETAIL_WIDE_QUERY)
@@ -320,7 +321,7 @@ function MasterRow({
 /* ── workspace: the selected package, sections in process order ─── */
 
 function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIssues> }) {
-  const navigate = useNavigate()
+  const navigate = useLocaleNavigate()
   const snap = useSnapshot(state)
   const live = state.packages.find((p) => p.id === id)
   const view = snap.packages.find((p) => p.id === id)

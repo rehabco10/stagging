@@ -1,0 +1,8 @@
+{
+  "settings": {
+    "language": "Interface language",
+    "language_hint": "Arabic lives at “/”, English at “/en” — the link carries the language.",
+    "language_ar": "العربية",
+    "language_en": "English"
+  }
+}

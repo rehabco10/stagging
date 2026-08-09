@@ -1,10 +1,11 @@
 import { useState } from "react"
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useSnapshot } from "valtio"
 import { Building2, ChevronLeft, Pencil, Plus, Trash2, TriangleAlert } from "lucide-react"
 
 import { addContract, removeHotel, state, type DraftHotel } from "@/store/season"
 import { MasterDetail } from "@/components/MasterDetail"
+import { useLocaleNavigate } from "@/i18n/LocaleProvider"
 import { Card, Note, PageHeader } from "@/components/PageShell"
 import { Button } from "@/components/ui/button"
 import { Field, Input, SelectField } from "@/components/ui/field"
@@ -28,7 +29,7 @@ const starLabel = (v: string) => STAR_OPTIONS.find((o) => o.value === v)?.label 
  */
 export function HousingPage() {
   const { hotelId } = useParams()
-  const navigate = useNavigate()
+  const navigate = useLocaleNavigate()
   const snap = useSnapshot(state)
   const issues = useIssues()
   const [addCity, setAddCity] = useState<DraftHotel["city"] | null>(null)
@@ -178,7 +179,7 @@ export function HousingPage() {
 /* ── the selected hotel ─────────────────────────────────────────── */
 
 function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) => void }) {
-  const navigate = useNavigate()
+  const navigate = useLocaleNavigate()
   const snap = useSnapshot(state)
   const [editing, setEditing] = useState(false)
   const h = snap.hotels.find((x) => x.id === id)

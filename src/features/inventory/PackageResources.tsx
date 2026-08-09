@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom"
+// Locale-aware Link — see @/i18n/LocaleProvider.
+import { LocaleLink as Link } from "@/i18n/LocaleProvider"
 import { useSnapshot } from "valtio"
 import { PlaneLanding, PlaneTakeoff, X } from "lucide-react"
 
