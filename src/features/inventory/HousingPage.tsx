@@ -16,6 +16,7 @@ import { AddHotelWizard } from "@/features/inventory/AddHotelWizard"
 import { ContractCard } from "@/features/inventory/ContractCard"
 import { ContractsTimeline } from "@/features/inventory/ContractsTimeline"
 import { hotelIssues, hotelSummary } from "@/features/inventory/supply"
+import { localName } from "@/lib/names"
 import { cityOptions, gradeOptions, starLabel, starOptions } from "@/lib/options"
 import { useIssues } from "@/store/use-issues"
 import { cn, arNum } from "@/lib/utils"
@@ -77,7 +78,7 @@ export function HousingPage() {
           </div>
           <div className="mt-0.5 text-[11px] text-muted-foreground">
             {starLabel(h.star_class)} · فئة {h.grade} ·{" "}
-            {sum.contracts === 0 ? "بلا عقود" : `${arNum(sum.contracts)} عقد`}
+            {sum.contracts === 0 ? t("بلا عقود") : t("units.contracts", { n: arNum(sum.contracts), count: sum.contracts })}
           </div>
           {sum.peakSupply > 0 && (
             <Meter className="mt-2" value={sum.peakDemand} max={sum.peakSupply} />
@@ -95,13 +96,13 @@ export function HousingPage() {
           <h2 className="text-[13px] font-bold text-foreground">{title}</h2>
           <Button variant="ghost" size="sm" onClick={() => setAddCity(city)}>
             <Plus className="size-3.5" />
-            فندق
+            {t("فندق")}
           </Button>
         </header>
         <ul className="space-y-2">
           {rows.length === 0 ? (
             <li className="rounded-xl border border-dashed border-surface-line px-3 py-5 text-center text-[12px] text-muted-foreground">
-              لا فنادق بعد.
+              {t("لا فنادق بعد.")}
             </li>
           ) : (
             rows.map(masterRow)
@@ -134,7 +135,7 @@ export function HousingPage() {
             placeholder={
               <span className="flex items-center gap-2">
                 <Building2 className="size-4" />
-                اختر فندقًا لعرض عقوده وتغطيته
+                {t("اختر فندقًا لعرض عقوده وتغطيته")}
               </span>
             }
             master={
@@ -177,6 +178,7 @@ export function HousingPage() {
 /* ── the selected hotel ─────────────────────────────────────────── */
 
 function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) => void }) {
+  const { t } = useTranslation()
   const navigate = useLocaleNavigate()
   const snap = useSnapshot(state)
   const [editing, setEditing] = useState(false)
@@ -209,11 +211,11 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
             </div>
             <Button variant="outline" size="sm" onClick={() => setEditing(true)}>
               <Pencil className="size-3.5" />
-              تحرير
+              {t("تحرير")}
             </Button>
             <button
               type="button"
-              aria-label={`حذف ${h.name_ar || "الفندق"}`}
+              aria-label={t("حذف {name}", { name: localName(h) || t("الفندق") })}
               onClick={() => {
                 const r = removeHotel(id)
                 if (r.ok) {
@@ -222,8 +224,8 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
                 } else {
                   onError(
                     r.usedBy > 0
-                      ? `لا يمكن حذف «${h.name_ar}»: مستخدم في ${arNum(r.usedBy)} إقامة.`
-                      : `لا يمكن حذف «${h.name_ar}»: عليه ${arNum(r.contractCount)} عقد سكن.`,
+                      ? t("لا يمكن حذف «{name}»: مستخدم في {n} إقامة.", { name: localName(h), n: arNum(r.usedBy) })
+                      : t("لا يمكن حذف «{name}»: عليه {n} عقد سكن.", { name: localName(h), n: arNum(r.contractCount) }),
                   )
                 }
               }}
@@ -234,10 +236,10 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-            <Field label="الاسم (عربي)">
+            <Field label={t("الاسم (عربي)")}>
               <Input value={h.name_ar} onChange={(e) => (live.name_ar = e.target.value)} />
             </Field>
-            <Field label="الاسم (إنجليزي)">
+            <Field label={t("الاسم (إنجليزي)")}>
               <Input
                 dir="ltr"
                 className="text-start"
@@ -245,7 +247,7 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
                 onChange={(e) => (live.name_en = e.target.value)}
               />
             </Field>
-            <Field label="المدينة">
+            <Field label={t("المدينة")}>
               <SelectField
                 allowEmpty={false}
                 value={h.city}
@@ -254,7 +256,7 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
               />
             </Field>
             <div className="grid grid-cols-2 gap-3">
-              <Field label="التصنيف">
+              <Field label={t("التصنيف")}>
                 <SelectField
                   allowEmpty={false}
                   value={h.star_class}
@@ -262,7 +264,7 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
                   onChange={(v) => (live.star_class = v as DraftHotel["star_class"])}
                 />
               </Field>
-              <Field label="الفئة">
+              <Field label={t("الفئة")}>
                 <SelectField
                   allowEmpty={false}
                   value={h.grade}
@@ -273,7 +275,7 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
             </div>
             <div className="col-span-2 lg:col-span-4">
               <Button size="sm" onClick={() => setEditing(false)}>
-                تم
+                {t("تم")}
               </Button>
             </div>
           </div>
@@ -281,22 +283,22 @@ function HotelDetail({ id, onError }: { id: string; onError: (m: string | null) 
       </Card>
 
       <Card
-        title="العقود على محور الموسم"
+        title={t("العقود على محور الموسم")}
         description={
           sum.peakSupply > 0
-            ? `ذروة الأسرّة الموقَّعة ${arNum(sum.peakSupply)} · ذروة سعات الباقات ${arNum(sum.peakDemand)}`
+            ? t("ذروة الأسرّة الموقَّعة {supply} · ذروة سعات الباقات {demand}", { supply: arNum(sum.peakSupply), demand: arNum(sum.peakDemand) })
             : "لا عقود موقَّعة بعد."
         }
         actions={
           <Button variant="outline" size="sm" onClick={() => addContract(id)}>
             <Plus className="size-3.5" />
-            إضافة عقد
+            {t("إضافة عقد")}
           </Button>
         }
       >
         {contracts.length === 0 ? (
           <p className="py-4 text-center text-[13px] text-muted-foreground">
-            الفندق مرشّح بلا عقود — يظهر تنبيه عند استخدامه في الباقات.
+            {t("الفندق مرشّح بلا عقود — يظهر تنبيه عند استخدامه في الباقات.")}
           </p>
         ) : (
           <ContractsTimeline hotelId={id} />

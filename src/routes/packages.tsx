@@ -17,7 +17,9 @@ import { MaskedPriceInput, Price } from "@/components/ui/price"
 import { Meter } from "@/components/ui/meter"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { PackageResources } from "@/features/inventory/PackageResources"
+import { localName } from "@/lib/names"
 import {
+  cityShortLabel,
   publishStatusOptions,
   roleOptions,
   saleStatusOptions,
@@ -99,7 +101,7 @@ export function PackagesPage() {
         actions={
           <Button size="sm" onClick={() => addPackage()}>
             <Plus className="size-3.5" />
-            باقة جديدة
+            {t("باقة جديدة")}
           </Button>
         }
       />
@@ -107,10 +109,10 @@ export function PackagesPage() {
         {/* الميزان — the steering instrument for the capacity partition.
             Narrow portrait collapses it to a verdict strip + drawer. */}
         <BalanceStrip
-          title="ميزان الحصة"
+          title={t("ميزان الحصة")}
           summary={
             <>
-              <span className="text-[12px] font-semibold text-foreground">الحصة</span>
+              <span className="text-[12px] font-semibold text-foreground">{t("الحصة")}</span>
               <span dir="ltr" className="text-[12px] tabular-nums text-muted-foreground">
                 <b className="font-bold text-foreground">{arNum(used)}</b> / {arNum(quota)}
               </span>
@@ -119,16 +121,16 @@ export function PackagesPage() {
           }
         >
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Meter className="min-w-64 flex-[2]" label="الحصة" value={used} max={quota} />
+            <Meter className="min-w-64 flex-[2]" label={t("الحصة")} value={used} max={quota} />
             <Meter
               className="min-w-52 flex-1"
-              label="فاخرة+مميزة ≤٤٠٪"
+              label={t("فاخرة+مميزة ≤٤٠٪")}
               value={Math.round(premPct * 10) / 10}
               max={40}
             />
             <Meter
               className="min-w-52 flex-1"
-              label="أساسية ≥٦٠٪"
+              label={t("أساسية ≥٦٠٪")}
               value={Math.round(stdPct * 10) / 10}
               max={60}
               bound="min"
@@ -144,7 +146,7 @@ export function PackagesPage() {
             placeholder={
               <span className="flex items-center gap-2">
                 <PackageIcon className="size-4" />
-                اختر باقة من القائمة
+                {t("اختر باقة من القائمة")}
               </span>
             }
             master={
@@ -156,7 +158,7 @@ export function PackagesPage() {
                     through the pane's px-1 gutters beside it. */}
                 <div className="sticky top-0 z-10 space-y-2 rounded-xl border border-surface-line bg-surface-raised p-2.5 shadow-[var(--elev-1)] max-lg:-mx-1 max-lg:rounded-none max-lg:border-x-0">
                   <Input
-                    placeholder="بحث بالاسم أو الرقم…"
+                    placeholder={t("بحث بالاسم أو الرقم…")}
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                   />
@@ -173,7 +175,7 @@ export function PackagesPage() {
                 <ul className="space-y-2">
                   {filtered.length === 0 && (
                     <li className="rounded-xl border border-dashed border-surface-line px-3 py-5 text-center text-[12px] text-muted-foreground">
-                      لا نتائج.
+                      {t("لا نتائج.")}
                     </li>
                   )}
                   {filtered.map((p) => (
@@ -203,6 +205,7 @@ export function PackagesPage() {
 
 /** The quota verdict pill — shared by the full meters and the mobile strip. */
 function QuotaChip({ used, quota }: { used: number; quota: number }) {
+  const { t } = useTranslation()
   return (
     <span
       className={cn(
@@ -217,8 +220,8 @@ function QuotaChip({ used, quota }: { used: number; quota: number }) {
       {used === quota
         ? "الحصة مستوفاة"
         : used > quota
-          ? `تجاوز ${arNum(used - quota)}`
-          : `متبقٍ ${arNum(quota - used)}`}
+          ? t("graph.over_by", { n: arNum(used - quota) })
+          : t("graph.left", { n: arNum(quota - used) })}
     </span>
   )
 }
@@ -299,7 +302,7 @@ function MasterRow({
               ·{" "}
               <Price
                 interactive={false}
-                value={`${arNum(Math.round(pkg.initial_price_sar))} ر.س`}
+                value={t("{n} ر.س", { n: arNum(Math.round(pkg.initial_price_sar)) })}
               />
             </>
           )}
@@ -308,7 +311,7 @@ function MasterRow({
           {dots.map((d) => (
             <span
               key={d.key}
-              title={`${d.key}: ${d.ok ? "جاهز" : "ناقص"}`}
+              title={`${t(d.key)}: ${d.ok ? t("جاهز") : t("ناقص")}`}
               className={cn(
                 "size-2 rounded-full",
                 d.ok ? "bg-[color:var(--brand-green)]" : "bg-surface-line",
@@ -327,6 +330,7 @@ function MasterRow({
 /* ── workspace: the selected package, sections in process order ─── */
 
 function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIssues> }) {
+  const { t } = useTranslation()
   const navigate = useLocaleNavigate()
   const snap = useSnapshot(state)
   const live = state.packages.find((p) => p.id === id)
@@ -357,7 +361,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
 
   const hotelOptions = snap.hotels.map((h) => ({
     value: h.id,
-    label: `${h.name_ar} — ${h.city === "makkah" ? "مكة" : "المدينة"}`,
+    label: `${localName(h)} — ${cityShortLabel(h.city)}`,
   }))
   const mixSum = view.room_mix["2"] + view.room_mix["3"] + view.room_mix["4"]
 
@@ -373,7 +377,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
     <>
       {/* ── ١ الهوية والتسعير ── */}
       <Card
-        title={`باقة ${view.package_no}`}
+        title={t("graph.package_no", { no: view.package_no })}
         description={`التصنيف في نسك: ${displayCategory({
           tier: view.tier,
           is_shifting: shifting,
@@ -383,7 +387,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
           <>
             <Button variant="outline" size="sm" onClick={() => navigate(`/packages/${duplicatePackage(id)}`)}>
               <Copy className="size-3.5" />
-              تكرار
+              {t("تكرار")}
             </Button>
             <Button
               variant="destructive"
@@ -394,19 +398,19 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
               }}
             >
               <Trash2 className="size-3.5" />
-              حذف
+              {t("حذف")}
             </Button>
           </>
         }
       >
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <Field label="رقم الباقة">
+          <Field label={t("رقم الباقة")}>
             <Input value={view.package_no} onChange={(e) => (live.package_no = e.target.value)} />
           </Field>
-          <Field label="الاسم (إنجليزي)" className="col-span-2 lg:col-span-1">
+          <Field label={t("الاسم (إنجليزي)")} className="col-span-2 lg:col-span-1">
             <Input dir="ltr" value={view.name_en} onChange={(e) => (live.name_en = e.target.value)} />
           </Field>
-          <Field label="الفئة">
+          <Field label={t("الفئة")}>
             <SelectField
               allowEmpty={false}
               value={view.tier}
@@ -414,7 +418,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
               onChange={(v) => (live.tier = v as DraftPackage["tier"])}
             />
           </Field>
-          <Field label="لاحقة التصنيف">
+          <Field label={t("لاحقة التصنيف")}>
             <Input
               dir="ltr"
               placeholder="—"
@@ -423,10 +427,10 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             />
           </Field>
           <Field
-            label="السعر الابتدائي (ر.س)"
+            label={t("السعر الابتدائي (ر.س)")}
             hint={
               bounds
-                ? `حدود ${tierLabel(view.tier)} المعتمدة: ${arNum(bounds.min_sar ?? 0)} – ${bounds.max_sar != null ? arNum(bounds.max_sar) : "—"}`
+                ? t("حدود {tier} المعتمدة: {min} – {max}", { tier: tierLabel(view.tier), min: arNum(bounds.min_sar ?? 0), max: bounds.max_sar != null ? arNum(bounds.max_sar) : "—" })
                 : "لا حدود سعرية معتمدة لهذه الفئة بعد."
             }
             error={outOfBounds ? "خارج الحدود المعتمدة للفئة." : undefined}
@@ -440,13 +444,13 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
       </Card>
 
       {/* ── ٢ السعة والتوزيع ── */}
-      <Card title="السعة وتوزيع الغرف">
+      <Card title={t("السعة وتوزيع الغرف")}>
         <div className="grid grid-cols-1 gap-3 lg:grid-cols-2">
           <Field
-            label="السعة (حاج)"
+            label={t("السعة (حاج)")}
             hint={
               left > 0
-                ? `المتبقي غير الموزَّع من الحصة: ${arNum(left)}.`
+                ? t("المتبقي غير الموزَّع من الحصة: {n}.", { n: arNum(left) })
                 : "الحصة موزَّعة بالكامل."
             }
           >
@@ -469,20 +473,20 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                 className="shrink-0 rounded-s-none bg-clip-padding"
                 disabled={left <= 0}
                 onClick={() => takeRemaining(id)}
-                title="إسناد المتبقي من الحصة إلى هذه الباقة"
+                title={t("إسناد المتبقي من الحصة إلى هذه الباقة")}
               >
                 إسناد المتبقي{left > 0 && ` (${arNum(left)})`}
               </Button>
             </div>
           </Field>
           <Field
-            label="توزيع الغرف (حاج)"
+            label={t("توزيع الغرف (حاج)")}
             hint={
               mixSum === 0
                 ? "لم يُحدَّد التوزيع بعد."
                 : mixSum === view.capacity
-                  ? `الموزَّع ${arNum(mixSum)} — مطابق للسعة.`
-                  : `الموزَّع ${arNum(mixSum)} — ${mixSum < view.capacity ? `ينقص ${arNum(view.capacity - mixSum)}` : `يزيد ${arNum(mixSum - view.capacity)}`}.`
+                  ? t("الموزَّع {n} — مطابق للسعة.", { n: arNum(mixSum) })
+                  : mixSum < view.capacity ? t("الموزَّع {n} — ينقص {d}.", { n: arNum(mixSum), d: arNum(view.capacity - mixSum) }) : t("الموزَّع {n} — يزيد {d}.", { n: arNum(mixSum), d: arNum(mixSum - view.capacity) })
             }
           >
             <div className="grid grid-cols-3 gap-1.5">
@@ -511,17 +515,17 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
 
       {/* ── ٣ الإقامات ── */}
       <Card
-        title="الإقامات"
-        description={`${arNum(view.legs.length)} إقامة · ${arNum(packageNights(live))} ليلة`}
+        title={t("الإقامات")}
+        description={t("graph.legs_summary", { legs: view.legs.length, nights: packageNights(live) })}
         actions={
           <>
             <SelectField
               className="w-44"
-              placeholder="نسخ مسار باقة…"
+              placeholder={t("نسخ مسار باقة…")}
               value={cloneSrc}
               options={snap.packages
                 .filter((p) => p.id !== id && p.legs.length > 0)
-                .map((p) => ({ value: p.id, label: `باقة ${p.package_no} — ${p.name_en}` }))}
+                .map((p) => ({ value: p.id, label: t("باقة {no} — {name}", { no: p.package_no, name: p.name_en || t("بدون اسم") }) }))}
               onChange={(v) => {
                 if (v) cloneChainFrom(id, v)
                 setCloneSrc("")
@@ -535,7 +539,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
               onClick={() => addLeg(id)}
             >
               <Plus className="size-3.5" />
-              إضافة
+              {t("إضافة")}
             </Button>
           </>
         }
@@ -543,7 +547,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
       >
         {view.legs.length === 0 ? (
           <p className="px-3 py-6 text-center text-[12px] text-muted-foreground">
-            لا توجد إقامات.
+            {t("لا توجد إقامات.")}
           </p>
         ) : (
           <>
@@ -567,7 +571,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                     />
                     <button
                       type="button"
-                      aria-label="حذف الإقامة"
+                      aria-label={t("حذف الإقامة")}
                       onClick={() => removeLeg(leg.id)}
                       className="grid size-9 shrink-0 place-items-center rounded-md text-muted-foreground/45 transition-colors hover:bg-[color:var(--brand-rose-soft)] hover:text-[color:var(--brand-rose-deep)]"
                     >
@@ -581,13 +585,13 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                     onChange={(v) => (leg.hotelId = v)}
                   />
                   <div className="grid grid-cols-2 gap-2">
-                    <Field label="البداية">
+                    <Field label={t("البداية")}>
                       <DatePicker
                         value={leg.starts_on}
                         onChange={(iso) => retimeLeg(leg.id, iso, addDays(iso, Math.max(1, nights)))}
                       />
                     </Field>
-                    <Field label="الليالي">
+                    <Field label={t("الليالي")}>
                       <NumInput
                         value={nights}
                         onChange={(e) => {
@@ -598,7 +602,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                     </Field>
                   </div>
                   <p className="text-[11px] tabular-nums text-muted-foreground">
-                    النهاية <span dir="ltr">{leg.ends_on}</span>
+                    {t("النهاية")} <span dir="ltr">{leg.ends_on}</span>
                   </p>
                 </li>
               )
@@ -608,11 +612,11 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
             <TableHeader>
               <TableRow className="border-t-0 bg-surface-sunken">
                 <TableHead className={cn(TH, "w-10")}>#</TableHead>
-                <TableHead className={cn(TH, "w-36")}>الدور</TableHead>
-                <TableHead className={TH}>الفندق</TableHead>
-                <TableHead className={cn(TH, "w-36")}>البداية</TableHead>
-                <TableHead className={cn(TH, "w-20")}>الليالي</TableHead>
-                <TableHead className={cn(TH, "w-28")}>النهاية</TableHead>
+                <TableHead className={cn(TH, "w-36")}>{t("الدور")}</TableHead>
+                <TableHead className={TH}>{t("الفندق")}</TableHead>
+                <TableHead className={cn(TH, "w-36")}>{t("البداية")}</TableHead>
+                <TableHead className={cn(TH, "w-20")}>{t("الليالي")}</TableHead>
+                <TableHead className={cn(TH, "w-28")}>{t("النهاية")}</TableHead>
                 <TableHead className={cn(TH, "w-10")} />
               </TableRow>
             </TableHeader>
@@ -665,7 +669,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
                     <TableCell className="px-1">
                       <button
                         type="button"
-                        aria-label="حذف الإقامة"
+                        aria-label={t("حذف الإقامة")}
                         onClick={() => removeLeg(leg.id)}
                         className="grid size-7 place-items-center rounded-md text-muted-foreground/45 transition-colors hover:bg-[color:var(--brand-rose-soft)] hover:text-[color:var(--brand-rose-deep)]"
                       >
@@ -683,19 +687,19 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
 
       {/* ── ٤ الموارد ── */}
       <Card
-        title="الموارد — العقود والمقاعد"
-        description="عقود السكن ومقاعد الطيران المخصصة لهذه الباقة."
+        title={t("الموارد — العقود والمقاعد")}
+        description={t("عقود السكن ومقاعد الطيران المخصصة لهذه الباقة.")}
       >
         <PackageResources pkg={live} />
       </Card>
 
       {/* ── ٥ الجاهزية والنشر ── */}
       <Card
-        title="الجاهزية والنشر"
-        description="حالة النشر في نسك ومتطلبات اكتمال المحتوى."
+        title={t("الجاهزية والنشر")}
+        description={t("حالة النشر في نسك ومتطلبات اكتمال المحتوى.")}
       >
         <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-          <Field label="حالة النشر في نسك">
+          <Field label={t("حالة النشر في نسك")}>
             <SelectField
               allowEmpty={false}
               value={view.publish_status}
@@ -703,7 +707,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
               onChange={(v) => (live.publish_status = v as DraftPackage["publish_status"])}
             />
           </Field>
-          <Field label="حالة البيع">
+          <Field label={t("حالة البيع")}>
             <SelectField
               allowEmpty={false}
               value={view.sale_status}
@@ -743,7 +747,7 @@ function Workspace({ id, issues }: { id: string; issues: ReturnType<typeof useIs
           </div>
         )}
         {gateErrors.length === 0 && (
-          <Note tone="brand">لا أخطاء تمنع رفع هذه الباقة.</Note>
+          <Note tone="brand">{t("لا أخطاء تمنع رفع هذه الباقة.")}</Note>
         )}
       </Card>
     </>

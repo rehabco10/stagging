@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import * as React from "react"
 import { ArrowRight } from "lucide-react"
 
@@ -31,6 +32,7 @@ export function MasterDetail({
   /** Wide-screen filler while nothing is selected. */
   placeholder: React.ReactNode
 }) {
+  const { t } = useTranslation()
   return (
     <div className="flex h-full min-h-0 items-stretch gap-4">
       <aside
@@ -58,7 +60,7 @@ export function MasterDetail({
               // phone, so it earns a visible surface and a 40px target.
               <Button variant="outline" className="h-10 px-4 lg:hidden" onClick={onBack}>
                 <ArrowRight className="size-4" />
-                رجوع
+                {t("رجوع")}
               </Button>
             )}
             {detail}

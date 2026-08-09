@@ -16,6 +16,8 @@ import {
   SheetDescription,
   SheetTitle,
 } from "@/components/ui/sheet"
+import { useLocale } from "@/i18n/LocaleProvider"
+import { LOCALE_DIR } from "@/i18n/locale"
 import { SIDE_PANEL_QUERY, useMediaQuery } from "@/hooks/use-media-query"
 import { cn } from "@/lib/utils"
 
@@ -68,6 +70,7 @@ export function ResponsivePanel({
   footer?: React.ReactNode
 }) {
   const isSide = useMediaQuery(SIDE_PANEL_QUERY)
+  const dir = LOCALE_DIR[useLocale()]
 
   const body = (parts: PanelParts) => (
     <>
@@ -91,9 +94,10 @@ export function ResponsivePanel({
     </>
   )
 
-  // Wide or landscape: a side sheet on the physical left edge. `side` is
-  // physical, not logical — in this RTL app that puts the panel opposite the
-  // nav rail, so the two never crowd the same edge.
+  // Wide or landscape: a side sheet OPPOSITE the nav rail, so the two never
+  // crowd the same edge. `side` is physical, so it flips with the locale:
+  // the rail sits on the start edge (right in Arabic, left in English), and
+  // the sheet takes the other one.
   if (isSide) {
     return (
       <Sheet
@@ -106,7 +110,7 @@ export function ResponsivePanel({
         disablePointerDismissal
       >
         <SheetContent
-          side="left"
+          side={dir === "rtl" ? "left" : "right"}
           showOverlay={false}
           showCloseButton={false}
           // Focus belongs on the canvas the user is driving.

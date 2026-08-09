@@ -68,7 +68,7 @@ export function ContractCard({
           title={usedBy > 0 ? "مرتبط بباقة — لا يمكن حذفه" : "حذف"}
           onClick={() => {
             const r = removeContract(c.id)
-            onError(r.ok ? null : `لا يمكن حذف العقد: مرتبط بـ${arNum(r.usedBy)} باقة.`)
+            onError(r.ok ? null : t("لا يمكن حذف العقد: مرتبط بـ{n} باقة.", { n: arNum(r.usedBy) }))
           }}
           className="grid size-8 shrink-0 place-items-center rounded-md text-muted-foreground/45 transition-colors hover:bg-[color:var(--brand-rose-soft)] hover:text-[color:var(--brand-rose-deep)]"
         >

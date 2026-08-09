@@ -21,7 +21,8 @@ import { displayCategory } from "@/lib/schemas"
 import { DatePicker } from "@/components/ui/date-picker"
 import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
 import { MaskedPriceInput } from "@/components/ui/price"
-import { roleOptions, tierOptions } from "@/lib/options"
+import { localName } from "@/lib/names"
+import { cityShortLabel, roleOptions, tierOptions } from "@/lib/options"
 import { cn, arNum } from "@/lib/utils"
 import { useIssues } from "@/store/use-issues"
 
@@ -93,7 +94,7 @@ function SeasonForm() {
                   : "text-foreground",
             )}
           >
-            {left === 0 ? "مكتمل" : left < 0 ? `تجاوز ${arNum(-left)}` : `متبقٍ ${arNum(left)}`}
+            {left === 0 ? t("dashboard.complete") : left < 0 ? t("graph.over_by", { n: arNum(-left) }) : t("graph.left", { n: arNum(left) })}
           </span>
         </div>
       </Section>
@@ -129,7 +130,7 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
 
   return (
     <>
-      <Section title={`باقة ${live.package_no}`}>
+      <Section title={t("graph.package_no", { no: live.package_no })}>
         <div className="grid grid-cols-2 gap-2">
           <Field label={t("رقم الباقة")}>
             <Input value={live.package_no} onChange={(e) => (pkg.package_no = e.target.value)} />
@@ -169,8 +170,8 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
             const sum = live.room_mix["2"] + live.room_mix["3"] + live.room_mix["4"]
             if (sum === 0) return "رباعية / ثلاثية / ثنائية — لم يُحدَّد التوزيع بعد."
             const diff = live.capacity - sum
-            if (diff === 0) return `الموزَّع ${arNum(sum)} — مطابق للسعة.`
-            return diff > 0 ? `الموزَّع ${arNum(sum)} — ينقص ${arNum(diff)}.` : `الموزَّع ${arNum(sum)} — يزيد ${arNum(-diff)}.`
+            if (diff === 0) return t("الموزَّع {n} — مطابق للسعة.", { n: arNum(sum) })
+            return diff > 0 ? t("الموزَّع {n} — ينقص {d}.", { n: arNum(sum), d: arNum(diff) }) : t("الموزَّع {n} — يزيد {d}.", { n: arNum(sum), d: arNum(-diff) })
           })()}
         >
           <div className="grid grid-cols-3 gap-1.5">
@@ -293,7 +294,7 @@ function LegForm({ legId }: { legId: string }) {
             value={leg.hotelId}
             options={state.hotels.map((h) => ({
               value: h.id,
-              label: `${h.name_ar} — ${h.city === "makkah" ? "مكة" : "المدينة"}`,
+              label: `${localName(h)} — ${cityShortLabel(h.city)}`,
             }))}
             onChange={(v) => (leg.hotelId = v)}
           />
@@ -348,7 +349,7 @@ function Issues() {
   if (snap.packages.length === 0) return null
 
   return (
-    <Section title={`التحقق — ${arNum(errors.length)} خطأ، ${arNum(warnings.length)} تنبيه`}>
+    <Section title={t("التحقق — {e} خطأ، {w} تنبيه", { e: arNum(errors.length), w: arNum(warnings.length) })}>
       {issues.length === 0 ? (
         <div className="flex items-center gap-2 rounded-md bg-[color:var(--brand-green-soft)] px-2.5 py-2 text-[11px] text-[color:var(--brand-green-deep)]">
           <CircleCheck className="size-4 shrink-0" />
@@ -424,8 +425,8 @@ export function InspectorContent() {
 export function useInspectorSubtitle() {
   const snap = useSnapshot(state)
   const pkg = snap.packages.find((p) => p.id === snap.selectedId)
-  if (pkg) return `باقة ${pkg.package_no} — ${pkg.name_en || "بدون اسم"}`
+  if (pkg) return i18n.t("باقة {no} — {name}", { no: pkg.package_no, name: pkg.name_en || i18n.t("بدون اسم") })
   const leg = findLeg(snap.selectedId)
   if (leg) return `${roleLabel(leg.leg.role)} — ${i18n.t("graph.package_no", { no: leg.pkg.package_no })}`
-  return `موسم ${snap.season.year_hijri}هـ — ${snap.season.year_gregorian}م`
+  return i18n.t("موسم {h}هـ — {g}م", { h: snap.season.year_hijri, g: snap.season.year_gregorian })
 }

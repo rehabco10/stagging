@@ -189,19 +189,24 @@ export interface DraftState {
   lastAdded: { id: string; parentId: string } | null
 }
 
-/** Hotels used in 1447, as a starting inventory. Verified from ocr/. */
+/**
+ * Hotels used in 1447, as a starting inventory. Verified from ocr/; the
+ * English names are the registry names from the 1447 system's
+ * `housing_providers` table (Voco keeps its brand name — the registry entry
+ * is its operating company, «MAAD INTERNATIONAL HOTEL CO LTD»).
+ */
 const SEED_HOTELS: DraftHotel[] = [
-  { id: "h_swiss", name_ar: "سويس أوتيل مكة", name_en: "Swiss Makkah", city: "makkah", star_class: "5", grade: "أ" },
-  { id: "h_pullman", name_ar: "بولمان زمزم مكة", name_en: "Pullman Makkah", city: "makkah", star_class: "5", grade: "أ" },
-  { id: "h_hyatt", name_ar: "حياة ريجنسي", name_en: "Hyatt Regency", city: "makkah", star_class: "5", grade: "أ" },
-  { id: "h_voco", name_ar: "فوكو", name_en: "Voco", city: "makkah", star_class: "4", grade: "ج" },
-  { id: "h_aziziyah", name_ar: "إثراء العزيزية", name_en: "Ithraa Al Aziziyah", city: "makkah", star_class: "nuzul", grade: "م" },
-  { id: "h_haram", name_ar: "دار الإيمان الحرم", name_en: "Dar Al Iman Al Haram", city: "madinah", star_class: "5", grade: "أ" },
-  { id: "h_hilton", name_ar: "هيلتون المدينة", name_en: "Hilton Madinah", city: "madinah", star_class: "5", grade: "أ" },
-  { id: "h_taqwa", name_ar: "إيلاف التقوى", name_en: "Ilaf Al Taqwa", city: "madinah", star_class: "4", grade: "أ" },
-  { id: "h_maysan", name_ar: "ميسان رحاب المسك", name_en: "Maysan Rehab Almisk", city: "madinah", star_class: "3", grade: "ج" },
-  { id: "h_durrat", name_ar: "درة الإيمان", name_en: "Durrat Al Iman", city: "madinah", star_class: "1", grade: "ج" },
-  { id: "h_deyar", name_ar: "ديار الإيمان", name_en: "Deyar Al Iman", city: "madinah", star_class: "1", grade: "ج" },
+  { id: "h_swiss", name_ar: "سويس أوتيل مكة", name_en: "Swissotel Makkah Hotel", city: "makkah", star_class: "5", grade: "أ" },
+  { id: "h_pullman", name_ar: "بولمان زمزم مكة", name_en: "Zamzam Pullman Makkah Hotel", city: "makkah", star_class: "5", grade: "أ" },
+  { id: "h_hyatt", name_ar: "حياة ريجنسي", name_en: "Jabal Omar Hyatt Regency Hotel", city: "makkah", star_class: "5", grade: "أ" },
+  { id: "h_voco", name_ar: "فوكو", name_en: "Voco Makkah (MAAD International)", city: "makkah", star_class: "4", grade: "ج" },
+  { id: "h_aziziyah", name_ar: "إثراء العزيزية", name_en: "Ithraa Al Aziziyah Hotel", city: "makkah", star_class: "nuzul", grade: "م" },
+  { id: "h_haram", name_ar: "دار الإيمان الحرم", name_en: "Dar Al Eiman Al Haram Hotel", city: "madinah", star_class: "5", grade: "أ" },
+  { id: "h_hilton", name_ar: "هيلتون المدينة", name_en: "Madinah Hilton Hotel", city: "madinah", star_class: "5", grade: "أ" },
+  { id: "h_taqwa", name_ar: "إيلاف التقوى", name_en: "Elaf Al Taqwa Hotel", city: "madinah", star_class: "4", grade: "أ" },
+  { id: "h_maysan", name_ar: "ميسان رحاب المسك", name_en: "Maysan Rehab Al Misk Hotel", city: "madinah", star_class: "3", grade: "ج" },
+  { id: "h_durrat", name_ar: "درة الإيمان", name_en: "Durrat Al Eman Hotel", city: "madinah", star_class: "1", grade: "ج" },
+  { id: "h_deyar", name_ar: "ديار الإيمان", name_en: "Diyar Al Eman Hotel", city: "madinah", star_class: "1", grade: "ج" },
 ]
 
 /** The 1447 ministry rules, as a starting point for this season's intake. */

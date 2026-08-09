@@ -2,6 +2,9 @@ import { Handle, Position, type Node, type NodeProps } from "@xyflow/react"
 import { useTranslation } from "react-i18next"
 import { ChevronDown, ChevronLeft, Plus, Pin, MoveRight, TriangleAlert } from "lucide-react"
 import { Price } from "@/components/ui/price"
+import { useLocale } from "@/i18n/LocaleProvider"
+import { LOCALE_DIR } from "@/i18n/locale"
+import { localName } from "@/lib/names"
 import { cityLabel, roleLabel, starLabel } from "@/lib/options"
 import { cn, arNum } from "@/lib/utils"
 import type { DraftLeg, DraftPackage, DraftHotel } from "@/store/season"
@@ -135,9 +138,13 @@ function Card({
   variant?: "flat" | "gradient"
   children: React.ReactNode
 }) {
+  // The canvas itself never flips, but the text INSIDE a card must read in
+  // the interface language — an English card laid out rtl puts «7,000
+  // pilgrims» number-last and reads as misplaced.
+  const locale = useLocale()
   return (
     <div
-      dir="rtl"
+      dir={LOCALE_DIR[locale]}
       // Fixed box: React Flow is told the same width/height, so nothing has to
       // be measured and layout can't disagree with what's painted.
       style={{ width, height }}
@@ -377,7 +384,7 @@ export function PackageNode({ data }: NodeProps<Node<PackageData>>) {
             {arNum(data.errorCount)}
           </span>
         ) : pkg.initial_price_sar > 0 ? (
-          <Price value={`${arNum(Math.round(pkg.initial_price_sar))} ر.س`} />
+          <Price value={t("{n} ر.س", { n: arNum(Math.round(pkg.initial_price_sar)) })} />
         ) : (
           <span>{t("graph.no_price")}</span>
         )}
@@ -431,8 +438,11 @@ export function LegNode({ data }: NodeProps<Node<LegData>>) {
         <span className="tabular-nums text-foreground/50">#{arNum(order)}</span>
       </div>
 
-      <div className="text-[13px] font-bold text-foreground leading-tight truncate" title={hotel?.name_ar}>
-        {hotel?.name_ar ?? t("graph.pick_hotel")}
+      <div
+        className="text-[13px] font-bold text-foreground leading-tight truncate"
+        title={localName(hotel)}
+      >
+        {hotel ? localName(hotel) : t("graph.pick_hotel")}
       </div>
 
       <div className="flex items-center justify-between text-[10px] text-foreground/65">

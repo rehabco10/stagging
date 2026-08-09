@@ -92,7 +92,7 @@ export function RequirementsPanel() {
 
       <Card
         title={t("المتطلبات")}
-        description={`${arNum(agreed)} معتمد من ${arNum(snap.requirements.length)}`}
+        description={t("{n} معتمد من {total}", { n: arNum(agreed), total: arNum(snap.requirements.length) })}
         actions={
           <Button variant="outline" size="sm" onClick={() => addRequirement("note")}>
             <Plus className="size-3.5" />
@@ -347,9 +347,9 @@ export function ValidationPanel() {
                       {issueCategoryLabel(cat)}
                     </h3>
                     <span className="text-[10px] tabular-nums text-muted-foreground">
-                      {errorCount > 0 && `${arNum(errorCount)} خطأ`}
+                      {errorCount > 0 && t("{n} خطأ", { n: arNum(errorCount) })}
                       {errorCount > 0 && warnCount > 0 && " · "}
-                      {warnCount > 0 && `${arNum(warnCount)} تنبيه`}
+                      {warnCount > 0 && t("{n} تنبيه", { n: arNum(warnCount) })}
                     </span>
                   </header>
                   {/* Two columns once there is width — the rows are one line

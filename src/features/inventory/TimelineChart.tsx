@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next"
 import {
   Area,
   ComposedChart,
@@ -34,21 +35,22 @@ export interface TimelinePoint {
 }
 
 export default function TimelineChart({ data }: { data: TimelinePoint[] }) {
+  const { t } = useTranslation()
   return (
     <div className="mt-3">
       {/* legend: identity never rides on color alone */}
       <div className="mb-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-muted-foreground">
         <span className="inline-flex items-center gap-1.5">
           <span className="h-0.5 w-4 rounded-full" style={{ background: TEAL_DEEP }} />
-          سعات الباقات
+          {t("سعات الباقات")}
         </span>
         <span className="inline-flex items-center gap-1.5">
           <span className="h-2.5 w-4 rounded-sm" style={{ background: TEAL, opacity: 0.25 }} />
-          الأسرّة الموقَّعة
+          {t("الأسرّة الموقَّعة")}
         </span>
         <span className="inline-flex items-center gap-1.5">
           <span className="h-2.5 w-4 rounded-sm" style={{ background: ROSE, opacity: 0.65 }} />
-          تجاوز
+          {t("تجاوز")}
         </span>
       </div>
       {/* ltr wrapper + reversed axis: Recharts math stays sane, time still

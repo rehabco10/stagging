@@ -7,42 +7,42 @@
     },
     {
       "page": "canvas",
-      "untranslated": 3,
+      "untranslated": 0,
       "dataNames": 0
     },
     {
       "page": "journey",
-      "untranslated": 23,
-      "dataNames": 8
+      "untranslated": 20,
+      "dataNames": 0
     },
     {
       "page": "packages",
-      "untranslated": 116,
+      "untranslated": 63,
       "dataNames": 8
     },
     {
       "page": "package-detail",
-      "untranslated": 117,
+      "untranslated": 63,
       "dataNames": 8
     },
     {
       "page": "hotels",
-      "untranslated": 41,
+      "untranslated": 27,
       "dataNames": 11
     },
     {
       "page": "hotel-detail",
-      "untranslated": 67,
+      "untranslated": 43,
       "dataNames": 12
     },
     {
       "page": "flights",
-      "untranslated": 111,
+      "untranslated": 106,
       "dataNames": 8
     },
     {
       "page": "validation",
-      "untranslated": 96,
+      "untranslated": 91,
       "dataNames": 0
     },
     {
@@ -51,7 +51,7 @@
       "dataNames": 0
     }
   ],
-  "distinct": 199,
+  "distinct": 139,
   "strings": [
     {
       "text": "باقة",
@@ -60,14 +60,6 @@
         "journey",
         "hotel-detail",
         "flights"
-      ]
-    },
-    {
-      "text": "عقد",
-      "count": 25,
-      "pages": [
-        "hotels",
-        "hotel-detail"
       ]
     },
     {
@@ -97,28 +89,6 @@
       ]
     },
     {
-      "text": "سويس أوتيل مكة",
-      "count": 9,
-      "pages": [
-        "journey",
-        "packages",
-        "package-detail",
-        "hotels",
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "دار الإيمان الحرم",
-      "count": 9,
-      "pages": [
-        "journey",
-        "packages",
-        "package-detail",
-        "hotels",
-        "hotel-detail"
-      ]
-    },
-    {
       "text": "مقعد",
       "count": 8,
       "pages": [
@@ -134,25 +104,23 @@
       ]
     },
     {
-      "text": "مكة",
-      "count": 7,
+      "text": "الوصول",
+      "count": 6,
       "pages": [
         "journey",
         "packages",
         "package-detail",
-        "hotels",
-        "hotel-detail"
+        "flights"
       ]
     },
     {
-      "text": "المدينة",
-      "count": 7,
+      "text": "المغادرة",
+      "count": 6,
       "pages": [
         "journey",
         "packages",
         "package-detail",
-        "hotels",
-        "hotel-detail"
+        "flights"
       ]
     },
     {
@@ -180,42 +148,9 @@
       ]
     },
     {
-      "text": "البداية",
-      "count": 6,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "الليالي",
-      "count": 6,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "النهاية",
-      "count": 6,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
       "text": "رباعية 80",
       "count": 6,
       "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "ليلة",
-      "count": 5,
-      "pages": [
-        "journey",
         "packages",
         "package-detail"
       ]
@@ -232,23 +167,13 @@
       ]
     },
     {
-      "text": "الوصول",
+      "text": "سويس أوتيل مكة",
       "count": 4,
       "pages": [
-        "journey",
         "packages",
         "package-detail",
-        "flights"
-      ]
-    },
-    {
-      "text": "المغادرة",
-      "count": 4,
-      "pages": [
-        "journey",
-        "packages",
-        "package-detail",
-        "flights"
+        "hotels",
+        "hotel-detail"
       ]
     },
     {
@@ -257,6 +182,16 @@
       "pages": [
         "packages",
         "package-detail"
+      ]
+    },
+    {
+      "text": "دار الإيمان الحرم",
+      "count": 4,
+      "pages": [
+        "packages",
+        "package-detail",
+        "hotels",
+        "hotel-detail"
       ]
     },
     {
@@ -284,14 +219,6 @@
       ]
     },
     {
-      "text": "فندق",
-      "count": 4,
-      "pages": [
-        "hotels",
-        "hotel-detail"
-      ]
-    },
-    {
       "text": "المدينة المنورة",
       "count": 4,
       "pages": [
@@ -301,39 +228,28 @@
       ]
     },
     {
-      "text": "فاخرة",
+      "text": "مكة",
       "count": 3,
       "pages": [
-        "canvas",
-        "packages",
-        "package-detail"
+        "journey",
+        "hotels",
+        "hotel-detail"
       ]
     },
     {
-      "text": "مميزة",
+      "text": "ليلة",
       "count": 3,
       "pages": [
-        "canvas",
-        "packages",
-        "package-detail"
+        "journey"
       ]
     },
     {
-      "text": "أساسية",
+      "text": "المدينة",
       "count": 3,
       "pages": [
-        "canvas",
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "رجوع",
-      "count": 3,
-      "pages": [
-        "package-detail",
-        "hotel-detail",
-        "flights"
+        "journey",
+        "hotels",
+        "hotel-detail"
       ]
     },
     {
@@ -353,10 +269,10 @@
       ]
     },
     {
-      "text": "تنبيه",
+      "text": "عقد",
       "count": 3,
       "pages": [
-        "validation"
+        "hotel-detail"
       ]
     },
     {
@@ -400,47 +316,7 @@
       ]
     },
     {
-      "text": "باقة جديدة",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "الحصة",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "٤٠٪",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "٦٠٪",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
       "text": "الحصة مستوفاة",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "باقة 01",
       "count": 2,
       "pages": [
         "packages",
@@ -456,79 +332,7 @@
       ]
     },
     {
-      "text": "تكرار",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "حذف",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "رقم الباقة",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "الاسم (إنجليزي)",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "الفئة",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "لاحقة التصنيف",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "السعر الابتدائي (ر.س)",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
       "text": "لا حدود سعرية معتمدة لهذه الفئة بعد.",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "السعة وتوزيع الغرف",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "السعة (حاج)",
       "count": 2,
       "pages": [
         "packages",
@@ -545,102 +349,6 @@
     },
     {
       "text": "الحصة موزَّعة بالكامل.",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "توزيع الغرف (حاج)",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "الموزَّع 200",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "مطابق للسعة.",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "الإقامات",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "إقامة",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "نسخ مسار باقة",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "إضافة",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "الدور",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "الفندق",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "الموارد",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "العقود والمقاعد",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "عقود السكن ومقاعد الطيران المخصصة لهذه الباقة.",
       "count": 2,
       "pages": [
         "packages",
@@ -736,62 +444,6 @@
       ]
     },
     {
-      "text": "يغطي 3 من 4 ليلة",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "إضافة كتلة الوصول",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "إضافة كتلة المغادرة",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "الجاهزية والنشر",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "حالة النشر في نسك ومتطلبات اكتمال المحتوى.",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "حالة النشر في نسك",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "حالة البيع",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
       "text": "الوصف العربي جاهز",
       "count": 2,
       "pages": [
@@ -809,14 +461,6 @@
     },
     {
       "text": "الصورة الرئيسية معتمدة",
-      "count": 2,
-      "pages": [
-        "packages",
-        "package-detail"
-      ]
-    },
-    {
-      "text": "لا أخطاء تمنع رفع هذه الباقة.",
       "count": 2,
       "pages": [
         "packages",
@@ -892,13 +536,6 @@
       "count": 2,
       "pages": [
         "flights"
-      ]
-    },
-    {
-      "text": "خطأ",
-      "count": 2,
-      "pages": [
-        "validation"
       ]
     },
     {
@@ -993,122 +630,10 @@
       ]
     },
     {
-      "text": "رجوع إلى المخطط",
-      "count": 1,
-      "pages": [
-        "journey"
-      ]
-    },
-    {
-      "text": "اختر فندقًا لعرض عقوده وتغطيته",
-      "count": 1,
-      "pages": [
-        "hotels"
-      ]
-    },
-    {
       "text": "إقامة في الباقات",
       "count": 1,
       "pages": [
         "hotel-detail"
-      ]
-    },
-    {
-      "text": "تحرير",
-      "count": 1,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "العقود على محور الموسم",
-      "count": 1,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "ذروة الأسرّة الموقَّعة 4",
-      "count": 1,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "ذروة سعات الباقات 4",
-      "count": 1,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "إضافة عقد",
-      "count": 1,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "سعات الباقات",
-      "count": 1,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "الأسرّة الموقَّعة",
-      "count": 1,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "تجاوز",
-      "count": 1,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "الأعلى: نوافذ العقود (المتقطّع مقترح غير موقَّع). الأسفل: سعات الباقات ليلةً بليلة على غلاف الأسرّة الموقَّعة",
-      "count": 1,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "الشريط الوردي هو مقدار التجاوز حيث يقع.",
-      "count": 1,
-      "pages": [
-        "hotel-detail"
-      ]
-    },
-    {
-      "text": "وصول مؤكَّد",
-      "count": 1,
-      "pages": [
-        "flights"
-      ]
-    },
-    {
-      "text": "مغادرة مؤكَّدة",
-      "count": 1,
-      "pages": [
-        "flights"
-      ]
-    },
-    {
-      "text": "كتلة لناقل جديد",
-      "count": 1,
-      "pages": [
-        "flights"
-      ]
-    },
-    {
-      "text": "إضافة كتلة",
-      "count": 1,
-      "pages": [
-        "flights"
       ]
     },
     {
