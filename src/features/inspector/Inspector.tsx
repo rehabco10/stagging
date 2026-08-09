@@ -13,13 +13,14 @@ import {
   state,
   type DraftPackage,
 } from "@/store/season"
-import { ROLE_LABEL } from "@/features/graph/nodes"
+import i18n from "@/i18n/config"
+import { roleLabel } from "@/lib/options"
 import { PackageResources } from "@/features/inventory/PackageResources"
 import { displayCategory } from "@/lib/schemas"
 import { DatePicker } from "@/components/ui/date-picker"
 import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
 import { MaskedPriceInput } from "@/components/ui/price"
-import { ROLE_OPTIONS, TIER_OPTIONS } from "@/lib/options"
+import { roleOptions, tierOptions } from "@/lib/options"
 import { cn, arNum } from "@/lib/utils"
 import { useIssues } from "@/store/use-issues"
 
@@ -134,7 +135,7 @@ function PackageForm({ pkg }: { pkg: DraftPackage }) {
             <SelectField
               allowEmpty={false}
               value={live.tier}
-              options={TIER_OPTIONS}
+              options={tierOptions()}
               onChange={(v) => (pkg.tier = v as DraftPackage["tier"])}
             />
           </Field>
@@ -261,12 +262,12 @@ function LegForm({ legId }: { legId: string }) {
 
   return (
     <>
-      <Section title={`${ROLE_LABEL[leg.role]} — باقة ${pkg.package_no}`}>
+      <Section title={`${roleLabel(leg.role)} — ${i18n.t("graph.package_no", { no: pkg.package_no })}`}>
         <Field label="الدور">
           <SelectField
             allowEmpty={false}
             value={leg.role}
-            options={ROLE_OPTIONS}
+            options={roleOptions()}
             onChange={(v) => {
               const next = v as typeof leg.role
               // Swap with whichever leg already holds the target role, so a
@@ -420,6 +421,6 @@ export function useInspectorSubtitle() {
   const pkg = snap.packages.find((p) => p.id === snap.selectedId)
   if (pkg) return `باقة ${pkg.package_no} — ${pkg.name_en || "بدون اسم"}`
   const leg = findLeg(snap.selectedId)
-  if (leg) return `${ROLE_LABEL[leg.leg.role]} — باقة ${leg.pkg.package_no}`
+  if (leg) return `${roleLabel(leg.leg.role)} — ${i18n.t("graph.package_no", { no: leg.pkg.package_no })}`
   return `موسم ${snap.season.year_hijri}هـ — ${snap.season.year_gregorian}م`
 }

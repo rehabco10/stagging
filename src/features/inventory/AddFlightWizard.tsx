@@ -3,10 +3,7 @@ import { useEffect, useState } from "react"
 import { FormWizard } from "@/components/ui/form-wizard"
 import { DatePicker } from "@/components/ui/date-picker"
 import { Field, Input, NumInput, SelectField } from "@/components/ui/field"
-import {
-  FLIGHT_DIRECTION_OPTIONS,
-  FLIGHT_TYPE_OPTIONS,
-} from "@/lib/options"
+import { flightDirectionOptions, flightTypeOptions } from "@/lib/options"
 import { addFlightBlock, state, type DraftFlightBlock } from "@/store/season"
 import { arNum } from "@/lib/utils"
 import { Review } from "./AddHotelWizard"
@@ -69,7 +66,7 @@ export function AddFlightWizard({
                 <SelectField
                   allowEmpty={false}
                   value={draft.direction}
-                  options={FLIGHT_DIRECTION_OPTIONS}
+                  options={flightDirectionOptions()}
                   onChange={(v) => {
                     const direction = v as FlightDraft["direction"]
                     set({
@@ -156,7 +153,7 @@ export function AddFlightWizard({
                 <SelectField
                   allowEmpty={false}
                   value={draft.contract_type}
-                  options={FLIGHT_TYPE_OPTIONS}
+                  options={flightTypeOptions()}
                   onChange={(v) => set({ contract_type: v as FlightDraft["contract_type"] })}
                 />
               </Field>

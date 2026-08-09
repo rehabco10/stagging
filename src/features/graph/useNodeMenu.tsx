@@ -12,7 +12,7 @@ import {
   state,
   unpinNode,
 } from "@/store/season"
-import { ROLE_LABEL } from "./nodes"
+import { roleLabel } from "@/lib/options"
 import { useLongPress } from "@/hooks/use-long-press"
 import { arNum } from "@/lib/utils"
 import type { MenuAction, MenuTarget } from "./NodeMenu"
@@ -109,7 +109,7 @@ export function useNodeMenu(
       if (found) {
         return {
           nodeId,
-          title: ROLE_LABEL[found.leg.role],
+          title: roleLabel(found.leg.role),
           subtitle: `باقة ${found.pkg.package_no}`,
           x,
           y,

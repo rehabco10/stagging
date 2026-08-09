@@ -1,5 +1,6 @@
 // Every internal link goes through the locale-aware Link, or an English
 // session would land back on the Arabic route.
+import { useTranslation } from "react-i18next"
 import { LocaleLink as Link } from "@/i18n/LocaleProvider"
 import { useSnapshot } from "valtio"
 import {
@@ -31,6 +32,7 @@ import { cn, arNum } from "@/lib/utils"
  * everything stacks in source order, which is also priority order.
  */
 export function DashboardPage() {
+  const { t } = useTranslation()
   const snap = useSnapshot(state)
   const issues = useIssues()
 
@@ -64,8 +66,11 @@ export function DashboardPage() {
 
   return (
     <PageShell
-      title="لوحة المعلومات"
-      description={`موسم ${snap.season.year_hijri}هـ — ${snap.season.year_gregorian}م · نظرة عامة على الحصة والتقدم والجاهزية.`}
+      title={t("page.dashboard")}
+      description={t("page.dashboard_desc", {
+        hijri: String(snap.season.year_hijri),
+        gregorian: String(snap.season.year_gregorian),
+      })}
     >
       <div className="grid items-start gap-4 lg:grid-cols-12">
         {/* ── hero: quota progress + tier mix ─────────────────────── */}

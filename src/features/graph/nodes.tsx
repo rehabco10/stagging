@@ -1,6 +1,8 @@
 import { Handle, Position, type Node, type NodeProps } from "@xyflow/react"
+import { useTranslation } from "react-i18next"
 import { ChevronDown, ChevronLeft, Plus, Pin, MoveRight, TriangleAlert } from "lucide-react"
 import { Price } from "@/components/ui/price"
+import { cityLabel, roleLabel, starLabel } from "@/lib/options"
 import { cn, arNum } from "@/lib/utils"
 import type { DraftLeg, DraftPackage, DraftHotel } from "@/store/season"
 
@@ -48,20 +50,6 @@ export const TIER_TINT: Record<DraftPackage["tier"], Tint> = {
   standard: "slate",
 }
 
-export const ROLE_LABEL: Record<DraftLeg["role"], string> = {
-  first: "السكن الأول",
-  second: "السكن الثاني",
-  transitional: "السكن الانتقالي",
-}
-
-const STAR_LABEL: Record<DraftHotel["star_class"], string> = {
-  "5": "خمسة نجوم",
-  "4": "أربعة نجوم",
-  "3": "ثلاثة نجوم",
-  "2": "نجمتان",
-  "1": "نجمة واحدة",
-  nuzul: "نزل",
-}
 
 /* ── shared chrome ──────────────────────────────────────────────── */
 
@@ -117,10 +105,11 @@ function AddButton({
 }
 
 function PinnedMark({ pinned }: { pinned: boolean }) {
+  const { t } = useTranslation()
   if (!pinned) return null
   return (
     <span
-      title="مثبَّت — لن تحركه إعادة الترتيب. انقر مرتين لفكّ التثبيت."
+      title={t("graph.pinned_hint")}
       className="absolute -top-2 -start-2 grid place-items-center size-5 rounded-full bg-card border border-border shadow-sm"
     >
       <Pin className="size-3 text-muted-foreground" />
@@ -181,6 +170,7 @@ export const QUOTA_W = 300
 export const QUOTA_H = 132
 
 export function QuotaNode({ data }: NodeProps<Node<QuotaData>>) {
+  const { t } = useTranslation()
   const { quota, allocated, packageCount, standardPct, errorCount } = data
   const left = quota - allocated
   const pct = quota > 0 ? Math.min(100, (allocated / quota) * 100) : 0
@@ -192,13 +182,15 @@ export function QuotaNode({ data }: NodeProps<Node<QuotaData>>) {
         <div className="flex items-start justify-between gap-2">
           <div>
             <div className="text-[10px] uppercase tracking-wider font-semibold text-foreground/70">
-              الحصة الإجمالية
+              {t("graph.quota_total")}
             </div>
-            <div className="text-base font-bold text-foreground leading-tight mt-0.5">الباقات</div>
+            <div className="text-base font-bold text-foreground leading-tight mt-0.5">
+              {t("graph.packages_root")}
+            </div>
           </div>
           <div className="text-end">
             <div className={cn("text-lg font-bold tabular-nums", TINT_FG.teal)}>{arNum(quota)}</div>
-            <div className="text-[10px] text-foreground/60">حاج</div>
+            <div className="text-[10px] text-foreground/60">{t("graph.pilgrim")}</div>
           </div>
         </div>
 
@@ -211,16 +203,25 @@ export function QuotaNode({ data }: NodeProps<Node<QuotaData>>) {
 
         <div className="flex items-center justify-between text-[11px] tabular-nums">
           <span className="text-foreground/70">
-            موزَّع <b className="font-semibold text-foreground">{arNum(allocated)}</b>
+            {t("graph.allocated")}{" "}
+            <b className="font-semibold text-foreground">{arNum(allocated)}</b>
           </span>
           <span className={cn("font-semibold", over ? "text-[color:var(--brand-rose-deep)]" : "text-foreground/70")}>
-            {over ? `تجاوز ${arNum(-left)}` : `متبقٍ ${arNum(left)}`}
+            {over ? t("graph.over_by", { n: arNum(-left) }) : t("graph.left", { n: arNum(left) })}
           </span>
         </div>
 
         <div className="flex items-center justify-between text-[10px] text-foreground/60 border-t border-white/60 pt-1.5">
-          <span>{packageCount === 0 ? "لا توجد باقات بعد" : `${arNum(packageCount)} باقة`}</span>
-          {packageCount > 0 && <span className="tabular-nums">أساسية {standardPct.toFixed(0)}%</span>}
+          <span>
+            {packageCount === 0
+              ? t("graph.no_packages")
+              : t("graph.package_count", { n: packageCount })}
+          </span>
+          {packageCount > 0 && (
+            <span className="tabular-nums">
+              {t("graph.standard_pct", { pct: standardPct.toFixed(0) })}
+            </span>
+          )}
           {errorCount > 0 && (
             <span className="inline-flex items-center gap-1 text-[color:var(--brand-rose-deep)] font-semibold">
               <TriangleAlert className="size-3" />
@@ -230,7 +231,7 @@ export function QuotaNode({ data }: NodeProps<Node<QuotaData>>) {
         </div>
 
         <Handle type="source" position={Position.Right} className="!opacity-0" />
-        <AddButton visible={data.selected} title="إضافة باقة" onClick={data.onAdd} />
+        <AddButton visible={data.selected} title={t("graph.add_package")} onClick={data.onAdd} />
       </Card>
     </>
   )
@@ -257,6 +258,7 @@ export const TIER_NODE_H = 88
  * creates a package already carrying that tier.
  */
 export function TierNode({ data }: NodeProps<Node<TierData>>) {
+  const { t } = useTranslation()
   const tint = TIER_TINT[data.tier]
   return (
     <Card tint={tint} selected={false} width={TIER_NODE_W} height={TIER_NODE_H}>
@@ -264,7 +266,7 @@ export function TierNode({ data }: NodeProps<Node<TierData>>) {
       <Handle type="source" position={Position.Right} className="!opacity-0" />
       <div className="flex items-start justify-between gap-2">
         <div className="text-[10px] uppercase tracking-wider font-semibold text-foreground/70">
-          فئة
+          {t("graph.tier_kicker")}
         </div>
         <div className={cn("text-base font-bold tabular-nums", TINT_FG[tint])}>
           {arNum(data.capacity)}
@@ -272,10 +274,14 @@ export function TierNode({ data }: NodeProps<Node<TierData>>) {
       </div>
       <div className="text-sm font-bold text-foreground leading-tight">{data.label}</div>
       <div className="flex items-center justify-between text-[10px] text-foreground/65 tabular-nums border-t border-white/60 pt-1">
-        <span>{arNum(data.count)} باقة</span>
+        <span>{t("graph.package_count", { n: data.count })}</span>
         <span>{data.pct.toFixed(1)}%</span>
       </div>
-      <AddButton visible={false} title={`إضافة باقة ${data.label}`} onClick={data.onAdd} />
+      <AddButton
+        visible={false}
+        title={`${t("graph.add_package")} — ${data.label}`}
+        onClick={data.onAdd}
+      />
     </Card>
   )
 }
@@ -303,6 +309,7 @@ export const PACKAGE_W = 260
 export const PACKAGE_H = 96
 
 export function PackageNode({ data }: NodeProps<Node<PackageData>>) {
+  const { t } = useTranslation()
   const { pkg, nights, shifting, legCount } = data
   const tint = TIER_TINT[pkg.tier]
 
@@ -315,11 +322,11 @@ export function PackageNode({ data }: NodeProps<Node<PackageData>>) {
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
           <div className="flex items-center gap-1.5 text-[10px] uppercase tracking-wider font-semibold text-foreground/70">
-            <span>باقة {pkg.package_no}</span>
+            <span>{t("graph.package_no", { no: pkg.package_no })}</span>
             {shifting && (
               <span className="inline-flex items-center gap-0.5 normal-case tracking-normal text-foreground/55">
                 <MoveRight className="size-3" />
-                انتقالية
+                {t("graph.shifting")}
               </span>
             )}
           </div>
@@ -334,14 +341,14 @@ export function PackageNode({ data }: NodeProps<Node<PackageData>>) {
 
       <div className="flex items-center justify-between text-[10px] text-foreground/70 tabular-nums border-t border-white/60 pt-1.5">
         {legCount === 0 ? (
-          <span>بدون إقامات</span>
+          <span>{t("graph.no_legs")}</span>
         ) : (
           // The accordion handle: opens this package's legs, closing whichever
           // branch was open — one readable package at a time on a 39-package
           // canvas. stopPropagation keeps it from also selecting the node.
           <button
             type="button"
-            title={data.expanded ? "طيّ الإقامات" : "عرض الإقامات"}
+            title={data.expanded ? t("graph.collapse_legs") : t("graph.expand_legs")}
             aria-expanded={data.expanded}
             onClick={(e) => {
               e.stopPropagation()
@@ -358,7 +365,7 @@ export function PackageNode({ data }: NodeProps<Node<PackageData>>) {
             ) : (
               <ChevronLeft className="size-3" />
             )}
-            {arNum(legCount)} إقامة · {arNum(nights)} ليلة
+            {t("graph.legs_summary", { legs: legCount, nights })}
           </button>
         )}
         {data.invalid ? (
@@ -372,14 +379,14 @@ export function PackageNode({ data }: NodeProps<Node<PackageData>>) {
         ) : pkg.initial_price_sar > 0 ? (
           <Price value={`${arNum(Math.round(pkg.initial_price_sar))} ر.س`} />
         ) : (
-          <span>بدون سعر</span>
+          <span>{t("graph.no_price")}</span>
         )}
       </div>
 
       <AddButton
         visible={data.selected}
         disabled={!data.canAddLeg}
-        title={data.canAddLeg ? "إضافة إقامة" : "كل الأدوار مستخدمة (أول، ثانٍ، انتقالي)"}
+        title={data.canAddLeg ? t("graph.add_leg") : t("graph.roles_used")}
         onClick={data.onAdd}
       />
     </Card>
@@ -402,6 +409,7 @@ export const LEG_W = 210
 export const LEG_H = 110
 
 export function LegNode({ data }: NodeProps<Node<LegData>>) {
+  const { t } = useTranslation()
   const { leg, hotel, nights, order } = data
   const tint: Tint = leg.role === "transitional" ? "rose" : hotel?.city === "makkah" ? "teal" : "green"
 
@@ -418,18 +426,20 @@ export function LegNode({ data }: NodeProps<Node<LegData>>) {
       <Handle type="target" position={Position.Left} className="!opacity-0" />
 
       <div className="flex items-center justify-between gap-2 text-[10px] font-semibold text-foreground/70">
-        <span className="uppercase tracking-wider">{ROLE_LABEL[leg.role]}</span>
+        <span className="uppercase tracking-wider">{roleLabel(leg.role)}</span>
         {/* Chronological index — role labels are not order. */}
         <span className="tabular-nums text-foreground/50">#{arNum(order)}</span>
       </div>
 
       <div className="text-[13px] font-bold text-foreground leading-tight truncate" title={hotel?.name_ar}>
-        {hotel?.name_ar ?? "— اختر فندقًا —"}
+        {hotel?.name_ar ?? t("graph.pick_hotel")}
       </div>
 
       <div className="flex items-center justify-between text-[10px] text-foreground/65">
-        <span>{hotel ? `${hotel.city === "makkah" ? "مكة المكرمة" : "المدينة المنورة"} · ${STAR_LABEL[hotel.star_class]}` : "—"}</span>
-        <span className={cn("font-semibold tabular-nums", TINT_FG[tint])}>{arNum(nights)} ليلة</span>
+        <span>{hotel ? `${cityLabel(hotel.city)} · ${starLabel(hotel.star_class)}` : "—"}</span>
+        <span className={cn("font-semibold tabular-nums", TINT_FG[tint])}>
+          {t("graph.nights", { n: nights })}
+        </span>
       </div>
 
       <div className="text-[10px] text-foreground/55 tabular-nums border-t border-white/60 pt-1.5" dir="ltr">

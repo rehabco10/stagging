@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { useQueryState } from "nuqs"
 import { useSnapshot } from "valtio"
 import { PanelRightOpen } from "lucide-react"
@@ -20,6 +21,7 @@ import { state } from "@/store/season"
 
 export function CanvasPage() {
   const snap = useSnapshot(state)
+  const { t } = useTranslation()
   const [wizardOpen, setWizardOpen] = useState(false)
   const subtitle = useInspectorSubtitle()
 
@@ -36,12 +38,12 @@ export function CanvasPage() {
   return (
     <div className="relative flex min-h-0 min-w-0 flex-1 flex-col bg-surface-page">
       <PageHeader
-        title="تكوين الباقات"
-        description="عرض الباقات وإقاماتها على المخطط."
+        title={t("page.canvas")}
+        description={t("page.canvas_desc")}
         actions={
           <Button variant="outline" size="sm" onClick={() => setWizardOpen(true)}>
             <PanelRightOpen className="size-3.5" />
-            معالج تكوين الباقات
+            {t("canvas.open_wizard")}
           </Button>
         }
       />
@@ -64,13 +66,9 @@ export function CanvasPage() {
       <ResponsivePanel
         open={wizardOpen}
         onOpenChange={setWizardOpen}
-        title="معالج تكوين الباقات"
+        title={t("canvas.wizard_title")}
         description={subtitle}
-        footer={
-          <p className="text-[10px] text-muted-foreground">
-            سحب العقدة يثبّت موضعها · النقر المزدوج يعيدها إلى الترتيب التلقائي
-          </p>
-        }
+        footer={<p className="text-[10px] text-muted-foreground">{t("canvas.pin_hint")}</p>}
       >
         <InspectorContent />
       </ResponsivePanel>
@@ -84,30 +82,27 @@ export function CanvasPage() {
 /* ── ordinary pages ─────────────────────────────────────────────── */
 
 export function RequirementsPage() {
+  const { t } = useTranslation()
   return (
-    <PageShell
-      title="الاجتماعات والمتطلبات"
-      description="متطلبات وزارة الحج والعمرة والفريق؛ يُطبَّق المعتمد منها على التحقق قبل الرفع."
-    >
+    <PageShell title={t("page.requirements")} description={t("page.requirements_desc")}>
       <RequirementsPanel />
     </PageShell>
   )
 }
 
 export function ValidationPage() {
+  const { t } = useTranslation()
   return (
-    <PageShell
-      title="التحقق والرفع"
-      description="الأخطاء المانعة للرفع إلى نسك والتنبيهات المستوجبة للمراجعة."
-    >
+    <PageShell title={t("page.validation")} description={t("page.validation_desc")}>
       <ValidationPanel />
     </PageShell>
   )
 }
 
 export function SettingsPage() {
+  const { t } = useTranslation()
   return (
-    <PageShell title="الإعدادات" description="الموسم، المخطط، والتخزين.">
+    <PageShell title={t("page.settings")} description={t("page.settings_desc")}>
       <SettingsPanel />
     </PageShell>
   )

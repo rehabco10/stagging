@@ -1,4 +1,144 @@
 {
+  "brand": "إثراء الخير",
+  "nav": {
+    "sections": "الأقسام",
+    "open_menu": "فتح القائمة",
+    "error_count": "{count, plural, zero {لا أخطاء} one {خطأ واحد} two {خطآن} few {# أخطاء} many {# خطأ} other {# خطأ}}",
+    "season_badge": "موسم {year}هـ",
+    "dashboard": "لوحة المعلومات",
+    "canvas": "تكوين الباقات — المخطط",
+    "packages": "جدول الباقات",
+    "requirements": "الاجتماعات والمتطلبات",
+    "hotels": "الفنادق والمخيمات",
+    "flights": "مقاعد الطيران",
+    "validation": "التحقق والرفع",
+    "settings": "الإعدادات"
+  },
+  "page": {
+    "dashboard": "لوحة المعلومات",
+    "dashboard_desc": "موسم {hijri}هـ — {gregorian}م · نظرة عامة على الحصة والتقدم والجاهزية.",
+    "canvas": "تكوين الباقات",
+    "canvas_desc": "عرض الباقات وإقاماتها على المخطط.",
+    "packages": "الباقات",
+    "packages_desc": "إدارة باقات الموسم وتوزيع الحصة المعتمدة.",
+    "requirements": "الاجتماعات والمتطلبات",
+    "requirements_desc": "متطلبات وزارة الحج والعمرة والفريق؛ يُطبَّق المعتمد منها على التحقق قبل الرفع.",
+    "hotels": "السكن",
+    "hotels_desc": "الفنادق وعقود السكن وسعاتها مقابل سعات الباقات.",
+    "flights": "الطيران",
+    "flights_desc": "الناقلات وكتل المقاعد المتعاقد عليها، وصولًا ومغادرة.",
+    "validation": "التحقق والرفع",
+    "validation_desc": "الأخطاء المانعة للرفع إلى نسك والتنبيهات المستوجبة للمراجعة.",
+    "settings": "الإعدادات",
+    "settings_desc": "الموسم، المخطط، والتخزين."
+  },
+  "canvas": {
+    "open_wizard": "معالج تكوين الباقات",
+    "wizard_title": "معالج تكوين الباقات",
+    "pin_hint": "سحب العقدة يثبّت موضعها · النقر المزدوج يعيدها إلى الترتيب التلقائي"
+  },
+  "graph": {
+    "quota_total": "الحصة الإجمالية",
+    "packages_root": "الباقات",
+    "pilgrim": "حاج",
+    "allocated": "موزَّع",
+    "over_by": "تجاوز {n}",
+    "left": "متبقٍ {n}",
+    "no_packages": "لا توجد باقات بعد",
+    "package_count": "{n} باقة",
+    "standard_pct": "أساسية {pct}%",
+    "tier_kicker": "فئة",
+    "package_no": "باقة {no}",
+    "shifting": "انتقالية",
+    "legs_summary": "{legs} إقامة · {nights} ليلة",
+    "no_legs": "بدون إقامات",
+    "no_price": "بدون سعر",
+    "collapse_legs": "طيّ الإقامات",
+    "expand_legs": "عرض الإقامات",
+    "add_package": "إضافة باقة",
+    "add_leg": "إضافة إقامة",
+    "roles_used": "كل الأدوار مستخدمة (أول، ثانٍ، انتقالي)",
+    "pick_hotel": "— اختر فندقًا —",
+    "nights": "{n} ليلة",
+    "pinned_hint": "مثبَّت — لن تحركه إعادة الترتيب. انقر مرتين لفكّ التثبيت."
+  },
+  "tier": {
+    "luxury": "فاخرة",
+    "premium": "مميزة",
+    "standard": "أساسية"
+  },
+  "role": {
+    "first": "السكن الأول",
+    "second": "السكن الثاني",
+    "transitional": "السكن الانتقالي"
+  },
+  "publish_status": {
+    "draft": "مسودة",
+    "submitted": "مرفوعة",
+    "approved": "معتمدة",
+    "rejected": "مرفوضة"
+  },
+  "sale_status": {
+    "unavailable": "غير متاح",
+    "available": "متاح للبيع"
+  },
+  "city": {
+    "makkah": "مكة المكرمة",
+    "madinah": "المدينة المنورة",
+    "makkah_short": "مكة",
+    "madinah_short": "المدينة"
+  },
+  "star": {
+    "5": "خمسة نجوم",
+    "4": "أربعة نجوم",
+    "3": "ثلاثة نجوم",
+    "2": "نجمتان",
+    "1": "نجمة واحدة",
+    "nuzul": "نزل"
+  },
+  "grade": {
+    "أ": "أ",
+    "ب": "ب",
+    "ج": "ج",
+    "م": "م"
+  },
+  "room_type": {
+    "4": "رباعية",
+    "3": "ثلاثية",
+    "2": "ثنائية"
+  },
+  "contract_city": {
+    "makkah": "مكة المكرمة",
+    "madinah": "المدينة المنورة",
+    "shifting": "انتقالي (مكة)"
+  },
+  "contract_status": {
+    "proposed": "مقترح",
+    "signed": "موقَّع",
+    "cancelled": "ملغى"
+  },
+  "flight_direction": {
+    "arrival": "وصول",
+    "return": "مغادرة"
+  },
+  "flight_type": {
+    "group": "رحلات مجموعات",
+    "gds": "رحلات GDS"
+  },
+  "flight_status": {
+    "proposed": "مقترح",
+    "confirmed": "مؤكَّد",
+    "cancelled": "ملغى"
+  },
+  "issue_category": {
+    "governance": "الحصة والضوابط",
+    "itinerary": "المسارات والإقامات",
+    "package": "بيانات الباقات",
+    "contracts": "عقود السكن",
+    "housing": "التسكين والتوفّر",
+    "flights": "مقاعد الطيران",
+    "other": "أخرى"
+  },
   "settings": {
     "language": "لغة الواجهة",
     "language_hint": "العربية على «/» والإنجليزية على «/en» — الرابط يحمل اللغة.",

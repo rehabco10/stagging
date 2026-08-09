@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useTranslation } from "react-i18next"
 import { useParams } from "react-router-dom"
 import { useSnapshot } from "valtio"
 import { ChevronLeft, MapPin, Plane, PlaneLanding, PlaneTakeoff, Plus, Trash2, TriangleAlert } from "lucide-react"
@@ -17,7 +18,7 @@ import { Meter } from "@/components/ui/meter"
 import { StatusPill } from "@/components/ui/status-pill"
 import { AddFlightWizard } from "@/features/inventory/AddFlightWizard"
 import { carrierIssues } from "@/features/inventory/supply"
-import { FLIGHT_DIRECTION_OPTIONS, FLIGHT_STATUS_OPTIONS, FLIGHT_TYPE_OPTIONS } from "@/lib/options"
+import { flightDirectionOptions, flightStatusOptions, flightTypeOptions } from "@/lib/options"
 import { useIssues } from "@/store/use-issues"
 import { cn, arNum } from "@/lib/utils"
 
@@ -40,6 +41,7 @@ const safeDecode = (s: string) => {
  * A block is always created FROM a carrier, preset in the wizard.
  */
 export function CarriersPage() {
+  const { t } = useTranslation()
   const params = useParams()
   const carrier = params.carrier ? safeDecode(params.carrier) : undefined
   const navigate = useLocaleNavigate()
@@ -77,10 +79,7 @@ export function CarriersPage() {
     // Chat-app scrolling: header and quota meters stay put; the carrier list
     // and the blocks detail scroll independently.
     <div className="flex min-h-0 min-w-0 flex-1 flex-col bg-surface-page">
-      <PageHeader
-        title="الطيران"
-        description="الناقلات وكتل المقاعد المتعاقد عليها، وصولًا ومغادرة."
-      />
+      <PageHeader title={t("page.flights")} description={t("page.flights_desc")} />
       <AddFlightWizard
         open={adding !== null}
         onOpenChange={(o) => !o && setAdding(null)}
@@ -337,7 +336,7 @@ function CarrierDetail({
                         <SelectField
                           allowEmpty={false}
                           value={f.direction}
-                          options={FLIGHT_DIRECTION_OPTIONS}
+                          options={flightDirectionOptions()}
                           onChange={(v) => (live.direction = v as DraftFlightBlock["direction"])}
                         />
                       </Field>
@@ -383,7 +382,7 @@ function CarrierDetail({
                           <SelectField
                             allowEmpty={false}
                             value={f.contract_type}
-                            options={FLIGHT_TYPE_OPTIONS}
+                            options={flightTypeOptions()}
                             onChange={(v) => (live.contract_type = v as DraftFlightBlock["contract_type"])}
                           />
                         </Field>
@@ -391,7 +390,7 @@ function CarrierDetail({
                           <SelectField
                             allowEmpty={false}
                             value={f.status}
-                            options={FLIGHT_STATUS_OPTIONS}
+                            options={flightStatusOptions()}
                             onChange={(v) => (live.status = v as DraftFlightBlock["status"])}
                           />
                         </Field>
