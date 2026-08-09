@@ -1,0 +1,12 @@
+# Arabic in direct JSX text — the bulk of the UI copy.
+id: i18n-jsx-text
+language: tsx
+severity: hint
+message: Arabic JSX text
+files:
+  - src/**
+ignores:
+  - src/store/seed-1447.ts
+rule:
+  kind: jsx_text
+  regex: '[؀-ۿ]'

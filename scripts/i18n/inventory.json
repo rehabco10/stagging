@@ -1,0 +1,5548 @@
+{
+  "generatedFrom": "ast-grep scan -c scripts/i18n/sgconfig.yml (see docs/i18n-plan.md §1)",
+  "totals": {
+    "matches": 762,
+    "distinctMessages": 532,
+    "withParams": 101,
+    "pluralCandidates": 51,
+    "byRule": {
+      "i18n-jsx-text": 127,
+      "i18n-attr-string": 308,
+      "i18n-literal-string": 221,
+      "i18n-template": 106
+    }
+  },
+  "messages": [
+    {
+      "text": "أ",
+      "count": 10,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/lib/schemas.ts",
+        "src/features/inventory/AddHotelWizard.tsx",
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "المدينة",
+      "count": 7,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx",
+        "src/features/inspector/Inspector.tsx",
+        "src/features/inventory/ContractCard.tsx",
+        "src/features/inventory/HousingPage.tsx",
+        "src/features/graph/JourneyGraph.tsx"
+      ]
+    },
+    {
+      "text": "باقة",
+      "count": 7,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx",
+        "src/features/inventory/ContractCard.tsx",
+        "src/features/inventory/CarriersPage.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "ج",
+      "count": 7,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/lib/schemas.ts",
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "جدة",
+      "count": 7,
+      "kinds": [
+        "literal-string",
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "سرير",
+      "count": 6,
+      "kinds": [
+        "jsx-text",
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/TimelineChart.tsx",
+        "src/features/inventory/ContractsTimeline.tsx",
+        "src/features/inventory/ContractCard.tsx",
+        "src/features/inventory/PackageResources.tsx",
+        "src/features/graph/JourneyGraph.tsx"
+      ]
+    },
+    {
+      "text": "مقعد",
+      "count": 6,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx",
+        "src/features/inventory/PackageResources.tsx",
+        "src/features/graph/JourneyGraph.tsx"
+      ]
+    },
+    {
+      "text": "الاسم (إنجليزي)",
+      "count": 5,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx",
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx",
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "المدينة المنورة",
+      "count": 5,
+      "kinds": [
+        "literal-string",
+        "attr-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/inventory/CarriersPage.tsx",
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "المغادرة",
+      "count": 5,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx",
+        "src/features/inventory/PackageResources.tsx",
+        "src/features/graph/JourneyGraph.tsx",
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "الموزَّع",
+      "count": 5,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "الوصول",
+      "count": 5,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx",
+        "src/features/inventory/PackageResources.tsx",
+        "src/features/graph/JourneyGraph.tsx",
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "ليلة",
+      "count": 5,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx",
+        "src/features/graph/JourneyGraph.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "مقترح",
+      "count": 5,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/components/ui/status-pill.tsx",
+        "src/features/panels/panels.tsx",
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "ملغى",
+      "count": 5,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/components/ui/status-pill.tsx",
+        "src/features/panels/panels.tsx",
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "أساسية",
+      "count": 4,
+      "kinds": [
+        "literal-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/graph/nodes.tsx",
+        "src/features/graph/PackageGraph.tsx"
+      ]
+    },
+    {
+      "text": "التصنيف",
+      "count": 4,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx",
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "ثلاثية",
+      "count": 4,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx",
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "ثنائية",
+      "count": 4,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx",
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "حذف الإقامة",
+      "count": 4,
+      "kinds": [
+        "literal-string",
+        "jsx-text",
+        "attr-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx",
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "رباعية",
+      "count": 4,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx",
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "م",
+      "count": 4,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/lib/schemas.ts",
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "مكة المكرمة",
+      "count": 4,
+      "kinds": [
+        "literal-string",
+        "attr-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "من",
+      "count": 4,
+      "kinds": [
+        "jsx-text",
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/features/inventory/AddFlightWizard.tsx",
+        "src/features/inventory/ContractCard.tsx",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(Math.round(pkg.initial_price_sar))} ر.س`",
+      "count": 3,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx",
+        "src/features/graph/JourneyGraph.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "إثراء الخير",
+      "count": 3,
+      "kinds": [
+        "literal-string",
+        "attr-string"
+      ],
+      "files": [
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "إضافة",
+      "count": 3,
+      "kinds": [
+        "literal-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/components/ui/form-wizard.tsx",
+        "src/features/panels/panels.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "إضافة باقة",
+      "count": 3,
+      "kinds": [
+        "literal-string",
+        "attr-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "الاجتماعات والمتطلبات",
+      "count": 3,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/routes.tsx",
+        "src/routes/dashboard.tsx",
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "الأقسام",
+      "count": 3,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "الباقات",
+      "count": 3,
+      "kinds": [
+        "literal-string",
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx",
+        "src/routes/packages.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "الحالة",
+      "count": 3,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx",
+        "src/features/inventory/ContractCard.tsx",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "الحصة مستوفاة",
+      "count": 3,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/features/panels/panels.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "الفئة",
+      "count": 3,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx",
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "الفندق",
+      "count": 3,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx",
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "إلى",
+      "count": 3,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx",
+        "src/features/inventory/ContractCard.tsx",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "ب",
+      "count": 3,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/lib/schemas.ts",
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "جدول الباقات",
+      "count": 3,
+      "kinds": [
+        "jsx-text",
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "حذف",
+      "count": 3,
+      "kinds": [
+        "jsx-text",
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx",
+        "src/features/inventory/ContractCard.tsx",
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "ر.س",
+      "count": 3,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx",
+        "src/features/graph/JourneyGraph.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "رقم الباقة",
+      "count": 3,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx",
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "سعر محجوب — النقر يُظهره",
+      "count": 3,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/components/ui/price.tsx"
+      ]
+    },
+    {
+      "text": "فاخرة",
+      "count": 3,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/graph/PackageGraph.tsx"
+      ]
+    },
+    {
+      "text": "كتلة ·",
+      "count": 3,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "مقاعد الطيران",
+      "count": 3,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/lib/options.ts",
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "مكة",
+      "count": 3,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/features/inventory/HousingPage.tsx",
+        "src/features/graph/JourneyGraph.tsx"
+      ]
+    },
+    {
+      "text": "مكتمل",
+      "count": 3,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/features/panels/panels.tsx",
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "مميزة",
+      "count": 3,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/graph/PackageGraph.tsx"
+      ]
+    },
+    {
+      "text": "موزَّع",
+      "count": 3,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/features/inspector/Inspector.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "— مطابق للسعة.",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "· فئة",
+      "count": 2,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "`${h.name_ar} — ${h.city === \"makkah\" ? \"مكة\" : \"المدينة\"}`",
+      "count": 2,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`تجاوز ${arNum(-left)}`",
+      "count": 2,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "`متبقٍ ${arNum(left)}`",
+      "count": 2,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "إجراءات",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "أخرى",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "أربعة نجوم",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "إضافة إقامة",
+      "count": 2,
+      "kinds": [
+        "literal-string",
+        "attr-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "إضافة كتلة",
+      "count": 2,
+      "kinds": [
+        "jsx-text",
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx",
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "إقامة ·",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "الاتجاه",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "الأساسية",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "الأسرّة الموقَّعة",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/TimelineChart.tsx"
+      ]
+    },
+    {
+      "text": "الاسم (عربي)",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx",
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "الإعدادات",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/routes.tsx",
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "البداية",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "التاريخ",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "التحقق والرفع",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/routes.tsx",
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "الحصة",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "الحصة الإجمالية (حاج)",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx",
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "الدور",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "الرحلة",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "السعة (حاج)",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "السعر الابتدائي (ر.س)",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "السكن الانتقالي",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "السكن الأول",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "السكن الثاني",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "السنة الميلادية",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx",
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "السنة الهجرية",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx",
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "الفنادق والمخيمات",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "الليالي",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "المخطط",
+      "count": 2,
+      "kinds": [
+        "jsx-text",
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "المسار",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "المقاعد",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "الموارد — العقود والمقاعد",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "الموسم",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx",
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "النهاية",
+      "count": 2,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "النوع",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "أمستردام",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "باقة جديدة",
+      "count": 2,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/CanvasToolbar.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "باقة.",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "بداية الموسم",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx",
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "بدون ناقل",
+      "count": 2,
+      "kinds": [
+        "literal-string",
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "بولمان زمزم مكة",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx",
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "تجاوز",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/TimelineChart.tsx"
+      ]
+    },
+    {
+      "text": "تجاوز الحصة",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "تكوين الباقات — المخطط",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "توزيع الغرف (حاج)",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "ثلاثة نجوم",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "حاج",
+      "count": 2,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "حذف الباقة",
+      "count": 2,
+      "kinds": [
+        "literal-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx",
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "خمسة نجوم",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "رقم الرحلة",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "سعات الباقات",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/TimelineChart.tsx"
+      ]
+    },
+    {
+      "text": "عقد",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/ContractsTimeline.tsx",
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "فئة السكن",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx"
+      ]
+    },
+    {
+      "text": "فتح في المعالج",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "فندق بلا اسم",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "كل الأدوار مستخدمة (أول، ثانٍ، انتقالي)",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "لا باقات بعد",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/features/graph/PackageGraph.tsx"
+      ]
+    },
+    {
+      "text": "لا يمكن حذف «",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "لاحقة التصنيف",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx",
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "لوحة المعلومات",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "مؤكَّد",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/components/ui/status-pill.tsx",
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "متبقٍ للتوزيع",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "معالج تكوين الباقات",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/routes.tsx"
+      ]
+    },
+    {
+      "text": "معتمد",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "مغادرة",
+      "count": 2,
+      "kinds": [
+        "literal-string",
+        "attr-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "مقعد وصول مؤكَّد",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "موزَّع على الباقات",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "موسم",
+      "count": 2,
+      "kinds": [
+        "attr-string",
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx",
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "موقَّع",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/components/ui/status-pill.tsx",
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "نجمة واحدة",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "نجمتان",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "نزل",
+      "count": 2,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "نهاية الموسم",
+      "count": 2,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx",
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "وصول",
+      "count": 2,
+      "kinds": [
+        "literal-string",
+        "attr-string"
+      ],
+      "files": [
+        "src/lib/options.ts",
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "— اختر —",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/components/ui/select-field.tsx"
+      ]
+    },
+    {
+      "text": "— اختر فندقًا —",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "— باقة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "— يزيد",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "— ينقص",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "· افتح التحقق والرفع",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "· ذروة سعات الباقات",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "«خمسة نجوم … نزل» — تصنيف الوزارة.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx"
+      ]
+    },
+    {
+      "text": "»: عليه",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "»: مستخدم في",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "`«${req.title}»: النسبة ${actual.toFixed(1)}% أقل من الحد الأدنى ${params.min_pct}%.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`«${req.title}»: النسبة ${actual.toFixed(1)}% تتجاوز الحد الأعلى ${params.max_pct}%.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`«${req.title}»: سعر الباقة ${p.package_no} أقل من الحد الأدنى ${params.min_sar}.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`«${req.title}»: سعر الباقة ${p.package_no} يتجاوز الحد الأعلى ${params.max_sar}.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`«${req.title}»: فندق مستبعد ما زال مستخدمًا في أحد المسارات.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`«${req.title}»: فندق مطلوب لم يُستخدم في أي مسار.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`${arNum(agreed)} متطلب معتمد من ${arNum(snap.requirements.length)}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(agreed)} معتمد من ${arNum(snap.requirements.length)}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(errorCount)} خطأ`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(errors)} خطأ يمنع الرفع`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(list.length)} كتلة · ${arNum(seats)} مقعد`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(Object.keys(snap.pinned).length)} عقدة تحتفظ بموضعها اليدوي.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(packageCount)} باقة`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(pkgs)} باقة على اللوحة`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(snap.flightBlocks.length)} كتلة · ${arNum(arrivalSeats)} مقعد وصول مؤكَّد`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(snap.hotels.length)} فندق · ${arNum(snap.contracts.length)} عقد سكن`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(sum.contracts)} عقد`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(view.legs.length)} إقامة · ${arNum(packageNights(live))} ليلة`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(warnCount)} تنبيه`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "`${arNum(warnings)} تنبيه`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "`${blockLabel(f)}: المقاعد المخصصة للباقات (${n(load)}) تتجاوز مقاعدها (${n(f.seats || 0)}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`${d.key}: ${d.ok ? \"جاهز\" : \"ناقص\"}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`${errorCount} خطأ`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "`${f.airline_ar || f.airline_en} ${f.flight_no || \"\"} · ${f.flies_on ? dm(f.flies_on) : \"\"} · ${arNum(f.seats)} مقعد`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "`${hotel.city === \"makkah\" ? \"مكة المكرمة\" : \"المدينة المنورة\"} · ${STAR_LABEL[hotel.star_class]}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "`${label} «${v}» مكرر ${n} مرات.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`${label}: سعات الباقات المرتبطة به تتجاوز أسرّته بمقدار ${n(r.short)} سرير (${rangeLabel(r)}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`${ROLE_LABEL[leg.leg.role]} — باقة ${leg.pkg.package_no}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "`${ROLE_LABEL[leg.role]} — باقة ${pkg.package_no}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "`إجمالي الأسرّة المخزَّن (${n(c.beds_total)}) لا يطابق مجموع الغرف (${n(total)}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`إجمالي الليالي المخزَّن (${itin.total_nights}) لا يطابق مجموع الإقامات (${sum}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`أسرّة ${RT_LABEL[rt]} المرتبطة في أسوأ ليلة مقابل توزيع الغرف`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "`أسرّة الغرف ${line.room_type === \"2\" ? \"الثنائية\" : line.room_type === \"3\" ? \"الثلاثية\" : \"الرباعية\"} (${n(line.beds)}) لا تطابق عدد الغرف × السعة (${n(expect)}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`إضافة باقة ${data.label}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "`إضافة كتلة ${label}…`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "`إعادة ${pinnedCount} عقدة مثبَّتة إلى الترتيب التلقائي`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/graph/CanvasToolbar.tsx"
+      ]
+    },
+    {
+      "text": "`التحقق — ${arNum(errors.length)} خطأ، ${arNum(warnings.length)} تنبيه`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "`التصنيف في نسك: ${displayCategory({ tier: view.tier, is_shifting: shifting, variant_suffix: view.variant_suffix, })}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`الحصة ${arNum(state.season.quota_total)} حاج`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "`الليالي من ${iso(r.from)} حتى ${iso(r.to)}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`المتبقي غير الموزَّع من الحصة: ${arNum(left)}.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`الموزَّع ${arNum(mixSum)} — ${mixSum < view.capacity ? `ينقص ${arNum(view.capacity - mixSum)}` : `يزيد ${arNum(mixSum - view.capacity)}`}.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`الموزَّع ${arNum(mixSum)} — مطابق للسعة.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`الموزَّع ${arNum(sum)} — مطابق للسعة.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "`الموزَّع ${arNum(sum)} — يزيد ${arNum(-diff)}.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "`الموزَّع ${arNum(sum)} — ينقص ${arNum(diff)}.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "`باقة · ${arNum(withLegs)} لها إقامات`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "`باقة ${found.pkg.package_no}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "`باقة ${live.package_no}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "`باقة ${owner.package_no}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${p.package_no} — ${p.name_en}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no} — ${pkg.name_en || \"بدون اسم\"}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}: ${i.message}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}: ${rangeLabel(r)} في فندق «${hotelName(hotelId)}» خارج نوافذ العقود المرتبطة.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}: لا ترتبط بأي عقد سكن لفندق «${hotelName(leg.hotel)}» رغم وجود عقود موقَّعة عليه.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}: لا ترتبط بأي كتلة مقاعد ${label}.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}: مرتبطة بعقد ${c.contract_no || \"بدون رقم\"} على فندق «${hotelName(c.hotel ?? \"\")}» ولا إقامة لها فيه.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}: مرتبطة بعقد ${c.contract_no || \"بدون رقم\"} غير موقَّع.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}: مرتبطة بعقد سكن لم يعد موجودًا.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}: مرتبطة بعقود سكن دون توزيع الحجاج على أنواع الغرف.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}: مرتبطة بكتلة مقاعد لم تعد موجودة.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}: مرتبطة بكتلة مقاعد ملغاة (${blockLabel(f)}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}: مقاعد ${label} المخصصة (${n(allocated)}) أقل من سعتها (${n(pkg.capacity)}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}: مقاعد ${label} المخصصة (${n(allocated)}) أكثر من سعتها (${n(pkg.capacity)}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`باقة ${pkg.package_no}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "`باقة ${view.package_no}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`تجاوز ${arNum(used - quota)}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`تكرار الإقامة بدور «${role}» ${n} مرات.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`توزيع الغرف (${n(mixSum)} حاج) لا يساوي سعة الباقة (${n(pkg.capacity)}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`حدود ${TIER_LABEL[view.tier]} المعتمدة: ${arNum(bounds.min_sar ?? 0)} – ${bounds.max_sar != null ? arNum(bounds.max_sar) : \"—\"}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`حذف ${h.name_ar || \"الفندق\"}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "`ذروة الأسرّة الموقَّعة ${arNum(sum.peakSupply)} · ذروة سعات الباقات ${arNum(sum.peakDemand)}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "`رقم العقد ${no} مكرر ${n(count)} مرات.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`عدد الليالي (${leg.nights}) لا يطابق المدة بين التاريخين (${span}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`عقد ${c.contract_no || \"بدون رقم\"} — ${hotelName(c.hotel)}: الغرف ${ROOM_TYPE_LABEL[rt]} تنقص ${n(r.short)} سريرًا عن خطة توزيع الغرف عند اكتمال سعات الباقات المرتبطة (${rangeLabel(r)}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`عقد ${c.contract_no || \"بدون رقم\"} — ${hotelName(c.hotel)}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`عقد ${c.contract_no || \"بدون رقم\"} · ${c.starts_on} → ${c.ends_on} · ${arNum(contractBeds(c))} سرير`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/ContractsTimeline.tsx"
+      ]
+    },
+    {
+      "text": "`عقد ${c.contract_no || \"بدون رقم\"}${hotel ? ` — ${hotel.name_ar}` : \"\"}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`فجوة أو تداخل بين الإقامات: تنتهي ${prev.ends_on.slice(0, 10)} وتبدأ التالية ${cur.starts_on.slice(0, 10)}.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`فندق «${hotelName(hotelId)}»: ${rangeLabel(r)} خارج نافذة أي عقد موقَّع.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`فندق «${hotelName(hotelId)}»: سعات الباقات تتجاوز الأسرّة المتعاقد عليها بمقدار ${n(r.short)} سرير (${rangeLabel(r)}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`فندق «${hotelName(hotelId)}»: لا يوجد عقد سكن موقَّع لهذا الفندق.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`كتلة ${f.direction === \"arrival\" ? \"الوصول\" : \"المغادرة\"} ${[f.airline_ar, f.flight_no].filter(Boolean).join(\" \") || f.pnr || \"\"}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`لا يمكن حذف «${h.name_ar}»: عليه ${arNum(r.contractCount)} عقد سكن.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "`لا يمكن حذف «${h.name_ar}»: مستخدم في ${arNum(r.usedBy)} إقامة.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "`لا يمكن حذف العقد: مرتبط بـ${arNum(r.usedBy)} باقة.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "`لا يمكن حذف الكتلة: مرتبطة بـ${arNum(r.usedBy)} باقة.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "`ليلة ${iso(r.from)}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`متبقٍ ${arNum(quota - used)}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`متطلب غير مؤكَّد: «${req.title}».`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`مجموع سعات الباقات ${n(total)} ${diff > 0 ? \"أكبر\" : \"أقل\"} من الحصة ${n(quota)} بمقدار ${n(Math.abs(diff))}.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`مقاعد ${label} المؤكَّدة (${n(seats)}) أقل من الحصة (${n(quotaForFlights)}).`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "`موسم ${snap.season.year_hijri}هـ — ${snap.season.year_gregorian}م · نظرة عامة على الحصة والتقدم والجاهزية.`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "`موسم ${snap.season.year_hijri}هـ — ${snap.season.year_gregorian}م`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "`يزيد ${arNum(mixSum - view.capacity)}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "`يغطي ${arNum(covered)} من ${arNum(total)} ليلة`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "`ينقص ${arNum(view.capacity - mixSum)}`",
+      "count": 1,
+      "kinds": [
+        "template"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "إثراء العزيزية",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "أحدث الملاحظات",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "اختر التاريخ",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/components/ui/date-picker.tsx"
+      ]
+    },
+    {
+      "text": "اختر باقة من القائمة",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "اختر فندقًا لعرض عقوده وتغطيته",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "اختر ناقلًا لعرض كتله",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "اختياري",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "أخطاء تمنع الرفع",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "إدارة باقات الموسم وتوزيع الحصة المعتمدة.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "أدنى",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "إزالة التخصيص",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "أساسية ≥٦٠٪",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "اسحب العقدة لتثبيتها في مكانها",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "أسرّة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "إسناد المتبقي",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "إسناد المتبقي من الحصة إلى هذه الباقة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "إضافة الفندق",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx"
+      ]
+    },
+    {
+      "text": "إضافة الكتلة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "إضافة باقة جديدة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/graph/CanvasToolbar.tsx"
+      ]
+    },
+    {
+      "text": "إضافة عقد",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "إضافة عقد من صفحة السكن",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "إضافة فندق",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx"
+      ]
+    },
+    {
+      "text": "إضافة كتلة مقاعد",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "إضافة كتلة مقاعد متعاقد عليها.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "إظهار الأسعار (محجوبة افتراضيًا «••••»)",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "إعادة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/graph/CanvasToolbar.tsx"
+      ]
+    },
+    {
+      "text": "إعادة تأطير العرض",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/graph/CanvasToolbar.tsx"
+      ]
+    },
+    {
+      "text": "إعادة للترتيب التلقائي",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "إعدادات الموسم",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "أعلى",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "إغلاق",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/components/ui/responsive-panel.tsx"
+      ]
+    },
+    {
+      "text": "إقامات",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "إقامة في الباقات",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "إقامة.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "الأخطاء المانعة للرفع إلى نسك والتنبيهات المستوجبة للمراجعة.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/routes.tsx"
+      ]
+    },
+    {
+      "text": "الأساسية 60% كحد أدنى",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "الأساسية ‏60% من الحصة كحد أدنى.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "الأسرّة",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "الأسرّة الموقَّعة:",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/TimelineChart.tsx"
+      ]
+    },
+    {
+      "text": "الاسم",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx"
+      ]
+    },
+    {
+      "text": "الأعلى: نوافذ العقود (المتقطّع مقترح غير موقَّع). الأسفل: سعات الباقات ليلةً بليلة على غلاف الأسرّة الموقَّعة — الشريط الوردي هو مقدار التجاوز حيث يقع.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/ContractsTimeline.tsx"
+      ]
+    },
+    {
+      "text": "الإقامات",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "الإقامات / الليالي",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "الباقات الأساسية (الاقتصادية) من إجمالي الحصة المخصصة.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "الباقة غير مرتبطة بمسار.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "البيانات محفوظة في الذاكرة فقط؛ تحديث الصفحة يمسح المسودة.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "التالي",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/components/ui/form-wizard.tsx"
+      ]
+    },
+    {
+      "text": "التحقق —",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "التخزين والاتصال",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "التسكين والتوفّر",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "التصنيف في نسك",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "التصنيف في نسك:",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "التفاصيل كما وردت في الاجتماع",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "الثلاثية",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "الثنائية",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "الجاهزية والنشر",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "الحد (%)",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "الحصة الإجمالية",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "الحصة المعتمدة (حاج)",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "الحصة موزَّعة بالكامل.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "الحصة والضوابط",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "الرباعية",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "الرياض (ترانزيت)",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "السابق",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/components/ui/form-wizard.tsx"
+      ]
+    },
+    {
+      "text": "السعة وتوزيع الغرف",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "السعودية",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "السكن",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "السنة والحصة المعتمدة من الوزارة.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "الصورة الرئيسية معتمدة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "الضوابط المعتمدة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "الطيران",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "الطيران والسكن بترتيب الرحلة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "العرض",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "العقد المثبَّتة",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "العقد غير مرتبط بفندق.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "العقود على محور الموسم",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "الغرف",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "الفاخرة والمميزة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "الفاخرة والمميزة (وانتقالياتهما) ‏40% من الحصة كحد أعلى.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "الفاخرة والمميزة 40% كحد أعلى",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "الفنادق وعقود السكن وسعاتها مقابل سعات الباقات.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "الفندق مرشّح بلا عقود — يظهر تنبيه عند استخدامه في الباقات.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "الكل",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/components/ui/filter-chips.tsx"
+      ]
+    },
+    {
+      "text": "المتبقي غير الموزَّع من الحصة:",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "المتطلبات",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "المجموعة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "المدينة والاسم",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx"
+      ]
+    },
+    {
+      "text": "المرتبطة في أسوأ ليلة مقابل توزيع الغرف",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "المسارات والإقامات",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "المعتمدة:",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "المقاعد المخصصة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "المقاعد والعقد",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "المميزة فأعلى",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "الموسم مطابق للضوابط. جاهز للرفع إلى نسك.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "الموسم مطابق للضوابط. جاهز للرفع.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "الموسم، المخطط، والتخزين.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/routes.tsx"
+      ]
+    },
+    {
+      "text": "الناقلات وكتل المقاعد المتعاقد عليها، وصولًا ومغادرة.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "النتائج",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "الوصف الإنجليزي جاهز",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "الوصف العربي جاهز",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "انتقالي (مكة)",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "انتقالية",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "أو من",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "إيلاف التقوى",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "باقات",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "باقة ·",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "باقة على اللوحة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "بحث بالاسم أو الرقم…",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "بداية الإقامة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "بدون إقامات",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "بدون رقم",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/ContractsTimeline.tsx"
+      ]
+    },
+    {
+      "text": "بدون سعر",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "بلا عقود",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "بنود من النوع نفسه — افتح للتفاصيل",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "بيانات",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "بيانات الباقات",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "بيانات الباقات في جداول قابلة للتحرير",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "تاريخ النهاية يجب أن يكون بعد تاريخ البداية.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "تاريخ بداية المسار لا يطابق أول إقامة.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "تاريخ غير صالح في الإقامة.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "تاريخ غير صالح في نافذة العقد.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "تاريخ نهاية المسار لا يطابق آخر إقامة.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "تثبيت في المكان",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "تجاوز:",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/TimelineChart.tsx"
+      ]
+    },
+    {
+      "text": "تحرير",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "تُشتق منها التواريخ الافتراضية للإقامات والعقود والرحلات.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "تشمل الباقات الفاخرة والمميزة وانتقالياتهما، من إجمالي الحصة.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "تُضاف الباقة الأولى من عقدة «الباقات» بزر (+).",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/PackageGraph.tsx"
+      ]
+    },
+    {
+      "text": "تُضاف الكتلة بحالة «مقترح» — لا تُحتسب في تغطية الحصة إلا بعد تأكيدها من الجدول.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "تُطبَّق المتطلبات المعتمدة تلقائيًا على التحقق قبل الرفع؛ وتتطلب الملاحظات النصية تأكيدًا يدويًا.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "تغيير التاريخ أو الليالي يزيح الإقامات التالية بنفس المقدار، فتبقى السلسلة متصلة بلا فجوات. النهاية الحالية:",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "تقدّم توزيع الحصة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "تكرار",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "تكرار الباقة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "تكوين الباقات",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/routes.tsx"
+      ]
+    },
+    {
+      "text": "تم",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "تم التأكيد قبل الرفع",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "تنبيه",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "تنبيهات",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "جاهز",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "جاهزية",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "حاج ·",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/JourneyGraph.tsx"
+      ]
+    },
+    {
+      "text": "حالة البيع",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "حالة النشر في نسك",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "حالة النشر في نسك ومتطلبات اكتمال المحتوى.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "حد أدنى 60%",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "حد أعلى 40%",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "حدود",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "حدود السعر",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "حذف العقد",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "حذف الكتلة",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "حذف المتطلب",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "حذف نوع الغرفة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "حياة ريجنسي",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "خارج الحدود المعتمدة للفئة.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "خارج مدة الإقامة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "خطأ",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "خطأ،",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "دار الإيمان الحرم",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "درة الإيمان",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "ديار الإيمان",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "ذروة الأسرّة الموقَّعة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "رباعية / ثلاثية / ثنائية — لم يُحدَّد التوزيع بعد.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "رجوع",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/components/MasterDetail.tsx"
+      ]
+    },
+    {
+      "text": "رجوع إلى المخطط",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/JourneyGraph.tsx"
+      ]
+    },
+    {
+      "text": "رحلات مجموعات",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "رحلات GDS",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "رحلة الحاج — باقة",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/JourneyGraph.tsx"
+      ]
+    },
+    {
+      "text": "رحلة الحاج الكاملة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "رقم العقد",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "سحب العقدة يثبّت موضعها · النقر المزدوج يعيدها إلى الترتيب التلقائي",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/routes.tsx"
+      ]
+    },
+    {
+      "text": "سرير متعاقد عليه (ذروة الليلة)",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "سعات الباقات:",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/TimelineChart.tsx"
+      ]
+    },
+    {
+      "text": "سعر السرير/ليلة",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "سعر مخفي",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/components/ui/price.tsx"
+      ]
+    },
+    {
+      "text": "سلوك لوحة تكوين الباقات.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "سويس أوتيل مكة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "شركة الطيران",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "شركة الطيران (إنجليزي)",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "طيّ الإقامات",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "عدد الليالي",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "عدد المقاعد",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "عرض الإقامات",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "عرض الباقات وإقاماتها على المخطط.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/routes.tsx"
+      ]
+    },
+    {
+      "text": "عرض الكل (",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "عقد انتقالي على فندق خارج مكة المكرمة.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "عقد سكن",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "عقد سكن.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "عقدة مثبَّتة إلى الترتيب التلقائي",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/graph/CanvasToolbar.tsx"
+      ]
+    },
+    {
+      "text": "عقود السكن",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "عقود السكن ومقاعد الطيران المخصصة لهذه الباقة.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "عقود مرتبطة خارج فنادق الإقامات",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "علامة «الانتقالي» لا تطابق وجود إقامة انتقالية.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "عنوان المتطلب",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "غير متاح",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "فئة",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "فئة مستقلة عن تصنيف النجوم.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx"
+      ]
+    },
+    {
+      "text": "فاخرة+مميزة ≤٤٠٪",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "فتح القائمة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "فكّ التثبيت",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/CanvasToolbar.tsx"
+      ]
+    },
+    {
+      "text": "فكّ الكل",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "فندق",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "فندق ·",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "فندق جديد في مخزون هذا الموسم.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx"
+      ]
+    },
+    {
+      "text": "فوكو",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "قيد على فندق",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "كتلة",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "كتلة · وصول",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "كتلة لناقل جديد",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "كل الأدوار مستخدمة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "كما يظهر في نسك، إن وُجد.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx"
+      ]
+    },
+    {
+      "text": "لا أخطاء تمنع الرفع",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "لا أخطاء تمنع رفع هذه الباقة.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "لا تنبيهات",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "لا توجد إقامات.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "لا توجد إقامة أولى.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "لا توجد أنواع غرف — العقد لا يوفّر أي سرير.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "لا توجد باقات — تُنشأ من",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "لا توجد باقات بعد",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "لا توجد باقات بعد.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "لا توجد صورة رئيسية معتمدة للباقة.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "لا توجد عقد مثبَّتة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/graph/CanvasToolbar.tsx"
+      ]
+    },
+    {
+      "text": "لا توجد عقد مثبَّتة.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "لا حدود سعرية معتمدة لهذه الفئة بعد.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "لا عقود سكن مرتبطة.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/JourneyGraph.tsx"
+      ]
+    },
+    {
+      "text": "لا عقود لهذا الفندق —",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "لا عقود موقَّعة بعد.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "لا فنادق بعد.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/HousingPage.tsx"
+      ]
+    },
+    {
+      "text": "لا كتل مقاعد بعد",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "لا كتل مقاعد بعد.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "لا مقاعد مخصصة.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/JourneyGraph.tsx"
+      ]
+    },
+    {
+      "text": "لا ملاحظات — الموسم مطابق للضوابط.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "لا نتائج.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "لا يُحتسب إلا الموقَّع",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "لا يمكن حذف العقد: مرتبط بـ",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "لا يمكن حذف الكتلة: مرتبطة بـ",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "لا يمكن ربط عقود السكن قبل إضافة الإقامات.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "لا يمكن رفع باقة بدون وصف عربي.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "لا يوجد وصف إنجليزي للباقة.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "لم تُحدَّد سعة الباقة بعد.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "لم تُضَف أي إقامة بعد.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "لم يُحدَّد التوزيع بعد.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "لم يُحدَّد السعر الابتدائي بعد.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "لم يُدخَل رقم العقد بعد.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "لم يُسجَّل أي متطلب بعد.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "لها إقامات",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "م · نظرة عامة على الحصة والتقدم والجاهزية.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "ما يظهر على الشاشة أثناء الاجتماعات.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "متاح للبيع",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "متطلب معتمد من",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "متطلبات وزارة الحج والعمرة والفريق؛ يُطبَّق المعتمد منها على التحقق قبل الرفع.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/routes.tsx"
+      ]
+    },
+    {
+      "text": "متعدد",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "متعدد / غير محدد",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "مثبَّت — لن تحركه إعادة الترتيب. انقر مرتين لفكّ التثبيت.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/graph/nodes.tsx"
+      ]
+    },
+    {
+      "text": "مجموع سعات الباقات مقابل الحصة المعتمدة.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "مجموع سعات الباقات يجب أن يساويها تمامًا.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "محتوى",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "مراجعة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx"
+      ]
+    },
+    {
+      "text": "مرتبط بباقة — لا يمكن حذفه",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "مرتبطة بباقة — لا يمكن حذفها",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "مرجع الحجز لدى الناقل، إن وُجد.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "مرفوضة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "مرفوعة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "مسودة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "مصدرها اجتماعات وزارة الحج والعمرة، وتُدار من صفحة «الاجتماعات والمتطلبات».",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "مصنَّفة حسب المجال؛ اختيار البند يفتح الباقة المعنية.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "معتمد من",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "معتمدة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/options.ts"
+      ]
+    },
+    {
+      "text": "معرّف نسك",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "مغادرة مؤكَّدة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "مقعد · مغادرة",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "ملء الشاشة",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/graph/CanvasToolbar.tsx"
+      ]
+    },
+    {
+      "text": "ملاحظة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "موارد",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "ميزان الحصة",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "ميزان المقاعد",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "ميسان رحاب المسك",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "نافذة زمنية",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "ناقص",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "نسب الفئات",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "نسخ مسار باقة…",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "نسخة بنفس المسار وسعة صفر",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/graph/useNodeMenu.tsx"
+      ]
+    },
+    {
+      "text": "نص يُحمل كما هو إلى نسك (مثل SA في 1447). معناه غير مؤكَّد، ولا يعتمد عليه أي منطق.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inspector/Inspector.tsx"
+      ]
+    },
+    {
+      "text": "نهاية العقد يجب أن تكون بعد بدايته.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "نوع الباقة (انتقالية) لا يطابق المسار المرتبط بها.",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/lib/validation.ts"
+      ]
+    },
+    {
+      "text": "نوع العقد",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "نوع الغرفة",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "نوع غرفة",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/ContractCard.tsx"
+      ]
+    },
+    {
+      "text": "هـ",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/components/NavRail.tsx"
+      ]
+    },
+    {
+      "text": "هـ —",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/dashboard.tsx"
+      ]
+    },
+    {
+      "text": "هيلتون المدينة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/store/season.ts"
+      ]
+    },
+    {
+      "text": "وصول مؤكَّد",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/CarriersPage.tsx"
+      ]
+    },
+    {
+      "text": "يُترك فارغًا إذا لم يُؤكَّد الحجز بعد.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/inventory/AddFlightWizard.tsx"
+      ]
+    },
+    {
+      "text": "يجب أن يساوي مجموع سعات الباقات الحصة الإجمالية. الرقم الحالي محمول من موسم 1447 حتى صدور اعتماد 1448.",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/features/panels/panels.tsx"
+      ]
+    },
+    {
+      "text": "يزيد",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    },
+    {
+      "text": "يُضاف الفندق كمرشّح بلا عقود — عقود السكن تُنشأ من صفحة الفنادق.",
+      "count": 1,
+      "kinds": [
+        "jsx-text"
+      ],
+      "files": [
+        "src/features/inventory/AddHotelWizard.tsx"
+      ]
+    },
+    {
+      "text": "يغطي كامل مدة الإقامة",
+      "count": 1,
+      "kinds": [
+        "literal-string"
+      ],
+      "files": [
+        "src/features/inventory/PackageResources.tsx"
+      ]
+    },
+    {
+      "text": "ينقص",
+      "count": 1,
+      "kinds": [
+        "attr-string"
+      ],
+      "files": [
+        "src/routes/packages.tsx"
+      ]
+    }
+  ]
+}

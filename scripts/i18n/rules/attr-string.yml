@@ -1,0 +1,15 @@
+# Arabic in JSX string attributes (label / title / aria-label / placeholder / hint / description).
+id: i18n-attr-string
+language: tsx
+severity: hint
+message: Arabic attribute string
+files:
+  - src/**
+ignores:
+  - src/store/seed-1447.ts
+rule:
+  kind: string_fragment
+  regex: '[؀-ۿ]'
+  inside:
+    kind: jsx_attribute
+    stopBy: end

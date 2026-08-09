@@ -1,0 +1,6 @@
+# i18n inventory config — run via: pnpm exec ast-grep scan -c scripts/i18n/sgconfig.yml --json src
+# Separate from the root sgconfig so `pnpm lint:ast` never fires these.
+ruleDirs:
+  - rules
+languageGlobs:
+  tsx: ['*.ts']
